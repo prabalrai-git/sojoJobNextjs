@@ -8,6 +8,7 @@ import JobCard from "@/components/JobCard";
 import EmployersCard from "@/components/EmployersCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Link from "next/link";
 
 export default function Home() {
   const data = [1, 2, 3, 4, 5, 5, 5, 5, 6, 6, 6];
@@ -62,8 +63,10 @@ export default function Home() {
             alt="search.png"
             className="tw-object-contain tw-absolute tw-top-4 tw-left-3 "
           />
-          <button className="tw-bg-primary tw-py-2 tw-px-5 tw-ml-4 tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover">
-            Search
+          <button className="tw-bg-primary tw-py-2 tw-px-5 tw-ml-4 tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover ">
+            <Link href="/search" className="tw-text-white tw-no-underline">
+              Search
+            </Link>
           </button>
         </div>
         <div className="tw-text-center tw-font-medium">Trending Tags:</div>
@@ -84,7 +87,11 @@ export default function Home() {
         </div>
         <div className="tw-grid tw-grid-cols-3 md:tw-grid-cols-3 sm:tw-grid-cols-1 tw-gap-4 tw-mt-10">
           {data.map((item) => {
-            return <JobCard key={item} job={job} />;
+            return (
+              <Link href="/jobs" className="tw-text-black tw-no-underline">
+                <JobCard key={item} job={job} />
+              </Link>
+            );
           })}
         </div>
       </div>

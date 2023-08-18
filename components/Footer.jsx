@@ -5,20 +5,20 @@ function Footer() {
   return (
     <div className="tw-bg-footerBackground tw-py-20 tw-flex tw-flex-row tw-justify-around tw-text-white tw-text-2xl tw-font-medium tw-flex-wrap tw-pb-40">
       <div>
-        <h2 className="tw-pb-7">Job Seekers</h2>
-        <ul className="tw-text-lg tw-font-normal">
-          <li className="tw-pb-5">Register to SojoJob</li>
-          <li className="tw-pb-5">Login to SojoJob Account</li>
-          <li className="tw-pb-5">About Us</li>
-        </ul>
+        <h4 className="tw-pb-7 ">Job Seekers</h4>
+        <div className="tw-text-lg tw-font-normal">
+          <p className="tw-pb-1">Register to SojoJob</p>
+          <p className="tw-pb-1">Login to SojoJob Account</p>
+          <p className="tw-pb-1">About Us</p>
+        </div>
       </div>
       <div>
-        <h2 className="tw-pb-7">Job Providers</h2>
-        <ul className="tw-text-lg tw-font-normal">
-          <li className="tw-pb-5">Register to SojoJob</li>
-          <li className="tw-pb-5">Login to SojoJob Account</li>
-          <li className="tw-pb-5">About Us</li>
-        </ul>
+        <h4 className="tw-pb-7">Job Providers</h4>
+        <div className="tw-text-lg tw-font-normal">
+          <p className="tw-pb-1">Register to SojoJob</p>
+          <p className="tw-pb-1">Login to SojoJob Account</p>
+          <p className="tw-pb-1">About Us</p>
+        </div>
       </div>
       <div className="tw-w-3/12">
         <Image
