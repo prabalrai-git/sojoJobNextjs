@@ -1,14 +1,23 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function page() {
+  const router = useRouter();
+
+  const goBack = () => {
+    router.back();
+  };
+
   return (
     <div
       style={{ height: "120vh" }}
-      className="tw-ml-20 tw-grid tw-grid-cols-2"
+      className="tw-ml-20 tw-grid tw-grid-cols-2 "
     >
       <div className="tw-px-5">
-        <div className="tw-flex tw-flex-row tw-justify-between  tw-mr-32   ">
+        <div className="tw-flex tw-flex-row tw-justify-between tw-mt-20  tw-mr-32   ">
           <div className="tw-flex tw-flex-row tw-self-center">
             <div className="mt-1">
               <Image
@@ -20,13 +29,15 @@ function page() {
                 className="tw-object-contain tw-mr-3 "
               />
             </div>
-            <p className=""> Go back to Homepage</p>
+            <button onClick={() => goBack()}>
+              <p className=""> Go back to Homepage</p>
+            </button>
           </div>
           <p className="tw-text-primary tw-font-medium">
             New to SojoJob ? Sign up here
           </p>
         </div>
-        <h1 className="tw-my-10 tw-mt-32 tw-text-3xl">Sign in to Sojojob</h1>
+        <h1 className="tw-my-10 tw-mt-20 tw-text-3xl">Sign in to Sojojob</h1>
         <p className="tw-mb-5 tw-font-medium tw-text-gray-800">You are a</p>
         <div className="tw-grid tw-grid-cols-3 tw-gap-10 tw-pr-10">
           <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-bg-chooseBg tw-border-2 tw-border-primary">
@@ -105,8 +116,8 @@ function page() {
 
         <Image
           src={"/images/auth_banner.png"}
-          width={200}
-          height={200}
+          width={300}
+          height={300}
           alt="auth.png"
           style={{ top: "20%", left: "14%" }}
           className="tw-w-9/12 object-contain tw-absolute "

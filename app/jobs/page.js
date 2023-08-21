@@ -39,10 +39,12 @@ function page() {
           className="tw-rounded-full tw-absolute tw-top-24 tw-left-40"
         />
       </div>
-      <div className="tw-mx-28 tw-mt-32">
+      <div className="tw-mx-28 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-28 tw-mt-32">
         <div className="tw-flex tw-flex-row tw-justify-between">
           <div>
-            <h3>Linux System Engineer</h3>
+            <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl">
+              Linux System Engineer
+            </h3>
             <p>Sojojob</p>
           </div>
           <div>
@@ -52,7 +54,7 @@ function page() {
           </div>
         </div>
         {/*  */}
-        <div className="tw-flex tw-flex-row tw-mt-4">
+        <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap ">
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
             <Image
               src={"/clock.png"}
@@ -140,7 +142,7 @@ function page() {
               Jobs At Sojojob
             </h2>
           </div>
-          <div className="tw-grid tw-grid-cols-3 md:tw-grid-cols-3 sm:tw-grid-cols-1 tw-gap-4 tw-mt-10">
+          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2">
             {data.map((item) => {
               return (
                 <Link href="/jobs" className="tw-text-black tw-no-underline">
@@ -164,7 +166,7 @@ function page() {
               Other Jobs
             </h2>
           </div>
-          <div className="tw-grid tw-grid-cols-3 md:tw-grid-cols-3 sm:tw-grid-cols-1 tw-gap-4 tw-mt-10">
+          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
             {data.map((item) => {
               return (
                 <Link href="/jobs" className="tw-text-black tw-no-underline">

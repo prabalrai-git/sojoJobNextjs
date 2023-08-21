@@ -23,6 +23,7 @@ function page() {
     {
       id: 1,
       src: "/images/c1.png",
+      logo: "/images/cl1.png",
       title: "Speed and Accuracy",
       person: "Ms.Sephika Shakya",
       desc: "The most important that we liked about sojojob is its speed and accuracy, you can try it yourself.",
@@ -31,6 +32,7 @@ function page() {
     {
       id: 2,
       src: "/images/c2.png",
+      logo: "/images/cl2.png",
       title: "Prompt Response",
       person: "Ms.Smriti",
       desc: "Sojojob's prompt response and follow up excites us the most and which has also helped us in hiring candidate faster",
@@ -39,6 +41,7 @@ function page() {
     {
       id: 3,
       src: "/images/c3.png",
+      logo: "/images/cl3.png",
       title: "Easy to work with ",
       person: "Ms. Sushma Dhakal",
       desc: "Overall process and team are both easy to work with",
@@ -48,15 +51,15 @@ function page() {
 
   return (
     <div className="">
-      <div className="tw-grid tw-grid-cols-2 tw-mx-23 tw-py-20 tw-gap-10 tw-px-20">
+      <div className="tw-grid tw-grid-cols-2 tw-mx-23 tw-py-20 tw-gap-10 sm:tw-gap-2 xsm:tw-gap-2 md:tw-grid-cols-2 lg:tw-grid-cols-2  sm:tw-py-5 xsm:tw-py-5 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 xsm:tw-mx-3 tw-text-justify sm:tw-mx-10 md:tw-mx-32 ">
         <h1
           style={{ lineHeight: "60px" }}
-          className="tw-font-medium tw-text-4xl tw-text-center "
+          className="tw-font-medium tw-text-4xl tw-text-center sm:tw-text-3xl xsm:tw-text-2xl "
         >
-          We help employers and employees find their{" "}
-          <span className="tw-text-primary">ideal</span> match
+          We help employers and employees find their
+          <span className="tw-text-primary"> ideal</span> match
         </h1>
-        <p className="tw-mx-20 tw-text-lg">
+        <p className="tw-mx-20 md:tw-mx-16 lg:tw-mx-16 xl:tw-mx-16 sm:tw-mx-0 xsm:tw-mx-0 tw-text-lg">
           For the past few years, we have been successful in helping both
           employers and jobseekers find their ideal match, with over 100+
           successful stories. We offer employers the opportunity to promote
@@ -67,10 +70,10 @@ function page() {
         <Image
           src="/images/home-banner.png"
           width={300}
-          height={100}
+          height={200}
           quality={100}
           alt="home-banner"
-          className="tw-w-full tw-object-contain tw-h-30"
+          className="tw-w-full tw-object-contain tw-h-30 xsm:tw-h-full"
         />
       </div>
       <div>
@@ -96,7 +99,7 @@ function page() {
         </div>
       </div>
       <div className="tw-bg-aboutGrey">
-        <div className="tw-mx-20">
+        <div className="tw-mx-20 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-32">
           <h1 className="tw-text-3xl tw-text-center tw-font-medium tw-pt-14">
             What our clients say
           </h1>
@@ -110,18 +113,18 @@ function page() {
             the job seekers, has always been our primary goal.
           </p>
         </div>
-        <div className="tw-mt-5 tw-mx-20 tw-grid tw-grid-cols-3 tw-gap-5 tw-pb-20">
+        <div className="tw-mt-5 tw-grid tw-grid-cols-3 tw-gap-5 tw-pb-20 xsm:tw-grid-cols-1 xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20 sm:tw-grid-cols-2 md:tw-grid-cols-3">
           {review?.map((item) => {
             return <ReviewCard item={item} />;
           })}
         </div>
       </div>
-      <div className="tw-mx-32 tw-grid tw-grid-cols-2 tw-gap-32 tw-pt-20">
+      <div className="tw-mx-32 xsm:tw-mx-5 sm:tw-mx-16 md:tw-mx-32 tw-grid tw-grid-cols-2 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 md:tw-grid-cols-1 950:tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-2 tw-gap-10 tw-pt-20 ">
         <div className="">
-          <h1 className="tw-text-3xl tw-font-medium tw-mb-5">
+          <h1 className="tw-text-4xl tw-font-medium tw-mb-5">
             Connect with us
           </h1>
-          <p className="tw-text-base tw-pr-6" style={{ lineHeight: "55px" }}>
+          <p className=" tw-pr-10 tw-leading-relaxed tw-font-normal tw-text-lg">
             Sojojob is a platform that enables employers to easily and quickly
             post their job requirements, shortlist the best candidates, and hire
             them with a few clicks. Job seekers can also benefit from this
@@ -136,7 +139,7 @@ function page() {
             <Form.Label>Name</Form.Label>
             <Form.Control
               size="lg"
-              className="tw-text-lg"
+              className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black "
               type="email"
               placeholder="Enter Name"
             />
@@ -144,7 +147,7 @@ function page() {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
-              className="tw-text-lg"
+              className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black"
               size="lg"
               type="email"
               placeholder="Enter email"
@@ -153,7 +156,7 @@ function page() {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Phone number</Form.Label>
             <Form.Control
-              className="tw-text-lg"
+              className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black"
               size="lg"
               type="email"
               placeholder="Enter email"
@@ -162,7 +165,7 @@ function page() {
 
           <Button
             type="submit"
-            className="tw-bg-primary hover:tw-bg-buttonHover tw-border-transparent px-4 py-3"
+            className="tw-bg-primary hover:tw-bg-buttonHover tw-border-transparent px-4 py-2"
           >
             Call Be Back
           </Button>

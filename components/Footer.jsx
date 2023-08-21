@@ -3,7 +3,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="tw-bg-footerBackground tw-py-20 tw-flex tw-flex-row tw-justify-around tw-text-white tw-text-2xl tw-font-medium tw-flex-wrap tw-pb-40">
+    <div className="tw-bg-footerBackground tw-py-20 tw-grid lg:tw-grid-cols-3 md:tw-grid-cols-2 xl:tw-grid-cols-3 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 tw-text-white tw-text-2xl tw-font-medium tw-flex-wrap tw-pb-40 tw-w-full tw-px-32 xsm:tw-px-5 sm:tw-px-10 md:tw-px-32 lg:tw-px-32 xl:tw-px-32">
       <div>
         <h4 className="tw-pb-7 ">Job Seekers</h4>
         <div className="tw-text-lg tw-font-normal">
@@ -20,7 +20,7 @@ function Footer() {
           <p className="tw-pb-1">About Us</p>
         </div>
       </div>
-      <div className="tw-w-3/12">
+      <div className="tw-w-full">
         <Image
           className="tw-pb-7"
           src={"/logo.png"}
@@ -36,7 +36,7 @@ function Footer() {
           register, search, apply and get jobs for free within a few clicks as
           well.
         </p>
-        <div className="tw-flex tw-flex-row tw-w-3/12 tw-justify-between tw-mt-6">
+        <div className="tw-flex tw-flex-row tw-w-3/12 md:tw-w-3/12 sm:tw-w-5/12 800:tw-w-4/12 xsm:tw-w-5/12 tw-justify-between tw-mt-6">
           <Image
             src={"/facebook.png"}
             width={24}
