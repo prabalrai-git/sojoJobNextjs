@@ -6,37 +6,16 @@ import { Input } from "antd";
 import { job } from "@/dummyData";
 import JobCard from "@/components/JobCard";
 import EmployersCard from "@/components/EmployersCard";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import Link from "next/link";
 import TrendingTags from "@/components/TrendingTags";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import NavBar1 from "@/components/NavBar";
+import Carousel from "react-multi-carousel";
 
 export default function Home() {
   const data = [1, 2, 3, 4, 5, 5, 5, 5, 6, 6, 6];
-  const data1 = [1, 1, 1, 1, 1];
+  const data1 = [1, 1, 1, 1, 1, 2, 3, 3, 2, 2];
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 5,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 5,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
   const tags = [
     { id: 0, title: "Architecture" },
     { id: 1, title: "Construction" },
@@ -44,7 +23,101 @@ export default function Home() {
     { id: 3, title: "Commercial" },
     { id: 4, title: "Architecture" },
   ];
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 6,
+      slidesToSlide: 2,
+    },
+    bigDesktop: {
+      breakpoint: { max: 3000, min: 2000 },
+      items: 5,
+      slidesToSlide: 2,
+    },
+    desktop: {
+      breakpoint: { max: 2000, min: 1324 },
+      items: 5,
+      slidesToSlide: 2,
+    },
+    smallDesktop: {
+      breakpoint: { max: 1324, min: 1024 },
+      items: 4,
+      slidesToSlide: 2,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 864 },
+      items: 3,
+      slidesToSlide: 2,
+    },
+    smallTablet: {
+      breakpoint: { max: 864, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
 
+  const employers = [
+    {
+      id: 1,
+      title: "E-sewa",
+      address: "Jawlakhel",
+      themeColor: "#60bb48",
+      logo: "/images/clients/1.png",
+    },
+    {
+      id: 2,
+      title: "Khalti",
+      address: "Jawlakhel",
+      themeColor: "#5d2f8f",
+      logo: "/images/clients/2.png",
+    },
+    {
+      id: 1,
+      title: "Foodmandu",
+      address: "Jawlakhel",
+      themeColor: "#ffdd00",
+      logo: "/images/clients/3.png",
+    },
+    {
+      id: 4,
+      title: "EbPearls",
+      address: "Jawlakhel",
+      themeColor: "#ffcd06",
+      logo: "/images/clients/4.png",
+    },
+    {
+      id: 4,
+      title: "DishHome",
+      address: "Jawlakhel",
+      themeColor: "#e30613",
+      logo: "/images/clients/5.png",
+    },
+    {
+      id: 6,
+      title: "Ing",
+      address: "Jawlakhel",
+      themeColor: "#75bf45",
+      logo: "/images/clients/6.png",
+    },
+    {
+      id: 7,
+      title: "IME",
+      address: "Jawlakhel",
+      themeColor: "#e30613",
+      logo: "/images/clients/7.png",
+    },
+    {
+      id: 8,
+      title: "Uxcam",
+      address: "Jawlakhel",
+      themeColor: "#161e35",
+      logo: "/images/clients/8.png",
+    },
+  ];
   return (
     <>
       <NavBar />
@@ -89,7 +162,7 @@ export default function Home() {
             </button>
           </div>
           <div className=" tw-font-medium tw-text-left lg:tw-w-6/12 tw-w-full  tw-flex tw-flex-row ">
-            <span className="lg:tw-w-3/12 tw-w-2/12">Trending tags:</span>
+            <span className="lg:tw-w-2/12 tw-w-4/12">Trending tags:</span>
             <span className="tw-flex tw-flex-row tw-overflow-x-hidden ">
               {tags.map((item) => {
                 return <TrendingTags key={item.id} item={item} />;
@@ -135,44 +208,35 @@ export default function Home() {
               Top Employers Currently
             </p>
           </div>
-          <div className="tw-mt-10 tw-grid tw-grid-cols-5 tw-gap-6 tw-mx-5">
-            {data1.map((item) => {
+          <div className="tw-mt-10 ">
+            {/* {data1.map((item) => {
               return <EmployersCard />;
-            })}
+            })} */}
+            <Carousel
+              autoPlay={true}
+              swipeable={false}
+              draggable={true}
+              showDots={false}
+              infinite={true}
+              partialVisible={false}
+              removeArrowOnDeviceType={[
+                "tablet",
+                "mobile",
+                "desktop",
+                "smallDesktop",
+                "bigDesktop",
+                "smallTablet",
+              ]}
+              responsive={responsive}
+            >
+              {employers.map((item) => {
+                return <EmployersCard key={item.id} item={item} />;
+              })}
+            </Carousel>
+            ;
           </div>
-          {/* <Carousel
-          swipeable={true}
-          draggable={false}
-          showDots={true}
-          responsive={responsive}
-          ssr={true} // means to render carousel on server-side.
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={1000}
-          keyBoardControl={true}
-          customTransition="all .5"
-          transitionDuration={500}
-          containerClass="carousel-container"
-          removeArrowOnDeviceType={["tablet", "mobile"]}
-          dotListClass="custom-dot-list-style"
-          itemClass="carousel-item-padding-40-px"
-        >
-          <div>
-            <EmployersCard />
-          </div>
-          <div>
-            <EmployersCard />
-          </div>
-          <div>
-            <EmployersCard />
-          </div>
-          <div>
-            <EmployersCard />
-          </div>
-          <div>
-            <EmployersCard />
-          </div>
-        </Carousel> */}
+          {/*  */}
+          {/*  */}
         </div>
         {/* end of employers carousel */}
         {/* start of standard jobs */}
