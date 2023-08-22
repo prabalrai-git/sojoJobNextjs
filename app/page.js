@@ -214,7 +214,7 @@ export default function Home() {
             })} */}
             <Carousel
               autoPlay={true}
-              swipeable={false}
+              swipeable={true}
               draggable={true}
               showDots={false}
               infinite={true}
@@ -233,7 +233,6 @@ export default function Home() {
                 return <EmployersCard key={item.id} item={item} />;
               })}
             </Carousel>
-            ;
           </div>
           {/*  */}
           {/*  */}

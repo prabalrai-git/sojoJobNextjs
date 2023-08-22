@@ -7,17 +7,29 @@ function Footer() {
       <div>
         <h4 className="tw-pb-7 ">Job Seekers</h4>
         <div className="tw-text-lg tw-font-normal">
-          <p className="tw-pb-1">Register to SojoJob</p>
-          <p className="tw-pb-1">Login to SojoJob Account</p>
-          <p className="tw-pb-1">About Us</p>
+          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary ">
+            Register to SojoJob
+          </p>
+          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
+            Login to SojoJob Account
+          </p>
+          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
+            About Us
+          </p>
         </div>
       </div>
       <div>
         <h4 className="tw-pb-7">Job Providers</h4>
         <div className="tw-text-lg tw-font-normal">
-          <p className="tw-pb-1">Register to SojoJob</p>
-          <p className="tw-pb-1">Login to SojoJob Account</p>
-          <p className="tw-pb-1">About Us</p>
+          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
+            Register to SojoJob
+          </p>
+          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
+            Login to SojoJob Account
+          </p>
+          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
+            About Us
+          </p>
         </div>
       </div>
       <div className="tw-w-full">
