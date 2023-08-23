@@ -44,6 +44,7 @@ module.exports = {
         employerBg: "#EAEAEA",
         progressBg: "#E58C17",
         progressLightBg: "#EAA444",
+        monthlyCard: "#F4F7FB",
       },
     },
   },

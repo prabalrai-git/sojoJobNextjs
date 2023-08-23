@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { SearchOutlined } from "@ant-design/icons";
-import { Input } from "antd";
+
 import { job } from "@/dummyData";
 import JobCard from "@/components/JobCard";
 import EmployersCard from "@/components/EmployersCard";
