@@ -46,17 +46,24 @@ function NavBar() {
               Dank memes
             </Nav.Link> */}
             <ul className="tw-flex tw-flex-row tw-text-lg tw-font-medium tw-items-center xsm:tw-text-sm md:tw-text-lg ">
-              <li className="tw-mx-4 md:tw-mx-7 tw-cursor-pointer ">
-                <Link className=" tw-no-underline tw-text-black" href="/about">
+              <Link className=" tw-no-underline tw-text-black" href="/about">
+                <li className="tw-mx-4 md:tw-mx-7 tw-cursor-pointer ">
                   About us
-                </Link>
-              </li>
-              <li className="tw-mx-4 md:tw-mx-7  tw-cursor-pointer">Sign Up</li>
-              <li className="tw-mx-4 md:tw-mx-7  tw-bg-primary hover:tw-bg-buttonHover tw-text-white tw-font-normal tw-cursor-pointer tw-px-10 tw-py-3 tw-rounded-lg">
-                <Link className=" tw-no-underline tw-text-white" href="/login">
+                </li>
+              </Link>
+              <Link
+                className=" tw-no-underline tw-text-black"
+                href={"/register"}
+              >
+                <li className="tw-mx-4 md:tw-mx-7  tw-cursor-pointer">
+                  Sign Up
+                </li>
+              </Link>
+              <Link className=" tw-no-underline tw-text-white" href="/login">
+                <li className="tw-mx-4 md:tw-mx-7  tw-bg-primary hover:tw-bg-buttonHover tw-text-white tw-font-normal tw-cursor-pointer tw-px-10 tw-py-3 tw-rounded-lg">
                   Sign In
-                </Link>
-              </li>
+                </li>
+              </Link>
             </ul>
           </Nav>
         </Navbar.Collapse>

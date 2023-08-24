@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -48,9 +49,11 @@ function ProgressMsg() {
           </h3>
         </div>
       </div>
-      <button className="tw-bg-progressLightBg tw-rounded-lg tw-h-12 tw-self-center tw-px-4 tw-py-3 tw-text-white ">
-        Post a Job
-      </button>
+      <Link className=" tw-self-center" href={"/employer/job/create"}>
+        <button className="tw-bg-progressLightBg tw-rounded-lg tw-h-12 tw-self-center tw-px-4 tw-py-3 tw-text-white ">
+          Post a Job
+        </button>
+      </Link>
     </div>
   );
 }

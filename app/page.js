@@ -20,7 +20,7 @@ export default function Home() {
     { id: 1, title: "Construction" },
     { id: 2, title: "logistics" },
     { id: 3, title: "Commercial" },
-    { id: 4, title: "Architecture" },
+    { id: 3, title: "Commercial" },
   ];
   const responsive = {
     superLargeDesktop: {
@@ -160,9 +160,9 @@ export default function Home() {
               </Link>
             </button>
           </div>
-          <div className=" tw-font-medium tw-text-left lg:tw-w-6/12 tw-w-full  tw-flex tw-flex-row ">
-            <span className="lg:tw-w-2/12 tw-w-4/12">Trending tags:</span>
-            <span className="tw-flex tw-flex-row tw-overflow-x-hidden ">
+          <div className=" tw-font-medium tw-text-left lg:tw-w-62 tw-w-62  tw-flex tw-flex-row tw-items-center tw-justify-center ">
+            <span className="tw-flex tw-flex-row ">
+              Trending tags:
               {tags.map((item) => {
                 return <TrendingTags key={item.id} item={item} />;
               })}
@@ -179,7 +179,7 @@ export default function Home() {
               width={30}
               alt="fire.png"
             />
-            <h2 className="tw-self-center tw-ml-3 tw-font-medium tw-text-lg">
+            <h2 className="tw-self-center tw-m-0 tw-ml-3 tw-font-medium tw-text-lg">
               Elite Jobs
             </h2>
           </div>
@@ -203,7 +203,7 @@ export default function Home() {
               alt="recruiters"
               className="tw-object-contain tw-mr-3 tw-self-center"
             />
-            <p className="tw-font-semibold tw-text-black tw-text-lg tw-self-center">
+            <p className="tw-font-semibold tw-m-0 tw-text-black tw-text-lg tw-self-center">
               Top Employers Currently
             </p>
           </div>
@@ -247,13 +247,17 @@ export default function Home() {
               alt="recruiters"
               className="tw-object-contain tw-mr-3 tw-self-center"
             />
-            <p className="tw-font-semibold tw-text-black tw-text-lg tw-self-center">
+            <p className="tw-font-semibold tw-m-0 tw-text-black tw-text-lg tw-self-center">
               Standard Jobs
             </p>
           </div>
           <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
             {data.map((item) => {
-              return <JobCard key={item} job={job} />;
+              return (
+                <Link href="/jobs" className="tw-text-black tw-no-underline">
+                  <JobCard key={item} job={job} />
+                </Link>
+              );
             })}
           </div>
         </div>

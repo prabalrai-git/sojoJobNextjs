@@ -19,8 +19,8 @@ function PostedJobs({ fromList }) {
           </h1>
         </div>
         {!fromList && (
-          <Link href={"/employer/job/list"}>
-            <h1 className="tw-self-center tw-text-primary">SEE ALL</h1>
+          <Link className="tw-self-center" href={"/employer/job/list"}>
+            <h1 className=" tw-text-primary">SEE ALL</h1>
           </Link>
         )}
       </div>

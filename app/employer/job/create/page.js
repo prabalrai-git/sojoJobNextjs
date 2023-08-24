@@ -21,7 +21,7 @@ function page() {
       <div className="tw-flex tw-flex-row tw-mb-10">
         <Link href={"/employer/dashboard"}>
           <Image
-            src={"/arrow.png"}
+            src={"/arrow-left.png"}
             width={40}
             height={40}
             alt="back"

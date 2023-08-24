@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 
 function page() {
   return (
-    <div className="tw-pt-10 tw-px-36 tw-pb-12">
+    <div className="tw-pt-20 tw-px-36 tw-pb-16">
       <div className="tw-flex tw-flex-row">
         <div className="tw-mr-5 tw-w-64">
           <Form.Label
