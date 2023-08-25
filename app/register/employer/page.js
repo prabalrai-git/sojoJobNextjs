@@ -31,7 +31,7 @@ function page() {
               <p className=""> Go back to Homepage</p>
             </div>
           </Link>
-          <Link className="tw-no-underline" href={"/login"}>
+          <Link className="tw-no-underline" href={"/login/employer"}>
             <p className="tw-text-primary tw-font-medium xsm:tw-hidden sm:tw-block">
               Already have an account?
             </p>
@@ -40,25 +40,29 @@ function page() {
         <h1 className="tw-my-10 tw-mt-20 tw-text-3xl">Sign Up to Sojojob</h1>
         <p className="tw-mb-5 tw-font-medium tw-text-gray-800">You are a</p>
         <div className="tw-grid xsm:tw-grid-cols-2 tw-gap-10 xsm:tw-pr-0 xl:tw-grid-cols-3">
-          <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-bg-chooseBg tw-border-2 tw-border-primary">
-            <Image
-              src={"/user.png"}
-              width={50}
-              height={50}
-              alt="person.png"
-              className="tw-object-contain"
-            />
-            <p className="tw-font-medium tw-mt-2">Job Seeker</p>
-          </div>
+          <Link href={"/register/job-seeker"} className="tw-no-underline">
+            <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-border-2 tw-border-chooseBg">
+              <Image
+                src={"/user.png"}
+                width={50}
+                height={50}
+                alt="person.png"
+                className="tw-object-contain tw-mt-5"
+              />
+              <p className="tw-font-medium tw-mt-2 tw-text-black tw-no-underline">
+                Job Seeker
+              </p>
+            </div>
+          </Link>
           <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-bg-chooseBg tw-border-2 tw-border-primary">
             <Image
               src={"/businessman.png"}
               width={50}
               height={50}
               alt="person.png"
-              className="tw-object-contain"
+              className="tw-object-contain tw-mt-5"
             />
-            <p className="tw-font-medium tw-mt-2">Job Seeker</p>
+            <p className="tw-font-medium tw-mt-2">Job Provider</p>
           </div>
         </div>
         {/* start of form */}
@@ -144,7 +148,7 @@ function page() {
             Sign In
           </button>
         </Link>
-        <Link className="tw-no-underline" href={"/login"}>
+        <Link className="tw-no-underline" href={"/login/employer"}>
           <p className="tw-mt-5 tw-text-primary tw-font-medium tw-cursor-pointer tw-mb-20">
             Already have an account?
           </p>

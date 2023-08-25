@@ -31,13 +31,13 @@ function page() {
               <p className=""> Go back to Homepage</p>
             </div>
           </Link>
-          <Link className="tw-no-underline" href={"/register"}>
+          <Link className="tw-no-underline" href={"/login/job-seeker"}>
             <p className="tw-text-primary tw-font-medium xsm:tw-hidden sm:tw-block">
-              New to SojoJob ? Sign up here
+              Already have an account?
             </p>
           </Link>
         </div>
-        <h1 className="tw-my-10 tw-mt-20 tw-text-3xl">Sign in to Sojojob</h1>
+        <h1 className="tw-my-10 tw-mt-20 tw-text-3xl">Sign Up to Sojojob</h1>
         <p className="tw-mb-5 tw-font-medium tw-text-gray-800">You are a</p>
         <div className="tw-grid xsm:tw-grid-cols-2 tw-gap-10 xsm:tw-pr-0 xl:tw-grid-cols-3">
           <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-bg-chooseBg tw-border-2 tw-border-primary">
@@ -46,23 +46,76 @@ function page() {
               width={50}
               height={50}
               alt="person.png"
-              className="tw-object-contain"
+              className="tw-object-contain tw-mt-5"
             />
             <p className="tw-font-medium tw-mt-2">Job Seeker</p>
           </div>
-          <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-bg-chooseBg tw-border-2 tw-border-primary">
-            <Image
-              src={"/businessman.png"}
-              width={50}
-              height={50}
-              alt="person.png"
-              className="tw-object-contain"
-            />
-            <p className="tw-font-medium tw-mt-2">Job Seeker</p>
-          </div>
+          <Link
+            href={"/register/employer"}
+            className="tw-text-black tw-no-underline"
+          >
+            <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-border-2 tw-border-chooseBg">
+              <Image
+                src={"/businessman.png"}
+                width={50}
+                height={50}
+                alt="person.png"
+                className="tw-object-contain tw-mt-5"
+              />
+              <p className="tw-font-medium tw-mt-2">Job Provider</p>
+            </div>
+          </Link>
         </div>
         {/* start of form */}
         <div class="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
+          <label
+            for="exampleFormControlInput1"
+            class="form-label tw-text-grey-800 tw-font-medium"
+          >
+            Email address
+          </label>
+          <input
+            type="email"
+            class="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+          <label
+            for="exampleFormControlInput1"
+            class="form-label tw-text-grey-800 tw-font-medium"
+          >
+            Email address
+          </label>
+          <input
+            type="email"
+            class="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+          <label
+            for="exampleFormControlInput1"
+            class="form-label tw-text-grey-800 tw-font-medium"
+          >
+            Email address
+          </label>
+          <input
+            type="email"
+            class="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+          <label
+            for="exampleFormControlInput1"
+            class="form-label tw-text-grey-800 tw-font-medium"
+          >
+            Email address
+          </label>
+          <input
+            type="email"
+            class="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
           <label
             for="exampleFormControlInput1"
             class="form-label tw-text-grey-800 tw-font-medium"
@@ -90,22 +143,19 @@ function page() {
           ></input>
         </div>
         {/* end of form */}
-        <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-16 ">
-          <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-medium tw-cursor-pointer">
-            Forgot Password?
-          </p>
-        </div>
+        <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-16 "></div>
         <Link href={"/employer/dashboard"}>
           <button className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-px-28">
             Sign In
           </button>
         </Link>
-        <Link className="tw-no-underline" href={"/register"}>
-          <p className="tw-mt-5 tw-text-primary tw-font-medium tw-cursor-pointer">
-            Don't have an account?
+        <Link className="tw-no-underline" href={"/login/job-seeker"}>
+          <p className="tw-mt-5 tw-text-primary tw-font-medium tw-cursor-pointer tw-mb-20">
+            Already have an account?
           </p>
         </Link>
       </div>
+
       {/*  */}
       <div className="tw-relative xsm:tw-hidden md:tw-block ">
         <div
@@ -115,11 +165,11 @@ function page() {
 
         <Image
           src={"/images/auth_bg.png"}
-          width={600}
+          width={400}
           height={300}
           alt="auth.png"
           style={{ height: "100%" }}
-          className="tw-w-full tw-object-scale-fill"
+          className="tw-w-full tw-object-fill"
         />
 
         <Image
@@ -130,50 +180,7 @@ function page() {
           style={{
             left: 0,
             right: 0,
-            bottom: "35%",
-            // margin: "auto",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-          className="tw-object-contain tw-absolute "
-        />
-        <h2
-          style={{
-            left: 0,
-            right: 0,
-            marginLeft: "auto",
-            marginRight: "auto",
-            bottom: "23%",
-          }}
-          className="object-contain tw-absolute tw-text-center text-white "
-        >
-          100+ Successful Stories <br /> Create from Sojojob
-        </h2>
-      </div>
-      {/* <div className="tw-relative xsm:tw-hidden md:tw-block ">
-        <div
-          style={{ height: "120vh" }}
-          className="tw-w-full z-10 tw-bg-overlayLogin tw-absolute tw-top-0"
-        ></div>
-
-        <Image
-          src={"/images/auth_bg.png"}
-          width={300}
-          height={300}
-          alt="auth.png"
-          style={{ height: "120vh" }}
-          className="tw-w-full object-cover"
-        />
-
-        <Image
-          src={"/images/auth_banner.png"}
-          width={400}
-          height={400}
-          alt="auth.png"
-          style={{
-            left: 0,
-            right: 0,
-            bottom: "35%",
+            bottom: "55%",
             // margin: "auto",
             marginLeft: "auto",
             marginRight: "auto",
@@ -186,13 +193,13 @@ function page() {
             right: 0,
             marginLeft: "auto",
             marginRight: "auto",
-            bottom: "22%",
+            bottom: "47%",
           }}
           className="object-contain tw-absolute tw-text-center text-white "
         >
           100+ Successful Stories <br /> Create from Sojojob
         </h2>
-      </div> */}
+      </div>
     </div>
   );
 }

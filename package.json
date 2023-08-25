@@ -20,9 +20,10 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-form-stepper": "^2.0.3",
     "react-multi-carousel": "^2.8.4",
     "react-quill": "^2.0.0",
+    "react-stepper-horizontal": "^1.0.11",
+    "sass": "^1.66.1",
     "tailwindcss": "3.3.3"
   }
 }

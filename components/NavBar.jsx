@@ -53,13 +53,16 @@ function NavBar() {
               </Link>
               <Link
                 className=" tw-no-underline tw-text-black"
-                href={"/register"}
+                href={"/register/employer"}
               >
                 <li className="tw-mx-4 md:tw-mx-7  tw-cursor-pointer">
                   Sign Up
                 </li>
               </Link>
-              <Link className=" tw-no-underline tw-text-white" href="/login">
+              <Link
+                className=" tw-no-underline tw-text-white"
+                href="/login/employer"
+              >
                 <li className="tw-mx-4 md:tw-mx-7  tw-bg-primary hover:tw-bg-buttonHover tw-text-white tw-font-normal tw-cursor-pointer tw-px-10 tw-py-3 tw-rounded-lg">
                   Sign In
                 </li>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Footer() {
@@ -7,29 +8,49 @@ function Footer() {
       <div>
         <h4 className="tw-pb-7 ">Job Seekers</h4>
         <div className="tw-text-lg tw-font-normal">
-          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary ">
-            Register to SojoJob
-          </p>
-          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
-            Login to SojoJob Account
-          </p>
-          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
-            About Us
-          </p>
+          <Link
+            href={"/register/job-seeker"}
+            className="tw-text-white tw-no-underline"
+          >
+            <p className=" tw-cursor-pointer hover:tw-text-primary ">
+              Register to SojoJob
+            </p>
+          </Link>
+          <Link
+            href={"/login/job-seeker"}
+            className="tw-text-white tw-no-underline"
+          >
+            <p className=" tw-cursor-pointer hover:tw-text-primary">
+              Login to SojoJob Account
+            </p>
+          </Link>
+          <Link href={"/about"} className="tw-text-white tw-no-underline">
+            <p className=" tw-cursor-pointer hover:tw-text-primary">About Us</p>
+          </Link>
         </div>
       </div>
       <div>
         <h4 className="tw-pb-7">Job Providers</h4>
         <div className="tw-text-lg tw-font-normal">
-          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
-            Register to SojoJob
-          </p>
-          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
-            Login to SojoJob Account
-          </p>
-          <p className="tw-pb-1 tw-cursor-pointer hover:tw-text-primary">
-            About Us
-          </p>
+          <Link
+            href={"/register/employer"}
+            className="tw-text-white tw-no-underline"
+          >
+            <p className=" tw-cursor-pointer hover:tw-text-primary">
+              Register to SojoJob
+            </p>
+          </Link>
+          <Link
+            href={"/login/employer"}
+            className="tw-text-white tw-no-underline"
+          >
+            <p className=" tw-cursor-pointer hover:tw-text-primary">
+              Login to SojoJob Account
+            </p>
+          </Link>
+          <Link href={"/about"} className="tw-text-white tw-no-underline">
+            <p className=" tw-cursor-pointer hover:tw-text-primary">About Us</p>
+          </Link>{" "}
         </div>
       </div>
       <div className="tw-w-full">
