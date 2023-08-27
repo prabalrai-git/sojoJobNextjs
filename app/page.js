@@ -160,9 +160,9 @@ export default function Home() {
               </Link>
             </button>
           </div>
-          <div className=" tw-font-medium tw-text-left lg:tw-w-62 tw-w-62  tw-flex tw-flex-row tw-items-center tw-justify-center ">
-            <span className="tw-flex tw-flex-row ">
-              Trending tags:
+          <div className=" tw-font-medium tw-text-left xsm:tw-w-8/12 tw-flex tw-flex-row tw-items-center tw-justify-center ">
+            <span className="tw-flex tw-flex-row tw-overflow-x-hidden ">
+              <span className="tw-w-32">Trending tags:</span>
               {tags.map((item) => {
                 return <TrendingTags key={item.id} item={item} />;
               })}

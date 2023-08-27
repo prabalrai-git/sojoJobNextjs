@@ -11,6 +11,8 @@
   "dependencies": {
     "autoprefixer": "10.4.15",
     "bootstrap": "^5.3.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "next": "13.4.13",
     "postcss": "8.4.27",
     "prop-types": "^15.8.1",

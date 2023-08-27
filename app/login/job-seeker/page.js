@@ -102,7 +102,7 @@ function page() {
             Forgot Password?
           </p>
         </div>
-        <Link href={"/employer/dashboard"}>
+        <Link href={"/job-seeker/dashboard"}>
           <button className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-px-28">
             Sign In
           </button>
