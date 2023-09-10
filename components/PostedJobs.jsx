@@ -15,7 +15,7 @@ function PostedJobs({ fromList }) {
             className="tw-object-fit tw-mr-7"
           />
           <h1 className="tw-text-lg tw-font-semibold tw-self-center">
-            Contact Person
+            Jobs Posted
           </h1>
         </div>
         {!fromList && (

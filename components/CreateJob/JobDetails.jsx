@@ -7,6 +7,10 @@ import "react-quill/dist/quill.snow.css";
 function JobDetails({ setStep }) {
   const [value, setValue] = useState("");
 
+  const setQValue = (e) => {
+    console.log(e, "from quill");
+  };
+
   return (
     <div className="tw-bg-white tw-rounded-lg tw-w-full tw-mt-10 tw-px-10 tw-py-6 ">
       <div className="tw-flex tw-flex-row tw-justify-between">
@@ -148,7 +152,7 @@ function JobDetails({ setStep }) {
               className="tw-h-40 tw-mb-20  "
               theme="snow"
               value={value}
-              onChange={setValue}
+              onChange={(e) => setQValue(e)}
             />
           </Form.Group>
           <Form.Group className="mb-4  " controlId="exampleForm.ControlInput1">
