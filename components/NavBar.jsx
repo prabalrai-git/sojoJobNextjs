@@ -5,15 +5,16 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import "@/styles/navbar.css";
 
 function NavBar() {
   return (
     <Navbar
       collapseOnSelect
-      expand="lg"
+      expand="sm"
       className="tw-flex tw-flex-row tw-bg-white tw-justify-between tw-pt-5 tw-sticky tw-top-0 tw-z-50 tw-pb-5"
     >
-      <Container>
+      <Container className="tw-max-w-screen-2xl pnavbar">
         <Navbar.Brand href="/">
           <Image
             className="tw-object-contain tw-cursor-pointer "

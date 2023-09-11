@@ -10,6 +10,7 @@ import TrendingTags from "@/components/TrendingTags";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import Carousel from "react-multi-carousel";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
   const data = [1, 2, 3, 4, 5, 5, 5, 5, 6, 6, 6];
@@ -64,49 +65,49 @@ export default function Home() {
       id: 1,
       title: "E-sewa",
       address: "Jawlakhel",
-      themeColor: "#60bb48",
+      themeColor: "#161e35",
       logo: "/images/clients/1.png",
     },
     {
       id: 2,
       title: "Khalti",
       address: "Jawlakhel",
-      themeColor: "#5d2f8f",
+      themeColor: "#161e35",
       logo: "/images/clients/2.png",
     },
     {
       id: 1,
       title: "Foodmandu",
       address: "Jawlakhel",
-      themeColor: "#ffdd00",
+      themeColor: "#161e35",
       logo: "/images/clients/3.png",
     },
     {
       id: 4,
       title: "EbPearls",
       address: "Jawlakhel",
-      themeColor: "#ffcd06",
+      themeColor: "#161e35",
       logo: "/images/clients/4.png",
     },
     {
       id: 4,
       title: "DishHome",
       address: "Jawlakhel",
-      themeColor: "#e30613",
+      themeColor: "#161e35",
       logo: "/images/clients/5.png",
     },
     {
       id: 6,
       title: "Ing",
       address: "Jawlakhel",
-      themeColor: "#75bf45",
+      themeColor: "#161e35",
       logo: "/images/clients/6.png",
     },
     {
       id: 7,
       title: "IME",
       address: "Jawlakhel",
-      themeColor: "#e30613",
+      themeColor: "#161e35",
       logo: "/images/clients/7.png",
     },
     {
@@ -119,6 +120,8 @@ export default function Home() {
   ];
   return (
     <>
+      <ToastContainer />
+
       <NavBar />
       <main
         className="tw-px-10  sm:tw-px-4 xsm:tw-px-4 md:tw-px-5 lg:tw-px-28 xl:tw-px-28"

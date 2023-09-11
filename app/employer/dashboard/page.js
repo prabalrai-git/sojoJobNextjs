@@ -5,10 +5,43 @@ import PostedJobs from "@/components/PostedJobs";
 import ProgressMsg from "@/components/ProgressMsg";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "react-avatar";
+import Axios from "@/api/server";
 
 function page() {
+  const [overViewData, setOverViewData] = useState();
+  const [sojoRep, setSojoRep] = useState();
+
+  useEffect(() => {
+    getOverViewData();
+    getSojoRep();
+  }, []);
+
+  const getOverViewData = async () => {
+    try {
+      const id = localStorage.getItem("id");
+
+      const res = await Axios.get(
+        `/jobRecruiter/getMonthlyOverviewDataByRecruiterId/${id}`
+      );
+
+      setOverViewData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSojoRep = async () => {
+    try {
+      const res = await Axios.get(
+        "/sojoJobContactPerson/getSojoJobContactPersonDetails"
+      );
+
+      setSojoRep(res.data.data[1]);
+    } catch (error) {}
+  };
+
   return (
     <div className="tw-pt-10 tw-px-20 tw-pb-12">
       <div className="tw-flex tw-flex-row tw-justify-between">
@@ -30,7 +63,9 @@ function page() {
       <p className="tw-text-lg">
         This is your personalized space where we help you find an ideal match!
       </p>
-      <ProgressMsg />
+      <ProgressMsg
+        completionPercentage={overViewData?.profileCompletionPercentage}
+      />
       <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-1 xl:tw-grid-cols-9 tw-gap-5 ">
         <div className="tw-bg-white tw-rounded-lg tw-col-span-6 ">
           <div className="tw-px-10 tw-py-6">
@@ -47,9 +82,18 @@ function page() {
               </h1>
             </div>
             <div className="tw-grid tw-grid-cols-3 1200:tw-grid-cols-2 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 md:tw-grid-cols-2 xl:tw-grid-cols-3 tw-mt-5 tw-gap-2">
-              <MonthlyInfoCard />
-              <MonthlyInfoCard />
-              <MonthlyInfoCard />
+              <MonthlyInfoCard
+                title={"Jobs Posted"}
+                data={overViewData?.totalJobsPosted}
+              />
+              <MonthlyInfoCard
+                title={"Active Jobs"}
+                data={overViewData?.totalActiveJobs}
+              />
+              <MonthlyInfoCard
+                title={"Total Views"}
+                data={overViewData?.profileViews}
+              />
             </div>
           </div>
         </div>
@@ -74,7 +118,7 @@ function page() {
               <div className="">
                 <Avatar
                   size="80"
-                  src={"/avatar.png"}
+                  src={sojoRep?.profileImage}
                   round={true}
                   className=" tw-border-gray-200 tw-mr-5 "
                   style={{ borderWidth: 0.5 }}
@@ -84,8 +128,8 @@ function page() {
                 <h2 className="tw-font-semibold tw-text-lg">
                   Sojo Representative
                 </h2>
-                <h2 className="tw-text-lg">demo.email@gmail.com</h2>
-                <p className="tw-text-lg">+911 9841 234 567</p>
+                <h2 className="tw-text-lg">{sojoRep?.email}</h2>
+                <p className="tw-text-lg">{sojoRep?.phone}</p>
               </div>
             </div>
           </div>

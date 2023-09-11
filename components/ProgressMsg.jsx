@@ -5,16 +5,15 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-function ProgressMsg() {
-  const percentage = 75;
+function ProgressMsg({ completionPercentage }) {
   return (
     <div className="tw-w-full tw-rounded-lg tw-py-5 tw-px-4 tw-bg-progressBg tw-mt-10 tw-flex tw-flex-row tw-justify-between">
       <div className="tw-flex tw-flex-row">
         <div className="tw-h-20 tw-w-20">
           <CircularProgressbar
             className="tw-bg-white tw-rounded-full tw-text-progressLightBg"
-            value={percentage}
-            text={`${percentage}%`}
+            value={completionPercentage && completionPercentage}
+            text={`${completionPercentage && completionPercentage}%`}
             styles={buildStyles({
               // Rotation of path and trail, in number of turns (0-1)
               //   rotation: 0.25,
@@ -32,7 +31,7 @@ function ProgressMsg() {
               // pathTransition: 'none',
 
               // Colors
-              pathColor: `rgba(234, 164, 68, ${percentage / 100})`,
+              pathColor: `rgba(234, 164, 68, ${completionPercentage / 100})`,
               textColor: "#E58C17",
 
               trailColor: "#fff",

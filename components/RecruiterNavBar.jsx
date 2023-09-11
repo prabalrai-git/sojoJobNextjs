@@ -10,6 +10,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import styles from "@/styles/global.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import "@/styles/navbar.css";
 
 function RecruiterNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -42,7 +43,7 @@ function RecruiterNavBar() {
       // expand="lg"
       className="bg-body-tertiary tw-px-20 tw-py-3 "
     >
-      <Container>
+      <Container className="tw-max-w-screen-2xl pnavbar">
         <Navbar.Brand href="/">
           <Image
             className="tw-object-contain tw-cursor-pointer "
