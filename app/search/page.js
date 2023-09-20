@@ -91,7 +91,7 @@ function page() {
             style={{ height: 1100 }}
             className="tw-grid tw-grid-cols-1 tw-gap-4 tw-overflow-y-auto tw-no-scrollbar tw-pr-5 "
           >
-            {data.map((item) => {
+            {data?.map((item) => {
               return (
                 <Link href="/jobs" className="tw-text-black tw-no-underline">
                   <JobCard key={item} job={job} />

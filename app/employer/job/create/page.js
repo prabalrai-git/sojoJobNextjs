@@ -14,7 +14,7 @@ function page() {
 
   const steps = [
     { title: "Job Details", completed: true, activeStep: true },
-    { title: "Job Questions", completed: true, activeStep: true },
+    // { title: "Job Questions", completed: true, activeStep: true },
     { title: "Job Preview", completed: false, activeStep: true },
     { title: "Contact", completed: false, activeStep: true },
   ];
@@ -24,11 +24,13 @@ function page() {
 
   if (step === 0) {
     content = <JobDetails setStep={setStep} />;
-  } else if (step === 1) {
-    content = <JobQuestions setStep={setStep} />;
-  } else if (step === 2) {
+  }
+  // else if (step === 1) {
+  //   content = <JobQuestions setStep={setStep} />;
+  // }
+  else if (step === 1) {
     content = <JobPreview setStep={setStep} />;
-  } else if (step == 3) {
+  } else if (step == 2) {
     content = <Contact setStep={setStep} />;
   }
 

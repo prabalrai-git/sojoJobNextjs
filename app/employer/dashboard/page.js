@@ -5,20 +5,23 @@ import PostedJobs from "@/components/PostedJobs";
 import ProgressMsg from "@/components/ProgressMsg";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Avatar from "react-avatar";
 import Axios from "@/api/server";
 
 function page() {
-  const [overViewData, setOverViewData] = useState();
-  const [sojoRep, setSojoRep] = useState();
+  const [overViewData, setOverViewData] = useState({
+    totalJobsPosted: 0, // Replace with your default value
+    totalActiveJobs: 0, // Replace with your default value
+    profileViews: 0, // Replace with your default value
+  });
+  const [sojoRep, setSojoRep] = useState({
+    profileImage: "", // Replace with your default value
+    email: "", // Replace with your default value
+    phone: "", // Replace with your default value
+  });
 
-  useEffect(() => {
-    getOverViewData();
-    getSojoRep();
-  }, []);
-
-  const getOverViewData = async () => {
+  const getOverViewData = useCallback(async () => {
     try {
       const id = localStorage.getItem("id");
 
@@ -30,9 +33,9 @@ function page() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
-  const getSojoRep = async () => {
+  const getSojoRep = useCallback(async () => {
     try {
       const res = await Axios.get(
         "/sojoJobContactPerson/getSojoJobContactPersonDetails"
@@ -40,7 +43,11 @@ function page() {
 
       setSojoRep(res.data.data[1]);
     } catch (error) {}
-  };
+  }, []);
+  useEffect(() => {
+    getOverViewData();
+    getSojoRep();
+  }, [getOverViewData, getSojoRep]);
 
   return (
     <div className="tw-pt-10 tw-px-20 tw-pb-12">
@@ -64,7 +71,11 @@ function page() {
         This is your personalized space where we help you find an ideal match!
       </p>
       <ProgressMsg
-        completionPercentage={overViewData?.profileCompletionPercentage}
+        completionPercentage={
+          overViewData?.profileCompletionPercentage
+            ? overViewData.profileCompletionPercentage
+            : 0
+        }
       />
       <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-1 xl:tw-grid-cols-9 tw-gap-5 ">
         <div className="tw-bg-white tw-rounded-lg tw-col-span-6 ">

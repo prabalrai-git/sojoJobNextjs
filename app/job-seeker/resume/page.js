@@ -121,7 +121,7 @@ function page() {
               <p className="tw-text-primary tw-font-medium tw-text-sm">
                 Work Experience
               </p>
-              {workER.map((item) => {
+              {workER?.map((item) => {
                 return (
                   <>
                     <div className="tw-mt-8">
@@ -157,7 +157,7 @@ function page() {
               <p className="tw-text-primary tw-font-medium tw-text-sm">
                 Education Background
               </p>
-              {rep.map((item) => {
+              {rep?.map((item) => {
                 return (
                   <>
                     <div className="tw-mt-8">
@@ -176,7 +176,7 @@ function page() {
               <p className="tw-text-primary tw-font-medium tw-text-sm">
                 Licenses & Certification
               </p>
-              {rep.map((item) => {
+              {rep?.map((item) => {
                 return (
                   <>
                     <div className="tw-mt-8">

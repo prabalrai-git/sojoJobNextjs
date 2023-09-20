@@ -1,15 +1,154 @@
+import { Checkbox, DatePicker, Select } from "antd";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import dayjs from "dayjs";
+import TagsInput from "react-tagsinput";
+import "@/styles/global.css";
+import Axios from "@/api/server";
+
+import "react-tagsinput/react-tagsinput.css";
+import JobPackage from "../JobPackage";
 
 function JobDetails({ setStep }) {
-  const [value, setValue] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [jobPackage, setJobPackage] = useState("");
+
+  //drop-down states
+
+  const [categories, setCategories] = useState();
+  const [employmentTypes, setEmploymentTypes] = useState();
+  const [experiences, setExperiences] = useState();
+  const [workTypes, setWorkTypes] = useState();
+
+  // form-submission states
+
+  const [title, setTitle] = useState();
+  const [category, setCategory] = useState();
+  const [employmentType, setEmploymentType] = useState();
+  const [location, setLocation] = useState();
+  const [experience, setExperience] = useState();
+  const [salary, setSalary] = useState();
+  const [vacancyNumber, setVacancyNumber] = useState();
+  const [workType, setWorkType] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [jobDescription, setJobDescription] = useState("");
+
+  useEffect(() => {
+    getAllCategories();
+    getAllEmploymetType();
+    getAllExperienceLevels();
+    getAllWorkTypes();
+  }, []);
+
+  const onSubmit = async () => {
+    const data = {
+      title,
+      jobCategoryId: category,
+      jobShiftId: employmentType,
+      jobLocation: location,
+      experienceLevelId: experience,
+      salary,
+      numberOfVacancies: vacancyNumber,
+      jobSiteId: workType,
+      startDate,
+      endDate,
+      jobDescription,
+      requirements: skills,
+      jobPostingPackage: jobPackage,
+    };
+    console.log(data);
+  };
+
+  const getAllCategories = async () => {
+    try {
+      const res = await Axios.get("/jobCategories/getAllJobCategories");
+      const data = res.data.data;
+      let newData = [];
+      for (let i in data) {
+        const obj = { value: data[i].id, label: data[i].title };
+        newData.push(obj);
+      }
+      setCategories(newData);
+    } catch (error) {}
+  };
+  const getAllEmploymetType = async () => {
+    try {
+      const res = await Axios.get("/jobShift/getAllShifts");
+      const data = res.data.data;
+      let newData = [];
+      for (let i in data) {
+        const obj = { value: data[i].id, label: data[i].title };
+        newData.push(obj);
+      }
+      setEmploymentTypes(newData);
+    } catch (error) {}
+  };
+  const getAllExperienceLevels = async () => {
+    try {
+      const res = await Axios.get("/experienceLevels/getAllExperienceLevels");
+      const data = res.data.data;
+      let newData = [];
+      for (let i in data) {
+        const obj = { value: data[i].id, label: data[i].title };
+        newData.push(obj);
+      }
+      setExperiences(newData);
+    } catch (error) {}
+  };
+  const getAllWorkTypes = async () => {
+    try {
+      const res = await Axios.get("/jobSites/getAllJobSites");
+      const data = res.data.data;
+      let newData = [];
+      for (let i in data) {
+        const obj = { value: data[i].id, label: data[i].title };
+        newData.push(obj);
+      }
+      setWorkTypes(newData);
+    } catch (error) {}
+  };
 
   const setQValue = (e) => {
     console.log(e, "from quill");
   };
+  const dateFormat = "YYYY/MM/DD";
+
+  let today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+
+  today = yyyy + "/" + mm + "/" + dd;
+  const options = [
+    {
+      value: "1",
+      label: "Not Identified",
+    },
+    {
+      value: "2",
+      label: "Closed",
+    },
+    {
+      value: "3",
+      label: "Communicated",
+    },
+    {
+      value: "4",
+      label: "Identified",
+    },
+    {
+      value: "5",
+      label: "Resolved",
+    },
+    {
+      value: "6",
+      label: "Cancelled",
+    },
+  ];
 
   return (
     <div className="tw-bg-white tw-rounded-lg tw-w-full tw-mt-10 tw-px-10 tw-py-6 ">
@@ -31,56 +170,112 @@ function JobDetails({ setStep }) {
         <Form>
           <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
             <Form.Label className="tw-text-gray-600 tw-font-medium">
-              Email address
+              Job's Title
             </Form.Label>
             <Form.Control
               className="tw-border-2 tw-border-gray-300 tw-h-12"
               type="email"
-              placeholder="name@example.com"
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter the job title here..."
             />
           </Form.Group>
-          <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+          <Form.Group
+            className="mb-4 tw-flex tw-flex-col"
+            controlId="exampleForm.ControlInput1"
+          >
             <Form.Label className="tw-text-gray-600 tw-font-medium">
-              Email address
+              Categories
             </Form.Label>
-            <Form.Control
-              className="tw-border-2 tw-border-gray-300 tw-h-12"
-              type="email"
-              placeholder="name@example.com"
+            <Select
+              showSearch
+              className="tw-h-12 "
+              style={
+                {
+                  // borderColor: "grey",
+                  // paddingTop: 10,
+                }
+              }
+              placeholder="Search to Select"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                (option?.label ?? "").includes(input)
+              }
+              filterSort={(optionA, optionB) =>
+                (optionA?.label ?? "")
+                  .toLowerCase()
+                  .localeCompare((optionB?.label ?? "").toLowerCase())
+              }
+              options={categories}
+              onChange={(e) => setCategory(e)}
             />
           </Form.Group>
           <Form.Group
             className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
             controlId="exampleForm.ControlInput1"
           >
-            <div>
+            <div className=" tw-flex tw-flex-col">
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
+                Employmnet Type
               </Form.Label>
-              <Form.Control
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
-                type="email"
-                placeholder="name@example.com"
+              <Select
+                onChange={(e) => setEmploymentType(e)}
+                showSearch
+                className="tw-h-12 "
+                style={
+                  {
+                    // borderColor: "grey",
+                    // paddingTop: 10,
+                  }
+                }
+                placeholder="Search to Select"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  (option?.label ?? "").includes(input)
+                }
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                options={employmentTypes}
               />
             </div>
             <div>
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
+                Location
               </Form.Label>
               <Form.Control
+                onChange={(e) => setLocation(e.target.value)}
                 className="tw-border-2 tw-border-gray-300 tw-h-12"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="Enter Job Location"
               />
             </div>
-            <div>
+            <div className=" tw-flex tw-flex-col">
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
+                Experience
               </Form.Label>
-              <Form.Control
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
-                type="email"
-                placeholder="name@example.com"
+              <Select
+                onChange={(e) => setExperience(e)}
+                showSearch
+                className="tw-h-12 "
+                style={
+                  {
+                    // borderColor: "grey",
+                    // paddingTop: 10,
+                  }
+                }
+                placeholder="Search to Select"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  (option?.label ?? "").includes(input)
+                }
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                options={experiences}
               />
             </div>
           </Form.Group>
@@ -90,32 +285,64 @@ function JobDetails({ setStep }) {
           >
             <div>
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
+                Salary
               </Form.Label>
               <Form.Control
+                onChange={(e) => setSalary(e.target.value)}
                 className="tw-border-2 tw-border-gray-300 tw-h-12"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="NRs.20,000-10,000 monthly"
+                value={salary}
               />
+              <Checkbox
+                className="tw-mt-3"
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setSalary("Negotiable");
+                  } else {
+                    setSalary("");
+                  }
+                }}
+              >
+                Negotiable
+              </Checkbox>
             </div>
             <div>
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
+                No. of Vacancy
               </Form.Label>
               <Form.Control
+                onChange={(e) => setVacancyNumber(e.target.value)}
                 className="tw-border-2 tw-border-gray-300 tw-h-12"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="Enter number of vacancy opening"
               />
             </div>
-            <div>
+            <div className=" tw-flex tw-flex-col">
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
+                Work Type{" "}
               </Form.Label>
-              <Form.Control
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
-                type="email"
-                placeholder="name@example.com"
+              <Select
+                onChange={(e) => setWorkType(e)}
+                showSearch
+                className="tw-h-12 "
+                style={
+                  {
+                    // borderColor: "grey",
+                    // paddingTop: 10,
+                  }
+                }
+                placeholder="Search to Select"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  (option?.label ?? "").includes(input)
+                }
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                options={workTypes}
               />
             </div>
           </Form.Group>
@@ -123,24 +350,35 @@ function JobDetails({ setStep }) {
             className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
             controlId="exampleForm.ControlInput1"
           >
-            <div>
+            <div className="tw-flex tw-flex-col">
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
+                Start Date
               </Form.Label>
-              <Form.Control
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
-                type="email"
-                placeholder="name@example.com"
+
+              <DatePicker
+                className="tw-py-3 tw-border-gray-300 tw-border-2"
+                defaultValue={dayjs(today, dateFormat)}
+                format={dateFormat}
+                onChange={(e) => setStartDate(e)}
+                value={startDate}
               />
-            </div>
-            <div>
-              <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Email address
-              </Form.Label>
-              <Form.Control
+
+              {/* <Form.Control
                 className="tw-border-2 tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="name@example.com"
+              /> */}
+            </div>
+            <div className="tw-flex tw-flex-col">
+              <Form.Label className="tw-text-gray-600 tw-font-medium">
+                End Date
+              </Form.Label>
+              <DatePicker
+                className="tw-py-3 tw-border-gray-300 tw-border-2"
+                defaultValue={dayjs(today, dateFormat)}
+                format={dateFormat}
+                onChange={(e) => setEndDate(e)}
+                value={endDate}
               />
             </div>
           </Form.Group>
@@ -151,24 +389,40 @@ function JobDetails({ setStep }) {
             <ReactQuill
               className="tw-h-40 tw-mb-20  "
               theme="snow"
-              value={value}
-              onChange={(e) => setQValue(e)}
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e)}
             />
           </Form.Group>
           <Form.Group className="mb-4  " controlId="exampleForm.ControlInput1">
             <Form.Label className="tw-text-gray-600 tw-font-medium">
-              Email address
+              Skills Required (Make sure to press enter after writing a skill
+              set.)
             </Form.Label>
-            <Form.Control
-              className="tw-border-2 tw-border-gray-300 tw-h-12"
-              type="email"
-              placeholder="name@example.com"
-            />
+            <TagsInput value={skills} onChange={(e) => setSkills(e)} />
           </Form.Group>
         </Form>
+        <div>
+          <p className="tw-text-gray-600 tw-font-medium">Package</p>
+
+          <div className="tw-flex tw-flex-row tw-gap-4">
+            <JobPackage
+              title={"Elite"}
+              setJobPackage={setJobPackage}
+              jobPackage={jobPackage}
+            />
+            <JobPackage
+              title={"Standard"}
+              setJobPackage={setJobPackage}
+              jobPackage={jobPackage}
+            />
+          </div>
+        </div>
 
         <button
-          onClick={() => setStep((prev) => prev + 1)}
+          onClick={() => {
+            return onSubmit();
+            setStep((prev) => prev + 1);
+          }}
           className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
         >
           Next

@@ -143,7 +143,7 @@ function page() {
             </h2>
           </div>
           <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2">
-            {data.map((item) => {
+            {data?.map((item) => {
               return (
                 <Link href="/jobs" className="tw-text-black tw-no-underline">
                   <JobCard key={item} job={job} />
