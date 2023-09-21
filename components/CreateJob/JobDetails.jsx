@@ -1,4 +1,4 @@
-import { Checkbox, DatePicker, Select } from "antd";
+import { Checkbox, DatePicker, Input, Select } from "antd";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
@@ -12,7 +12,7 @@ import Axios from "@/api/server";
 import "react-tagsinput/react-tagsinput.css";
 import JobPackage from "../JobPackage";
 
-function JobDetails({ setStep }) {
+function JobDetails({ setStep, setData }) {
   const [skills, setSkills] = useState([]);
   const [jobPackage, setJobPackage] = useState("");
 
@@ -60,7 +60,8 @@ function JobDetails({ setStep }) {
       requirements: skills,
       jobPostingPackage: jobPackage,
     };
-    console.log(data);
+
+    setData(data);
   };
 
   const getAllCategories = async () => {
@@ -115,7 +116,7 @@ function JobDetails({ setStep }) {
   const setQValue = (e) => {
     console.log(e, "from quill");
   };
-  const dateFormat = "YYYY/MM/DD";
+  const dateFormat = "YYYY-MM-DD";
 
   let today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
@@ -172,9 +173,14 @@ function JobDetails({ setStep }) {
             <Form.Label className="tw-text-gray-600 tw-font-medium">
               Job's Title
             </Form.Label>
-            <Form.Control
+            {/* <Form.Control
               className="tw-border-2 tw-border-gray-300 tw-h-12"
               type="email"
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter the job title here..."
+            /> */}
+            <Input
+              className="tw-border-2 tw-border-gray-300 tw-h-12"
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter the job title here..."
             />
@@ -188,7 +194,7 @@ function JobDetails({ setStep }) {
             </Form.Label>
             <Select
               showSearch
-              className="tw-h-12 "
+              className="tw-h-12 tw-border-2 tw-rounded-lg "
               style={
                 {
                   // borderColor: "grey",
@@ -206,7 +212,7 @@ function JobDetails({ setStep }) {
                   .localeCompare((optionB?.label ?? "").toLowerCase())
               }
               options={categories}
-              onChange={(e) => setCategory(e)}
+              onChange={(e, a) => setCategory(a)}
             />
           </Form.Group>
           <Form.Group
@@ -218,9 +224,9 @@ function JobDetails({ setStep }) {
                 Employmnet Type
               </Form.Label>
               <Select
-                onChange={(e) => setEmploymentType(e)}
+                onChange={(e, a) => setEmploymentType(a)}
                 showSearch
-                className="tw-h-12 "
+                className="tw-h-12 tw-border-2  tw-rounded-lg"
                 style={
                   {
                     // borderColor: "grey",
@@ -244,21 +250,26 @@ function JobDetails({ setStep }) {
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Location
               </Form.Label>
-              <Form.Control
+              <Input
+                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="Enter Job Location"
+              />
+              {/* <Form.Control
                 onChange={(e) => setLocation(e.target.value)}
                 className="tw-border-2 tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="Enter Job Location"
-              />
+              /> */}
             </div>
-            <div className=" tw-flex tw-flex-col">
+            <div className=" tw-flex tw-flex-col ">
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Experience
               </Form.Label>
               <Select
-                onChange={(e) => setExperience(e)}
+                onChange={(e, a) => setExperience(a)}
                 showSearch
-                className="tw-h-12 "
+                className="tw-h-12 tw-border-2 tw-rounded-lg "
                 style={
                   {
                     // borderColor: "grey",
@@ -287,13 +298,19 @@ function JobDetails({ setStep }) {
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Salary
               </Form.Label>
-              <Form.Control
+              <Input
+                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                onChange={(e) => setSalary(e.target.value)}
+                placeholder="NRs.20,000-10,000 monthly"
+                value={salary}
+              />
+              {/* <Form.Control
                 onChange={(e) => setSalary(e.target.value)}
                 className="tw-border-2 tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="NRs.20,000-10,000 monthly"
                 value={salary}
-              />
+              /> */}
               <Checkbox
                 className="tw-mt-3"
                 onChange={(e) => {
@@ -311,21 +328,27 @@ function JobDetails({ setStep }) {
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 No. of Vacancy
               </Form.Label>
-              <Form.Control
+              <Input
+                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                onChange={(e) => setVacancyNumber(e.target.value)}
+                placeholder="Enter number of vacancy opening"
+                value={vacancyNumber}
+              />
+              {/* <Form.Control
                 onChange={(e) => setVacancyNumber(e.target.value)}
                 className="tw-border-2 tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="Enter number of vacancy opening"
-              />
+              /> */}
             </div>
             <div className=" tw-flex tw-flex-col">
               <Form.Label className="tw-text-gray-600 tw-font-medium">
-                Work Type{" "}
+                Work Type
               </Form.Label>
               <Select
-                onChange={(e) => setWorkType(e)}
+                onChange={(e, a) => setWorkType(a)}
                 showSearch
-                className="tw-h-12 "
+                className="tw-h-12 tw-border-2 tw-rounded-lg "
                 style={
                   {
                     // borderColor: "grey",
@@ -359,8 +382,8 @@ function JobDetails({ setStep }) {
                 className="tw-py-3 tw-border-gray-300 tw-border-2"
                 defaultValue={dayjs(today, dateFormat)}
                 format={dateFormat}
-                onChange={(e) => setStartDate(e)}
-                value={startDate}
+                onChange={(e, a) => setStartDate(a)}
+                value={startDate ? dayjs(startDate, dateFormat) : null}
               />
 
               {/* <Form.Control
@@ -377,10 +400,21 @@ function JobDetails({ setStep }) {
                 className="tw-py-3 tw-border-gray-300 tw-border-2"
                 defaultValue={dayjs(today, dateFormat)}
                 format={dateFormat}
-                onChange={(e) => setEndDate(e)}
-                value={endDate}
+                onChange={(e, a) => setEndDate(a)}
+                value={endDate ? dayjs(endDate, dateFormat) : null}
               />
             </div>
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+            <Form.Label className="tw-text-gray-600 tw-font-medium">
+              Skills Required
+            </Form.Label>
+            <ReactQuill
+              className="tw-h-40 tw-mb-20  "
+              theme="snow"
+              value={skills}
+              onChange={(e) => setSkills(e)}
+            />
           </Form.Group>
           <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
             <Form.Label className="tw-text-gray-600 tw-font-medium">
@@ -393,13 +427,13 @@ function JobDetails({ setStep }) {
               onChange={(e) => setJobDescription(e)}
             />
           </Form.Group>
-          <Form.Group className="mb-4  " controlId="exampleForm.ControlInput1">
+          {/* <Form.Group className="mb-4  " controlId="exampleForm.ControlInput1">
             <Form.Label className="tw-text-gray-600 tw-font-medium">
               Skills Required (Make sure to press enter after writing a skill
               set.)
             </Form.Label>
             <TagsInput value={skills} onChange={(e) => setSkills(e)} />
-          </Form.Group>
+          </Form.Group> */}
         </Form>
         <div>
           <p className="tw-text-gray-600 tw-font-medium">Package</p>
@@ -420,7 +454,7 @@ function JobDetails({ setStep }) {
 
         <button
           onClick={() => {
-            return onSubmit();
+            onSubmit();
             setStep((prev) => prev + 1);
           }}
           className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"

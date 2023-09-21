@@ -24,8 +24,11 @@ function page() {
     try {
       const res = await Axios.post("/auth/login", data);
 
+      console.log(res.data.data, "he ha");
+
       localStorage.setItem("id", res.data.data.id);
       localStorage.setItem("tokenSojoJob", res.data.data.token);
+      localStorage.setItem("employerId", res.data.data.employerId);
       if (res.data.success) {
         toast.success("Login Successful!", {
           position: "top-right",

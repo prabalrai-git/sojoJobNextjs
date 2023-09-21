@@ -23,7 +23,7 @@ function page() {
 
   const getOverViewData = useCallback(async () => {
     try {
-      const id = localStorage.getItem("id");
+      const id = localStorage.getItem("employerId");
 
       const res = await Axios.get(
         `/jobRecruiter/getMonthlyOverviewDataByRecruiterId/${id}`
@@ -125,10 +125,10 @@ function page() {
                 Contact Person
               </h1>
             </div>
-            <div className="tw-mt-8  tw-flex tw-flex-row tw-items-center tw-h-40">
+            <div className="tw-mt-1  tw-flex tw-flex-row tw-items-center tw-h-40">
               <div className="">
                 <Avatar
-                  size="80"
+                  size="100"
                   src={sojoRep?.profileImage}
                   round={true}
                   className=" tw-border-gray-200 tw-mr-5 "
