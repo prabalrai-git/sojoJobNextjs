@@ -28,6 +28,12 @@ function PostedJobs({ fromList }) {
   };
   const columns = [
     {
+      title: "Job Post ID",
+      dataIndex: "id",
+      key: "id",
+      render: (item) => <p>SJ00{item}</p>,
+    },
+    {
       title: "Job Title",
       dataIndex: "title",
       key: "title",
