@@ -1,15 +1,39 @@
 "use client";
 
+import { DatePicker, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import Dropzone, { useDropzone } from "react-dropzone";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import dayjs from "dayjs";
+import Axios from "@/api/server";
 
 function page() {
   const [value, setValue] = useState();
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    getProfileInformation();
+  }, []);
+
+  const getProfileInformation = async () => {
+    try {
+      const res = await Axios.get(
+        `/jobRecruiter/getJobRecruiterById/${localStorage.getItem(
+          "employerId"
+        )}`
+      );
+
+      console.log(res.data.data);
+      setData(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
     // Disable click and keydown behavior
     noClick: true,
@@ -21,6 +45,14 @@ function page() {
       {file.path} - {file.size} bytes
     </li>
   ));
+
+  const dateFormat = "YYYY-MM-DD";
+  let today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+
+  today = yyyy + "/" + mm + "/" + dd;
 
   return (
     <div className="tw-pt-10 tw-mx-40 tw-pb-10">
@@ -94,43 +126,41 @@ function page() {
               <div className="tw-col-span-3 tw-grid tw-gap-8">
                 <div>
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
-                    Email address
+                    Company Name
                   </Form.Label>
-                  <Form.Control
-                    className="tw-border-2 tw-border-gray-300 tw-h-12"
-                    type="email"
-                    placeholder="name@example.com"
+                  <Input
+                    className="tw-h-12"
+                    placeholder="Enter company name"
+                    value={data?.companyName}
                   />
                 </div>
                 <div>
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
-                    Email address
+                    Company Email
                   </Form.Label>
-                  <Form.Control
-                    className="tw-border-2 tw-border-gray-300 tw-h-12"
+                  <Input
                     type="email"
-                    placeholder="name@example.com"
+                    className="tw-h-12"
+                    placeholder="Enter company email"
+                    value={data?.companyEmail}
                   />
                 </div>
                 <div>
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
-                    Email address
+                    Contact Number
                   </Form.Label>
-                  <Form.Control
-                    className="tw-border-2 tw-border-gray-300 tw-h-12"
-                    type="email"
-                    placeholder="name@example.com"
+                  <Input
+                    type="number"
+                    className="tw-h-12"
+                    placeholder="Enter company contact number"
+                    value={data?.companyPhone}
                   />
                 </div>
                 <div>
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
-                    Email address
+                    Name
                   </Form.Label>
-                  <Form.Control
-                    className="tw-border-2 tw-border-gray-300 tw-h-12"
-                    type="email"
-                    placeholder="name@example.com"
-                  />
+                  <Input className="tw-h-12" placeholder="Enter name" />
                 </div>
               </div>
             </Form.Group>
@@ -140,22 +170,25 @@ function page() {
             >
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Founded Date
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+
+                <DatePicker
+                  className="tw-py-3 tw-border-gray-300 tw-border-2 tw-w-full"
+                  defaultValue={dayjs(today, dateFormat)}
+                  format={dateFormat}
+                  onChange={(e, a) => console.log(a)}
+                  // value={startDate ? dayjs(startDate, dateFormat) : null}
                 />
               </div>
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Headquaters
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+                <Input
+                  className="tw-h-12"
+                  placeholder="Enter headquater"
+                  value={data?.companyHeadquarters}
                 />
               </div>
             </Form.Group>
@@ -165,22 +198,23 @@ function page() {
             >
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Number of Employees
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+                <Input
+                  className="tw-h-12"
+                  type="number"
+                  placeholder="Enter number of employees"
+                  value={data?.companySize}
                 />
               </div>
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Website Url
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+                <Input
+                  className="tw-h-12"
+                  placeholder="Enter website url"
+                  value={data?.companyWebsiteURL}
                 />
               </div>
             </Form.Group>

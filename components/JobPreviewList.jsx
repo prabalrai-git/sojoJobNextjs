@@ -1,76 +1,23 @@
 import Image from "next/image";
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
-import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
 
-function JobPreview({ setStep, data }) {
+function JobPreviewList({ data }) {
   const jobDescription = (
     <div
       dangerouslySetInnerHTML={{
-        __html: data.jobDescription,
+        __html: data?.jobDescription,
       }}
     />
   );
   const requirements = (
     <div
       dangerouslySetInnerHTML={{
-        __html: data.requirements,
+        __html: data?.requirements,
       }}
     />
   );
-
-  const onJobPost = async () => {
-    const dataToPost = {
-      title: data?.title,
-      salary: data?.salary,
-      responsibilities: data.requirements,
-      requirements: data?.requirements,
-      jobLocation: data?.jobLocation,
-      jobPostingPackage: data?.jobPostingPackage,
-      jobCategoryId: data?.jobCategoryId?.value,
-      jobShiftId: data?.jobShiftId?.value,
-      jobSiteId: data?.jobSiteId?.value,
-      educationLevelId: data?.educationLevelId?.value,
-      experienceLevelId: data?.experienceLevelId?.value,
-      jobRecruiterId: Number(localStorage.getItem("employerId")),
-      startDate: data?.startDate,
-      endDate: data?.endDate,
-      numberOfVacancies: Number(data?.numberOfVacancies),
-      jobDescription: data?.jobDescription,
-    };
-
-    try {
-      const res = await Axios.post("/job/postJob", dataToPost);
-      if (res.data.success) {
-        toast.success("Posted Successfully!", {
-          position: "top-right",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      }
-      setTimeout(() => {
-        setStep((prev) => prev + 1);
-      }, 1500);
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong!", {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-  };
 
   return (
     <>
@@ -79,7 +26,7 @@ function JobPreview({ setStep, data }) {
       <div className="tw-bg-white tw-rounded-lg tw-w-full tw-mt-10 tw-px-10 tw-py-6 ">
         <div className="tw-flex tw-flex-row tw-justify-between">
           <h1 className="tw-text-black tw-text-2xl tw-font-medium tw-self-end">
-            {data.title}
+            {data?.title}
           </h1>
           <div className="tw-self-center tw-flex tw-flex-row">
             {/* <button
@@ -98,13 +45,8 @@ function JobPreview({ setStep, data }) {
               /> */}
               <p className="tw-ml-2 tw-text-base ">View as public</p>
             </button>
-            <button
-              onClick={() => {
-                onJobPost();
-              }}
-              className="tw-text-white tw-text-base tw-font-medium tw-bg-primary tw-px-8 tw-py-3 tw-rounded-lg "
-            >
-              Post Job
+            <button className="tw-text-white tw-text-base tw-font-medium tw-bg-primary tw-px-8 tw-py-3 tw-rounded-lg ">
+              Edit Job
             </button>
           </div>
         </div>
@@ -124,7 +66,7 @@ function JobPreview({ setStep, data }) {
             />
 
             <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
-              {data.jobShiftId.label}
+              {data?.jobShift?.title}
             </p>
           </div>
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
@@ -137,7 +79,7 @@ function JobPreview({ setStep, data }) {
             />
 
             <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
-              {data.experienceLevelId.label}
+              {data?.experienceLevel?.title}
             </p>
           </div>
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
@@ -150,7 +92,7 @@ function JobPreview({ setStep, data }) {
             />
 
             <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
-              {data.salary}
+              {data?.salary}
             </p>
           </div>
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
@@ -163,7 +105,7 @@ function JobPreview({ setStep, data }) {
             />
 
             <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
-              {data.jobSiteId.label}
+              {data?.jobSite.title}
             </p>
           </div>
         </div>
@@ -195,4 +137,4 @@ function JobPreview({ setStep, data }) {
   );
 }
 
-export default JobPreview;
+export default JobPreviewList;

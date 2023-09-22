@@ -1,10 +1,13 @@
 "use client";
 
 import PostedJobs from "@/components/PostedJobs";
-import React from "react";
+import { Select } from "antd";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 function page() {
+  const [jobStatusFilter, setJobStatusFilter] = useState("");
+
   return (
     <div className="tw-pt-20 tw-px-36 tw-pb-16">
       <div className="tw-flex tw-flex-row">
@@ -28,8 +31,37 @@ function page() {
           >
             Job Status
           </Form.Label>
+          <Select
+            className="tw-h-12 tw-border tw-border-primary tw-w-full tw-rounded-md"
+            placeholder="Search to Select"
+            defaultValue={"All"}
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").includes(input)
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            onChange={(e) => setJobStatusFilter(e)}
+            options={[
+              {
+                value: "All",
+                label: "All",
+              },
+              {
+                value: "Pending",
+                label: "Pending",
+              },
+              {
+                value: "Active",
+                label: "Active",
+              },
+            ]}
+          />
 
-          <Form.Select
+          {/* <Form.Select
             aria-label="Default select example"
             className="tw-h-12 tw-border tw-border-primary tw-w-full"
           >
@@ -37,10 +69,10 @@ function page() {
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
-          </Form.Select>
+          </Form.Select> */}
         </div>
       </div>
-      <PostedJobs fromList={true} />
+      <PostedJobs fromList={true} jobStatusFilter={jobStatusFilter} />
     </div>
   );
 }
