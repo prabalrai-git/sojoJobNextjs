@@ -124,32 +124,6 @@ function JobDetails({ setStep, setData }) {
   const yyyy = today.getFullYear();
 
   today = yyyy + "/" + mm + "/" + dd;
-  const options = [
-    {
-      value: "1",
-      label: "Not Identified",
-    },
-    {
-      value: "2",
-      label: "Closed",
-    },
-    {
-      value: "3",
-      label: "Communicated",
-    },
-    {
-      value: "4",
-      label: "Identified",
-    },
-    {
-      value: "5",
-      label: "Resolved",
-    },
-    {
-      value: "6",
-      label: "Cancelled",
-    },
-  ];
 
   return (
     <div className="tw-bg-white tw-rounded-lg tw-w-full tw-mt-10 tw-px-10 tw-py-6 ">

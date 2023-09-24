@@ -35,6 +35,8 @@ function page() {
     }
   }, []);
 
+  console.log(overViewData);
+
   const getSojoRep = useCallback(async () => {
     try {
       const res = await Axios.get(
@@ -70,13 +72,15 @@ function page() {
       <p className="tw-text-lg">
         This is your personalized space where we help you find an ideal match!
       </p>
-      <ProgressMsg
-        completionPercentage={
-          overViewData?.profileCompletionPercentage
-            ? overViewData.profileCompletionPercentage
-            : 0
-        }
-      />
+      {overViewData?.profileComplete === false && (
+        <ProgressMsg
+          completionPercentage={
+            overViewData?.profileCompletionPercentage
+              ? overViewData.profileCompletionPercentage
+              : 0
+          }
+        />
+      )}
       <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-1 xl:tw-grid-cols-9 tw-gap-5 ">
         <div className="tw-bg-white tw-rounded-lg tw-col-span-6 ">
           <div className="tw-px-10 tw-py-6">

@@ -12,10 +12,11 @@ import Stepper from "react-stepper-horizontal";
 function page() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState();
+  const [jobQuestions, setJobQuestions] = useState([]);
 
   const steps = [
     { title: "Job Details", completed: true, activeStep: true },
-    // { title: "Job Questions", completed: true, activeStep: true },
+    { title: "Job Questions", completed: true, activeStep: true },
     { title: "Job Preview", completed: false, activeStep: true },
     { title: "Contact", completed: false, activeStep: true },
   ];
@@ -25,13 +26,15 @@ function page() {
 
   if (step === 0) {
     content = <JobDetails setStep={setStep} setData={setData} />;
-  }
-  // else if (step === 1) {
-  //   content = <JobQuestions setStep={setStep} />;
-  // }
-  else if (step === 1) {
-    content = <JobPreview setStep={setStep} data={data} />;
-  } else if (step == 2) {
+  } else if (step === 1) {
+    content = (
+      <JobQuestions setStep={setStep} setJobQuestions={setJobQuestions} />
+    );
+  } else if (step === 2) {
+    content = (
+      <JobPreview setStep={setStep} data={data} jobQuestions={jobQuestions} />
+    );
+  } else if (step == 3) {
     content = <Contact setStep={setStep} />;
   }
 

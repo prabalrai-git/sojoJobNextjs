@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
 
-function JobPreview({ setStep, data }) {
+function JobPreview({ setStep, data, jobQuestions }) {
   const jobDescription = (
     <div
       dangerouslySetInnerHTML={{
@@ -19,6 +19,8 @@ function JobPreview({ setStep, data }) {
       }}
     />
   );
+
+  console.log(jobQuestions, "yeeee haaaaaaa");
 
   const onJobPost = async () => {
     const dataToPost = {
@@ -54,9 +56,15 @@ function JobPreview({ setStep, data }) {
           theme: "dark",
         });
       }
-      setTimeout(() => {
-        setStep((prev) => prev + 1);
-      }, 1500);
+      console.log(res.data.data.id);
+      const jobId = res.data.data.id;
+      const addedJobIdJQ = jobQuestions.map((e) => e["jobId"] == jobId);
+
+      console.log(addedJobIdJQ, "addedJobIdJQ");
+
+      // setTimeout(() => {
+      //   setStep((prev) => prev + 1);
+      // }, 1500);
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong!", {
