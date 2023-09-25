@@ -9,9 +9,9 @@ function page() {
   const [jobStatusFilter, setJobStatusFilter] = useState("");
 
   return (
-    <div className="tw-pt-20 tw-px-36 tw-pb-16">
-      <div className="tw-flex tw-flex-row">
-        <div className="tw-mr-5 tw-w-64">
+    <div className="tw-pt-20 tw-px-16 tw-pb-16">
+      <div className="tw-grid xsm:tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-5 gap-4">
+        <div className="tw-mr-5 md:tw-w-full xsm:tw-w-full">
           <Form.Label
             className="tw-text-gray-700 tw-font-medium"
             htmlFor="inputPassword5"
@@ -24,7 +24,7 @@ function page() {
             className="tw-h-12 tw-border tw-border-primary tw-w-full"
           />
         </div>
-        <div className="tw-w-64">
+        <div className="md:tw-w-full xsm:tw-w-full">
           <Form.Label
             className="tw-text-gray-700 tw-font-medium"
             htmlFor="inputPassword5"

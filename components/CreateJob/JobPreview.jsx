@@ -58,13 +58,20 @@ function JobPreview({ setStep, data, jobQuestions }) {
       }
       console.log(res.data.data.id);
       const jobId = res.data.data.id;
-      const addedJobIdJQ = jobQuestions.map((e) => e["jobId"] == jobId);
+      const addedJobIdJQ = jobQuestions.map((e) => {
+        return { ...e, jobId: jobId };
+      });
 
-      console.log(addedJobIdJQ, "addedJobIdJQ");
-
-      // setTimeout(() => {
-      //   setStep((prev) => prev + 1);
-      // }, 1500);
+      try {
+        addedJobIdJQ.map(async (e) => {
+          await Axios.post("job/postJobQuestion", e);
+        });
+        setTimeout(() => {
+          setStep((prev) => prev + 1);
+        }, 1500);
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong!", {

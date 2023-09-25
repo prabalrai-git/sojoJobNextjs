@@ -24,7 +24,7 @@ function page() {
     try {
       const res = await Axios.post("/auth/login", data);
 
-      console.log(res.data.data, "he ha");
+      // return console.log(res.data.data, "he ha");
 
       localStorage.setItem("id", res.data.data.id);
       localStorage.setItem("tokenSojoJob", res.data.data.token);

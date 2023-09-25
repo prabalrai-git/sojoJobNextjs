@@ -41,12 +41,12 @@ function RecruiterNavBar() {
     <Navbar
       collapseOnSelect
       // expand="lg"
-      className="bg-body-tertiary tw-px-20 tw-py-3 "
+      className="bg-body-tertiary tw-px-2 tw-py-3 "
     >
-      <Container className="tw-max-w-screen-2xl pnavbar">
-        <Navbar.Brand href="/">
+      <Container className="tw-max-w-screen-2xl pnavbar ">
+        <Navbar.Brand className=" " href="/">
           <Image
-            className="tw-object-contain tw-cursor-pointer "
+            className="tw-object-contain tw-cursor-pointer tw-w-52 "
             src={"/logo.png"}
             width={230}
             height={230}
@@ -65,22 +65,25 @@ function RecruiterNavBar() {
                 src={"/settings.png"}
                 width={30}
                 height={30}
-                className="tw-mt-2"
+                className="tw-mt-2 "
                 alt="settings"
               />
             </Nav.Link>
-            <Nav.Link href="#deets">
+            <Nav.Link
+              href="#deets"
+              onClick={() => setShowDropDown((prev) => !prev)}
+            >
               <Image
                 src={"/avatar.png"}
                 width={40}
                 height={40}
                 alt="user"
-                className=" tw-ml-8"
+                className=" tw-ml-8 tw-w-10"
               />
             </Nav.Link>
             <Nav.Link
               // ref={wrapperRef}
-              className="tw-self-center "
+              className="tw-self-center sm:tw-hidden md:tw-block xsm:tw-hidden"
               onClick={() => setShowDropDown((prev) => !prev)}
               href="#memes"
             >
@@ -103,7 +106,7 @@ function RecruiterNavBar() {
       {showDropDown && (
         <div
           ref={wrapperRef}
-          className=" tw-drop-shadow-md tw-absolute tw-right-36 tw-top-24 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-6 tw-pr-52 tw-py-6"
+          className=" tw-drop-shadow-md tw-absolute md:tw-right-10 tw-top-20 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-6 tw-pr-52 tw-py-6 xsm:tw-right-0 xsm:tw-w-full md:tw-w-4/12 lg:tw-w-3/12"
         >
           <ul onClick={() => setShowDropDown((prev) => !prev)}>
             <Link href={"/employer/dashboard"}>
@@ -115,7 +118,7 @@ function RecruiterNavBar() {
                   alt="home"
                   className="tw-object-contain tw-mr-4"
                 />
-                <p className="tw-text-lg tw-font-medium tw-text-gray-600">
+                <p className="tw-text-base tw-font-medium tw-text-gray-600">
                   Dashboard
                 </p>
               </li>
@@ -129,7 +132,7 @@ function RecruiterNavBar() {
                   alt="home"
                   className="tw-object-contain tw-mr-4"
                 />
-                <p className="tw-text-lg tw-font-medium tw-text-gray-600">
+                <p className="tw-text-base tw-font-medium tw-text-gray-600">
                   Job Applications
                 </p>
               </li>
@@ -143,7 +146,7 @@ function RecruiterNavBar() {
                   alt="home"
                   className="tw-object-contain tw-mr-4"
                 />
-                <p className="tw-text-lg tw-font-medium tw-text-gray-600">
+                <p className="tw-text-base tw-font-medium tw-text-gray-600">
                   Logout
                 </p>
               </li>

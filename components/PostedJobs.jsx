@@ -220,6 +220,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
             className="tw-mt-10"
             columns={columns}
             dataSource={filteredJobs ? filteredJobs : jobs}
+            scroll={{ x: 900 }}
           />
         ) : (
           <Image

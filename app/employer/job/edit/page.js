@@ -44,6 +44,53 @@ function page({ searchParams }) {
 
   const [data, setData] = useState();
 
+  const [question1, setQuestion1] = useState({
+    questionNumber: 1,
+    questionType: null,
+    questionText: null,
+    requiredAnswer: null,
+    jobId: searchParams?.id,
+  });
+  const [question2, setQuestion2] = useState({
+    questionNumber: 2,
+    questionType: null,
+    questionText: null,
+    requiredAnswer: null,
+    jobId: searchParams?.id,
+  });
+  const [question3, setQuestion3] = useState({
+    questionNumber: 3,
+    questionType: null,
+    questionText: null,
+    requiredAnswer: null,
+    jobId: searchParams?.id,
+  });
+  const [questions, setQuestions] = useState([]);
+  const [questionsToUpdate, setQuestionsToUpdate] = useState();
+
+  useEffect(() => {
+    setQuestionsToUpdate([question1, question2, question3]);
+  }, [question1, question2, question3]);
+
+  console.log(questionsToUpdate, "questionsToUpdate");
+
+  const questionTypes = [
+    { label: "Yes/No", value: "Yes/No" },
+    { label: "Range", value: "Range" },
+  ];
+
+  const yesno = [
+    { label: "Yes", value: "Yes" },
+    { label: "No", value: "No" },
+  ];
+  const range = [
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
+  ];
+
   useEffect(() => {
     getJobById();
   }, [searchParams.id]);
@@ -69,9 +116,23 @@ function page({ searchParams }) {
 
   const getJobById = async () => {
     try {
-      const res = await Axios.get(`/job//getJobById/${searchParams?.id}`);
+      const res = await Axios.get(`/job/getJobById/${searchParams?.id}`);
       setData(res.data.data);
       console.log(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getJobQuestionsByJobId = async () => {
+    try {
+      const res = await Axios.get(
+        `/job/getAllJobQuestionsByJobId/${searchParams?.id}`
+      );
+      setQuestions(res.data.data);
+      setQuestion1(res.data.data[0]);
+      setQuestion2(res.data.data[1]);
+      setQuestion3(res.data.data[2]);
     } catch (error) {
       console.log(error);
     }
@@ -82,6 +143,7 @@ function page({ searchParams }) {
     getAllEmploymetType();
     getAllExperienceLevels();
     getAllWorkTypes();
+    getJobQuestionsByJobId();
   }, []);
 
   const router = useRouter();
@@ -111,7 +173,13 @@ function page({ searchParams }) {
         `/job/updateJobPost/${searchParams?.id}`,
         formData
       );
-      if (res.data.success) {
+
+      try {
+        if (questions) {
+          questionsToUpdate.map(async (e) => {
+            await Axios.patch("job/updateJobQuestionById", e);
+          });
+        }
         toast.success("Edited Successfully!", {
           position: "top-right",
           autoClose: 1000,
@@ -125,7 +193,22 @@ function page({ searchParams }) {
         setTimeout(() => {
           router.push("/employer/dashboard");
         }, 2000);
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong!", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
+      // if (res.data.success) {
+
+      // }
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong!", {
@@ -199,11 +282,13 @@ function page({ searchParams }) {
 
   today = yyyy + "/" + mm + "/" + dd;
 
+  console.log(questions[0]?.questionType);
+
   return (
     <>
       <ToastContainer />
 
-      <div className="tw-pt-10 tw-mx-40 tw-pb-20">
+      <div className="tw-pt-10 tw-mx-10 tw-pb-20">
         <div className="tw-flex tw-flex-row tw-mb-10">
           <Link href={"/employer/dashboard"}>
             <Image
@@ -288,10 +373,10 @@ function page({ searchParams }) {
                 />
               </Form.Group>
               <Form.Group
-                className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+                className="mb-4 tw-grid lg:tw-grid-cols-3 tw-gap-4 md:tw-grid-cols-2 sm:tw-grid-cols-1"
                 controlId="exampleForm.ControlInput1"
               >
-                <div className=" tw-flex tw-flex-col">
+                <div className=" tw-grid tw-flex-col tw-flex-wrap">
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
                     Employmnet Type
                   </Form.Label>
@@ -366,7 +451,7 @@ function page({ searchParams }) {
                 </div>
               </Form.Group>
               <Form.Group
-                className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+                className="mb-4 mb-4 tw-grid lg:tw-grid-cols-3 tw-gap-4 md:tw-grid-cols-2 sm:tw-grid-cols-1"
                 controlId="exampleForm.ControlInput1"
               >
                 <div>
@@ -447,7 +532,7 @@ function page({ searchParams }) {
                 </div>
               </Form.Group>
               <Form.Group
-                className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+                className="mb-4 tw-grid lg:tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-1 md:tw-grid-cols-2"
                 controlId="exampleForm.ControlInput1"
               >
                 <div className="tw-flex tw-flex-col">
@@ -483,17 +568,18 @@ function page({ searchParams }) {
                 </div>
               </Form.Group>
               <Form.Group
-                className="mb-4"
+                className="mb-4 tw-mb-10"
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
                   Skills Required
                 </Form.Label>
                 <ReactQuill
-                  className="tw-h-40 tw-mb-20  "
+                  className="tw-mb-5 "
                   theme="snow"
                   value={skills}
                   onChange={(e) => setSkills(e)}
+                  size
                 />
               </Form.Group>
               <Form.Group
@@ -504,7 +590,7 @@ function page({ searchParams }) {
                   Job Description
                 </Form.Label>
                 <ReactQuill
-                  className="tw-h-40 tw-mb-20  "
+                  className=" tw-mb-5 "
                   theme="snow"
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e)}
@@ -521,7 +607,7 @@ function page({ searchParams }) {
             <div>
               <p className="tw-text-gray-600 tw-font-medium">Package</p>
 
-              <div className="tw-flex tw-flex-row tw-gap-4">
+              <div className="tw-grid lg:tw-grid-cols-8 md:tw-grid-cols-4 sm:tw-grid-cols-2 tw-gap-4">
                 <JobPackage
                   title={"Elite"}
                   setJobPackage={setJobPackage}
@@ -534,12 +620,385 @@ function page({ searchParams }) {
                 />
               </div>
             </div>
+            {questions.length > 0 && (
+              <>
+                <div className="tw-flex tw-flex-row tw-justify-between tw-mt-10">
+                  <div className="tw-flex tw-flex-row">
+                    <Image
+                      src={"/borderBlack.png"}
+                      width={10}
+                      height={10}
+                      alt="border"
+                      className="tw-object-fit tw-mr-7"
+                    />
+                    <h1 className="tw-text-xl tw-font-semibold tw-self-center">
+                      Candidate Questions
+                    </h1>
+                  </div>
+                </div>
+                <p className="tw-my-8 tw-text-gray-500 tw-font-medium">
+                  3 questions to briefly speculate the candidate.
+                </p>
+                <div className="tw-mt-10">
+                  <Form>
+                    <Form.Group
+                      className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 md:tw-grid-cols-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Question Type 1
+                        </Form.Label>
+                        <Select
+                          onChange={(e, a) =>
+                            setQuestion1((prev) => ({
+                              ...prev,
+                              questionType: e,
+                            }))
+                          }
+                          showSearch
+                          className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                          style={
+                            {
+                              // borderColor: "grey",
+                              // paddingTop: 10,
+                            }
+                          }
+                          placeholder="Search to Select"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "").includes(input)
+                          }
+                          filterSort={(optionA, optionB) =>
+                            (optionA?.label ?? "")
+                              .toLowerCase()
+                              .localeCompare(
+                                (optionB?.label ?? "").toLowerCase()
+                              )
+                          }
+                          options={questionTypes}
+                          value={
+                            question1?.questionType
+                              ? question1.questionType
+                              : questions[0]?.questionType
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Question 1
+                        </Form.Label>
+                        <Input
+                          className="tw-border-2 tw-border-gray-300 tw-h-12"
+                          onChange={(e) =>
+                            setQuestion1((prev) => ({
+                              ...prev,
+                              questionText: e.target.value,
+                            }))
+                          }
+                          placeholder="Enter Question here"
+                          value={
+                            question1?.questionText
+                              ? question1.questionText
+                              : questions[0]?.questionText
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Ideal Answer 1
+                        </Form.Label>
+                        <Select
+                          onChange={(e, a) =>
+                            setQuestion1((prev) => ({
+                              ...prev,
+                              requiredAnswer: e,
+                            }))
+                          }
+                          showSearch
+                          className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                          style={
+                            {
+                              // borderColor: "grey",
+                              // paddingTop: 10,
+                            }
+                          }
+                          placeholder="Search to Select"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "").includes(input)
+                          }
+                          filterSort={(optionA, optionB) =>
+                            (optionA?.label ?? "")
+                              .toLowerCase()
+                              .localeCompare(
+                                (optionB?.label ?? "").toLowerCase()
+                              )
+                          }
+                          options={
+                            question1?.questionType
+                              ? question1?.questionType == "Yes/No"
+                                ? yesno
+                                : range
+                              : questions[0]?.questionType == "Yes/No"
+                              ? yesno
+                              : range
+                          }
+                          value={
+                            question1?.requiredAnswer
+                              ? question1?.requiredAnswer
+                              : questions[0]?.requiredAnswer
+                          }
+                        />
+                      </div>
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 md:tw-grid-cols-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Question Type 2
+                        </Form.Label>
+                        <Select
+                          onChange={(e, a) =>
+                            setQuestion2((prev) => ({
+                              ...prev,
+                              questionType: e,
+                            }))
+                          }
+                          showSearch
+                          className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                          style={
+                            {
+                              // borderColor: "grey",
+                              // paddingTop: 10,
+                            }
+                          }
+                          placeholder="Search to Select"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "").includes(input)
+                          }
+                          filterSort={(optionA, optionB) =>
+                            (optionA?.label ?? "")
+                              .toLowerCase()
+                              .localeCompare(
+                                (optionB?.label ?? "").toLowerCase()
+                              )
+                          }
+                          options={questionTypes}
+                          value={
+                            question2?.questionType
+                              ? question2.questionType
+                              : questions[1]?.questionType
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Question 2
+                        </Form.Label>
+                        <Input
+                          className="tw-border-2 tw-border-gray-300 tw-h-12"
+                          onChange={(e) =>
+                            setQuestion2((prev) => ({
+                              ...prev,
+                              questionText: e.target.value,
+                            }))
+                          }
+                          placeholder="Enter Question here"
+                          value={
+                            question2?.questionText
+                              ? question2?.questionText
+                              : questions[1]?.questionText
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Ideal Answer 2
+                        </Form.Label>
+                        <Select
+                          onChange={(e, a) =>
+                            setQuestion2((prev) => ({
+                              ...prev,
+                              requiredAnswer: e,
+                            }))
+                          }
+                          showSearch
+                          className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                          style={
+                            {
+                              // borderColor: "grey",
+                              // paddingTop: 10,
+                            }
+                          }
+                          placeholder="Search to Select"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "").includes(input)
+                          }
+                          filterSort={(optionA, optionB) =>
+                            (optionA?.label ?? "")
+                              .toLowerCase()
+                              .localeCompare(
+                                (optionB?.label ?? "").toLowerCase()
+                              )
+                          }
+                          options={
+                            question2?.questionType
+                              ? question2?.questionType == "Yes/No"
+                                ? yesno
+                                : range
+                              : questions[1]?.questionType == "Yes/No"
+                              ? yesno
+                              : range
+                          }
+                          value={
+                            question2?.requiredAnswer
+                              ? question2.requiredAnswer
+                              : questions[1]?.requiredAnswer
+                          }
+                        />
+                      </div>
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 md:tw-grid-cols-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Question Type 3
+                        </Form.Label>
+                        <Select
+                          onChange={(e, a) =>
+                            setQuestion3((prev) => ({
+                              ...prev,
+                              questionType: e,
+                            }))
+                          }
+                          showSearch
+                          className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                          style={
+                            {
+                              // borderColor: "grey",
+                              // paddingTop: 10,
+                            }
+                          }
+                          placeholder="Search to Select"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "").includes(input)
+                          }
+                          filterSort={(optionA, optionB) =>
+                            (optionA?.label ?? "")
+                              .toLowerCase()
+                              .localeCompare(
+                                (optionB?.label ?? "").toLowerCase()
+                              )
+                          }
+                          options={questionTypes}
+                          value={
+                            question3?.questionType
+                              ? question3.questionType
+                              : questions[2]?.questionType
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Question 3
+                        </Form.Label>
+                        <Input
+                          className="tw-border-2 tw-border-gray-300 tw-h-12"
+                          onChange={(e) =>
+                            setQuestion3((prev) => ({
+                              ...prev,
+                              questionText: e.target.value,
+                            }))
+                          }
+                          placeholder="Enter Question here"
+                          value={
+                            question3?.questionText
+                              ? question3.questionText
+                              : questions[2]?.questionText
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Form.Label className="tw-text-gray-600 tw-font-medium">
+                          Ideal Answer 3
+                        </Form.Label>
+                        <Select
+                          onChange={(e, a) =>
+                            setQuestion3((prev) => ({
+                              ...prev,
+                              requiredAnswer: e,
+                            }))
+                          }
+                          showSearch
+                          className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                          style={
+                            {
+                              // borderColor: "grey",
+                              // paddingTop: 10,
+                            }
+                          }
+                          placeholder="Search to Select"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "").includes(input)
+                          }
+                          filterSort={(optionA, optionB) =>
+                            (optionA?.label ?? "")
+                              .toLowerCase()
+                              .localeCompare(
+                                (optionB?.label ?? "").toLowerCase()
+                              )
+                          }
+                          options={
+                            question3?.questionType
+                              ? question3?.questionType == "Yes/No"
+                                ? yesno
+                                : range
+                              : questions[2]?.questionType == "Yes/No"
+                              ? yesno
+                              : range
+                          }
+                          value={
+                            question3?.requiredAnswer
+                              ? question3.requiredAnswer
+                              : questions[2]?.requiredAnswer
+                          }
+                        />
+                      </div>
+                    </Form.Group>
+                  </Form>
+                  {/* buttons */}
+                  {/* <div className="tw-mb-10">
+          <button
+            onClick={() => setStep((prev) => prev + 1)}
+            className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg tw-mr-5"
+          >
+            Next
+          </button>
+          <button
+            onClick={() => setStep((prev) => prev - 1)}
+            className="tw-bg-white tw-text-black tw-border-black tw-border tw-px-16 tw-mt-10 hover:tw-border-primary hover:tw-text-primary tw-py-3 tw-rounded-lg tw-text-lg"
+          >
+            Previous
+          </button>
+        </div> */}
+                </div>
+              </>
+            )}
 
             <button
               onClick={() => {
                 onSubmit();
               }}
-              className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
+              className="tw-bg-primary tw-text-white  xsm:tw-w-full sm:tw-w-4/12 md:tw-w-3/12 lg:tw-w-2/12  tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
             >
               Edit Job
             </button>

@@ -52,26 +52,35 @@ function page() {
   }, [getOverViewData, getSojoRep]);
 
   return (
-    <div className="tw-pt-10 tw-px-20 tw-pb-12">
-      <div className="tw-flex tw-flex-row tw-justify-between">
-        <h1 className="tw-text-4xl tw-font-semibold">Welcome </h1>
-        <Link href={"/employer/job/create"}>
-          <button className="tw-bg-primary tw-rounded-lg tw-px-4 tw-py-3 tw-text-white tw-flex tw-flex-row">
+    <div className="tw-pt-10 tw-px-10 tw-pb-12">
+      <div className="tw-flex tw-flex-row tw-justify-between xsm:tw-flex-col  md:tw-flex-row">
+        <div className="tw-flex tw-flex-col ">
+          <h1 className="tw-text-4xl tw-font-semibold">Welcome </h1>
+          <p className="tw-text-lg tw-mt-3">
+            This is your personalized space where we help you find an ideal
+            match!
+          </p>
+        </div>
+        <Link
+          className="md:tw-w-3/12 lg:tw-w-2/12 tw-mt-5"
+          href={"/employer/job/create"}
+        >
+          <button className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg xsm:tw-w-full tw-py-4  tw-text-white tw-flex tw-flex-row tw-items-center tw-justify-center md:tw-w-full ">
             <Image
               src={"/add.png"}
-              width={20}
-              height={20}
+              width={25}
+              height={25}
               alt="add"
               className="tw-self-center tw-mr-3"
             />
 
-            <p className="tw-self-center tw-text-lg">Post a Job</p>
+            <p className="tw-self-center tw-text-base tw-font-bold">
+              Post a Job
+            </p>
           </button>
         </Link>
       </div>
-      <p className="tw-text-lg">
-        This is your personalized space where we help you find an ideal match!
-      </p>
+
       {overViewData?.profileComplete === false && (
         <ProgressMsg
           completionPercentage={
@@ -81,8 +90,8 @@ function page() {
           }
         />
       )}
-      <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-1 xl:tw-grid-cols-9 tw-gap-5 ">
-        <div className="tw-bg-white tw-rounded-lg tw-col-span-6 ">
+      <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-9  ">
+        <div className="tw-bg-white tw-rounded-lg tw-col-span-6  ">
           <div className="tw-px-10 tw-py-6">
             <div className="tw-flex tw-flex-row">
               <Image
@@ -96,7 +105,7 @@ function page() {
                 Monthly Overview
               </h1>
             </div>
-            <div className="tw-grid tw-grid-cols-3 1200:tw-grid-cols-2 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 md:tw-grid-cols-2 xl:tw-grid-cols-3 tw-mt-5 tw-gap-2">
+            <div className="tw-grid tw-grid-cols-3 1200:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 md:tw-grid-cols-3 xl:tw-grid-cols-3 tw-mt-5 tw-gap-2">
               <MonthlyInfoCard
                 title={"Jobs Posted"}
                 data={overViewData?.totalJobsPosted}
@@ -114,9 +123,9 @@ function page() {
         </div>
         <div
           style={{ height: "290px" }}
-          className="tw-bg-white tw-rounded-lg tw-col-span-3 "
+          className="tw-bg-white tw-rounded-lg tw-col-span-3 tw-grid tw-w-full lg:tw-mt-10 xl:tw-mt-0 xsm:tw-mt-10 "
         >
-          <div className="tw-px-10 tw-py-6">
+          <div className="tw-px-10 tw-py-6 ">
             <div className="tw-flex tw-flex-row">
               <Image
                 src={"/borderBlack.png"}

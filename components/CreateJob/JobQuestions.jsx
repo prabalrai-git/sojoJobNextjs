@@ -311,12 +311,12 @@ function JobQuestions({ setStep, setJobQuestions }) {
           >
             Next
           </button>
-          <button
+          {/* <button
             onClick={() => setStep((prev) => prev - 1)}
             className="tw-bg-white tw-text-black tw-border-black tw-border tw-px-16 tw-mt-10 hover:tw-border-primary hover:tw-text-primary tw-py-3 tw-rounded-lg tw-text-lg"
           >
             Previous
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
