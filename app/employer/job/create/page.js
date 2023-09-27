@@ -39,7 +39,7 @@ function page() {
   }
 
   return (
-    <div className="tw-pt-10 tw-mx-40 tw-pb-20">
+    <div className="tw-pt-10 tw-mx-10 xsm:tw-mx-2 450:tw-mx-8 tw-pb-20">
       <div className="tw-flex tw-flex-row tw-mb-10">
         <Link href={"/employer/dashboard"}>
           <Image
@@ -63,7 +63,7 @@ function page() {
           activeTitleColor={"#27AE61"}
           completeTitleColor={"#27AE61"}
           defaultTitleColor={"#777777"}
-          size={40}
+          size={35}
           circleTop={20}
           defaultBorderWidth={20}
           defaultBarColor={"#777777"}

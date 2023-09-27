@@ -7,25 +7,29 @@ function JobCard({ job }) {
       <div>
         <Image
           className="tw-rounded-full tw-mr-5 tw-h-8 tw-w-8 lg:tw-w-10 lg:tw-h-10"
-          src={job.companyLogo}
+          src={"/companyLogo.png"}
           width={46}
           height={46}
           alt="companylogo"
         />
       </div>
       <div>
-        <p className="tw-font-semibold tw-text-lg tw-mb-1">{job?.title}</p>
-        <p className="tw-text-lg tw-font-light tw-mb-1">{job?.jobRecruiter}</p>
-        <div className="tw-flex tw-flex-row tw-flex-wrap ">
-          <div className="tw-flex tw-flex-row  tw-mr-4">
+        <p className="tw-font-semibold tw-text-lg tw-mb-2 tw-capitalize">
+          {job?.title}
+        </p>
+        <p className="tw-text-lg tw-font-light tw-mb-3 tw-capitalize">
+          {job?.jobRecruiter.companyName}
+        </p>
+        <div className="tw-flex tw-flex-row tw-flex-wrap -tw-ml-1 ">
+          <div className="tw-flex tw-flex-row  tw-mr-3">
             <Image
               src={"/clock.png"}
               width={20}
               height={20}
               alt="job-shift"
-              className="tw-mr-3  tw-mb-10 tw-object-contain"
+              className="tw-mr-2  tw-mb-10 tw-object-contain"
             />
-            <p className="tw-text-primary">{job?.jobShifts}</p>
+            <p className="tw-text-primary">{job?.jobShift?.title}</p>
           </div>
           <div className="tw-flex tw-flex-row ">
             <Image
@@ -33,9 +37,9 @@ function JobCard({ job }) {
               width={20}
               height={20}
               alt="job-site"
-              className="tw-mr-3 tw-mb-10  tw-object-contain"
+              className="tw-mr-2 tw-mb-10  tw-object-contain"
             />
-            <p className="tw-text-primary">{job?.jobSites}</p>
+            <p className="tw-text-primary">{job?.jobSite?.title}</p>
           </div>
         </div>
       </div>

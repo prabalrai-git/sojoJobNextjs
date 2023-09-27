@@ -158,7 +158,7 @@ function page() {
     <>
       <ToastContainer />
 
-      <div className="tw-pt-10 tw-mx-40 tw-pb-10">
+      <div className="tw-pt-10 xsm:tw-mx-4 450:tw-mx-16 tw-pb-10">
         <div className="tw-flex tw-flex-row tw-mb-10">
           <Link href={"/employer/dashboard"}>
             <Image
@@ -191,23 +191,18 @@ function page() {
           <div className="tw-mt-10">
             <Form>
               <Form.Group
-                className="mb-4 tw-grid tw-grid-cols-5 tw-gap-4"
+                className="mb-4 tw-grid lg:tw-grid-cols-5 tw-gap-4 xsm:tw-grid-cols-1 md:tw-grid-cols-1"
                 controlId="exampleForm.ControlInput1"
               >
                 <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 tw-relative">
-                  <Dragger {...props} className="tw-w-full tw-h-4/6">
+                  <Dragger {...props} className="tw-w-full tw-h-full">
                     {logoDisplayImage ? (
                       <>
-                        <div
-                          style={{ height: 100 }}
-                          className="tw-absolute tw-bottom-56"
-                        >
-                          <img
-                            src={logoDisplayImage}
-                            className="tw-w-full"
-                            alt="img"
-                          />
-                        </div>
+                        <img
+                          src={logoDisplayImage}
+                          className="tw-w-full tw-h-full tw-object-cover"
+                          alt="img"
+                        />
                       </>
                     ) : (
                       <>
@@ -279,7 +274,7 @@ function page() {
                 </div>
               </Form.Group>
               <Form.Group
-                className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
+                className="mb-4 tw-grid xsm:tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4"
                 controlId="exampleForm.ControlInput1"
               >
                 <div>
@@ -312,7 +307,7 @@ function page() {
                 </div>
               </Form.Group>
               <Form.Group
-                className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
+                className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4 xsm:tw-grid-cols-1 md:tw-grid-cols-2"
                 controlId="exampleForm.ControlInput1"
               >
                 <div>
@@ -371,7 +366,7 @@ function page() {
 
             <button
               onClick={() => onSubmit()}
-              className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
+              className="tw-bg-primary tw-text-white  xsm:tw-w-full sm:tw-w-4/12 md:tw-w-3/12 lg:tw-w-2/12  tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
             >
               Update Profile
             </button>

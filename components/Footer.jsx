@@ -60,6 +60,7 @@ function Footer() {
           width={300}
           height={300}
           alt="logo.png"
+          style={{ marginLeft: -21 }}
         />
         <p className="tw-text-lg tw-font-normal tw-leading-9">
           Sojojob Enables employers just like you to register, post and fulfill

@@ -91,7 +91,7 @@ function page() {
         />
       )}
       <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-9  ">
-        <div className="tw-bg-white tw-rounded-lg tw-col-span-6  ">
+        <div className="tw-bg-white tw-rounded-lg tw-col-span-6 xl:tw-mr-4 xsm:tw-mr-0  ">
           <div className="tw-px-10 tw-py-6">
             <div className="tw-flex tw-flex-row">
               <Image
@@ -122,7 +122,7 @@ function page() {
           </div>
         </div>
         <div
-          style={{ height: "290px" }}
+          style={{ height: "295px" }}
           className="tw-bg-white tw-rounded-lg tw-col-span-3 tw-grid tw-w-full lg:tw-mt-10 xl:tw-mt-0 xsm:tw-mt-10 "
         >
           <div className="tw-px-10 tw-py-6 ">
@@ -138,7 +138,7 @@ function page() {
                 Contact Person
               </h1>
             </div>
-            <div className="tw-mt-1  tw-flex tw-flex-row tw-items-center tw-h-40">
+            <div className="tw-mt-1  tw-flex tw-flex-col tw-items-center tw-h-40 450:tw-flex-row tw-mt-5">
               <div className="">
                 <Avatar
                   size="100"

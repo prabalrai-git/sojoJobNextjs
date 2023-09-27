@@ -1,0 +1,16 @@
+:where(.css-dev-only-do-not-override-1vr7spz).ant-input-affix-wrapper
+  > input.ant-input {
+  padding: 0;
+  font-size: inherit;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background-color: #f4f4f4;
+}
+.ant-input-search
+  :where(.css-dev-only-do-not-override-1vr7spz).ant-input-group
+  .ant-input-affix-wrapper:not(:last-child) {
+  border-start-start-radius: 6px;
+  border-end-start-radius: 6px;
+  background-color: #f4f4f4;
+}

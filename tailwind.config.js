@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       screens: {
         xsm: "100px",
+        450: "500px",
         800: "800px",
         950: "950px",
         1200: "1200px",
@@ -50,6 +51,7 @@ module.exports = {
         dndBtnH: "#13538e",
         prevBtn: "#4096ff",
         red: "red",
+        searchGrey: "#F4F4F4",
       },
     },
   },

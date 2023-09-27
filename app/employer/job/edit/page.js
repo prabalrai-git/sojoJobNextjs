@@ -72,8 +72,6 @@ function page({ searchParams }) {
     setQuestionsToUpdate([question1, question2, question3]);
   }, [question1, question2, question3]);
 
-  console.log(questionsToUpdate, "questionsToUpdate");
-
   const questionTypes = [
     { label: "Yes/No", value: "Yes/No" },
     { label: "Range", value: "Range" },
@@ -281,8 +279,6 @@ function page({ searchParams }) {
   const yyyy = today.getFullYear();
 
   today = yyyy + "/" + mm + "/" + dd;
-
-  console.log(questions[0]?.questionType);
 
   return (
     <>

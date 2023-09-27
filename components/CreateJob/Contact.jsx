@@ -31,7 +31,7 @@ function Contact() {
         </div>
       </div>
       <Link href={"/employer/dashboard"}>
-        <button className="tw-text-white tw-text-base tw-font-medium tw-bg-primary tw-px-12 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg  ">
+        <button className="tw-bg-primary tw-text-white  xsm:tw-w-full sm:tw-w-4/12 md:tw-w-3/12 lg:tw-w-2/12  tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg">
           Done
         </button>
       </Link>

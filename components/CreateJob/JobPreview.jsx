@@ -3,6 +3,7 @@ import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
+import { Table } from "antd";
 
 function JobPreview({ setStep, data, jobQuestions }) {
   const jobDescription = (
@@ -19,6 +20,8 @@ function JobPreview({ setStep, data, jobQuestions }) {
       }}
     />
   );
+
+  const skipped = false;
 
   console.log(jobQuestions, "yeeee haaaaaaa");
 
@@ -56,7 +59,6 @@ function JobPreview({ setStep, data, jobQuestions }) {
           theme: "dark",
         });
       }
-      console.log(res.data.data.id);
       const jobId = res.data.data.id;
       const addedJobIdJQ = jobQuestions.map((e) => {
         return { ...e, jobId: jobId };
@@ -86,24 +88,42 @@ function JobPreview({ setStep, data, jobQuestions }) {
       });
     }
   };
+  const columns = [
+    {
+      title: "Question Type",
+      dataIndex: "questionType",
+      key: "questionType",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Question",
+      dataIndex: "questionText",
+      key: "questionText",
+    },
+    {
+      title: "Ideal Answer",
+      dataIndex: "requiredAnswer",
+      key: "requiredAnswer",
+    },
+  ];
 
   return (
     <>
       <ToastContainer />
 
       <div className="tw-bg-white tw-rounded-lg tw-w-full tw-mt-10 tw-px-10 tw-py-6 ">
-        <div className="tw-flex tw-flex-row tw-justify-between">
-          <h1 className="tw-text-black tw-text-2xl tw-font-medium tw-self-end">
+        <div className="tw-flex md:tw-flex-row tw-justify-between xsm:tw-flex-col">
+          <h1 className="tw-text-black tw-text-2xl tw-font-medium md:tw-self-end xsm:tw-self-start tw-capitalize">
             {data.title}
           </h1>
-          <div className="tw-self-center tw-flex tw-flex-row">
+          <div className="md:tw-self-center xsm:tw-self-start xsm:tw-mt-3 tw-grid tw-gap-4 xsm:tw-w-full md:tw-w-5/12 lg:tw-w-4/12 md:tw-grid-cols-2 sm:tw-grid-cols-1 xsm:tw-grid-cols-1">
             {/* <button
             onClick={() => setStep((prev) => prev - 1)}
             className="tw-text-white tw-text-base tw-font-medium tw-bg-prevBtn tw-px-8 tw-py-3 tw-rounded-lg tw-mr-3 "
           >
             Previous
           </button> */}
-            <button className="tw-bg-cardBorder tw-flex tw-flex-row tw-justify-between tw-text-primary tw-font-medium tw-px-8 tw-py-3 tw-rounded-lg tw-mr-3">
+            <button className="tw-bg-cardBorder tw-text-primary tw-font-medium  tw-py-3 tw-rounded-lg xsm:tw-flex-1 tw-w-full  tw-text-sm tw-text-center">
               {/* <Image
                 src={"/eye.png"}
                 width={20}
@@ -111,13 +131,13 @@ function JobPreview({ setStep, data, jobQuestions }) {
                 alt="view"
                 className=" tw-self-center"
               /> */}
-              <p className="tw-ml-2 tw-text-base ">View as public</p>
+              View as public
             </button>
             <button
               onClick={() => {
                 onJobPost();
               }}
-              className="tw-text-white tw-text-base tw-font-medium tw-bg-primary tw-px-8 tw-py-3 tw-rounded-lg "
+              className="tw-text-white tw-text-sm tw-font-medium tw-bg-primary tw-py-3 tw-rounded-lg hover:tw-bg-buttonHover tw-w-full "
             >
               Post Job
             </button>
@@ -129,7 +149,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
         </h2>
         {/*  */}
         <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap tw-mb-10 ">
-          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center tw-mb-4   ">
             <Image
               src={"/clock.png"}
               width={20}
@@ -142,7 +162,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
               {data.jobShiftId.label}
             </p>
           </div>
-          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center tw-mb-4">
             <Image
               src={"/signal-status.png"}
               width={20}
@@ -155,7 +175,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
               {data.experienceLevelId.label}
             </p>
           </div>
-          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center tw-mb-4">
             <Image
               src={"/money.png"}
               width={20}
@@ -168,7 +188,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
               {data.salary}
             </p>
           </div>
-          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center tw-mb-4">
             <Image
               src={"/briefcase.png"}
               width={20}
@@ -187,13 +207,19 @@ function JobPreview({ setStep, data, jobQuestions }) {
           <h2 className="tw-text-black tw-font-medium tw-mb-4">
             Job Description
           </h2>
-          <p style={{ lineHeight: 1.5 }} className="tw-text-gray-400 ">
+          <p
+            style={{ lineHeight: 1.5 }}
+            className="tw-text-gray-400 tw-text-justify "
+          >
             {jobDescription}
           </p>
         </div>
         <div className="tw-mb-10">
           <h2 className="tw-text-black tw-font-medium tw-mb-4">Requirements</h2>
-          <p style={{ lineHeight: 1.5 }} className="tw-text-gray-400 ">
+          <p
+            style={{ lineHeight: 1.5 }}
+            className="tw-text-gray-400 tw-text-justify "
+          >
             {requirements}
           </p>
         </div>
@@ -201,10 +227,23 @@ function JobPreview({ setStep, data, jobQuestions }) {
           <h2 className="tw-text-black tw-font-medium tw-mb-4">
             Responsibilities
           </h2>
-          <p style={{ lineHeight: 1.5 }} className="tw-text-gray-400 ">
+          <p
+            style={{ lineHeight: 1.5 }}
+            className="tw-text-gray-400 tw-text-justify "
+          >
             {requirements}
           </p>
         </div>
+        {!skipped > 0 && (
+          <>
+            <p className=" tw-mb-5 tw-font-bold">Questions</p>
+            <Table
+              columns={columns}
+              dataSource={jobQuestions}
+              scroll={{ x: 600 }}
+            />
+          </>
+        )}
       </div>
     </>
   );

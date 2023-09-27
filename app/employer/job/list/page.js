@@ -9,7 +9,7 @@ function page() {
   const [jobStatusFilter, setJobStatusFilter] = useState("");
 
   return (
-    <div className="tw-pt-20 tw-px-16 tw-pb-16">
+    <div className="tw-pt-20 xsm:tw-px-4 lg:tw-px-16 tw-pb-16">
       <div className="tw-grid xsm:tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-5 gap-4">
         <div className="tw-mr-5 md:tw-w-full xsm:tw-w-full">
           <Form.Label

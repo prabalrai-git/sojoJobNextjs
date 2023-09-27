@@ -11,10 +11,42 @@ import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import Carousel from "react-multi-carousel";
 import { ToastContainer } from "react-toastify";
+import { useEffect, useState } from "react";
+import Axios from "@/api/server";
+import { Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
+import "@/styles/individualStyles.css";
 
 export default function Home() {
-  const data = [1, 2, 3, 4, 5, 5, 5, 5, 6, 6, 6];
-  const data1 = [1, 1, 1, 1, 1, 2, 3, 3, 2, 2];
+  const [eliteJobs, setEliteJobs] = useState(null);
+  const [standardJobs, setStandardJobs] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    getEliteJobs();
+    getStandardJobs();
+  }, []);
+
+  const getEliteJobs = async (req, res) => {
+    try {
+      const res = await Axios.get("/public/getEliteJobs");
+      setEliteJobs(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getStandardJobs = async (req, res) => {
+    try {
+      const res = await Axios.get("/public/getStandardJobs");
+      setStandardJobs(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const tags = [
     { id: 0, title: "Architecture" },
@@ -118,6 +150,13 @@ export default function Home() {
       logo: "/images/clients/8.png",
     },
   ];
+
+  const searchJobs = () => {
+    router.push({
+      pathname: "/search",
+      query: { term: searchTerm },
+    });
+  };
   return (
     <>
       <ToastContainer />
@@ -136,32 +175,26 @@ export default function Home() {
         </h1>
         <content className="tw-flex tw-flex-col tw-items-center sm:tw-w-full ">
           <div className="tw-flex tw-mt-14 tw-mb-7 tw-relative lg:tw-w-6/12 tw-w-full  ">
-            {/* <Input
-          className="tw-bg-textInput tw-w-96 tw-h-15"
-          size="large"
-          placeholder="Search jobs"
-          prefix={<SearchOutlined />}
-        /> */}
-            <input
-              type="text"
-              id="fname"
-              name="fname"
-              style={{ height: "50px" }}
+            <Input
               placeholder="Search Jobs"
-              className="tw-bg-textInput tw-w-full tw-rounded-lg tw-pl-10"
-            ></input>
-            <Image
-              src={"/search.png"}
-              width={20}
-              height={20}
-              alt="search.png"
-              className="tw-object-contain tw-absolute tw-top-4 tw-left-3 "
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onPressEnter={searchJobs}
+              className="tw-h-12 tw-bg-searchGrey "
+              size="large"
+              prefix={
+                <SearchOutlined style={{ fontSize: 20, color: "grey" }} />
+              }
             />
-            <button className="tw-bg-primary tw-py-2 tw-px-5 tw-ml-4 tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover ">
-              <Link href="/search" className="tw-text-white tw-no-underline">
-                Search
-              </Link>
-            </button>
+
+            <Link
+              href={{
+                pathname: "/search",
+                query: { term: searchTerm }, // the data
+              }}
+              className="tw-bg-primary tw-py-2 tw-px-5 tw-ml-4 tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline "
+            >
+              <button>Search</button>
+            </Link>
           </div>
           <div className=" tw-font-medium tw-text-left xsm:tw-w-8/12 tw-flex tw-flex-row tw-items-center tw-justify-center ">
             <span className="tw-flex tw-flex-row tw-overflow-x-hidden ">
@@ -187,10 +220,16 @@ export default function Home() {
             </h2>
           </div>
           <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
-            {data.map((item) => {
+            {eliteJobs?.map((item) => {
               return (
-                <Link href="/jobs" className="tw-text-black tw-no-underline">
-                  <JobCard key={item} job={job} />
+                <Link
+                  href={{
+                    pathname: "/jobs",
+                    query: { id: item.id }, // the data
+                  }}
+                  className="tw-text-black tw-no-underline"
+                >
+                  <JobCard key={item} job={item} />
                 </Link>
               );
             })}
@@ -255,10 +294,16 @@ export default function Home() {
             </p>
           </div>
           <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
-            {data.map((item) => {
+            {standardJobs?.map((item) => {
               return (
-                <Link href="/jobs" className="tw-text-black tw-no-underline">
-                  <JobCard key={item} job={job} />
+                <Link
+                  href={{
+                    pathname: "/jobs",
+                    query: { id: item.id }, // the data
+                  }}
+                  className="tw-text-black tw-no-underline"
+                >
+                  <JobCard key={item} job={item} />
                 </Link>
               );
             })}

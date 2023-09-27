@@ -190,10 +190,10 @@ function JobDetails({ setStep, setData }) {
             />
           </Form.Group>
           <Form.Group
-            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+            className="mb-4 tw-grid lg:tw-grid-cols-3 tw-gap-4 md:tw-grid-cols-2 sm:tw-grid-cols-1"
             controlId="exampleForm.ControlInput1"
           >
-            <div className=" tw-flex tw-flex-col">
+            <div className=" tw-grid tw-flex-col tw-flex-wrap">
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Employmnet Type
               </Form.Label>
@@ -265,7 +265,7 @@ function JobDetails({ setStep, setData }) {
             </div>
           </Form.Group>
           <Form.Group
-            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+            className="mb-4 mb-4 tw-grid lg:tw-grid-cols-3 tw-gap-4 md:tw-grid-cols-2 sm:tw-grid-cols-1"
             controlId="exampleForm.ControlInput1"
           >
             <div>
@@ -344,7 +344,7 @@ function JobDetails({ setStep, setData }) {
             </div>
           </Form.Group>
           <Form.Group
-            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+            className="mb-4 tw-grid lg:tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-1 md:tw-grid-cols-2"
             controlId="exampleForm.ControlInput1"
           >
             <div className="tw-flex tw-flex-col">
@@ -384,7 +384,7 @@ function JobDetails({ setStep, setData }) {
               Skills Required
             </Form.Label>
             <ReactQuill
-              className="tw-h-40 tw-mb-20  "
+              className="tw-mb-5  "
               theme="snow"
               value={skills}
               onChange={(e) => setSkills(e)}
@@ -395,7 +395,7 @@ function JobDetails({ setStep, setData }) {
               Job Description
             </Form.Label>
             <ReactQuill
-              className="tw-h-40 tw-mb-20  "
+              className=" tw-mb-5 "
               theme="snow"
               value={jobDescription}
               onChange={(e) => setJobDescription(e)}
@@ -412,7 +412,7 @@ function JobDetails({ setStep, setData }) {
         <div>
           <p className="tw-text-gray-600 tw-font-medium">Package</p>
 
-          <div className="tw-flex tw-flex-row tw-gap-4">
+          <div className="tw-grid lg:tw-grid-cols-8 md:tw-grid-cols-4 sm:tw-grid-cols-2 tw-gap-4">
             <JobPackage
               title={"Elite"}
               setJobPackage={setJobPackage}
@@ -431,7 +431,7 @@ function JobDetails({ setStep, setData }) {
             onSubmit();
             setStep((prev) => prev + 1);
           }}
-          className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
+          className="tw-bg-primary tw-text-white  xsm:tw-w-full sm:tw-w-4/12 md:tw-w-3/12 lg:tw-w-2/12  tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
         >
           Next
         </button>

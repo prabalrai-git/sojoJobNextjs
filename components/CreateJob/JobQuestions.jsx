@@ -69,7 +69,7 @@ function JobQuestions({ setStep, setJobQuestions }) {
       <div className="tw-mt-10">
         <Form>
           <Form.Group
-            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 md:tw-grid-cols-3"
             controlId="exampleForm.ControlInput1"
           >
             <div>
@@ -147,7 +147,7 @@ function JobQuestions({ setStep, setJobQuestions }) {
             </div>
           </Form.Group>
           <Form.Group
-            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 md:tw-grid-cols-3"
             controlId="exampleForm.ControlInput1"
           >
             <div>
@@ -225,7 +225,7 @@ function JobQuestions({ setStep, setJobQuestions }) {
             </div>
           </Form.Group>
           <Form.Group
-            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4"
+            className="mb-4 tw-grid tw-grid-cols-3 tw-gap-4 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 md:tw-grid-cols-3"
             controlId="exampleForm.ControlInput1"
           >
             <div>
@@ -307,7 +307,7 @@ function JobQuestions({ setStep, setJobQuestions }) {
         <div className="tw-mb-10">
           <button
             onClick={() => setStep((prev) => prev + 1)}
-            className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg tw-mr-5"
+            className="tw-bg-primary tw-text-white  xsm:tw-w-full sm:tw-w-4/12 md:tw-w-3/12 lg:tw-w-2/12  tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
           >
             Next
           </button>

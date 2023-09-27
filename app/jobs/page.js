@@ -1,24 +1,47 @@
+"use client";
+
 import JobCard from "@/components/JobCard";
 import { job } from "@/dummyData";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import Axios from "@/api/server";
+import JobDetails from "@/components/CreateJob/JobDetails";
+import RelatedJobs from "@/components/RelatedJobs";
+import OtherJobs from "@/components/OtherJobs";
 
-function page() {
-  const responsibilities = [
-    "Software testing.",
-    "Coordinate with the Team leader in implementation.",
-    "Collaborate with other team members to solve the issues.",
-    "Quickly produce well-organized, optimized, and documented manual.",
-    "Installing and configuring different servers (File Server, Database Server, Etc.).",
-    "Managing and maintaining the different servers.",
-    "Implementation of software.",
-    "Work independently when required.",
-    "Continuously learn and improve skills.",
-    "Have to travel extensively across Nepal for implementation.",
-  ];
+function page({ searchParams }) {
+  const [jobDetails, setJobsDetails] = useState();
 
   const data = [1, 2, 3, 4, 5, 6];
+
+  const jobDescription = (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: jobDetails?.jobDescription,
+      }}
+    />
+  );
+  const requirements = (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: jobDetails?.requirements,
+      }}
+    />
+  );
+  useEffect(() => {
+    getJobDetails();
+  }, [searchParams.id]);
+  const getJobDetails = async () => {
+    try {
+      const res = await Axios.get(`/job/getJobById/${searchParams.id}`);
+      setJobsDetails(res.data.data);
+      console.log(res.data.data, "jobs details");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -42,10 +65,12 @@ function page() {
       <div className="tw-mx-28 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-28 tw-mt-32">
         <div className="tw-flex tw-flex-row tw-justify-between">
           <div>
-            <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl">
-              Linux System Engineer
+            <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize tw-mb-3 tw-font-semibold ">
+              {jobDetails?.title}
             </h3>
-            <p>Sojojob</p>
+            <p className="tw-capitalize tw-text-blue-700">
+              {jobDetails?.jobRecruiter?.companyName}
+            </p>
           </div>
           <div>
             <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">
@@ -61,11 +86,11 @@ function page() {
               width={20}
               height={20}
               alt="timing"
-              className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
+              className="tw-object-contain tw-mr-3  tw-self-center "
             />
 
             <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-              Full Time
+              {jobDetails?.jobShift?.title}
             </p>
           </div>
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
@@ -74,11 +99,11 @@ function page() {
               width={20}
               height={20}
               alt="timing"
-              className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
+              className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
             <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-              Mid Level
+              {jobDetails?.experienceLevel?.title}
             </p>
           </div>
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
@@ -87,11 +112,11 @@ function page() {
               width={20}
               height={20}
               alt="timing"
-              className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
+              className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
             <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-              Negotiable
+              {jobDetails?.salary}
             </p>
           </div>
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
@@ -100,82 +125,34 @@ function page() {
               width={20}
               height={20}
               alt="timing"
-              className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
+              className="tw-object-contain tw-mr-3 tw-self-center"
             />
 
             <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-              In Office
+              {jobDetails?.jobSite?.title}
             </p>
           </div>
         </div>
         {/*  */}
         <div className="tw-mt-10">
-          <h4>Job Description</h4>
-          <h3 className="tw-mt-7 tw-underline">Responsibilities</h3>
-          <div>
-            {responsibilities?.map((item) => {
-              return (
-                <p className="tw-text-black tw-font-normal tw-mb-1">• {item}</p>
-              );
-            })}
-          </div>
-          <h3 className="tw-mt-10 tw-underline">Requirements</h3>
-          <div>
-            {responsibilities?.map((item) => {
-              return (
-                <p className="tw-text-black tw-font-normal tw-mb-1">• {item}</p>
-              );
-            })}
-          </div>
+          <h4 className="tw-font-bold tw-text-2xl">Job Description</h4>
+          <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
+            Responsibilities
+          </h3>
+          <div>{jobDescription}</div>
+          <h3 className="tw-mt-10 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
+            Requirements
+          </h3>
+          <div>{requirements}</div>
         </div>
         {/*  */}
-        <div className="tw-mt-32">
-          <div className="tw-flex tw-flex-row tw-items-stretch">
-            <Image
-              className="tw-self-center tw-mb-3"
-              src={"/briefcase.png"}
-              height={30}
-              width={30}
-              alt="fire.png"
-            />
-            <h2 className="tw-self-center tw-ml-3 tw-font-medium tw-text-lg">
-              Jobs At Sojojob
-            </h2>
-          </div>
-          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2">
-            {data?.map((item) => {
-              return (
-                <Link href="/jobs" className="tw-text-black tw-no-underline">
-                  <JobCard key={item} job={job} />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+
+        <RelatedJobs
+          jobCategory={jobDetails?.jobCategory}
+          exludeJobId={jobDetails?.id}
+        />
         {/*  */}
-        <div className="tw-mt-20">
-          <div className="tw-flex tw-flex-row tw-items-stretch">
-            <Image
-              className="tw-self-center tw-mb-3"
-              src={"/briefcase.png"}
-              height={30}
-              width={30}
-              alt="fire.png"
-            />
-            <h2 className="tw-self-center tw-ml-3 tw-font-medium tw-text-lg">
-              Other Jobs
-            </h2>
-          </div>
-          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
-            {data.map((item) => {
-              return (
-                <Link href="/jobs" className="tw-text-black tw-no-underline">
-                  <JobCard key={item} job={job} />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        <OtherJobs jobCategory={jobDetails?.jobCategory} />
       </div>
     </div>
   );
