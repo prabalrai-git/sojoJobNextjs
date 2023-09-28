@@ -6,10 +6,12 @@ import React from "react";
 
 function layout({ children }) {
   const NavBarByUser = () => {
-    if (localStorage.getItem("userType") === "employer") {
-      return <RecruiterNavBar />;
-    } else {
-      return <NavBar />;
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("userType") === "employer") {
+        return <RecruiterNavBar />;
+      } else {
+        return <NavBar />;
+      }
     }
   };
   return (

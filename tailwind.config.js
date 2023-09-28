@@ -29,6 +29,8 @@ module.exports = {
         white: "#ffffff",
         black: "#000000",
         primary: "#26af61",
+        secondary: "#0069d3",
+        secondaryH: "#266baf",
         textInput: "#F4F4F4",
         footerBackground: "#333333",
         cardBorder: "#E9F7EF",

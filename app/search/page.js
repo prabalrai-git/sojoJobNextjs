@@ -23,9 +23,9 @@ function page({ searchParams }) {
 
   // form states
 
-  const [category, setCategory] = useState();
-  const [education, setEducation] = useState();
-  const [experience, setExperience] = useState();
+  const [category, setCategory] = useState(null);
+  const [education, setEducation] = useState(null);
+  const [experience, setExperience] = useState(null);
 
   useEffect(() => {
     getCategoriesList();
@@ -113,10 +113,36 @@ function page({ searchParams }) {
       console.log(error);
     }
   };
+
+  const onFilter = async () => {
+    try {
+      let apiUrl = "/public/getJobByFilters";
+      let queryParams = [];
+
+      if (category !== null && category !== undefined) {
+        queryParams.push(`categoryId=${category}`);
+      }
+      if (education !== null && education !== undefined) {
+        queryParams.push(`educationLevelId=${education}`);
+      }
+      if (experience !== null && experience !== undefined) {
+        queryParams.push(`experienceLevelId=${experience}`);
+      }
+
+      if (queryParams.length > 0) {
+        apiUrl += `?${queryParams.join("&")}`;
+      }
+      const res = await Axios.get(apiUrl);
+      setSearchedJobs(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="tw-mx-28 xsm:tw-mx-5 sm:tw-mx-10 md:tw-mx-28 tw-mt-10">
       <div className="tw-flex tw-flex-row xsm:tw-flex-col  sm:tw-flex-col  md:tw-flex-row tw-justify-between">
-        <h2 className="tw-font-medium">Search Jobs</h2>
+        <h2 className="tw-font-medium tw-text-3xl">Search Jobs</h2>
         <div className="tw-flex tw-justify-center tw-mb-10  xsm:tw-w-full sm:tw-w-full md:tw-w-4/12 tw-relative 950:tw-w-5/12 800:tw-w-5/12 lg:tw-w-3/12  ">
           <Search
             placeholder="Search for jobs.."
@@ -128,11 +154,12 @@ function page({ searchParams }) {
         </div>
       </div>
       {/*  */}
-      <h5 className="tw-font-medium">Filters:</h5>
+      <h5 className="tw-font-medium tw-text-lg">Filters:</h5>
       <div className="tw-grid tw-grid-cols-4 tw-gap-4 xsm:tw-grid-cols-1  tw-mt-4 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-3 xl:tw-grid-cols-4">
         <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch
+            allowClear
             className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
             style={
               {
@@ -151,12 +178,13 @@ function page({ searchParams }) {
                 .localeCompare((optionB?.label ?? "").toLowerCase())
             }
             options={categoriesList}
-            onChange={(e, a) => setCategory(a)}
+            onChange={(e, a) => setCategory(e)}
           />
         </div>
         <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch
+            allowClear
             className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
             style={
               {
@@ -175,12 +203,13 @@ function page({ searchParams }) {
                 .localeCompare((optionB?.label ?? "").toLowerCase())
             }
             options={educationList}
-            onChange={(e, a) => setEducation(a)}
+            onChange={(e, a) => setEducation(e)}
           />
         </div>
         <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch
+            allowClear
             className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
             style={
               {
@@ -199,15 +228,15 @@ function page({ searchParams }) {
                 .localeCompare((optionB?.label ?? "").toLowerCase())
             }
             options={experienceList}
-            onChange={(e, a) => setExperience(a)}
+            onChange={(e, a) => setExperience(e)}
           />
         </div>
         <div className="tw-mr-4 tw-w-full">
           <button
-            className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-text-white tw-h-12 tw-text-lg tw-font-light tw-w-6/12"
-            onClick={() => console.log("yo")}
+            className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-text-white tw-h-12 tw-text-sm tw-font-semibold tw-w-4/12"
+            onClick={() => onFilter()}
           >
-            Apply Filter
+            Filter
           </button>{" "}
         </div>
       </div>
@@ -218,7 +247,7 @@ function page({ searchParams }) {
           // style={{ marginTop: -109 }}
           className="xsm:tw-order-2 sm:tw-order-2 md:tw-order-2 lg:tw-order-1 lg:-tw-mt-28 md:tw-mt-0  "
         >
-          <h4 className="tw-mt-10 tw-mb-10 tw-capitalize">
+          <h4 className="tw-mt-10 tw-mb-10 tw-capitalize tw-text-xl tw-font-medium">
             {searchedJobs?.length} jobs listed currently
           </h4>
 
@@ -235,86 +264,92 @@ function page({ searchParams }) {
             })}
           </div>
         </div>
-        <div className=" xsm:tw-order-1 sm:tw-order-1 md:tw-order-1 lg:tw-order-2 tw-col-span-2 tw-border-2  tw-border-cardBorder tw-rounded-lg tw-p-10 tw-py-16 xsm:tw-p-3 sm:tw-p-5 md:tw-p-10 lg:-tw-mt-1">
-          <div className="tw-flex tw-flex-row tw-justify-between">
-            <div>
-              <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize">
-                {toDisplayJob && toDisplayJob?.title}
+        {searchedJobs?.length > 0 && (
+          <div className=" xsm:tw-order-1 sm:tw-order-1 md:tw-order-1 lg:tw-order-2 tw-col-span-2 tw-border-2  tw-border-cardBorder tw-rounded-lg tw-p-10 tw-py-16 xsm:tw-p-3 sm:tw-p-5 md:tw-p-10 lg:-tw-mt-1">
+            <div className="tw-flex tw-flex-row tw-justify-between">
+              <div>
+                <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize tw-mb-2">
+                  {toDisplayJob && toDisplayJob?.title}
+                </h3>
+                <p className="tw-capitalize">
+                  {toDisplayJob && toDisplayJob?.jobRecruiter?.companyName}
+                </p>
+              </div>
+              <div>
+                <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">
+                  Apply now!
+                </button>
+              </div>
+            </div>
+            {/*  */}
+            <div className="tw-flex tw-flex-row tw-mt-6 tw-flex-wrap">
+              <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+                <Image
+                  src={"/clock.png"}
+                  width={20}
+                  height={20}
+                  alt="timing"
+                  className="tw-object-contain tw-mr-3 tw-self-center "
+                />
+
+                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                  {toDisplayJob && toDisplayJob?.jobShift?.title}
+                </p>
+              </div>
+              <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+                <Image
+                  src={"/signal-status.png"}
+                  width={20}
+                  height={20}
+                  alt="timing"
+                  className="tw-object-contain tw-mr-3 tw-self-center "
+                />
+
+                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                  {toDisplayJob && toDisplayJob?.experienceLevel?.title}
+                </p>
+              </div>
+              <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+                <Image
+                  src={"/money.png"}
+                  width={20}
+                  height={20}
+                  alt="timing"
+                  className="tw-object-contain tw-mr-3 tw-self-center "
+                />
+
+                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                  {toDisplayJob && toDisplayJob?.salary}
+                </p>
+              </div>
+              <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+                <Image
+                  src={"/briefcase.png"}
+                  width={20}
+                  height={20}
+                  alt="timing"
+                  className="tw-object-contain tw-mr-3 tw-self-center "
+                />
+
+                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                  {toDisplayJob && toDisplayJob?.jobSite?.title}
+                </p>
+              </div>
+            </div>
+            {/*  */}
+            <div className="tw-mt-10">
+              <h4 className="tw-font-semibold tw-text-2xl">Job Description</h4>
+              <h3 className="tw-mt-7 tw-underline tw-font-semibold tw-text-xl tw-mb-5">
+                Responsibilities
               </h3>
-              <p className="tw-capitalize">
-                {toDisplayJob && toDisplayJob?.jobRecruiter?.companyName}
-              </p>
-            </div>
-            <div>
-              <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">
-                Apply now!
-              </button>
+              <div>{jobDescription}</div>
+              <h3 className="tw-mt-10 tw-underline tw-font-semibold tw-text-xl tw-mb-5">
+                Requirements
+              </h3>
+              <div>{requirements}</div>
             </div>
           </div>
-          {/*  */}
-          <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap">
-            <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
-              <Image
-                src={"/clock.png"}
-                width={20}
-                height={20}
-                alt="timing"
-                className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
-              />
-
-              <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-                {toDisplayJob && toDisplayJob?.jobShift?.title}
-              </p>
-            </div>
-            <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
-              <Image
-                src={"/signal-status.png"}
-                width={20}
-                height={20}
-                alt="timing"
-                className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
-              />
-
-              <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-                {toDisplayJob && toDisplayJob?.experienceLevel?.title}
-              </p>
-            </div>
-            <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
-              <Image
-                src={"/money.png"}
-                width={20}
-                height={20}
-                alt="timing"
-                className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
-              />
-
-              <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-                {toDisplayJob && toDisplayJob?.salary}
-              </p>
-            </div>
-            <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
-              <Image
-                src={"/briefcase.png"}
-                width={20}
-                height={20}
-                alt="timing"
-                className="tw-object-contain tw-mr-3 tw-self-center tw-mb-4"
-              />
-
-              <p className="tw-self-center tw-text-gray-600 tw-text-medium">
-                {toDisplayJob && toDisplayJob?.jobSite?.title}
-              </p>
-            </div>
-          </div>
-          {/*  */}
-          <div className="tw-mt-10">
-            <h4>Job Description</h4>
-            <h3 className="tw-mt-7 tw-underline">Responsibilities</h3>
-            <div>{jobDescription}</div>
-            <h3 className="tw-mt-10 tw-underline">Requirements</h3>
-            <div>{requirements}</div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

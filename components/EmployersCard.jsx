@@ -35,10 +35,10 @@ function EmployersCard({ item }) {
       </div>
       <div className="tw-border-cardBorder tw-border-2 tw-h-36 tw-rounded-b-lg tw-items-center tw-flex tw-justify-center">
         <div className="tw-mt-6">
-          <p className="tw-font-semibold tw-text-lg tw-text-center">
+          <p className="tw-font-medium tw-text-lg tw-text-center">
             {item.title}
           </p>
-          <p className="tw-mt-1 tw-text-primary tw-text-center">
+          <p className="tw-mt-1 tw-text-primary tw-text-center tw-font-light">
             {item.address}
           </p>
         </div>

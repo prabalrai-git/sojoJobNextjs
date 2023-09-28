@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 
-import { job } from "@/dummyData";
 import JobCard from "@/components/JobCard";
 import EmployersCard from "@/components/EmployersCard";
 import Link from "next/link";
-import TrendingTags from "@/components/TrendingTags";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import Carousel from "react-multi-carousel";
@@ -17,7 +15,8 @@ import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import "@/styles/individualStyles.css";
-
+import RecruiterNavBar from "@/components/RecruiterNavBar";
+import TrendingTagsComponent from "@/components/TrendingTagsComponent";
 export default function Home() {
   const [eliteJobs, setEliteJobs] = useState(null);
   const [standardJobs, setStandardJobs] = useState(null);
@@ -48,13 +47,6 @@ export default function Home() {
     }
   };
 
-  const tags = [
-    { id: 0, title: "Architecture" },
-    { id: 1, title: "Construction" },
-    { id: 2, title: "logistics" },
-    { id: 3, title: "Commercial" },
-    { id: 3, title: "Commercial" },
-  ];
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -95,73 +87,58 @@ export default function Home() {
   const employers = [
     {
       id: 1,
-      title: "E-sewa",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/1.png",
+      title: "Leapfrog",
+      address: "Charkhal",
+      themeColor: "#27AF61",
+      logo: "/leapfroglogo.png",
     },
     {
       id: 2,
+      title: "Deerhold Ltd",
+      address: "Kupondole",
+      themeColor: "#e96b30",
+      logo: "/dearhold.png",
+    },
+    {
+      id: 3,
+      title: "COTIVITI",
+      address: "Bhaktapur",
+      themeColor: "#30006e",
+      logo: "/cotiviti.png",
+    },
+    {
+      id: 4,
+      title: "UXcam",
+      address: "Lalitpur",
+      themeColor: "#5e97ff",
+      logo: "/ux.png",
+    },
+    {
+      id: 5,
       title: "Khalti",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/2.png",
-    },
-    {
-      id: 1,
-      title: "Foodmandu",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/3.png",
-    },
-    {
-      id: 4,
-      title: "EbPearls",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/4.png",
-    },
-    {
-      id: 4,
-      title: "DishHome",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/5.png",
-    },
-    {
-      id: 6,
-      title: "Ing",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/6.png",
-    },
-    {
-      id: 7,
-      title: "IME",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/7.png",
-    },
-    {
-      id: 8,
-      title: "Uxcam",
-      address: "Jawlakhel",
-      themeColor: "#161e35",
-      logo: "/images/clients/8.png",
+      address: "Baneshwor",
+      themeColor: "#5c2d91",
+      logo: "/khalti.png",
     },
   ];
 
   const searchJobs = () => {
-    router.push({
-      pathname: "/search",
-      query: { term: searchTerm },
-    });
+    router.push(`/search?term=${searchTerm}`);
   };
+
+  const NavBarByUser = () => {
+    if (localStorage.getItem("userType") === "employer") {
+      return <RecruiterNavBar />;
+    } else {
+      return <NavBar />;
+    }
+  };
+
   return (
     <>
       <ToastContainer />
+      {NavBarByUser()}
 
-      <NavBar />
       <main
         className="tw-px-10  sm:tw-px-4 xsm:tw-px-4 md:tw-px-5 lg:tw-px-28 xl:tw-px-28"
         style={{
@@ -169,7 +146,7 @@ export default function Home() {
           paddingBottom: 100,
         }}
       >
-        <h1 className="tw-text-center tw-mt-28 tw-text-5xl lg:tw-text-4xl md:tw-text-4xl sm:tw-text-4xl xl:tw-text-5xl xsm:tw-text-4xl tw-font-medium">
+        <h1 className="tw-text-center tw-mt-12 tw-text-5xl lg:tw-text-4xl md:tw-text-4xl sm:tw-text-4xl xl:tw-text-5xl xsm:tw-text-4xl tw-font-medium">
           Hire an Expert or Be <span className="tw-text-primary">Hired</span> as
           One
         </h1>
@@ -196,14 +173,8 @@ export default function Home() {
               <button>Search</button>
             </Link>
           </div>
-          <div className=" tw-font-medium tw-text-left xsm:tw-w-8/12 tw-flex tw-flex-row tw-items-center tw-justify-center ">
-            <span className="tw-flex tw-flex-row tw-overflow-x-hidden ">
-              <span className="tw-w-32">Trending tags:</span>
-              {tags.map((item) => {
-                return <TrendingTags key={item.id} item={item} />;
-              })}
-            </span>
-          </div>
+
+          <TrendingTagsComponent />
         </content>
 
         <div className="tw-mt-20 ">

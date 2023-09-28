@@ -13,11 +13,12 @@ function JobCard({ job }) {
           alt="companylogo"
         />
       </div>
+
       <div>
         <p className="tw-font-semibold tw-text-lg tw-mb-2 tw-capitalize">
           {job?.title}
         </p>
-        <p className="tw-text-lg tw-font-light tw-mb-3 tw-capitalize">
+        <p className="tw-text-md tw-font-normal tw-mb-3 tw-capitalize">
           {job?.jobRecruiter.companyName}
         </p>
         <div className="tw-flex tw-flex-row tw-flex-wrap -tw-ml-1 ">

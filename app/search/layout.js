@@ -1,11 +1,21 @@
+"use client";
+
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import RecruiterNavBar from "@/components/RecruiterNavBar";
 import React from "react";
 
 function layout({ children }) {
+  const NavBarByUser = () => {
+    if (localStorage.getItem("userType") === "employer") {
+      return <RecruiterNavBar />;
+    } else {
+      return <NavBar />;
+    }
+  };
   return (
     <>
-      <NavBar />
+      {NavBarByUser()}
       <div
         style={{
           minHeight: `calc(100vh- 108px - 741px)`,

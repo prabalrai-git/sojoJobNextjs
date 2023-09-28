@@ -11,9 +11,12 @@ import styles from "@/styles/global.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@/styles/navbar.css";
+import { useRouter } from "next/navigation";
 
 function RecruiterNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
+
+  const router = useRouter();
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
@@ -36,6 +39,11 @@ function RecruiterNavBar() {
 
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
 
   return (
     <Navbar
@@ -137,20 +145,22 @@ function RecruiterNavBar() {
                 </p>
               </li>
             </Link>
-            <Link href={"/"}>
-              <li className="tw-flex tw-flex-row tw-mb-3">
-                <Image
-                  src={"/logout.png"}
-                  width={16}
-                  height={16}
-                  alt="home"
-                  className="tw-object-contain tw-mr-4"
-                />
-                <p className="tw-text-base tw-font-medium tw-text-gray-600">
-                  Logout
-                </p>
-              </li>
-            </Link>
+
+            <li
+              onClick={() => logout()}
+              className="tw-flex tw-flex-row tw-mb-3 tw-cursor-pointer"
+            >
+              <Image
+                src={"/logout.png"}
+                width={16}
+                height={16}
+                alt="home"
+                className="tw-object-contain tw-mr-4"
+              />
+              <p className="tw-text-base tw-font-medium tw-text-gray-600">
+                Logout
+              </p>
+            </li>
           </ul>
         </div>
       )}

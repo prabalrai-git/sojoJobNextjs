@@ -64,8 +64,8 @@ function NavBar() {
                 className=" tw-no-underline tw-text-white"
                 href="/login/employer"
               >
-                <li className="tw-mx-4 md:tw-mx-7  tw-bg-primary hover:tw-bg-buttonHover tw-text-white tw-font-normal tw-cursor-pointer tw-px-10 tw-py-3 tw-rounded-lg">
-                  Sign In
+                <li className="tw-mx-4   tw-bg-primary hover:tw-bg-buttonHover tw-text-white tw-font-normal tw-cursor-pointer  tw-w-28 xsm:tw-w-20 lg:tw-w-32 tw-h-12 tw-text-center tw-flex tw-justify-center tw-items-center tw-rounded-lg">
+                  <p className="tw-my-auto">Sign In</p>
                 </li>
               </Link>
             </ul>

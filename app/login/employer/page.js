@@ -29,6 +29,7 @@ function page() {
       localStorage.setItem("id", res.data.data.id);
       localStorage.setItem("tokenSojoJob", res.data.data.token);
       localStorage.setItem("employerId", res.data.data.employerId);
+      localStorage.setItem("userType", res.data.data.userType);
       if (res.data.success) {
         toast.success("Login Successful!", {
           position: "top-right",

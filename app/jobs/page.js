@@ -68,9 +68,16 @@ function page({ searchParams }) {
             <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize tw-mb-3 tw-font-semibold ">
               {jobDetails?.title}
             </h3>
-            <p className="tw-capitalize tw-text-blue-700">
-              {jobDetails?.jobRecruiter?.companyName}
-            </p>
+            <Link
+              href={{
+                pathname: "/companyProfile",
+                query: { id: jobDetails?.jobRecruiter?.id }, // the data
+              }}
+            >
+              <p className="tw-capitalize tw-text-blue-700 hover:tw-text-primary">
+                {jobDetails?.jobRecruiter?.companyName}
+              </p>
+            </Link>
           </div>
           <div>
             <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">
