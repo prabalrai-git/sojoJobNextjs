@@ -12,9 +12,28 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@/styles/navbar.css";
 import { useRouter } from "next/navigation";
+import Axios from "@/api/server";
 
 function RecruiterNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [data, setData] = useState();
+  useEffect(() => {
+    getProfileInformation();
+  }, []);
+
+  const getProfileInformation = async () => {
+    try {
+      const res = await Axios.get(
+        `/jobRecruiter/getJobRecruiterById/${localStorage.getItem(
+          "employerId"
+        )}`
+      );
+
+      setData(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const router = useRouter();
 
@@ -67,13 +86,12 @@ function RecruiterNavBar() {
             {/* <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link> */}
           </Nav>
-          <Nav>
+          <Nav className=" tw-flex tw-flex-row tw-justify-center tw-items-center">
             <Nav.Link href="/employer/profile">
               <Image
                 src={"/settings.png"}
                 width={30}
                 height={30}
-                className="tw-mt-2 "
                 alt="settings"
               />
             </Nav.Link>
@@ -82,7 +100,9 @@ function RecruiterNavBar() {
               onClick={() => setShowDropDown((prev) => !prev)}
             >
               <Image
-                src={"/avatar.png"}
+                src={
+                  data?.companyLogoImage ? data.companyLogoImage : "/avatar.png"
+                }
                 width={40}
                 height={40}
                 alt="user"
@@ -97,7 +117,7 @@ function RecruiterNavBar() {
             >
               <div className="tw-flex tw-flex-row ">
                 <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4">
-                  Demo User
+                  {data?.companyName}
                 </h2>
                 <Image
                   src={"/down.png"}

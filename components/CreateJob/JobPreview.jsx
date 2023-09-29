@@ -23,8 +23,6 @@ function JobPreview({ setStep, data, jobQuestions }) {
 
   const skipped = false;
 
-  console.log(jobQuestions, "yeeee haaaaaaa");
-
   const onJobPost = async () => {
     const dataToPost = {
       title: data?.title,

@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 function page() {
+  const sendEmail = async () => {};
+
   const data = [
     { id: 1, src: "/images/clients/1.png" },
     { id: 2, src: "/images/clients/2.png" },
@@ -164,10 +166,11 @@ function page() {
           </Form.Group>
 
           <Button
+            onClick={sendEmail}
             type="submit"
             className="tw-bg-primary hover:tw-bg-buttonHover tw-border-transparent px-4 py-2"
           >
-            Call Be Back
+            Call me Back
           </Button>
         </Form>
       </div>

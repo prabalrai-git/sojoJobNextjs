@@ -4,45 +4,30 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form } from "react-bootstrap";
 import Dropzone, { useDropzone } from "react-dropzone";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Axios from "@/api/server";
 
 function page() {
-  const [value, setValue] = useState();
-  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
-    // Disable click and keydown behavior
-    noClick: true,
-    noKeyboard: true,
-  });
+  const [userData, setUserData] = useState();
 
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
-  const workExperience = {
-    title: "Senior Software Engineer",
-    company: "F1 Soft International",
-    years: "2017-2022",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+  useEffect(() => {
+    getProfileInfo();
+  }, []);
+  const getProfileInfo = async () => {
+    try {
+      const res = await Axios.get(
+        `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
+      );
+      setUserData(res.data.data);
+      console.log(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const education = {
-    id: 1,
-    title: "Msc.IT",
-    college: "Tribhuvan University",
-    years: "2017-2022",
-  };
-  const licenses = {
-    id: 1,
-    title: "VAPT Certified Administrator | VAPT",
-    years: "2017 - 2022",
-  };
-  const workER = [1, 2, 3, 4];
-  const rep = [1, 2, 3];
 
   const pdfRef = useRef();
   const downloadPDF = () => {
@@ -50,6 +35,7 @@ function page() {
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("img/png");
       const doc = new jsPDF("p", "mm", "a4");
+
       const componentWidth = doc.internal.pageSize.getWidth();
       const componentHeight = doc.internal.pageSize.getHeight();
       doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
@@ -57,8 +43,37 @@ function page() {
     });
   };
 
+  const workExperience = (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: userData?.workExperience,
+      }}
+    />
+  );
+  const educationBackground = (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: userData?.educationBackground,
+      }}
+    />
+  );
+  const licensesAndCertification = (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: userData?.licensesAndCertification,
+      }}
+    />
+  );
+  const otherSkillSets = (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: userData?.otherSkillSets,
+      }}
+    />
+  );
+
   return (
-    <div className="tw-pt-10 tw-mx-40 tw-pb-10">
+    <div className="tw-pt-10 tw-mx-16 tw-pb-10">
       <div className="tw-flex tw-flex-row tw-justify-between tw-mb-10">
         <div className="tw-flex tw-flex-row">
           <Link href={"/job-seeker/dashboard"}>
@@ -109,97 +124,55 @@ function page() {
         <div className="tw-grid tw-grid-cols-5 tw-gap-28">
           <div className="tw-col-span-3">
             <div className="tw-mb-40">
-              <h1 className="tw-text-black tw-font-medium tw-text-3xl tw-mb-2">
-                John Dough
+              <h1 className="tw-text-black tw-font-medium tw-text-3xl tw-mb-2 tw-capitalize">
+                {userData?.name}
               </h1>
-              <p className="tw-text-primary tw-font-medium tw-text-sm">
+              {/* <p className="tw-text-primary tw-font-medium tw-text-sm">
                 Senior Software Engineer
-              </p>
+              </p> */}
             </div>
             {/*  */}
             <div>
-              <p className="tw-text-primary tw-font-medium tw-text-sm">
+              <p className="tw-text-primary tw-font-medium tw-text-sm tw-mb-5">
                 Work Experience
               </p>
-              {workER?.map((item) => {
-                return (
-                  <>
-                    <div className="tw-mt-8">
-                      <h2 className="tw-text-xl tw-mb-2">
-                        {workExperience.title} | {workExperience.company}
-                      </h2>
-                      <p className="tw-text-gray-400 tw-mb-2">
-                        {workExperience.years}
-                      </p>
-                      <p style={{ lineHeight: 2 }} className="tw-text-gray-500">
-                        {workExperience.desc}
-                      </p>
-                    </div>
-                  </>
-                );
-              })}
+              <p className=" tw-leading-loose">{workExperience}</p>
             </div>
           </div>
           <div className="tw-col-span-2">
             <div style={{ marginBottom: 122 }}>
-              <p className="tw-text-gray-500 tw-font-medium tw-text-sm tw-mb-5 tw-underline">
-                johndough@gmail.com
+              <p className="tw-text-gray-500 tw-font-medium tw-text-sm tw-mb-3 tw-underline">
+                {userData?.email}
               </p>
               <p className="tw-text-gray-500 tw-font-medium tw-text-sm tw-mb-5">
-                00977 9851123456
+                +977 {userData?.contactNumber}
               </p>
-              <p className="tw-text-gray-500 tw-font-medium tw-text-sm tw-mb-5">
+              {/* <p className="tw-text-gray-500 tw-font-medium tw-text-sm tw-mb-5">
                 www.johndough.com
-              </p>
+              </p> */}
             </div>
             {/*  */}
             <div className="tw-mb-14">
-              <p className="tw-text-primary tw-font-medium tw-text-sm">
+              <p className="tw-text-primary tw-font-medium tw-text-sm tw-mb-5 ">
                 Education Background
               </p>
-              {rep?.map((item) => {
-                return (
-                  <>
-                    <div className="tw-mt-8">
-                      <h2 className="tw-text-xl tw-mb-2">
-                        {education.title} | {education.college}
-                      </h2>
-                      <p className="tw-text-gray-400 tw-mb-2">
-                        {education.years}
-                      </p>
-                    </div>
-                  </>
-                );
-              })}
+              <p className=" tw-leading-loose">{educationBackground}</p>
             </div>
             <div>
-              <p className="tw-text-primary tw-font-medium tw-text-sm">
+              <p className="tw-text-primary tw-font-medium tw-text-sm tw-mb-5">
                 Licenses & Certification
               </p>
-              {rep?.map((item) => {
-                return (
-                  <>
-                    <div className="tw-mt-8">
-                      <h2 className="tw-text-xl tw-mb-2">{licenses.title}</h2>
-                      <p className="tw-text-gray-400 tw-mb-2">
-                        {licenses.years}
-                      </p>
-                    </div>
-                  </>
-                );
-              })}
+              <p className=" tw-leading-loose">{licensesAndCertification}</p>
             </div>
           </div>
         </div>
         {/* final full grid for skillsets */}
         <div className="tw-w-full tw-mt-10">
-          <p className="tw-text-primary tw-font-medium tw-text-sm">
+          <p className="tw-text-primary tw-font-medium tw-text-sm tw-mb-5">
             Other Skillsets
           </p>
           <p className="tw-mt-5 tw-text-xl tw-mb-2 tw-font-light">
-            Ruby on rails, SQL, Python, Django, Ruby on rails, SQL, Python,
-            Django, Ruby on rails, SQL, Python, Django, Ruby on rails, SQL,
-            Python, Django
+            <p className=" tw-leading-loose">{otherSkillSets}</p>
           </p>
         </div>
       </div>

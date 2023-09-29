@@ -10,7 +10,7 @@ import "react-quill/dist/quill.snow.css";
 import dayjs from "dayjs";
 import Axios from "@/api/server";
 import ImgCrop from "antd-img-crop";
-import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

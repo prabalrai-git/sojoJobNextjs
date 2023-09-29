@@ -47,8 +47,8 @@ function NavBar() {
               Dank memes
             </Nav.Link> */}
             <ul className="tw-flex tw-flex-row tw-text-lg tw-font-medium tw-items-center xsm:tw-text-sm md:tw-text-lg ">
-              <Link className=" tw-no-underline tw-text-black" href="/about">
-                <li className="tw-mx-4 md:tw-mx-7 tw-cursor-pointer ">
+              <Link className=" tw-no-underline tw-text-black" href="/about ">
+                <li className="tw-mx-4 md:tw-mx-7 tw-cursor-pointer hover:tw-underline ">
                   About us
                 </li>
               </Link>
@@ -56,7 +56,7 @@ function NavBar() {
                 className=" tw-no-underline tw-text-black"
                 href={"/register/employer"}
               >
-                <li className="tw-mx-4 md:tw-mx-7  tw-cursor-pointer">
+                <li className="tw-mx-4 md:tw-mx-7  tw-cursor-pointer hover:tw-underline">
                   Sign Up
                 </li>
               </Link>

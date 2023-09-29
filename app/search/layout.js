@@ -2,17 +2,11 @@
 
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import { NavBarByUser } from "@/components/NavBarType";
 import RecruiterNavBar from "@/components/RecruiterNavBar";
 import React from "react";
 
 function layout({ children }) {
-  const NavBarByUser = () => {
-    if (localStorage.getItem("userType") === "employer") {
-      return <RecruiterNavBar />;
-    } else {
-      return <NavBar />;
-    }
-  };
   return (
     <>
       {NavBarByUser()}

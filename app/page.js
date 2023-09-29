@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 import "@/styles/individualStyles.css";
 import RecruiterNavBar from "@/components/RecruiterNavBar";
 import TrendingTagsComponent from "@/components/TrendingTagsComponent";
+import JobSeekerNavBar from "@/components/JobSeekerNavBar";
+import { NavBarByUser } from "@/components/NavBarType";
 export default function Home() {
   const [eliteJobs, setEliteJobs] = useState(null);
   const [standardJobs, setStandardJobs] = useState(null);
@@ -126,13 +128,15 @@ export default function Home() {
     router.push(`/search?term=${searchTerm}`);
   };
 
-  const NavBarByUser = () => {
-    if (localStorage.getItem("userType") === "employer") {
-      return <RecruiterNavBar />;
-    } else {
-      return <NavBar />;
-    }
-  };
+  // const NavBarByUser = () => {
+  //   if (localStorage.getItem("userType") === "employer") {
+  //     return <RecruiterNavBar />;
+  //   } else if (localStorage.getItem("userType") === "job-seeker") {
+  //     return <JobSeekerNavBar />;
+  //   } else {
+  //     return <NavBar />;
+  //   }
+  // };
 
   return (
     <>

@@ -1,12 +1,17 @@
 "use client";
 
+import { DatePicker, Input, Upload, message } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import Dropzone, { useDropzone } from "react-dropzone";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import dayjs from "dayjs";
+import Axios from "@/api/server";
+import { UploadOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 
 function page() {
   const [value, setValue] = useState();
@@ -15,12 +20,119 @@ function page() {
     noClick: true,
     noKeyboard: true,
   });
+  const [data, setData] = useState({
+    name: null,
+    email: null,
+    contactNumber: null,
+    currentAddress: null,
+    permanentAddress: null,
+    gender: null,
+    dateOfBirth: null,
+    workExperience: null,
+    educationBackground: null,
+    licensesAndCertification: null,
+    otherSkillSets: null,
+    profilePicture: null,
+  });
+  const [logoDisplayImage, setLogoDisplayImage] = useState();
 
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+  useEffect(() => {
+    getProfileInfo();
+  }, []);
+
+  const router = useRouter();
+
+  const dateFormat = "YYYY-MM-DD";
+  const { Dragger } = Upload;
+  const props = {
+    name: "file",
+    multiple: false,
+    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    onChange(info) {
+      const { status } = info.file;
+
+      setData((prev) => {
+        return { ...prev, profilePicture: info.file.originFileObj };
+      });
+      const img = URL.createObjectURL(info.file.originFileObj);
+      setLogoDisplayImage(img);
+
+      if (status !== "uploading") {
+        console.log(info.file, info.fileList);
+      }
+      if (status === "done") {
+        message.success(`${info.file.name} file uploaded successfully.`);
+
+        setLogoDisplayImage(img);
+      } else if (status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onDrop(e) {
+      console.log("Dropped files", e.dataTransfer.files);
+    },
+  };
+  const getProfileInfo = async () => {
+    try {
+      const res = await Axios.get(
+        `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
+      );
+      const data = res.data.data;
+      setData({
+        name: data?.name,
+        email: data?.email,
+        contactNumber: data?.contactNumber,
+        currentAddress: data?.currentAddress,
+        permanentAddress: data?.permanentAddress,
+        gender: data?.gender,
+        dateOfBirth: data?.dateOfBirth,
+        workExperience: data?.workExperience,
+        educationBackground: data?.educationBackground,
+        licensesAndCertification: data?.licensesAndCertification,
+        otherSkillSets: data?.otherSkillSets,
+        profilePicture: data?.profilePicture,
+      });
+      setLogoDisplayImage(data.profilePicture);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateProfile = async () => {
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("contactNumber", data.contactNumber);
+    formData.append("currentAddress", data.currentAddress);
+    formData.append("permanentAddress", data.permanentAddress);
+    formData.append("gender", data.gender);
+    formData.append("dateOfBirth", data.dateOfBirth);
+    formData.append("workExperience", data.workExperience);
+    formData.append("educationBackground", data.educationBackground);
+    formData.append("licensesAndCertification", data.licensesAndCertification);
+    formData.append("otherSkillSets", data.otherSkillSets);
+    formData.append("profilePicture", data.profilePicture);
+    try {
+      const res = await Axios.patch(
+        `/jobSeeker/updateJobSeekerProfileById/${localStorage.getItem(
+          "jobSeekerId"
+        )}`,
+        formData
+      );
+      console.log(res.data);
+      if (res.data.success) {
+        message.success("Profile Updated Successfully");
+
+        setTimeout(() => {
+          router.push("/job-seeker/dashboard");
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+      message.error(error.response.msg);
+    }
+  };
 
   return (
     <div className="tw-pt-10 tw-mx-40 tw-pb-10">
@@ -59,67 +171,78 @@ function page() {
               className="mb-4 tw-grid tw-grid-cols-5 tw-gap-4"
               controlId="exampleForm.ControlInput1"
             >
-              <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2">
-                <div
-                  className="tw-flex tw-flex-col"
-                  {...getRootProps({ className: "dropzone" })}
-                >
-                  <input {...getInputProps()} />
-                  <Image
-                    src={"/upload.png"}
-                    width={65}
-                    height={65}
-                    alt="upload"
-                    className="tw-object-contain tw-mb-8 tw-self-center tw-mx-auto"
-                  />
-                  <p className="tw-text-black tw-font-bold tw-text-lg tw-mb-4 tw-text-center">
-                    Drag and Drop file
-                  </p>
-                  <p className="tw-text-black tw-font-medium tw-text-lg tw-mb-4 tw-text-center">
-                    or
-                  </p>
-                  <button
-                    className="tw-bg-dndBtn hover:tw-bg-dndBtnH tw-text-white tw-font-medium tw-text-center tw-rounded-lg tw-px-8 tw-py-3"
-                    type="button"
-                    onClick={open}
-                  >
-                    Browse files
-                  </button>
-                </div>
-                {/* <div>
-                  <h4>Files</h4>
-                  <ul>{files}</ul>
-                </div> */}
+              <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 tw-relative">
+                <Dragger {...props} className="tw-w-full tw-h-full">
+                  {logoDisplayImage ? (
+                    <>
+                      <img
+                        src={logoDisplayImage}
+                        className="tw-w-full tw-h-full tw-object-cover"
+                        alt="img"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <p className="ant-upload-drag-icon">
+                        <UploadOutlined />
+                      </p>
+                      <p className="ant-upload-text">
+                        Drag and Drop to Upload Profile Image
+                      </p>
+                      <p>Or</p>
+                      <button
+                        className="tw-text-white tw-bg-dndBtn tw-px-5 tw-py-3 tw-rounded-lg hover:tw-bg-dndBtnH tw-mt-5"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Browse File
+                      </button>
+                    </>
+                  )}
+                </Dragger>
+                {/* </ImgCrop> */}
               </div>
               <div className="tw-col-span-3 tw-grid tw-gap-8">
                 <div>
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
-                    Email address
+                    Name
                   </Form.Label>
-                  <Form.Control
-                    className="tw-border-2 tw-border-gray-300 tw-h-12"
-                    type="email"
-                    placeholder="name@example.com"
+                  <Input
+                    className="tw-h-12 "
+                    value={data.name}
+                    onChange={(e) =>
+                      setData((prev) => {
+                        return { ...prev, name: e.target.value };
+                      })
+                    }
                   />
                 </div>
                 <div>
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
-                    Email address
+                    Email
                   </Form.Label>
-                  <Form.Control
-                    className="tw-border-2 tw-border-gray-300 tw-h-12"
-                    type="email"
-                    placeholder="name@example.com"
+                  <Input
+                    disabled={true}
+                    className="tw-h-12 "
+                    value={data.email}
+                    onChange={(e) =>
+                      setData((prev) => {
+                        return { ...prev, email: e.target.value };
+                      })
+                    }
                   />
                 </div>
                 <div>
                   <Form.Label className="tw-text-gray-600 tw-font-medium">
-                    Email address
+                    Contact Number
                   </Form.Label>
-                  <Form.Control
-                    className="tw-border-2 tw-border-gray-300 tw-h-12"
-                    type="email"
-                    placeholder="name@example.com"
+                  <Input
+                    className="tw-h-12 "
+                    value={data.contactNumber}
+                    onChange={(e) =>
+                      setData((prev) => {
+                        return { ...prev, contactNumber: e.target.value };
+                      })
+                    }
                   />
                 </div>
               </div>
@@ -145,22 +268,30 @@ function page() {
             >
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Current Address
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+                <Input
+                  className="tw-h-12 "
+                  value={data.currentAddress}
+                  onChange={(e) =>
+                    setData((prev) => {
+                      return { ...prev, currentAddress: e.target.value };
+                    })
+                  }
                 />
               </div>
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Permanent address
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+                <Input
+                  className="tw-h-12 "
+                  value={data.permanentAddress}
+                  onChange={(e) =>
+                    setData((prev) => {
+                      return { ...prev, permanentAddress: e.target.value };
+                    })
+                  }
                 />
               </div>
             </Form.Group>
@@ -170,76 +301,41 @@ function page() {
             >
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Gender
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+                <Input
+                  className="tw-h-12 "
+                  value={data.gender}
+                  onChange={(e) =>
+                    setData((prev) => {
+                      return { ...prev, gender: e.target.value };
+                    })
+                  }
                 />
               </div>
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
+                  Date Of Birth
                 </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
+                <DatePicker
+                  className="tw-py-3 tw-border-gray-300 tw-border-2 tw-w-full"
+                  // defaultValue={dayjs(today, dateFormat)}
+                  format={dateFormat}
+                  onChange={(e, a) =>
+                    setData((prev) => {
+                      return { ...prev, dateOfBirth: a };
+                    })
+                  }
+                  value={
+                    data.dateOfBirth
+                      ? dayjs(data.dateOfBirth, dateFormat)
+                      : null
+                  }
                 />
               </div>
             </Form.Group>
-            <Form.Group
-              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
-              controlId="exampleForm.ControlInput1"
-            >
-              <div>
-                <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
-                </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
-                />
-              </div>
-              <div>
-                <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
-                </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
-                />
-              </div>
-            </Form.Group>
-            <Form.Group
-              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
-              controlId="exampleForm.ControlInput1"
-            >
-              <div>
-                <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
-                </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
-                />
-              </div>
-              <div>
-                <Form.Label className="tw-text-gray-600 tw-font-medium">
-                  Email address
-                </Form.Label>
-                <Form.Control
-                  className="tw-border-2 tw-border-gray-300 tw-h-12"
-                  type="email"
-                  placeholder="name@example.com"
-                />
-              </div>
-            </Form.Group>
-            <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+
+            {/* <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
               <div className="tw-flex tw-flex-row tw-justify-between tw-my-10">
                 <div className="tw-flex tw-flex-row">
                   <Image
@@ -260,10 +356,13 @@ function page() {
               <ReactQuill
                 className="tw-h-40 tw-mb-20  "
                 theme="snow"
-                value={value}
-                onChange={setValue}
-              />
-            </Form.Group>
+                value={data.}
+                onChange={(e) =>
+                  setData((prev) => {
+                    return { ...prev, gender: e.target.value };
+                  })
+                }              />
+            </Form.Group> */}
             <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
               <div className="tw-flex tw-flex-row tw-justify-between tw-my-10">
                 <div className="tw-flex tw-flex-row">
@@ -275,7 +374,7 @@ function page() {
                     className="tw-object-fit tw-mr-7"
                   />
                   <h1 className="tw-text-xl tw-font-semibold tw-self-center">
-                    Work Information
+                    Work Experience
                   </h1>
                 </div>
               </div>
@@ -285,8 +384,12 @@ function page() {
               <ReactQuill
                 className="tw-h-40 tw-mb-20  "
                 theme="snow"
-                value={value}
-                onChange={setValue}
+                value={data.workExperience}
+                onChange={(e) =>
+                  setData((prev) => {
+                    return { ...prev, workExperience: e };
+                  })
+                }
               />
             </Form.Group>
             <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
@@ -310,8 +413,12 @@ function page() {
               <ReactQuill
                 className="tw-h-40 tw-mb-20  "
                 theme="snow"
-                value={value}
-                onChange={setValue}
+                value={data.educationBackground}
+                onChange={(e) =>
+                  setData((prev) => {
+                    return { ...prev, educationBackground: e };
+                  })
+                }
               />
             </Form.Group>
             <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
@@ -335,8 +442,15 @@ function page() {
               <ReactQuill
                 className="tw-h-40 tw-mb-20  "
                 theme="snow"
-                value={value}
-                onChange={setValue}
+                value={data.licensesAndCertification}
+                onChange={(e) =>
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      licensesAndCertification: e,
+                    };
+                  })
+                }
               />
             </Form.Group>
             <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
@@ -360,13 +474,20 @@ function page() {
               <ReactQuill
                 className="tw-h-40 tw-mb-20  "
                 theme="snow"
-                value={value}
-                onChange={setValue}
+                value={data.otherSkillSets}
+                onChange={(e) =>
+                  setData((prev) => {
+                    return { ...prev, otherSkillSets: e };
+                  })
+                }
               />
             </Form.Group>
           </Form>
 
-          <button className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg">
+          <button
+            onClick={() => updateProfile()}
+            className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
+          >
             Submit
           </button>
         </div>

@@ -1,9 +1,12 @@
 import Image from "next/image";
 import React from "react";
 
-function JobCard({ job }) {
+function JobCard({ job, whiteBg }) {
   return (
-    <div className=" tw-flex tw-flex-row tw-border-2  tw-border-cardBorder tw-rounded-lg tw-p-5 tw-pb-0 tw-cursor-pointer hover:tw-shadow tw-shadow-cyan-500/50">
+    <div
+      style={{ backgroundColor: whiteBg && "white" }}
+      className=" tw-flex tw-flex-row tw-border-2  tw-border-cardBorder tw-rounded-lg tw-p-5 tw-pb-0 tw-cursor-pointer hover:tw-shadow tw-shadow-cyan-500/50"
+    >
       <div>
         <Image
           className="tw-rounded-full tw-mr-5 tw-h-8 tw-w-8 lg:tw-w-10 lg:tw-h-10"

@@ -11,9 +11,26 @@ import styles from "@/styles/global.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@/styles/navbar.css";
+import Axios from "@/api/server";
 
 function JobSeekerNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    getProfileInfo();
+  }, []);
+  const getProfileInfo = async () => {
+    try {
+      const res = await Axios.get(
+        `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
+      );
+      setUserData(res.data.data);
+      console.log(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
@@ -37,6 +54,11 @@ function JobSeekerNavBar() {
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
   return (
     <Navbar
       collapseOnSelect
@@ -50,7 +72,6 @@ function JobSeekerNavBar() {
             src={"/logo.png"}
             width={230}
             height={230}
-            ßß
             alt="logo.png"
           />
         </Navbar.Brand>
@@ -62,17 +83,21 @@ function JobSeekerNavBar() {
           </Nav>
           <Nav>
             <Nav.Link className="tw-self-center" href="/about">
-              <h2 className="tw-font-medium tw-text-xl tw-text-black ">
+              <h2 className="tw-font-medium tw-text-lg tw-text-black hover:tw-underline">
                 About Us
               </h2>
             </Nav.Link>
             <Nav.Link href="#deets">
               <Image
-                src={"/avatar.png"}
-                width={40}
-                height={40}
+                src={
+                  userData?.profilePicture
+                    ? userData.profilePicture
+                    : "/avatar.png"
+                }
+                width={45}
+                height={45}
                 alt="user"
-                className=" tw-ml-8"
+                className=" tw-ml-8 tw-rounded-full tw-object-contain"
               />
             </Nav.Link>
             <Nav.Link
@@ -83,7 +108,7 @@ function JobSeekerNavBar() {
             >
               <div className="tw-flex tw-flex-row ">
                 <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4">
-                  Job Seeker
+                  {userData?.name}
                 </h2>
                 <Image
                   src={"/down.png"}
@@ -159,20 +184,22 @@ function JobSeekerNavBar() {
                 </p>
               </li>
             </Link>
-            <Link href={"/"}>
-              <li className="tw-flex tw-flex-row tw-mb-3">
-                <Image
-                  src={"/logout.png"}
-                  width={16}
-                  height={16}
-                  alt="home"
-                  className="tw-object-contain tw-mr-4"
-                />
-                <p className="tw-text-lg tw-font-medium tw-text-gray-600">
-                  Logout
-                </p>
-              </li>
-            </Link>
+
+            <li className="tw-flex tw-flex-row tw-mb-3">
+              <Image
+                src={"/logout.png"}
+                width={16}
+                height={16}
+                alt="home"
+                className="tw-object-contain tw-mr-4"
+              />
+              <p
+                onClick={() => logout()}
+                className="tw-text-lg tw-font-medium tw-text-gray-600 tw-cursor-pointer"
+              >
+                Logout
+              </p>
+            </li>
           </ul>
         </div>
       )}

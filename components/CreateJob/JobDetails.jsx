@@ -11,6 +11,7 @@ import Axios from "@/api/server";
 
 import "react-tagsinput/react-tagsinput.css";
 import JobPackage from "../JobPackage";
+import moment from "moment";
 
 function JobDetails({ setStep, setData }) {
   const [skills, setSkills] = useState([]);
@@ -353,6 +354,10 @@ function JobDetails({ setStep, setData }) {
               </Form.Label>
 
               <DatePicker
+                disabledDate={(current) => {
+                  let customDate = moment().format("YYYY-MM-DD");
+                  return current && current < moment(customDate, "YYYY-MM-DD");
+                }}
                 className="tw-py-3 tw-border-gray-300 tw-border-2"
                 defaultValue={dayjs(today, dateFormat)}
                 format={dateFormat}
@@ -371,6 +376,10 @@ function JobDetails({ setStep, setData }) {
                 End Date
               </Form.Label>
               <DatePicker
+                disabledDate={(current) => {
+                  let customDate = moment().format("YYYY-MM-DD");
+                  return current && current < moment(customDate, "YYYY-MM-DD");
+                }}
                 className="tw-py-3 tw-border-gray-300 tw-border-2"
                 defaultValue={dayjs(today, dateFormat)}
                 format={dateFormat}
