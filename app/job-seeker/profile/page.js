@@ -1,6 +1,6 @@
 "use client";
 
-import { DatePicker, Input, Upload, message } from "antd";
+import { Button, DatePicker, Input, Upload, message } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -10,8 +10,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import dayjs from "dayjs";
 import Axios from "@/api/server";
-import { UploadOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { UploadOutlined } from "@ant-design/icons";
 
 function page() {
   const [value, setValue] = useState();
@@ -28,13 +28,11 @@ function page() {
     permanentAddress: null,
     gender: null,
     dateOfBirth: null,
-    workExperience: null,
-    educationBackground: null,
-    licensesAndCertification: null,
-    otherSkillSets: null,
+    cvfile: null,
     profilePicture: null,
   });
   const [logoDisplayImage, setLogoDisplayImage] = useState();
+  const [cvDisplayUrl, setCVDisplayUrl] = useState([]);
 
   useEffect(() => {
     getProfileInfo();
@@ -52,7 +50,10 @@ function page() {
       const { status } = info.file;
 
       setData((prev) => {
-        return { ...prev, profilePicture: info.file.originFileObj };
+        return {
+          ...prev,
+          profilePicture: info.file.originFileObj,
+        };
       });
       const img = URL.createObjectURL(info.file.originFileObj);
       setLogoDisplayImage(img);
@@ -86,20 +87,27 @@ function page() {
         permanentAddress: data?.permanentAddress,
         gender: data?.gender,
         dateOfBirth: data?.dateOfBirth,
-        workExperience: data?.workExperience,
-        educationBackground: data?.educationBackground,
-        licensesAndCertification: data?.licensesAndCertification,
-        otherSkillSets: data?.otherSkillSets,
         profilePicture: data?.profilePicture,
+        cvfile: data?.applicantCV?.cvUrl,
       });
       setLogoDisplayImage(data.profilePicture);
+      setCVDisplayUrl([
+        {
+          url: data?.applicantCV?.cvUrl,
+          uid: 1,
+          name: data?.applicantCV?.cvUrl,
+        },
+      ]);
     } catch (error) {
       console.log(error);
     }
   };
 
   const updateProfile = async () => {
+    // return console.log(data);
     const formData = new FormData();
+
+    const cvformData = new FormData();
 
     formData.append("name", data.name);
     formData.append("email", data.email);
@@ -107,12 +115,14 @@ function page() {
     formData.append("currentAddress", data.currentAddress);
     formData.append("permanentAddress", data.permanentAddress);
     formData.append("gender", data.gender);
-    formData.append("dateOfBirth", data.dateOfBirth);
-    formData.append("workExperience", data.workExperience);
-    formData.append("educationBackground", data.educationBackground);
-    formData.append("licensesAndCertification", data.licensesAndCertification);
-    formData.append("otherSkillSets", data.otherSkillSets);
+    formData.append(
+      "dateOfBirth",
+      data?.dateOfBirth ? data.dateOfBirth : new Date()
+    );
+    // formData.append("files", data.cvfile);
+
     formData.append("profilePicture", data.profilePicture);
+    cvformData.append("cvFile", data.cvfile);
     try {
       const res = await Axios.patch(
         `/jobSeeker/updateJobSeekerProfileById/${localStorage.getItem(
@@ -120,7 +130,15 @@ function page() {
         )}`,
         formData
       );
-      console.log(res.data);
+
+      console.log("cut half");
+
+      await Axios.post(
+        `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${localStorage.getItem(
+          "jobSeekerId"
+        )}`,
+        cvformData
+      );
       if (res.data.success) {
         message.success("Profile Updated Successfully");
 
@@ -133,7 +151,25 @@ function page() {
       message.error(error.response.msg);
     }
   };
-
+  const propsCV = {
+    beforeUpload: (file) => {
+      // return console.log(file);
+      // const isPDF = file.type === "application/pdf";
+      // if (!isPDF) {
+      //   return message.error(`${file.name} is not a pdf file`);
+      // }
+      setData((prev) => {
+        return { ...prev, cvfile: file };
+      });
+      setCVDisplayUrl([
+        {
+          uid: file.uid,
+          name: file.name,
+        },
+      ]);
+      return false;
+    },
+  };
   return (
     <div className="tw-pt-10 tw-mx-40 tw-pb-10">
       <div className="tw-flex tw-flex-row tw-mb-10">
@@ -266,6 +302,20 @@ function page() {
               className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
               controlId="exampleForm.ControlInput1"
             >
+              <div className="tw-flex tw-flex-col">
+                <Form.Label className="tw-text-gray-600 tw-font-medium">
+                  Upload CV
+                </Form.Label>
+                <Upload
+                  className="tw-width-full"
+                  {...propsCV}
+                  fileList={cvDisplayUrl && cvDisplayUrl}
+                  // action="/upload.do"
+                  // listType="picture-card"
+                >
+                  <Button icon={<UploadOutlined />}>Select File</Button>
+                </Upload>
+              </div>
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
                   Current Address
@@ -280,6 +330,11 @@ function page() {
                   }
                 />
               </div>
+            </Form.Group>
+            <Form.Group
+              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
+              controlId="exampleForm.ControlInput1"
+            >
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
                   Permanent address
@@ -294,11 +349,6 @@ function page() {
                   }
                 />
               </div>
-            </Form.Group>
-            <Form.Group
-              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
-              controlId="exampleForm.ControlInput1"
-            >
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
                   Gender
@@ -313,6 +363,11 @@ function page() {
                   }
                 />
               </div>
+            </Form.Group>
+            <Form.Group
+              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
+              controlId="exampleForm.ControlInput1"
+            >
               <div>
                 <Form.Label className="tw-text-gray-600 tw-font-medium">
                   Date Of Birth
@@ -363,7 +418,7 @@ function page() {
                   })
                 }              />
             </Form.Group> */}
-            <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+            {/* <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
               <div className="tw-flex tw-flex-row tw-justify-between tw-my-10">
                 <div className="tw-flex tw-flex-row">
                   <Image
@@ -481,7 +536,7 @@ function page() {
                   })
                 }
               />
-            </Form.Group>
+            </Form.Group> */}
           </Form>
 
           <button

@@ -107,7 +107,7 @@ function JobSeekerNavBar() {
               href="#memes"
             >
               <div className="tw-flex tw-flex-row ">
-                <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4">
+                <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4 tw-capitalize">
                   {userData?.name}
                 </h2>
                 <Image

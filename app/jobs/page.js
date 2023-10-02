@@ -1,20 +1,19 @@
 "use client";
 
-import JobCard from "@/components/JobCard";
-import { job } from "@/dummyData";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
-import JobDetails from "@/components/CreateJob/JobDetails";
 import RelatedJobs from "@/components/RelatedJobs";
 import OtherJobs from "@/components/OtherJobs";
+import SendApplicationModal from "@/components/SendApplicationModal";
 
 function page({ searchParams }) {
   const [jobDetails, setJobsDetails] = useState();
-
-  const data = [1, 2, 3, 4, 5, 6];
+  const [open, setOpen] = useState(false);
+  const showModal = () => {
+    setOpen(true);
+  };
 
   const jobDescription = (
     <div
@@ -80,7 +79,10 @@ function page({ searchParams }) {
             </Link>
           </div>
           <div>
-            <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">
+            <button
+              onClick={() => showModal()}
+              className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4"
+            >
               Apply now!
             </button>
           </div>
@@ -161,6 +163,12 @@ function page({ searchParams }) {
         {/*  */}
         <OtherJobs jobCategory={jobDetails?.jobCategory} />
       </div>
+      <SendApplicationModal
+        open={open}
+        setOpen={setOpen}
+        jobRecruiterId={jobDetails?.jobRecruiterId}
+        jobId={jobDetails?.id}
+      />
     </div>
   );
 }
