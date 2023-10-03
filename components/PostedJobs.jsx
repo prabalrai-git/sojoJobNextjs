@@ -120,9 +120,47 @@ function PostedJobs({ fromList, jobStatusFilter }) {
     },
     {
       title: "Applicants",
-      dataIndex: "address",
-      key: "address",
-      render: (text) => <p>No Applicants</p>,
+      dataIndex: "jobApplications",
+      key: "jobApplications",
+      render: (text, a) => {
+        if (a.jobStatus === "Expired") {
+          return (
+            <p className="tw-text-black tw-capitalize tw-font-semibold">
+              {" "}
+              Job Post closed
+            </p>
+          );
+        }
+        if (a.jobStatus === "Pending") {
+          return (
+            <p className="tw-text-black tw-capitalize tw-font-base">
+              {" "}
+              No Applicants
+            </p>
+          );
+        }
+        if (a.jobApplications.length > 0) {
+          return (
+            <Link
+              href={{
+                pathname: "/employer/jobApplications",
+                query: { jobId: a.id }, // the data
+              }}
+            >
+              <p className="tw-text-primary tw-capitalize tw-font-semibold hover:tw-text-buttonHover tw-cursor-pointer">
+                View Applicants
+              </p>
+            </Link>
+          );
+        } else {
+          return (
+            <p className="tw-text-black tw-capitalize tw-font-base">
+              {" "}
+              No Applicants
+            </p>
+          );
+        }
+      },
     },
     {
       title: "Actions",

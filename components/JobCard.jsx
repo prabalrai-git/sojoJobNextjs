@@ -33,9 +33,11 @@ function JobCard({ job, whiteBg }) {
               alt="job-shift"
               className="tw-mr-2  tw-mb-10 tw-object-contain"
             />
-            <p className="tw-text-primary">{job?.jobShift?.title}</p>
+            <p className="tw-text-primary tw-capitalize">
+              {job?.jobShift?.title}
+            </p>
           </div>
-          <div className="tw-flex tw-flex-row ">
+          <div className="tw-flex tw-flex-row tw-capitalize ">
             <Image
               src={"/briefcase.png"}
               width={20}

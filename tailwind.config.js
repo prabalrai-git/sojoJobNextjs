@@ -54,6 +54,7 @@ module.exports = {
         prevBtn: "#4096ff",
         red: "red",
         searchGrey: "#F4F4F4",
+        lightRed: "#ffe4e4",
       },
     },
   },

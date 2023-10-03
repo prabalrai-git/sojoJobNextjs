@@ -35,8 +35,6 @@ function page() {
     }
   }, []);
 
-  console.log(overViewData);
-
   const getSojoRep = useCallback(async () => {
     try {
       const res = await Axios.get(

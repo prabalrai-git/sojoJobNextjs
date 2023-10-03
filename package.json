@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
+    "@react-pdf/renderer": "^3.1.12",
     "antd": "^5.9.2",
     "antd-img-crop": "^4.13.0",
     "autoprefixer": "10.4.15",
@@ -29,6 +30,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "react-multi-carousel": "^2.8.4",
+    "react-pdf": "^7.4.0",
     "react-quill": "^2.0.0",
     "react-slick": "^0.29.0",
     "react-stepper-horizontal": "^1.0.11",
@@ -38,5 +40,8 @@
     "sass": "^1.66.1",
     "slick-carousel": "^1.8.1",
     "tailwindcss": "3.3.3"
+  },
+  "devDependencies": {
+    "raw-loader": "^4.0.2"
   }
 }

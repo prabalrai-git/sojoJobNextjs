@@ -36,7 +36,6 @@ function page({ searchParams }) {
     try {
       const res = await Axios.get(`/job/getJobById/${searchParams.id}`);
       setJobsDetails(res.data.data);
-      console.log(res.data.data, "jobs details");
     } catch (error) {
       console.log(error);
     }

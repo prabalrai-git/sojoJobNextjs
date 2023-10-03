@@ -1,34 +1,19 @@
 "use client";
 
-import { Table } from "antd";
+import { Popconfirm, Table } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import JobCard from "./JobCard";
+import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
-import { useEffect } from "react";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 function AppliedJobs({ fromList }) {
-  const [standardJobs, setStandardJobs] = useState(null);
-
-  useEffect(() => {
-    getStandardJobs();
-  }, []);
-
-  const getStandardJobs = async (req, res) => {
-    try {
-      const res = await Axios.get("/public/getStandardJobs");
-      setStandardJobs(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [data, setData] = useState();
   const columns = [
     {
       title: "Job Title",
       dataIndex: "jobTitle",
       key: "jobTitle",
-      render: (text) => <a>{text}</a>,
     },
     {
       title: "Employer",
@@ -39,29 +24,101 @@ function AppliedJobs({ fromList }) {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (item) => {
+        if (item === "pending") {
+          return <p className="tw-capitalize tw-text-progressBg">{item}</p>;
+        }
+        if (item === "accepted") {
+          return <p className="tw-capitalize tw-text-primary">{item}</p>;
+        }
+        if (item === "rejected") {
+          return <p className="tw-capitalize tw-text-red">{item}</p>;
+        }
+      },
     },
     {
       title: "Job Type",
       dataIndex: "jobType",
       key: "jobType",
+      render: (item) => <p className="tw-capitalize">{item}</p>,
     },
     {
       title: "Deadline",
       dataIndex: "deadline",
       key: "deadline",
-    },
-    {
-      title: "Remarks",
-      dataIndex: "remarks",
-      key: "remarks",
+      render: (item) => item.split("T")[0],
     },
     {
       title: "Actions",
       dataIndex: "remarks",
       key: "remarks",
+      render: (e, a) => (
+        <div className="tw-flex tw-flex-row tw-gap-4">
+          <div className="tw-self-end " data-tooltip-id="view">
+            <ReactTooltip id="view" place="bottom" content="View Job Post" />
+
+            <Image
+              src={"/view.png"}
+              width={23}
+              height={23}
+              alt="border"
+              className="tw-object-fit tw-cursor-pointer "
+            />
+          </div>
+
+          <div className="tw-self-end " data-tooltip-id="delete">
+            <ReactTooltip
+              id="delete"
+              place="bottom"
+              content="Delete Job Application"
+            />
+            <Popconfirm
+              title="Delete the Job Application"
+              description="Are you sure to delete this Job Application?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => console.log("yo")}
+            >
+              <Image
+                src={"/trash.png"}
+                width={22}
+                height={22}
+                alt="border"
+                className="tw-object-fit tw-cursor-pointer "
+              />
+            </Popconfirm>
+          </div>
+        </div>
+      ),
     },
   ];
-  const jobQuestions = [];
+
+  const getJobsAppliedByApplicant = async () => {
+    try {
+      const res = await Axios.get(
+        `/application/getApplicationsBySeekerId/${localStorage.getItem(
+          "jobSeekerId"
+        )}`
+      );
+      const data = res.data.data;
+      const structuredData = data.map((item) => {
+        return {
+          jobTitle: item?.job?.title,
+          employer: item?.jobRecruiter?.companyName,
+          status: item?.status,
+          jobType: item?.job?.jobShift?.title,
+          deadline: item?.job?.endDate,
+        };
+      });
+      setData(structuredData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getJobsAppliedByApplicant();
+  }, []);
 
   return (
     <>
@@ -92,11 +149,11 @@ function AppliedJobs({ fromList }) {
         alt="file"
         className="tw-relative tw-right-0 tw-left-0 tw-mx-auto"
       /> */}
-        {jobQuestions.length > 0 ? (
+        {data?.length > 0 ? (
           <Table
             className="tw-mt-10"
             columns={columns}
-            dataSource={jobQuestions}
+            dataSource={data}
             scroll={{ x: 900 }}
           />
         ) : (
@@ -108,33 +165,6 @@ function AppliedJobs({ fromList }) {
             className="tw-relative tw-right-0 tw-left-0 tw-mx-auto"
           />
         )}
-      </div>
-      <div className="tw-flex tw-flex-row">
-        <Image
-          src={"/fireo.png"}
-          width={25}
-          height={25}
-          alt="fireo"
-          className="tw-object-contain tw-mr-3"
-        />
-        <p className="tw-text-gray-600 tw-font-semibold tw-text-lg tw-self-end">
-          Jobs for you
-        </p>
-      </div>
-      <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
-        {standardJobs?.map((item) => {
-          return (
-            <Link
-              href={{
-                pathname: "/jobs",
-                query: { id: item.id }, // the data
-              }}
-              className="tw-text-black tw-no-underline"
-            >
-              <JobCard whiteBg={true} key={item} job={item} />
-            </Link>
-          );
-        })}
       </div>
     </>
   );
