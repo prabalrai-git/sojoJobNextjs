@@ -60,7 +60,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
           </div>
         </div>
         {/*  */}
-        <h2 className="tw-text-black tw-text-lg tw-mt-7 tw-mb-8 tw-font-light">
+        <h2 className="tw-text-black tw-text-lg tw-mt-7 tw-mb-8 tw-font-light tw-capitalize">
           {employer?.companyName}
         </h2>
         {/*  */}
@@ -74,7 +74,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
               className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center  tw-text-gray-600 tw-text-medium tw-capitalize">
               {data?.jobShift?.title}
             </p>
           </div>
@@ -87,7 +87,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
               className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center  tw-text-gray-600 tw-text-medium tw-capitalize">
               {data?.experienceLevel?.title}
             </p>
           </div>
@@ -100,7 +100,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
               className="tw-object-contain tw-mr-3 tw-self-center"
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center  tw-text-gray-600 tw-text-medium tw-capitalize">
               {data?.salary}
             </p>
           </div>
@@ -113,7 +113,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
               className="tw-object-contain tw-mr-3 tw-self-center"
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center  tw-text-gray-600 tw-text-medium tw-capitalize">
               {data?.jobSite?.title}
             </p>
           </div>

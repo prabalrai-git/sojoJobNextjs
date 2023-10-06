@@ -49,7 +49,7 @@ function page({ searchParams }) {
 
   return (
     <div className="tw-mx-28 xsm:tw-mx-5 sm:tw-mx-10 md:tw-mx-28 tw-mt-10">
-      <div className="tw-bg-primary tw-h-72 tw-w-full tw-rounded tw-relative">
+      <div className="tw-bg-gray-500 tw-h-72 tw-w-full tw-rounded tw-relative">
         <div className="tw-bg-white tw-h-32 tw-w-32 tw-rounded-full tw-absolute -tw-bottom-16 tw-left-7 tw-flex tw-justify-center tw-align-middle">
           {company?.companyLogoImage && (
             <Image

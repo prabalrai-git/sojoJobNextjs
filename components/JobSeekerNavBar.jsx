@@ -155,7 +155,7 @@ function JobSeekerNavBar() {
                 </p>
               </li>
             </Link>
-            <Link href={"/job-seeker/resume"}>
+            {/* <Link href={"/job-seeker/resume"}>
               <li className="tw-flex tw-flex-row tw-mb-3">
                 <Image
                   src={"/reportg.png"}
@@ -168,7 +168,7 @@ function JobSeekerNavBar() {
                   My Resume
                 </p>
               </li>
-            </Link>
+            </Link> */}
             <Link href={"/job-seeker/settings"}>
               <li className="tw-flex tw-flex-row tw-mb-3">
                 <Image

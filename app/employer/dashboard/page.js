@@ -38,11 +38,12 @@ function page() {
   const getSojoRep = useCallback(async () => {
     try {
       const res = await Axios.get(
-        "/sojoJobContactPerson/getSojoJobContactPersonDetails"
+        "/admin/sojoJobContactPerson/getSojoJobContactPersonDetails"
       );
-
-      setSojoRep(res.data.data[1]);
-    } catch (error) {}
+      setSojoRep(res.data.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
   useEffect(() => {
     getOverViewData();
@@ -60,7 +61,7 @@ function page() {
           </p>
         </div>
         <Link
-          className="md:tw-w-3/12 lg:tw-w-2/12 tw-mt-5"
+          className="md:tw-w-3/12 lg:tw-w-44 tw-mt-5"
           href={"/employer/job/create"}
         >
           <button className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg xsm:tw-w-full tw-py-4  tw-text-white tw-flex tw-flex-row tw-items-center tw-justify-center md:tw-w-full ">
@@ -72,7 +73,7 @@ function page() {
               className="tw-self-center tw-mr-3"
             />
 
-            <p className="tw-self-center tw-text-base tw-font-bold">
+            <p className="tw-self-center tw-text-base tw-font-medium">
               Post a Job
             </p>
           </button>

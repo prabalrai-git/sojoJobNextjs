@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
+import { Input, Form } from "antd";
 
 function page() {
   const router = useRouter();
@@ -15,7 +16,7 @@ function page() {
 
   const [mPin, setMPin] = useState();
 
-  const onSignIn = async () => {
+  const onFinish = async () => {
     const data = {
       email,
       mPin,
@@ -88,7 +89,7 @@ function page() {
               </div>
             </Link>
             <Link className="tw-no-underline" href={"/register/employer"}>
-              <p className="tw-text-primary tw-font-medium xsm:tw-hidden sm:tw-block">
+              <p className="tw-text-primary tw-font-base xsm:tw-hidden sm:tw-block hover:tw-text-buttonHover">
                 New to SojoJob ? Sign up here
               </p>
             </Link>
@@ -123,49 +124,71 @@ function page() {
           </div>
           {/* start of form */}
           <div className="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
-            <label
-              for="email"
-              className="form-label tw-text-grey-800 tw-font-medium"
+            <Form
+              requiredMark={false}
+              onFinish={onFinish}
+              autoComplete="on"
+              layout="vertical"
             >
-              Email address
-            </label>
-            <input
-              type="email"
-              className="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
-              id="email"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label
-              for="inputPassword5"
-              className="form-label tw-text-grey-800 tw-font-medium tw-mb-2 "
-            >
-              M-pin
-            </label>
-            <input
-              type="password"
-              id="mPin"
-              className="form-control tw-h-12 tw-drop-shadow-md "
-              aria-describedby="passwordHelpBlock"
-              value={mPin}
-              onChange={(e) => setMPin(e.target.value)}
-            ></input>
+              <Form.Item
+                name="emailAddress"
+                label=" Email address"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your email!",
+                  },
+                ]}
+              >
+                <Input
+                  type="email"
+                  className="tw-h-12 tw-drop-shadow-sm"
+                  id="emailAddress"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="mPin"
+                label="M-pin"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your mPin!",
+                  },
+                ]}
+              >
+                <Input.Password
+                  type="password"
+                  id="mPin"
+                  className="tw-h-12 tw-drop-shadow-sm"
+                  aria-describedby="passwordHelpBlock"
+                  placeholder="Enter your m-pin"
+                  value={mPin}
+                  onChange={(e) => setMPin(e.target.value)}
+                ></Input.Password>
+              </Form.Item>
+              <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-0 ">
+                <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-base tw-cursor-pointer hover:tw-text-buttonHover">
+                  Forgot Password?
+                </p>
+              </div>
+              <Form.Item>
+                <button
+                  type="primary"
+                  htmlType="submit"
+                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-24"
+                >
+                  Sign In
+                </button>
+              </Form.Item>
+            </Form>
           </div>
           {/* end of form */}
-          <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-16 ">
-            <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-medium tw-cursor-pointer">
-              Forgot Password?
-            </p>
-          </div>
-          <button
-            className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-4 tw-text-lg tw-font-medium tw-px-28"
-            onClick={() => onSignIn()}
-          >
-            Sign In
-          </button>
           <Link className="tw-no-underline" href={"/register/employer"}>
-            <p className="tw-mt-5 tw-text-primary tw-font-medium tw-cursor-pointer">
+            <p className="tw-mt-5 tw-text-primary tw-font-base tw-cursor-pointer hover:tw-text-buttonHover">
               Don't have an account?
             </p>
           </Link>

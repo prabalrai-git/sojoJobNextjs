@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "antd";
+import { Form, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ function page() {
   const [email, setEmail] = useState();
   const [mPin, setMPin] = useState();
 
-  const onSignIn = async () => {
+  const onFinish = async () => {
     const data = {
       email,
       mPin,
@@ -87,7 +87,7 @@ function page() {
               </div>
             </Link>
             <Link className="tw-no-underline" href={"/register/job-seeker"}>
-              <p className="tw-text-primary tw-font-medium xsm:tw-hidden sm:tw-block">
+              <p className="tw-text-primary tw-font-sm xsm:tw-hidden sm:tw-block hover:tw-text-buttonHover">
                 New to SojoJob ? Sign up here
               </p>
             </Link>
@@ -123,44 +123,72 @@ function page() {
           </div>
           {/* start of form */}
           <div class="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
-            <label
-              for="exampleFormControlInput1"
-              class="form-label tw-text-grey-800 tw-font-medium"
+            <Form
+              requiredMark={false}
+              onFinish={onFinish}
+              autoComplete="on"
+              layout="vertical"
             >
-              Email
-            </label>
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              className="tw-h-12 tw-mb-4"
-            />
+              <Form.Item
+                name="emailAddress"
+                label=" Email address"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your email!",
+                  },
+                ]}
+              >
+                <Input
+                  type="email"
+                  className="tw-h-12 tw-drop-shadow-sm"
+                  id="emailAddress"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Item>
 
-            <label
-              for="inputPassword5"
-              class="form-label tw-text-grey-800 tw-font-medium"
-              className=" tw-mb-2 "
-            >
-              M-pin
-            </label>
-            <Input
-              onChange={(e) => setMPin(e.target.value)}
-              className="tw-h-12 tw-mb-4"
-            />
+              <Form.Item
+                name="mPin"
+                label="M-pin"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your mPin!",
+                  },
+                ]}
+              >
+                <Input.Password
+                  type="password"
+                  id="mPin"
+                  className="tw-h-12 tw-drop-shadow-sm"
+                  aria-describedby="passwordHelpBlock"
+                  placeholder="Enter your m-pin"
+                  value={mPin}
+                  onChange={(e) => setMPin(e.target.value)}
+                ></Input.Password>
+              </Form.Item>
+              <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-0 ">
+                <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-base tw-cursor-pointer hover:tw-text-buttonHover">
+                  Forgot Password?
+                </p>
+              </div>
+              <Form.Item>
+                <button
+                  type="primary"
+                  htmlType="submit"
+                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-24"
+                >
+                  Sign In
+                </button>
+              </Form.Item>
+            </Form>
           </div>
           {/* end of form */}
-          <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-16 ">
-            <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-medium tw-cursor-pointer">
-              Forgot Password?
-            </p>
-          </div>
 
-          <button
-            onClick={() => onSignIn()}
-            className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-px-28"
-          >
-            Sign In
-          </button>
           <Link className="tw-no-underline" href={"/register/job-seeker"}>
-            <p className="tw-mt-5 tw-text-primary tw-font-medium tw-cursor-pointer">
+            <p className="tw-mt-5 tw-text-primary tw-font-sm tw-cursor-pointer hover:tw-text-buttonHover">
               Don't have an account?
             </p>
           </Link>

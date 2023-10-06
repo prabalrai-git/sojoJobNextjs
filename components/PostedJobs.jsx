@@ -110,6 +110,8 @@ function PostedJobs({ fromList, jobStatusFilter }) {
           return <p className="tw-text-primary">{text}</p>;
         } else if (text.toLowerCase() == "expired") {
           return <p className="tw-text-red">{text}</p>;
+        } else if (text.toLowerCase() == "declined") {
+          return <p className="tw-text-red">{text}</p>;
         }
       },
     },
@@ -132,6 +134,14 @@ function PostedJobs({ fromList, jobStatusFilter }) {
           );
         }
         if (a.jobStatus === "Pending") {
+          return (
+            <p className="tw-text-black tw-capitalize tw-font-base">
+              {" "}
+              No Applicants
+            </p>
+          );
+        }
+        if (a.jobStatus === "Declined") {
           return (
             <p className="tw-text-black tw-capitalize tw-font-base">
               {" "}

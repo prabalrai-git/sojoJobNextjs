@@ -224,7 +224,7 @@ function page({ searchParams }) {
 
   const getAllCategories = async () => {
     try {
-      const res = await Axios.get("/jobCategories/getAllJobCategories");
+      const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
       const data = res.data.data;
       let newData = [];
       for (let i in data) {
@@ -236,7 +236,7 @@ function page({ searchParams }) {
   };
   const getAllEmploymetType = async () => {
     try {
-      const res = await Axios.get("/jobShift/getAllShifts");
+      const res = await Axios.get("/admin/jobShift/getAllShifts");
       const data = res.data.data;
       let newData = [];
       for (let i in data) {
@@ -248,7 +248,9 @@ function page({ searchParams }) {
   };
   const getAllExperienceLevels = async () => {
     try {
-      const res = await Axios.get("/experienceLevels/getAllExperienceLevels");
+      const res = await Axios.get(
+        "/admin/experienceLevels/getAllExperienceLevels"
+      );
       const data = res.data.data;
       let newData = [];
       for (let i in data) {
@@ -260,7 +262,7 @@ function page({ searchParams }) {
   };
   const getAllWorkTypes = async () => {
     try {
-      const res = await Axios.get("/jobSites/getAllJobSites");
+      const res = await Axios.get("/admin/jobSites/getAllJobSites");
       const data = res.data.data;
       let newData = [];
       for (let i in data) {

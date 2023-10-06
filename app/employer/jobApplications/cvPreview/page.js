@@ -63,6 +63,12 @@ function page({ searchParams }) {
           alt="Image"
         />
       </div>
+      {/* <iframe
+        src={
+          "https://res.cloudinary.com/dl1xvgdqf/image/upload/v1696393346/kv7x2lpoiqpvxh9zjbbu.pdf"
+        }
+        className="tw-w-full tw-h-screen"
+      /> */}
     </div>
   );
 }

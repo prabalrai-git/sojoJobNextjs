@@ -72,7 +72,7 @@ function page({ searchParams }) {
 
   const getCategoriesList = async () => {
     try {
-      const res = await Axios.get("/jobCategories/getAllJobCategories");
+      const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
       const newData = res.data.data.map((item) => {
         return { label: item.title, value: item.id };
       });
@@ -83,7 +83,9 @@ function page({ searchParams }) {
   };
   const getEducationList = async () => {
     try {
-      const res = await Axios.get("/educationLevels/getAllEducationLevels");
+      const res = await Axios.get(
+        "/admin/educationLevels/getAllEducationLevels"
+      );
       const newData = res.data.data.map((item) => {
         return { label: item.title, value: item.id };
       });
@@ -94,7 +96,9 @@ function page({ searchParams }) {
   };
   const getExperienceList = async () => {
     try {
-      const res = await Axios.get("/experienceLevels/getAllExperienceLevels");
+      const res = await Axios.get(
+        "/admin/experienceLevels/getAllExperienceLevels"
+      );
       const newData = res.data.data.map((item) => {
         return { label: item.title, value: item.id };
       });
@@ -292,7 +296,7 @@ function page({ searchParams }) {
                   className="tw-object-contain tw-mr-3 tw-self-center "
                 />
 
-                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
                   {toDisplayJob && toDisplayJob?.jobShift?.title}
                 </p>
               </div>
@@ -305,7 +309,7 @@ function page({ searchParams }) {
                   className="tw-object-contain tw-mr-3 tw-self-center "
                 />
 
-                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
                   {toDisplayJob && toDisplayJob?.experienceLevel?.title}
                 </p>
               </div>
@@ -318,7 +322,7 @@ function page({ searchParams }) {
                   className="tw-object-contain tw-mr-3 tw-self-center "
                 />
 
-                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
                   {toDisplayJob && toDisplayJob?.salary}
                 </p>
               </div>
@@ -331,7 +335,7 @@ function page({ searchParams }) {
                   className="tw-object-contain tw-mr-3 tw-self-center "
                 />
 
-                <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+                <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
                   {toDisplayJob && toDisplayJob?.jobSite?.title}
                 </p>
               </div>

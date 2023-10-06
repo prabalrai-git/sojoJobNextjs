@@ -144,7 +144,7 @@ export default function Home() {
       {NavBarByUser()}
 
       <main
-        className="tw-px-10  sm:tw-px-4 xsm:tw-px-4 md:tw-px-5 lg:tw-px-28 xl:tw-px-28"
+        className="tw-px-5  sm:tw-px-4 xsm:tw-px-4 md:tw-px-5 lg:tw-px-14 xl:tw-px-14"
         style={{
           minHeight: `calc(100vh- 108px - 741px)`,
           paddingBottom: 100,
@@ -194,7 +194,7 @@ export default function Home() {
               Elite Jobs
             </h2>
           </div>
-          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
+          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 950:twpgrid-cols-3 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
             {eliteJobs?.map((item) => {
               return (
                 <Link
@@ -268,7 +268,7 @@ export default function Home() {
               Standard Jobs
             </p>
           </div>
-          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
+          <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 950:twpgrid-cols-3 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
             {standardJobs?.map((item) => {
               return (
                 <Link

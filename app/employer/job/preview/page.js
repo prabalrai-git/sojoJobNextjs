@@ -5,7 +5,6 @@ import Axios from "@/api/server";
 import Image from "next/image";
 import Link from "next/link";
 import JobPreviewList from "@/components/JobPreviewList";
-import { Table } from "antd";
 
 function page({ searchParams }) {
   const [data, setData] = useState();

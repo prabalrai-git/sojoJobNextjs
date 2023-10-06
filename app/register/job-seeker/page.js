@@ -37,10 +37,29 @@ function page() {
   //     setJobsCategories(newData);
   //   } catch (error) {}
   // };
+  const statusOptions = [
+    {
+      value: "I'm a fresher",
+      label: "I'm a fresher",
+    },
+    {
+      value: "I have 1 to 4 years of experience",
+      label: "I have 1 to 4 years of experience",
+    },
+    {
+      value: "I have 4 to 8 years of experience",
+      label: "I have 4 to 8 years of experience",
+    },
+    {
+      value: "I have 8 to 10 years of experience",
+      label: "I have 8 to 10 years of experience",
+    },
+    {
+      value: "I have more than 10 years of experience",
+      label: "I have more than 10 years of experience",
+    },
+  ];
 
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
   const onSearch = (value) => {
     console.log("search:", value);
   };
@@ -112,7 +131,7 @@ function page() {
               </div>
             </Link>
             <Link className="tw-no-underline" href={"/login/job-seeker"}>
-              <p className="tw-text-primary tw-font-medium xsm:tw-hidden sm:tw-block">
+              <p className="tw-text-primary tw-font-sm xsm:tw-hidden sm:tw-block hover:tw-text-buttonHover">
                 Already have an account?
               </p>
             </Link>
@@ -185,7 +204,7 @@ function page() {
                       return { ...prev, name: e.target.value };
                     });
                   }}
-                  className="tw-h-12 tw-border-2 tw-mb-4 "
+                  className="tw-h-12 tw-drop-shadow-sm"
                 />
               </Form.Item>
               <Form.Item
@@ -199,12 +218,13 @@ function page() {
                 ]}
               >
                 <Input
+                  type="number"
                   onChange={(e, a) => {
                     setData((prev) => {
                       return { ...prev, contactNumber: e.target.value };
                     });
                   }}
-                  className="tw-h-12 tw-border-2 tw-mb-4 "
+                  className="tw-h-12 tw-drop-shadow-sm"
                 />
               </Form.Item>
               <Form.Item
@@ -223,12 +243,12 @@ function page() {
                       return { ...prev, email: e.target.value };
                     });
                   }}
-                  className="tw-h-12 tw-border-2 tw-mb-4 "
+                  className="tw-h-12 tw-drop-shadow-sm"
                 />
               </Form.Item>
               <Form.Item label="Job Status" name="jobStatus">
                 <Select
-                  className="tw-w-full tw-h-12 tw-border-2 tw-mb-4 tw-rounded-lg"
+                  className="tw-w-full tw-h-12 tw-drop-shadow-sm tw-rounded-lg"
                   showSearch
                   placeholder="Select Jobs Status"
                   allowClear
@@ -240,28 +260,7 @@ function page() {
                   }}
                   onSearch={onSearch}
                   filterOption={filterOption}
-                  options={[
-                    {
-                      value: "I'm a fresher",
-                      label: "I'm a fresher",
-                    },
-                    {
-                      value: "I have 1 to 4 years of experience",
-                      label: "I have 1 to 4 years of experience",
-                    },
-                    {
-                      value: "I have 4 to 8 years of experience",
-                      label: "I have 4 to 8 years of experience",
-                    },
-                    {
-                      value: "I have 8 to 10 years of experience",
-                      label: "I have 8 to 10 years of experience",
-                    },
-                    {
-                      value: "I have more than 10 years of experience",
-                      label: "I have more than 10 years of experience",
-                    },
-                  ]}
+                  options={statusOptions}
                 />
               </Form.Item>
               {/* <Form.Item
@@ -287,7 +286,8 @@ function page() {
               </Form.Item> */}
               <Form.Item
                 label="M-pin"
-                name="M-pin"
+                hasFeedback
+                name="mPin"
                 rules={[
                   {
                     required: true,
@@ -301,24 +301,37 @@ function page() {
                       return { ...prev, mPin: e.target.value };
                     });
                   }}
-                  className="tw-h-12 tw-border-2 tw-mb-4"
+                  className="tw-h-12 tw-drop-shadow-sm"
                 />
               </Form.Item>
               <Form.Item
                 label="Confirm M-pin"
                 name="comfirmM-pin"
+                dependencies={["mPin"]}
+                hasFeedback
                 rules={[
                   {
                     required: true,
-                    message: "Please confirm the m-pin!",
+                    message: "Please confirm your M-pin!",
                   },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("mPin") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The new M-pin that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
                 ]}
               >
-                <Input.Password className="tw-h-12 tw-border-2  tw-mb-4" />
+                <Input.Password className="tw-h-12 " />
               </Form.Item>
 
               <Form.Item>
-                <Link href={"/employer/dashboard"}></Link>
                 <button
                   htmlType="submit"
                   className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-px-28"
@@ -332,7 +345,7 @@ function page() {
           {/* end of form */}
 
           <Link className="tw-no-underline" href={"/login/job-seeker"}>
-            <p className="tw-mt-5 tw-text-primary tw-font-medium tw-cursor-pointer tw-mb-20">
+            <p className="tw-mt-5 tw-text-primary tw-font-sm tw-cursor-pointer tw-mb-20 hover:tw-text-buttonHover">
               Already have an account?
             </p>
           </Link>

@@ -17,7 +17,7 @@ function TrendingTagsComponent() {
 
   const getAllCategories = async () => {
     try {
-      const res = await Axios.get("/jobCategories/getAllJobCategories");
+      const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
 
       setCategories(res.data.data);
     } catch (error) {

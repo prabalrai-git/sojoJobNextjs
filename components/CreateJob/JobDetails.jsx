@@ -1,4 +1,4 @@
-import { Checkbox, DatePicker, Input, Select } from "antd";
+import { Checkbox, DatePicker, Input, Select, message } from "antd";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
@@ -15,7 +15,7 @@ import moment from "moment";
 
 function JobDetails({ setStep, setData }) {
   const [skills, setSkills] = useState([]);
-  const [jobPackage, setJobPackage] = useState("");
+  const [jobPackage, setJobPackage] = useState("Standard");
 
   //drop-down states
 
@@ -46,6 +46,23 @@ function JobDetails({ setStep, setData }) {
   }, []);
 
   const onSubmit = async () => {
+    if (
+      !title ||
+      !category ||
+      !employmentType ||
+      !location ||
+      !experience ||
+      !salary ||
+      !vacancyNumber ||
+      !workType ||
+      !startDate ||
+      !endDate ||
+      !jobDescription ||
+      !skills ||
+      !jobPackage
+    ) {
+      return message.error("Please fill out all the fields!");
+    }
     const data = {
       title,
       jobCategoryId: category,
@@ -63,11 +80,12 @@ function JobDetails({ setStep, setData }) {
     };
 
     setData(data);
+    setStep((prev) => prev + 1);
   };
 
   const getAllCategories = async () => {
     try {
-      const res = await Axios.get("/jobCategories/getAllJobCategories");
+      const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
       const data = res.data.data;
       let newData = [];
       for (let i in data) {
@@ -79,7 +97,7 @@ function JobDetails({ setStep, setData }) {
   };
   const getAllEmploymetType = async () => {
     try {
-      const res = await Axios.get("/jobShift/getAllShifts");
+      const res = await Axios.get("/admin/jobShift/getAllShifts");
       const data = res.data.data;
       let newData = [];
       for (let i in data) {
@@ -91,7 +109,9 @@ function JobDetails({ setStep, setData }) {
   };
   const getAllExperienceLevels = async () => {
     try {
-      const res = await Axios.get("/experienceLevels/getAllExperienceLevels");
+      const res = await Axios.get(
+        "/admin/experienceLevels/getAllExperienceLevels"
+      );
       const data = res.data.data;
       let newData = [];
       for (let i in data) {
@@ -103,7 +123,7 @@ function JobDetails({ setStep, setData }) {
   };
   const getAllWorkTypes = async () => {
     try {
-      const res = await Axios.get("/jobSites/getAllJobSites");
+      const res = await Axios.get("/admin/jobSites/getAllJobSites");
       const data = res.data.data;
       let newData = [];
       for (let i in data) {
@@ -149,13 +169,13 @@ function JobDetails({ setStep, setData }) {
               Job's Title
             </Form.Label>
             {/* <Form.Control
-              className="tw-border-2 tw-border-gray-300 tw-h-12"
+              className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
               type="email"
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter the job title here..."
             /> */}
             <Input
-              className="tw-border-2 tw-border-gray-300 tw-h-12"
+              className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter the job title here..."
             />
@@ -169,7 +189,7 @@ function JobDetails({ setStep, setData }) {
             </Form.Label>
             <Select
               showSearch
-              className="tw-h-12 tw-border-2 tw-rounded-lg "
+              className="tw-h-12 tw-border-1 tw-drop-shadow-sm tw-rounded-lg "
               style={
                 {
                   // borderColor: "grey",
@@ -201,7 +221,7 @@ function JobDetails({ setStep, setData }) {
               <Select
                 onChange={(e, a) => setEmploymentType(a)}
                 showSearch
-                className="tw-h-12 tw-border-2  tw-rounded-lg"
+                className="tw-h-12 tw-border-1 tw-drop-shadow-sm  tw-rounded-lg"
                 style={
                   {
                     // borderColor: "grey",
@@ -226,13 +246,13 @@ function JobDetails({ setStep, setData }) {
                 Location
               </Form.Label>
               <Input
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="Enter Job Location"
               />
               {/* <Form.Control
                 onChange={(e) => setLocation(e.target.value)}
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="Enter Job Location"
               /> */}
@@ -244,7 +264,7 @@ function JobDetails({ setStep, setData }) {
               <Select
                 onChange={(e, a) => setExperience(a)}
                 showSearch
-                className="tw-h-12 tw-border-2 tw-rounded-lg "
+                className="tw-h-12 tw-border-1 tw-drop-shadow-sm tw-rounded-lg "
                 style={
                   {
                     // borderColor: "grey",
@@ -274,14 +294,14 @@ function JobDetails({ setStep, setData }) {
                 Salary
               </Form.Label>
               <Input
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
                 onChange={(e) => setSalary(e.target.value)}
                 placeholder="NRs.20,000-10,000 monthly"
                 value={salary}
               />
               {/* <Form.Control
                 onChange={(e) => setSalary(e.target.value)}
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="NRs.20,000-10,000 monthly"
                 value={salary}
@@ -304,14 +324,14 @@ function JobDetails({ setStep, setData }) {
                 No. of Vacancy
               </Form.Label>
               <Input
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
                 onChange={(e) => setVacancyNumber(e.target.value)}
                 placeholder="Enter number of vacancy opening"
                 value={vacancyNumber}
               />
               {/* <Form.Control
                 onChange={(e) => setVacancyNumber(e.target.value)}
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="Enter number of vacancy opening"
               /> */}
@@ -323,7 +343,7 @@ function JobDetails({ setStep, setData }) {
               <Select
                 onChange={(e, a) => setWorkType(a)}
                 showSearch
-                className="tw-h-12 tw-border-2 tw-rounded-lg "
+                className="tw-h-12 tw-border-1 tw-drop-shadow-sm tw-rounded-lg "
                 style={
                   {
                     // borderColor: "grey",
@@ -358,7 +378,7 @@ function JobDetails({ setStep, setData }) {
                   let customDate = moment().format("YYYY-MM-DD");
                   return current && current < moment(customDate, "YYYY-MM-DD");
                 }}
-                className="tw-py-3 tw-border-gray-300 tw-border-2"
+                className="tw-py-3 tw-border-gray-300 tw-border-1 tw-drop-shadow-sm"
                 defaultValue={dayjs(today, dateFormat)}
                 format={dateFormat}
                 onChange={(e, a) => setStartDate(a)}
@@ -366,7 +386,7 @@ function JobDetails({ setStep, setData }) {
               />
 
               {/* <Form.Control
-                className="tw-border-2 tw-border-gray-300 tw-h-12"
+                className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
                 type="email"
                 placeholder="name@example.com"
               /> */}
@@ -380,7 +400,7 @@ function JobDetails({ setStep, setData }) {
                   let customDate = moment().format("YYYY-MM-DD");
                   return current && current < moment(customDate, "YYYY-MM-DD");
                 }}
-                className="tw-py-3 tw-border-gray-300 tw-border-2"
+                className="tw-py-3 tw-border-gray-300 tw-border-1 tw-drop-shadow-sm"
                 defaultValue={dayjs(today, dateFormat)}
                 format={dateFormat}
                 onChange={(e, a) => setEndDate(a)}
@@ -438,7 +458,6 @@ function JobDetails({ setStep, setData }) {
         <button
           onClick={() => {
             onSubmit();
-            setStep((prev) => prev + 1);
           }}
           className="tw-bg-primary tw-text-white  xsm:tw-w-full sm:tw-w-4/12 md:tw-w-3/12 lg:tw-w-2/12  tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
         >

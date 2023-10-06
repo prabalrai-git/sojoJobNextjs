@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Form, Input } from "antd";
 
 function page() {
   const [companyName, setCompanyName] = useState("");
@@ -18,7 +19,7 @@ function page() {
 
   const router = useRouter();
 
-  const onSignUp = async () => {
+  const onFinish = async () => {
     const data = {
       companyName,
       companyEmail,
@@ -26,7 +27,7 @@ function page() {
       name,
       mPin,
     };
-
+    console.log(data);
     try {
       const res = await Axios.post(
         "/jobRecruiter/createJobRecruiterProfile",
@@ -90,7 +91,7 @@ function page() {
               </div>
             </Link>
             <Link className="tw-no-underline" href={"/login/employer"}>
-              <p className="tw-text-primary tw-font-medium xsm:tw-hidden sm:tw-block">
+              <p className="tw-text-primary tw-font-base xsm:tw-hidden sm:tw-block hover:tw-text-buttonHover">
                 Already have an account?
               </p>
             </Link>
@@ -125,103 +126,163 @@ function page() {
           </div>
           {/* start of form */}
           <div className="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
-            <label
-              htmlFor="companyName"
-              className="form-label tw-text-grey-800 tw-font-medium"
+            <Form
+              requiredMark={false}
+              onFinish={onFinish}
+              autoComplete="on"
+              layout="vertical"
             >
-              Company Name
-            </label>
-            <input
-              type="text"
-              className="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
-              id="companyName"
-              placeholder="Enter your company name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-            />
-            <label
-              htmlFor="companyEmail"
-              className="form-label tw-text-grey-800 tw-font-medium"
-            >
-              Company Email
-            </label>
-            <input
-              type="email"
-              className="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
-              id="companyEmail"
-              placeholder="Enter your company email"
-              value={companyEmail}
-              onChange={(e) => setCompanyEmail(e.target.value)}
-            />
-            <label
-              htmlFor="contactNo"
-              className="form-label tw-text-grey-800 tw-font-medium"
-            >
-              Contact No
-            </label>
-            <input
-              type="number"
-              className="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
-              id="contactNo"
-              placeholder="Enter your company number"
-              value={contactNo}
-              onChange={(e) => setContactNo(e.target.value)}
-            />
-            <label
-              htmlFor="name"
-              className="form-label tw-text-grey-800 tw-font-medium"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control tw-mb-10 tw-h-12 tw-drop-shadow-md"
-              id="name"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label
-              htmlFor="mPin"
-              className="form-label tw-text-grey-800 tw-font-medium"
-            >
-              M-Pin
-            </label>
-            <input
-              type="password"
-              id="mPin"
-              className="form-control tw-h-12 tw-mb-5 tw-drop-shadow-md "
-              aria-describedby="passwordHelpBlock"
-              value={mPin}
-              onChange={(e) => setMPin(e.target.value)}
-            ></input>
-            <label
-              htmlFor="confirmMPin"
-              className="form-label tw-text-grey-800 tw-font-medium tw-mb-2 "
-            >
-              Confirm M-pin
-            </label>
-            <input
-              type="password"
-              id="confirmMPin"
-              className="form-control tw-h-12 tw-drop-shadow-md "
-              aria-describedby="passwordHelpBlock"
-              value={confirmMPin}
-              onChange={(e) => setConfirmMPin(e.target.value)}
-            ></input>
+              <Form.Item
+                name="companyName"
+                label="Company Name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your company name!",
+                  },
+                ]}
+              >
+                <Input
+                  type="text"
+                  className="tw-h-12 tw-drop-shadow-sm"
+                  // id="companyName"
+                  placeholder="Enter your company's name"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="companyEmail"
+                label="Company Email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your company email!",
+                  },
+                ]}
+              >
+                <Input
+                  type="email"
+                  className="tw-h-12 tw-drop-shadow-sm"
+                  placeholder="Enter your company's email"
+                  value={companyEmail}
+                  onChange={(e) => setCompanyEmail(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="contactNo"
+                label="Contact No"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your company number!",
+                  },
+                ]}
+              >
+                <Input
+                  type="number"
+                  className=" tw-h-12 tw-drop-shadow-sm"
+                  id="contactNo"
+                  placeholder="Enter your company number"
+                  value={contactNo}
+                  onChange={(e) => setContactNo(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="name"
+                label="Name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your company name!",
+                  },
+                ]}
+              >
+                <Input
+                  type="text"
+                  className="tw-h-12 tw-drop-shadow-sm"
+                  id="name"
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="mPin"
+                label="M-pin"
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your mPin!",
+                  },
+                ]}
+              >
+                <Input.Password
+                  type="password"
+                  id="mPin"
+                  className=" tw-h-12  tw-drop-shadow-sm "
+                  aria-describedby="passwordHelpBlock"
+                  value={mPin}
+                  onChange={(e) => setMPin(e.target.value)}
+                ></Input.Password>
+              </Form.Item>
+
+              <Form.Item
+                name="confirmMPin"
+                label="Confirm M-pin"
+                dependencies={["mPin"]}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: "Please confirm your M-pin!",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("mPin") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The new M-pin that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  type="password"
+                  id="confirmMPin"
+                  className="tw-h-12 tw-drop-shadow-sm "
+                  aria-describedby="passwordHelpBlock"
+                  value={confirmMPin}
+                  onChange={(e) => setConfirmMPin(e.target.value)}
+                ></Input.Password>
+              </Form.Item>
+
+              <Form.Item>
+                <button
+                  type="primary"
+                  htmlType="submit"
+                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-28"
+                  // onClick={() => onSignUp()}
+                >
+                  Register
+                </button>
+              </Form.Item>
+            </Form>
           </div>
+
           {/* end of form */}
-          <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-16 "></div>
-          <Link href={"/employer/dashboard"}></Link>
-          <button
-            className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-4 tw-text-lg tw-font-medium tw-px-28"
-            onClick={() => onSignUp()}
-          >
-            Sign Up
-          </button>
 
           <Link className="tw-no-underline" href={"/login/employer"}>
-            <p className="tw-mt-5 tw-text-primary tw-font-medium tw-cursor-pointer tw-mb-20">
+            <p className="tw-mt-5 tw-text-primary tw-font-base tw-cursor-pointer tw-mb-20 hover:tw-text-buttonHover">
               Already have an account?
             </p>
           </Link>
