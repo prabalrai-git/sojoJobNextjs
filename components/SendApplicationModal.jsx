@@ -25,7 +25,7 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
   const [cvDisplayUrl, setCVDisplayUrl] = useState([]);
 
   const clearAllStates = () => {
-    setEmail(""); //clear all states
+    setEmail(); //clear all states
     setFullName();
     setFile();
     setCVDisplayUrl();
@@ -173,7 +173,7 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
             onChange={(e) => setEmail(e.target.value)}
             className="tw-h-10"
             placeholder="Enter your email.."
-            value={loggedInUserData?.email && loggedInUserData.email}
+            value={loggedInUserData?.email ? loggedInUserData.email : email}
           />
         </Form.Item>
         <Form.Item label="Full Name">
@@ -182,7 +182,7 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
             onChange={(e) => setFullName(e.target.value)}
             className="tw-h-10"
             placeholder="Enter your full name.."
-            value={loggedInUserData?.name && loggedInUserData.name}
+            value={loggedInUserData?.name ? loggedInUserData.name : fullname}
           />
         </Form.Item>
         <Form.Item
