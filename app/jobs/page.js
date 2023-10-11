@@ -11,6 +11,7 @@ import SendApplicationModal from "@/components/SendApplicationModal";
 function page({ searchParams }) {
   const [jobDetails, setJobsDetails] = useState();
   const [open, setOpen] = useState(false);
+  const [jobQuestions, setJobQuestions] = useState(null);
   const showModal = () => {
     setOpen(true);
   };
@@ -36,6 +37,7 @@ function page({ searchParams }) {
     try {
       const res = await Axios.get(`/job/getJobById/${searchParams.id}`);
       setJobsDetails(res.data.data);
+      setJobQuestions(res.data.data?.jobQuestions);
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +99,7 @@ function page({ searchParams }) {
               className="tw-object-contain tw-mr-3  tw-self-center "
             />
 
-            <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
               {jobDetails?.jobShift?.title}
             </p>
           </div>
@@ -110,7 +112,7 @@ function page({ searchParams }) {
               className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
-            <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
               {jobDetails?.experienceLevel?.title}
             </p>
           </div>
@@ -123,7 +125,7 @@ function page({ searchParams }) {
               className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
-            <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
               {jobDetails?.salary}
             </p>
           </div>
@@ -136,7 +138,7 @@ function page({ searchParams }) {
               className="tw-object-contain tw-mr-3 tw-self-center"
             />
 
-            <p className="tw-self-center tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
               {jobDetails?.jobSite?.title}
             </p>
           </div>
@@ -167,6 +169,7 @@ function page({ searchParams }) {
         setOpen={setOpen}
         jobRecruiterId={jobDetails?.jobRecruiterId}
         jobId={jobDetails?.id}
+        jobQuestions={jobQuestions}
       />
     </div>
   );

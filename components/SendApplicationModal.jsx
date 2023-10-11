@@ -5,15 +5,20 @@ import {
   Button,
   Form,
   Input,
-  Radio,
   Upload,
   message,
+  Select,
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import Axios from "@/api/server";
 import { UploadOutlined } from "@ant-design/icons";
 
-function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
+function SendApplicationModal({
+  open,
+  setOpen,
+  jobRecruiterId,
+  jobId,
+  jobQuestions,
+}) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState();
   const [fullname, setFullName] = useState();
@@ -23,6 +28,7 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
   );
   const [loggedInUserData, setLoggedInUserData] = useState();
   const [cvDisplayUrl, setCVDisplayUrl] = useState([]);
+  const [answers, setAnswers] = useState([]);
 
   const clearAllStates = () => {
     setEmail(); //clear all states
@@ -30,7 +36,6 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
     setFile();
     setCVDisplayUrl();
   };
-
   useEffect(() => {
     if (jobSeekerId) {
       getLoggedInJobSeekerData();
@@ -97,6 +102,7 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
   };
 
   const onSubmit = async () => {
+    // return console.log(answers);
     const formData = new FormData();
     formData.append("jobSeekerName", fullname);
     formData.append("jobSeekerEmail", email);
@@ -104,10 +110,27 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
     formData.append("jobId", jobId);
     formData.append("cvfile", file);
     try {
-      await Axios.post("/application/createNewApplication", formData);
-      handleCancel();
-      message.success("Application sent successfully!");
-      clearAllStates();
+      const data = await Axios.post(
+        "/application/createNewApplication",
+        formData
+      );
+
+      const jobApplicationId = data.data.data.id;
+      // console.log(data.data, "yo pani ho");
+      const nAnswers = answers.map((item) => {
+        return { jobApplicationId: jobApplicationId, ...item };
+      });
+      try {
+        nAnswers.map(async (item) => {
+          // return console.log(item, "yo ho hai");
+          await Axios.post("/job/postJobAnswers", item);
+        });
+        handleCancel();
+        message.success("Application sent successfully!");
+        clearAllStates();
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error.response.data);
       handleCancel();
@@ -139,9 +162,87 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
     }
   };
 
+  const generateFormForJobQuestions = () => {
+    return jobQuestions?.map((item) => {
+      const handleInputChange = (e) => {
+        // Find the index of the existing answer for this question
+        const answerIndex = answers.findIndex(
+          (answer) => answer.jobQuestionId === item.id
+        );
+
+        if (answerIndex !== -1) {
+          // If an answer for this question exists, update it
+          setAnswers((prev) => [
+            ...prev.slice(0, answerIndex), // Keep the previous answers before the current one
+            {
+              answer:
+                item.questionType.toLowerCase() === "number"
+                  ? e.target.value
+                  : e,
+              jobQuestionId: item.id,
+            }, // Update the current answer
+            ...prev.slice(answerIndex + 1), // Keep the answers after the current one
+          ]);
+        } else {
+          // If no answer for this question exists, add a new answer
+          setAnswers((prev) => [
+            {
+              answer:
+                item.questionType.toLowerCase() === "number"
+                  ? e.target.value
+                  : e,
+              jobQuestionId: item.id,
+            },
+            ...prev,
+          ]);
+        }
+      };
+
+      return (
+        <Form.Item
+          name={item.id}
+          rules={[
+            {
+              required: true,
+              message: "Please input your answer!",
+            },
+          ]}
+          label={item.questionText}
+        >
+          {item.questionType.toLowerCase() === "number" ? (
+            <Input
+              className="tw-h-10"
+              type="number"
+              onChange={(e) => handleInputChange(e)}
+            />
+          ) : (
+            <Select
+              className="tw-h-10"
+              onChange={(e) => handleInputChange(e)}
+              options={[
+                {
+                  value: "yes",
+                  label: "Yes",
+                },
+                {
+                  value: "no",
+                  label: "No",
+                },
+              ]}
+            />
+          )}
+        </Form.Item>
+      );
+    });
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   return (
     <Modal
       open={open}
+      width={700}
+      className="tw-mb-40"
       title={
         <>
           <p className="tw-text-2xl">Apply Job</p>
@@ -150,41 +251,56 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
       }
       onOk={handleOk}
       onCancel={handleCancel}
-      footer={[
-        <button
-          onClick={() => {
-            jobSeekerId ? onSubmitLoggedInJobSeeker() : onSubmit();
-          }}
-          className="tw-bg-primary tw-w-full tw-text-white tw-rounded-lg tw-py-2 tw-text-md tw-font-normal hover:tw-bg-buttonHover"
-        >
-          Send Application
-        </button>,
-      ]}
+      footer={null}
     >
       <Form
         layout={"vertical"}
+        onFinish={() => {
+          jobSeekerId ? onSubmitLoggedInJobSeeker() : onSubmit();
+        }}
+        onFinishFailed={onFinishFailed}
         // style={{
         //   maxWidth: formLayout === "inline" ? "none" : 600,
         // }}
       >
-        <Form.Item label="Email">
-          <Input
-            disabled={jobSeekerId ? true : false}
-            onChange={(e) => setEmail(e.target.value)}
-            className="tw-h-10"
-            placeholder="Enter your email.."
-            value={loggedInUserData?.email ? loggedInUserData.email : email}
-          />
-        </Form.Item>
-        <Form.Item label="Full Name">
-          <Input
-            disabled={jobSeekerId ? true : false}
-            onChange={(e) => setFullName(e.target.value)}
-            className="tw-h-10"
-            placeholder="Enter your full name.."
-            value={loggedInUserData?.name ? loggedInUserData.name : fullname}
-          />
-        </Form.Item>
+        <div className="tw-grid md:tw-grid-cols-2 tw-gap-3 xsm:tw-grid-cols-1">
+          <Form.Item
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+              },
+            ]}
+            label="Email"
+            name="email"
+          >
+            <Input
+              disabled={jobSeekerId ? true : false}
+              onChange={(e) => setEmail(e.target.value)}
+              className="tw-h-10"
+              placeholder="Enter your email.."
+              value={loggedInUserData?.email ? loggedInUserData.email : email}
+            />
+          </Form.Item>
+          <Form.Item
+            name="fullname"
+            rules={[
+              {
+                required: true,
+                message: "Please input your full name!",
+              },
+            ]}
+            label="Full Name"
+          >
+            <Input
+              disabled={jobSeekerId ? true : false}
+              onChange={(e) => setFullName(e.target.value)}
+              className="tw-h-10"
+              placeholder="Enter your full name.."
+              value={loggedInUserData?.name ? loggedInUserData.name : fullname}
+            />
+          </Form.Item>
+        </div>
         <Form.Item
           label="Upload CV"
           valuePropName="fileList"
@@ -205,6 +321,26 @@ function SendApplicationModal({ open, setOpen, jobRecruiterId, jobId }) {
             </Button>
           </Upload>
         </Form.Item>
+        {jobQuestions && (
+          <>
+            {/* <p className="tw-font-medium tw-text-lg tw-mb-5">
+             he following questions as well
+            </p> */}
+            <Divider orientation="left" orientationMargin="0">
+              Please answer the questions below
+            </Divider>
+            {generateFormForJobQuestions()}
+          </>
+        )}
+        <Form.Item>
+          <button
+            htmlType="submit"
+            className="tw-bg-primary tw-w-full tw-text-white tw-rounded-lg tw-py-2 tw-text-md tw-font-normal hover:tw-bg-buttonHover"
+          >
+            Send Application
+          </button>
+        </Form.Item>
+
         {/* <Upload {...props} action="/upload.do" listType="picture-card">
             <div>
               <PlusOutlined />

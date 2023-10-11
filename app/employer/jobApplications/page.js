@@ -2,15 +2,22 @@
 
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
-import { Popconfirm, Table, message } from "antd";
+import { Popconfirm, Table, Tag, message } from "antd";
 import Link from "next/link";
 import Image from "next/image";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import ImagePreview from "@/components/ImagePreview";
+import ApplicantAnswers from "@/components/ApplicantAnswers";
 
 function page({ searchParams }) {
   const [applications, setApplications] = useState();
   const [reload, setReload] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [answers, setAnswers] = useState();
+  const [applicantName, setApplicantName] = useState();
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     getAllApplicationsForJobId();
@@ -21,9 +28,10 @@ function page({ searchParams }) {
         `/application/getApplicationsByJobId/${searchParams?.jobId}`
       );
       setApplications(res.data.data);
+      setAnswers(res.data.data.jobAnswers);
     } catch (error) {}
   };
-
+  console.log(applications);
   const onFit = async (id) => {
     try {
       const res = await Axios.patch(
@@ -99,6 +107,35 @@ function page({ searchParams }) {
       },
     },
     {
+      title: "View Answers",
+      dataIndex: "viewAnswers",
+      key: "viewAnswers",
+      width: "148px",
+      render: (e, a) => {
+        if (a.jobAnswers.length > 0) {
+          return (
+            <Tag
+              className="tw-cursor-pointer"
+              color="green"
+              onClick={() => {
+                setAnswers(a.jobAnswers);
+                showModal();
+                setApplicantName(a.jobSeekerName);
+              }}
+            >
+              View Answers
+            </Tag>
+          );
+        } else {
+          return (
+            <Tag color="red" className="tw-cursor-not-allowed">
+              No any answers
+            </Tag>
+          );
+        }
+      },
+    },
+    {
       title: "Actions",
       dataIndex: "",
       key: "x",
@@ -165,6 +202,12 @@ function page({ searchParams }) {
         columns={columns}
         dataSource={applications}
         scroll={{ x: 900 }}
+      />
+      <ApplicantAnswers
+        data={answers}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        applicantName={applicantName}
       />
     </div>
   );
