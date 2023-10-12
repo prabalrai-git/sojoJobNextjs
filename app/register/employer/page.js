@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 
 function page() {
   const [companyName, setCompanyName] = useState("");
@@ -16,6 +16,7 @@ function page() {
   const [name, setName] = useState("");
   const [mPin, setMPin] = useState("");
   const [confirmMPin, setConfirmMPin] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -29,6 +30,7 @@ function page() {
     };
     console.log(data);
     try {
+      setLoading(true);
       const res = await Axios.post(
         "/jobRecruiter/createJobRecruiterProfile",
         data
@@ -36,7 +38,7 @@ function page() {
       if (res.data.success) {
         toast.success("Profile created!", {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -46,11 +48,14 @@ function page() {
         });
 
         setTimeout(() => {
+          setLoading(false);
           router.push("/login/employer");
-        }, 3000);
+        }, 500);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
+
       toast.error("Something went wrong!", {
         position: "top-right",
         autoClose: 4000,
@@ -267,14 +272,14 @@ function page() {
               </Form.Item>
 
               <Form.Item>
-                <button
-                  type="primary"
+                <Button
+                  disabled={loading}
+                  loading={loading}
                   htmlType="submit"
-                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-28"
-                  // onClick={() => onSignUp()}
+                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-20 tw-h-12 tw-flex tw-justify-center tw-items-center"
                 >
                   Register
-                </button>
+                </Button>
               </Form.Item>
             </Form>
           </div>

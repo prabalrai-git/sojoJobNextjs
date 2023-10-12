@@ -33,6 +33,7 @@ function page() {
   });
   const [logoDisplayImage, setLogoDisplayImage] = useState();
   const [cvDisplayUrl, setCVDisplayUrl] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getProfileInfo();
@@ -45,7 +46,7 @@ function page() {
   const props = {
     name: "file",
     multiple: false,
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    // action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
     onChange(info) {
       const { status } = info.file;
 
@@ -57,17 +58,6 @@ function page() {
       });
       const img = URL.createObjectURL(info.file.originFileObj);
       setLogoDisplayImage(img);
-
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
-
-        setLogoDisplayImage(img);
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
@@ -76,7 +66,7 @@ function page() {
   const getProfileInfo = async () => {
     try {
       const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
+        `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
       );
       const data = res.data.data;
       setData({
@@ -124,30 +114,32 @@ function page() {
     formData.append("profilePicture", data.profilePicture);
     cvformData.append("cvFile", data.cvfile);
     try {
+      setLoading(true);
       const res = await Axios.patch(
-        `/jobSeeker/updateJobSeekerProfileById/${localStorage.getItem(
+        `/jobSeeker/updateJobSeekerProfileById/${sessionStorage.getItem(
           "jobSeekerId"
         )}`,
         formData
       );
 
-      console.log("cut half");
-
       await Axios.post(
-        `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${localStorage.getItem(
+        `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${sessionStorage.getItem(
           "jobSeekerId"
         )}`,
         cvformData
       );
       if (res.data.success) {
         message.success("Profile Updated Successfully");
+        setLoading(false);
 
         setTimeout(() => {
           router.push("/job-seeker/dashboard");
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
+
       message.error(error.response.msg);
     }
   };
@@ -207,13 +199,13 @@ function page() {
               className="mb-4 tw-grid tw-grid-cols-5 tw-gap-4"
               controlId="exampleForm.ControlInput1"
             >
-              <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 tw-relative">
-                <Dragger {...props} className="tw-w-full tw-h-full">
+              <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 ">
+                <Dragger {...props} className="tw-w-full tw-h-full tw-relative">
                   {logoDisplayImage ? (
                     <>
                       <img
                         src={logoDisplayImage}
-                        className="tw-w-full tw-h-full tw-object-cover"
+                        className="tw-absolute tw-top-0 tw-bottom-0 tw-left-0 tw-right-0 tw-max-h-full tw-w-full tw-object-cover"
                         alt="img"
                       />
                     </>
@@ -539,12 +531,14 @@ function page() {
             </Form.Group> */}
           </Form>
 
-          <button
+          <Button
+            loading={loading}
+            disabled={loading}
             onClick={() => updateProfile()}
-            className="tw-bg-primary tw-text-white tw-px-16 tw-mt-10 hover:tw-bg-buttonHover tw-py-3 tw-rounded-lg tw-text-lg"
+            className="tw-bg-primary tw-text-white tw-px-12 tw-mt-10 hover:tw-bg-buttonHover tw-py-6 tw-rounded-lg tw-text-lg tw-h-13 tw-text-center tw-flex tw-justify-center tw-items-center"
           >
             Submit
-          </button>
+          </Button>
         </div>
       </div>
     </div>

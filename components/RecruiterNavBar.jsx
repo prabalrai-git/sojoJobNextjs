@@ -24,7 +24,7 @@ function RecruiterNavBar() {
   const getProfileInformation = async () => {
     try {
       const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${localStorage.getItem(
+        `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
           "employerId"
         )}`
       );
@@ -60,7 +60,7 @@ function RecruiterNavBar() {
   useOutsideAlerter(wrapperRef);
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "/";
   };
 

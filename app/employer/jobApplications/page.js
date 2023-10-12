@@ -28,10 +28,10 @@ function page({ searchParams }) {
         `/application/getApplicationsByJobId/${searchParams?.jobId}`
       );
       setApplications(res.data.data);
-      setAnswers(res.data.data.jobAnswers);
+      // setAnswers(res.data.data);
     } catch (error) {}
   };
-  console.log(applications);
+
   const onFit = async (id) => {
     try {
       const res = await Axios.patch(
@@ -81,12 +81,19 @@ function page({ searchParams }) {
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text) => text.split("T")[0],
+      sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
     },
 
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      filters: [
+        { text: "Pending", value: "pending" },
+        { text: "Accepted", value: "accepted" },
+        { text: "Rejected", value: "rejected" },
+      ],
+      onFilter: (value, record) => record.status === value,
       render: (text) => {
         if (text.toLowerCase() == "pending") {
           return <p className="tw-text-progressBg tw-capitalize">{text}</p>;

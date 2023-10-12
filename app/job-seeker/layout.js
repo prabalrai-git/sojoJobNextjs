@@ -7,19 +7,19 @@ import React, { useEffect } from "react";
 
 function layout({ children }) {
   const router = useRouter();
-  useEffect(() => {
-    const check = checkEmployeeAuth();
-    if (!check) {
-      return router.replace("/");
-    }
-  }, []);
-  return (
-    <>
-      <JobSeekerNavBar />
-      <div className="tw-bg-employerBg tw-min-h-screen">{children}</div>
-      <Footer />
-    </>
-  );
+
+  const check = checkEmployeeAuth();
+  if (!check) {
+    return router.replace("/");
+  } else {
+    return (
+      <>
+        <JobSeekerNavBar />
+        <div className="tw-bg-employerBg tw-min-h-screen">{children}</div>
+        <Footer />
+      </>
+    );
+  }
 }
 
 export default layout;

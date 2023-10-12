@@ -157,7 +157,7 @@ function page({ searchParams }) {
       numberOfVacancies: Number(vacancyNumber),
       responsibilities: skills,
       jobSiteId: workType,
-      jobRecruiterId: Number(localStorage.getItem("employerId")),
+      jobRecruiterId: Number(sessionStorage.getItem("employerId")),
 
       startDate,
       endDate,
@@ -180,7 +180,7 @@ function page({ searchParams }) {
         }
         toast.success("Edited Successfully!", {
           position: "top-right",
-          autoClose: 1000,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -190,7 +190,7 @@ function page({ searchParams }) {
         });
         setTimeout(() => {
           router.push("/employer/dashboard");
-        }, 2000);
+        }, 500);
       } catch (error) {
         console.log(error);
         toast.error("Something went wrong!", {

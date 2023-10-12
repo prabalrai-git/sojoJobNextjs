@@ -6,18 +6,35 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
 import Image from "next/image";
+import ProgressMsg from "@/components/ProgressMsg";
 
 function page() {
   const [standardJobs, setStandardJobs] = useState(null);
+  const [profileCompletion, setProfileCompletion] = useState();
 
   useEffect(() => {
     getStandardJobs();
+    getProfileCompletionPercentage();
   }, []);
 
   const getStandardJobs = async (req, res) => {
     try {
       const res = await Axios.get("/public/getStandardJobs");
       setStandardJobs(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getProfileCompletionPercentage = async () => {
+    try {
+      const res = await Axios.get(
+        `/jobSeeker/getProfileCompletionPercentage/${sessionStorage.getItem(
+          "jobSeekerId"
+        )}`
+      );
+      setProfileCompletion(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +50,16 @@ function page() {
             This is your personalized space where we help you find an ideal
             match!
           </h2>
+          {profileCompletion?.profileComplete === false && (
+            <ProgressMsg
+              fromJobSeeker={true}
+              completionPercentage={
+                profileCompletion?.profileCompletionPercentage
+                  ? profileCompletion.profileCompletionPercentage
+                  : 0
+              }
+            />
+          )}
           <AppliedJobs />
         </div>
         <div className="tw-flex tw-flex-row">

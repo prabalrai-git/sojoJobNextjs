@@ -7,6 +7,7 @@ import Axios from "@/api/server";
 import RelatedJobs from "@/components/RelatedJobs";
 import OtherJobs from "@/components/OtherJobs";
 import SendApplicationModal from "@/components/SendApplicationModal";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 function page({ searchParams }) {
   const [jobDetails, setJobsDetails] = useState();
@@ -55,7 +56,11 @@ function page({ searchParams }) {
           className="tw-w-full tw-object-cover tw-h-40"
         />
         <Image
-          src={"/companyLogo.png"}
+          src={
+            jobDetails?.jobRecruiter?.companyLogoImage
+              ? jobDetails.jobRecruiter.companyLogoImage
+              : "/companyLogo.png"
+          }
           width={115}
           height={115}
           alt="companyLogo"

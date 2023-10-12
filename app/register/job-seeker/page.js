@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, Input, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,7 @@ function page() {
     jobStatus: null,
     mPin: null,
   });
+  const [loading, setLoading] = useState(false);
   // const [jobCategories, setJobsCategories] = useState();
 
   // useEffect(() => {
@@ -65,11 +66,12 @@ function page() {
   };
   const onFinish = async (values) => {
     try {
+      setLoading(true);
       const res = await Axios.post("/jobSeeker/createJobSeekerProfile", data);
       if (res.data.success) {
         toast.success("Profile created!", {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -79,14 +81,17 @@ function page() {
         });
 
         setTimeout(() => {
+          setLoading(false);
           router.push("/login/job-seeker");
-        }, 3000);
+        }, 500);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
+
       toast.error("Something went wrong!", {
         position: "top-right",
-        autoClose: 4000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -332,13 +337,14 @@ function page() {
               </Form.Item>
 
               <Form.Item>
-                <button
+                <Button
+                  disabled={loading}
+                  loading={loading}
                   htmlType="submit"
-                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-px-28"
-                  t
+                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-20 tw-h-12 tw-flex tw-justify-center tw-items-center"
                 >
-                  Sign In
-                </button>
+                  Register
+                </Button>
               </Form.Item>
             </Form>
           </div>

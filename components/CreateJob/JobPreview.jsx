@@ -36,7 +36,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
       jobSiteId: data?.jobSiteId?.value,
       educationLevelId: data?.educationLevelId?.value,
       experienceLevelId: data?.experienceLevelId?.value,
-      jobRecruiterId: Number(localStorage.getItem("employerId")),
+      jobRecruiterId: Number(sessionStorage.getItem("employerId")),
       startDate: data?.startDate,
       endDate: data?.endDate,
       numberOfVacancies: Number(data?.numberOfVacancies),
@@ -156,7 +156,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
               className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize  tw-text-gray-600 tw-text-medium">
               {data.jobShiftId.label}
             </p>
           </div>
@@ -169,7 +169,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
               className="tw-object-contain tw-mr-3 tw-self-center "
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize   tw-text-gray-600 tw-text-medium">
               {data.experienceLevelId.label}
             </p>
           </div>
@@ -182,7 +182,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
               className="tw-object-contain tw-mr-3 tw-self-center"
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize   tw-text-gray-600 tw-text-medium">
               {data.salary}
             </p>
           </div>
@@ -195,7 +195,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
               className="tw-object-contain tw-mr-3 tw-self-center"
             />
 
-            <p className="tw-self-center  tw-text-gray-600 tw-text-medium">
+            <p className="tw-self-center tw-capitalize   tw-text-gray-600 tw-text-medium">
               {data.jobSiteId.label}
             </p>
           </div>

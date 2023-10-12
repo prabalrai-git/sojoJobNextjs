@@ -23,7 +23,7 @@ function JobSeekerNavBar() {
   const getProfileInfo = async () => {
     try {
       const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
+        `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
       );
       setUserData(res.data.data);
     } catch (error) {
@@ -54,7 +54,7 @@ function JobSeekerNavBar() {
   useOutsideAlerter(wrapperRef);
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "/";
   };
 

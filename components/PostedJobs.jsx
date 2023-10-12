@@ -72,7 +72,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
     try {
       const res = await Axios.get(
         `/job/getJobsByRecruiterId?recruiterId=${Number(
-          localStorage.getItem("employerId")
+          sessionStorage.getItem("employerId")
         )}`
       );
       setJobs(res.data.data);
@@ -98,11 +98,20 @@ function PostedJobs({ fromList, jobStatusFilter }) {
       dataIndex: "startDate",
       key: "startDate",
       render: (text) => text.split("T")[0],
+      sorter: (a, b) => new Date(a.startDate) - new Date(b.startDate),
     },
     {
       title: "Status",
       dataIndex: "jobStatus",
       key: "jobStatus",
+      filters: [
+        { text: "Pending", value: "Pending" },
+        { text: "Active", value: "Active" },
+        { text: "Expired", value: "Expired" },
+        { text: "Declined", value: "Declined" },
+      ],
+      onFilter: (value, record) => record.jobStatus === value,
+
       render: (text) => {
         if (text.toLowerCase() == "pending") {
           return <p className="tw-text-progressBg">{text}</p>;
@@ -119,6 +128,11 @@ function PostedJobs({ fromList, jobStatusFilter }) {
       title: "Posting Package",
       dataIndex: "jobPostingPackage",
       key: "jobPostingPackage",
+      filters: [
+        { text: "Standard", value: "Standard" },
+        { text: "Elite", value: "Elite" },
+      ],
+      onFilter: (value, record) => record.jobPostingPackage === value,
     },
     {
       title: "Applicants",

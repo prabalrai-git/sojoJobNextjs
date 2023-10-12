@@ -5,13 +5,16 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-function ProgressMsg({ completionPercentage }) {
+function ProgressMsg({ completionPercentage, fromJobSeeker }) {
   return (
-    <div className="tw-w-full tw-rounded-lg tw-py-5 tw-px-4 tw-bg-progressBg tw-mt-10 tw-flex tw-flex-row tw-justify-between">
+    <div
+      style={{ backgroundColor: fromJobSeeker ? "#0069d3" : "#E58C17" }}
+      className="tw-w-full tw-rounded-lg tw-py-5 tw-px-4 tw-mt-10 tw-flex tw-flex-row tw-justify-between"
+    >
       <div className="tw-flex tw-flex-row">
         <div className="tw-h-20 tw-w-20">
           <CircularProgressbar
-            className="tw-bg-white tw-rounded-full tw-text-progressLightBg"
+            className="tw-bg-white tw-rounded-full "
             value={completionPercentage && completionPercentage}
             text={`${completionPercentage && completionPercentage}%`}
             styles={buildStyles({
@@ -32,10 +35,10 @@ function ProgressMsg({ completionPercentage }) {
 
               // Colors
               pathColor: `rgba(234, 164, 68, ${completionPercentage / 100})`,
-              textColor: "#E58C17",
+              textColor: fromJobSeeker ? "#0069d3" : "#E58C17",
 
               trailColor: "#fff",
-              backgroundColor: "#EAA444",
+              backgroundColor: fromJobSeeker ? "#266baf" : "#EAA444",
             })}
           />
         </div>
@@ -44,13 +47,24 @@ function ProgressMsg({ completionPercentage }) {
             Your details are missing!
           </h2>
           <h3 className="tw-text-white tw-font-base tw-mb-2 tw-text-lg">
-            Post a free job to complete your profile
+            {fromJobSeeker
+              ? "Just a few more steps and your SojoJob profile is complete! Setup now to enjoy unlimited benefits."
+              : "Post a free job to complete your profile"}
           </h3>
         </div>
       </div>
-      <Link className=" tw-self-center" href={"/employer/job/create"}>
-        <button className="tw-bg-progressLightBg tw-rounded-lg tw-h-12 tw-self-center tw-px-4 tw-py-3 tw-text-white ">
-          Post a Job
+      <Link
+        className=" tw-self-center"
+        href={fromJobSeeker ? "/job-seeker/profile" : "/employer/job/create"}
+      >
+        <button
+          style={{
+            backgroundColor: fromJobSeeker ? "white" : "#EAA444",
+            color: fromJobSeeker ? "#0069d3" : "white",
+          }}
+          className=" tw-rounded-lg tw-h-12 tw-self-center tw-px-4 tw-py-3  "
+        >
+          {fromJobSeeker ? "Setup Now" : "Post a Job"}
         </button>
       </Link>
     </div>

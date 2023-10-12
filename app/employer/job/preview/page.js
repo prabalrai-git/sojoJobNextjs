@@ -29,7 +29,7 @@ function page({ searchParams }) {
   const getEmployerProfile = async () => {
     try {
       const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${localStorage.getItem(
+        `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
           "employerId"
         )}`
       );

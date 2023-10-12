@@ -51,7 +51,7 @@ function page() {
     formData.append("name", name);
     try {
       const res = await Axios.patch(
-        `/jobRecruiter/updateJobRecruiterProfileById/${localStorage.getItem(
+        `/jobRecruiter/updateJobRecruiterProfileById/${sessionStorage.getItem(
           "employerId"
         )}`,
         formData
@@ -59,7 +59,7 @@ function page() {
       if (res.data.success) {
         toast.success("Profile Updated Successfully!", {
           position: "top-right",
-          autoClose: 1000,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -69,13 +69,13 @@ function page() {
         });
         setTimeout(() => {
           router.push("/employer/dashboard");
-        }, 2000);
+        }, 500);
       }
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong!", {
         position: "top-right",
-        autoClose: 4000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -108,7 +108,7 @@ function page() {
   const getProfileInformation = async () => {
     try {
       const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${localStorage.getItem(
+        `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
           "employerId"
         )}`
       );
@@ -122,24 +122,13 @@ function page() {
   const props = {
     name: "file",
     multiple: false,
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    // action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
     onChange(info) {
       const { status } = info.file;
 
       setCompanyLogoImage(info.file.originFileObj);
       const img = URL.createObjectURL(info.file.originFileObj);
       setLogoDisplayImage(img);
-
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
-
-        setLogoDisplayImage(img);
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
@@ -191,16 +180,19 @@ function page() {
           <div className="tw-mt-10">
             <Form>
               <Form.Group
-                className="mb-4 tw-grid lg:tw-grid-cols-5 tw-gap-4 xsm:tw-grid-cols-1 md:tw-grid-cols-1"
+                className="tw-mb-12 tw-grid lg:tw-grid-cols-5 tw-gap-4 xsm:tw-grid-cols-1 md:tw-grid-cols-1"
                 controlId="exampleForm.ControlInput1"
               >
                 <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 tw-relative">
-                  <Dragger {...props} className="tw-w-full tw-h-full">
+                  <Dragger
+                    {...props}
+                    className="tw-w-full tw-h-full tw-relative"
+                  >
                     {logoDisplayImage ? (
                       <>
                         <img
                           src={logoDisplayImage}
-                          className="tw-w-full tw-h-full tw-object-cover"
+                          className="tw-absolute tw-top-0 tw-bottom-0 tw-left-0 tw-right-0 tw-max-h-full tw-w-full tw-object-cover"
                           alt="img"
                         />
                       </>

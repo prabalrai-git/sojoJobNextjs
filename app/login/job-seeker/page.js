@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, Input } from "antd";
+import { Button, Form, Input, Spin } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ function page() {
   const router = useRouter();
   const [email, setEmail] = useState();
   const [mPin, setMPin] = useState();
+  const [loading, setLoading] = useState(false);
 
   const onFinish = async () => {
     const data = {
@@ -21,18 +22,20 @@ function page() {
     };
 
     try {
+      setLoading(true);
       const res = await Axios.post("/auth/login", data);
 
       // return console.log(res.data.data, "he ha");
 
-      localStorage.setItem("id", res.data.data.id);
-      localStorage.setItem("tokenSojoJob", res.data.data.token);
-      localStorage.setItem("jobSeekerId", res.data.data.jobSeekerId);
-      localStorage.setItem("userType", res.data.data.userType);
+      sessionStorage.clear();
+      sessionStorage.setItem("id", res.data.data.id);
+      sessionStorage.setItem("tokenSojoJob", res.data.data.token);
+      sessionStorage.setItem("jobSeekerId", res.data.data.jobSeekerId);
+      sessionStorage.setItem("userType", res.data.data.userType);
       if (res.data.success) {
         toast.success("Login Successful!", {
           position: "top-right",
-          autoClose: 1000,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -40,16 +43,19 @@ function page() {
           progress: undefined,
           theme: "dark",
         });
+        setLoading(false);
 
         setTimeout(() => {
           router.push("/job-seeker/dashboard");
-        }, 2000);
+        }, 500);
       }
     } catch (error) {
       console.log(error.response);
-      toast.error(error.response.data.msg, {
+      setLoading(false);
+
+      toast.error(error.response?.data?.msg, {
         position: "top-right",
-        autoClose: 4000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -175,13 +181,14 @@ function page() {
                 </p>
               </div>
               <Form.Item>
-                <button
-                  type="primary"
+                <Button
+                  disabled={loading}
+                  loading={loading}
                   htmlType="submit"
-                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-24"
+                  className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-20 tw-h-12 tw-flex tw-justify-center tw-items-center"
                 >
                   Sign In
-                </button>
+                </Button>
               </Form.Item>
             </Form>
           </div>
@@ -193,6 +200,7 @@ function page() {
             </p>
           </Link>
         </div>
+
         {/*  */}
         <div className="tw-relative xsm:tw-hidden md:tw-block ">
           <div
