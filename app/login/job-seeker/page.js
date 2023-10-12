@@ -27,11 +27,13 @@ function page() {
 
       // return console.log(res.data.data, "he ha");
 
-      sessionStorage.clear();
-      sessionStorage.setItem("id", res.data.data.id);
-      sessionStorage.setItem("tokenSojoJob", res.data.data.token);
-      sessionStorage.setItem("jobSeekerId", res.data.data.jobSeekerId);
-      sessionStorage.setItem("userType", res.data.data.userType);
+      if (typeof window !== "undefined") {
+        sessionStorage.clear();
+        sessionStorage.setItem("id", res.data.data.id);
+        sessionStorage.setItem("tokenSojoJob", res.data.data.token);
+        sessionStorage.setItem("jobSeekerId", res.data.data.jobSeekerId);
+        sessionStorage.setItem("userType", res.data.data.userType);
+      }
       if (res.data.success) {
         toast.success("Login Successful!", {
           position: "top-right",

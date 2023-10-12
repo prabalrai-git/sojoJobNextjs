@@ -66,7 +66,7 @@ function page() {
   const getProfileInfo = async () => {
     try {
       const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+        `/jobSeeker/getJobSeekerById/${sessionStorage?.getItem("jobSeekerId")}`
       );
       const data = res.data.data;
       setData({
@@ -116,14 +116,14 @@ function page() {
     try {
       setLoading(true);
       const res = await Axios.patch(
-        `/jobSeeker/updateJobSeekerProfileById/${sessionStorage.getItem(
+        `/jobSeeker/updateJobSeekerProfileById/${sessionStorage?.getItem(
           "jobSeekerId"
         )}`,
         formData
       );
 
       await Axios.post(
-        `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${sessionStorage.getItem(
+        `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${sessionStorage?.getItem(
           "jobSeekerId"
         )}`,
         cvformData

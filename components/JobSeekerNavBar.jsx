@@ -54,8 +54,10 @@ function JobSeekerNavBar() {
   useOutsideAlerter(wrapperRef);
 
   const logout = () => {
-    sessionStorage.clear();
-    window.location.href = "/";
+    if (typeof window !== "undefined") {
+      sessionStorage.clear();
+      window.location.href = "/";
+    }
   };
 
   return (

@@ -51,7 +51,7 @@ function page() {
     formData.append("name", name);
     try {
       const res = await Axios.patch(
-        `/jobRecruiter/updateJobRecruiterProfileById/${sessionStorage.getItem(
+        `/jobRecruiter/updateJobRecruiterProfileById/${sessionStorage?.getItem(
           "employerId"
         )}`,
         formData
@@ -108,7 +108,7 @@ function page() {
   const getProfileInformation = async () => {
     try {
       const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
+        `/jobRecruiter/getJobRecruiterById/${sessionStorage?.getItem(
           "employerId"
         )}`
       );

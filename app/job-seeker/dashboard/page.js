@@ -29,7 +29,7 @@ function page() {
   const getProfileCompletionPercentage = async () => {
     try {
       const res = await Axios.get(
-        `/jobSeeker/getProfileCompletionPercentage/${sessionStorage.getItem(
+        `/jobSeeker/getProfileCompletionPercentage/${sessionStorage?.getItem(
           "jobSeekerId"
         )}`
       );

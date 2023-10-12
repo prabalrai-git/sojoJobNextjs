@@ -36,7 +36,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
       jobSiteId: data?.jobSiteId?.value,
       educationLevelId: data?.educationLevelId?.value,
       experienceLevelId: data?.experienceLevelId?.value,
-      jobRecruiterId: Number(sessionStorage.getItem("employerId")),
+      jobRecruiterId: Number(sessionStorage?.getItem("employerId")),
       startDate: data?.startDate,
       endDate: data?.endDate,
       numberOfVacancies: Number(data?.numberOfVacancies),

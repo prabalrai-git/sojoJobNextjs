@@ -72,7 +72,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
     try {
       const res = await Axios.get(
         `/job/getJobsByRecruiterId?recruiterId=${Number(
-          sessionStorage.getItem("employerId")
+          sessionStorage?.getItem("employerId")
         )}`
       );
       setJobs(res.data.data);

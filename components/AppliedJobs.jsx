@@ -96,7 +96,7 @@ function AppliedJobs({ fromList }) {
   const getJobsAppliedByApplicant = async () => {
     try {
       const res = await Axios.get(
-        `/application/getApplicationsBySeekerId/${sessionStorage.getItem(
+        `/application/getApplicationsBySeekerId/${sessionStorage?.getItem(
           "jobSeekerId"
         )}`
       );
