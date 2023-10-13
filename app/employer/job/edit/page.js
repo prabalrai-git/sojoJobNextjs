@@ -157,7 +157,9 @@ function page({ searchParams }) {
       numberOfVacancies: Number(vacancyNumber),
       responsibilities: skills,
       jobSiteId: workType,
-      jobRecruiterId: Number(sessionStorage?.getItem("employerId")),
+      jobRecruiterId:
+        global.window.sessionStorage &&
+        Number(sessionStorage?.getItem("employerId")),
 
       startDate,
       endDate,

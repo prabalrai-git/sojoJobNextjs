@@ -4,9 +4,15 @@ const { default: NavBar } = require("./NavBar");
 const { default: RecruiterNavBar } = require("./RecruiterNavBar");
 
 export const NavBarByUser = () => {
-  if (sessionStorage?.getItem("userType") === "employer") {
+  if (
+    global?.window?.sessionStorage &&
+    sessionStorage.getItem("userType") === "employer"
+  ) {
     return <RecruiterNavBar />;
-  } else if (sessionStorage?.getItem("userType") === "job-seeker") {
+  } else if (
+    global?.window?.sessionStorage &&
+    sessionStorage?.getItem("userType") === "job-seeker"
+  ) {
     return <JobSeekerNavBar />;
   } else {
     return <NavBar />;

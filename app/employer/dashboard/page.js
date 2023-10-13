@@ -23,14 +23,13 @@ function page() {
 
   const getOverViewData = useCallback(async () => {
     try {
-      if (typeof window !== "undefined") {
-        const id = sessionStorage?.getItem("employerId");
-        const res = await Axios.get(
-          `/jobRecruiter/getMonthlyOverviewDataByRecruiterId/${id}`
-        );
+      const id =
+        global.window.sessionStorage && sessionStorage?.getItem("employerId");
+      const res = await Axios.get(
+        `/jobRecruiter/getMonthlyOverviewDataByRecruiterId/${id}`
+      );
 
-        setOverViewData(res.data);
-      }
+      setOverViewData(res.data);
     } catch (error) {
       console.log(error);
     }

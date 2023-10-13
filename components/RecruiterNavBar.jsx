@@ -24,9 +24,9 @@ function RecruiterNavBar() {
   const getProfileInformation = async () => {
     try {
       const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
-          "employerId"
-        )}`
+        `/jobRecruiter/getJobRecruiterById/${
+          global?.window?.sessionStorage && sessionStorage.getItem("employerId")
+        }`
       );
 
       setData(res.data.data);
@@ -49,12 +49,14 @@ function RecruiterNavBar() {
       }
       // Bind the event listener
       if (typeof window !== "undefined") {
-        document?.addEventListener("mousedown", handleClickOutside);
+        global?.window.document &&
+          document?.addEventListener("mousedown", handleClickOutside);
       }
       return () => {
         if (typeof window !== "undefined") {
           // Unbind the event listener on clean up
-          document?.removeEventListener("mousedown", handleClickOutside);
+          global?.window.document &&
+            document?.removeEventListener("mousedown", handleClickOutside);
         }
       };
     }, [ref]);
@@ -65,7 +67,7 @@ function RecruiterNavBar() {
 
   const logout = () => {
     if (typeof window !== "undefined") {
-      sessionStorage.clear();
+      global?.window?.sessionStorage && sessionStorage.clear();
       window.location.href = "/";
     }
   };

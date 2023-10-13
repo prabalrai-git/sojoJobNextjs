@@ -51,9 +51,10 @@ function page() {
     formData.append("name", name);
     try {
       const res = await Axios.patch(
-        `/jobRecruiter/updateJobRecruiterProfileById/${sessionStorage?.getItem(
-          "employerId"
-        )}`,
+        `/jobRecruiter/updateJobRecruiterProfileById/${
+          global?.window?.sessionStorage &&
+          sessionStorage?.getItem("employerId")
+        }`,
         formData
       );
       if (res.data.success) {
@@ -108,9 +109,10 @@ function page() {
   const getProfileInformation = async () => {
     try {
       const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${sessionStorage?.getItem(
-          "employerId"
-        )}`
+        `/jobRecruiter/getJobRecruiterById/${
+          global?.window?.sessionStorage &&
+          sessionStorage?.getItem("employerId")
+        }`
       );
 
       setData(res.data.data);

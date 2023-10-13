@@ -20,7 +20,10 @@ function page() {
   const getProfileInfo = async () => {
     try {
       const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${sessionStorage?.getItem("jobSeekerId")}`
+        `/jobSeeker/getJobSeekerById/${
+          global?.window?.sessionStorage &&
+          sessionStorage?.getItem("jobSeekerId")
+        }`
       );
       setUserData(res.data.data);
       console.log(res.data.data);

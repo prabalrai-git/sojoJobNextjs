@@ -17,10 +17,10 @@ function ImagePreview({ src }) {
       .then((blob) => {
         if (typeof document !== "undefined") {
           const url = URL.createObjectURL(new Blob([blob]));
-          const link = document.createElement("a");
+          const link = global?.window.document && document.createElement("a");
           link.href = url;
           link.download = "image.png";
-          document.body.appendChild(link);
+          global?.window.document && document.body.appendChild(link);
           link.click();
           URL.revokeObjectURL(url);
           link.remove();

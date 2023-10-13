@@ -29,9 +29,10 @@ function page() {
   const getProfileCompletionPercentage = async () => {
     try {
       const res = await Axios.get(
-        `/jobSeeker/getProfileCompletionPercentage/${sessionStorage?.getItem(
-          "jobSeekerId"
-        )}`
+        `/jobSeeker/getProfileCompletionPercentage/${
+          global?.window?.sessionStorage &&
+          sessionStorage?.getItem("jobSeekerId")
+        }`
       );
       setProfileCompletion(res.data);
     } catch (error) {
