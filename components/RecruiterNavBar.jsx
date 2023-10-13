@@ -48,16 +48,13 @@ function RecruiterNavBar() {
         }
       }
       // Bind the event listener
-      if (typeof window !== "undefined") {
-        global?.window.document &&
-          document?.addEventListener("mousedown", handleClickOutside);
-      }
+
+      global?.window.document &&
+        document?.addEventListener("mousedown", handleClickOutside);
       return () => {
-        if (typeof window !== "undefined") {
-          // Unbind the event listener on clean up
-          global?.window.document &&
-            document?.removeEventListener("mousedown", handleClickOutside);
-        }
+        // Unbind the event listener on clean up
+        global?.window.document &&
+          document?.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
   }
@@ -66,8 +63,8 @@ function RecruiterNavBar() {
   useOutsideAlerter(wrapperRef);
 
   const logout = () => {
-    if (typeof window !== "undefined") {
-      global?.window?.sessionStorage && sessionStorage.clear();
+    global?.window?.sessionStorage && sessionStorage.clear();
+    if (global.window.location) {
       window.location.href = "/";
     }
   };

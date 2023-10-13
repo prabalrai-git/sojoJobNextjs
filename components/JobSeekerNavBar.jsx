@@ -44,17 +44,14 @@ function JobSeekerNavBar() {
           setShowDropDown((prev) => !prev);
         }
       }
-      if (typeof window !== "undefined") {
-        global?.window.document &&
-          document?.addEventListener("mousedown", handleClickOutside);
-      }
+      global?.window.document &&
+        document?.addEventListener("mousedown", handleClickOutside);
       // Bind the event listener
       return () => {
         // Unbind the event listener on clean up
-        if (typeof window !== "undefined") {
-          global?.window.document &&
-            document?.removeEventListener("mousedown", handleClickOutside);
-        }
+
+        global?.window.document &&
+          document?.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
   }
@@ -63,8 +60,8 @@ function JobSeekerNavBar() {
   useOutsideAlerter(wrapperRef);
 
   const logout = () => {
-    if (typeof window !== "undefined") {
-      global?.window?.sessionStorage && sessionStorage.clear();
+    global?.window?.sessionStorage && sessionStorage.clear();
+    if (global.window.location) {
       window.location.href = "/";
     }
   };

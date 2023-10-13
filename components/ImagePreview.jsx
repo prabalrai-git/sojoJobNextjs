@@ -15,16 +15,14 @@ function ImagePreview({ src }) {
     fetch(src)
       .then((response) => response.blob())
       .then((blob) => {
-        if (typeof document !== "undefined") {
-          const url = URL.createObjectURL(new Blob([blob]));
-          const link = global?.window.document && document.createElement("a");
-          link.href = url;
-          link.download = "image.png";
-          global?.window.document && document.body.appendChild(link);
-          link.click();
-          URL.revokeObjectURL(url);
-          link.remove();
-        }
+        const url = URL.createObjectURL(new Blob([blob]));
+        const link = global?.window.document && document.createElement("a");
+        link.href = url;
+        link.download = "image.png";
+        global?.window.document && document.body.appendChild(link);
+        link.click();
+        URL.revokeObjectURL(url);
+        link.remove();
       });
   };
 
