@@ -64,8 +64,8 @@ function RecruiterNavBar() {
 
   const logout = () => {
     global?.window?.sessionStorage && sessionStorage.clear();
-    if (global.window.location) {
-      window.location.href = "/";
+    if (global.window.location.href) {
+      global.window.location.href = "/";
     }
   };
 
