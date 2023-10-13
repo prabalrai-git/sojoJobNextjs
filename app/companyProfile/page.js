@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
 import Link from "next/link";
 import JobCard from "@/components/JobCard";
+import BackgroundImage from "@/public/companyBackground.png";
 
 function page({ searchParams }) {
   const [company, setCompany] = useState();
@@ -49,7 +50,15 @@ function page({ searchParams }) {
 
   return (
     <div className="tw-mx-28 xsm:tw-mx-5 sm:tw-mx-10 md:tw-mx-28 tw-mt-10">
-      <div className="tw-bg-gray-500 tw-h-72 tw-w-full tw-rounded tw-relative">
+      <div
+        style={{
+          backgroundImage: `url(${BackgroundImage.src})`,
+          backgroundSize: "cover", // Set backgroundSize to 'cover'
+          backgroundPosition: "center center", // Center the image
+          backgroundRepeat: "no-repeat",
+        }}
+        className="tw-h-72 tw-w-full tw-rounded tw-relative tw-object-contain"
+      >
         <div className="tw-bg-white tw-h-32 tw-w-32 tw-rounded-full tw-absolute -tw-bottom-16 tw-left-7 tw-flex tw-justify-center tw-align-middle">
           {company?.companyLogoImage && (
             <Image

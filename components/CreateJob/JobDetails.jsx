@@ -20,6 +20,7 @@ function JobDetails({ setStep, setData }) {
   //drop-down states
 
   const [categories, setCategories] = useState();
+  const [subCategories, setSubCategories] = useState();
   const [employmentTypes, setEmploymentTypes] = useState();
   const [experiences, setExperiences] = useState();
   const [workTypes, setWorkTypes] = useState();
@@ -28,6 +29,7 @@ function JobDetails({ setStep, setData }) {
 
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
+  const [subCategory, setSubCategory] = useState();
   const [employmentType, setEmploymentType] = useState();
   const [location, setLocation] = useState();
   const [experience, setExperience] = useState();
@@ -59,13 +61,15 @@ function JobDetails({ setStep, setData }) {
       !endDate ||
       !jobDescription ||
       !skills ||
-      !jobPackage
+      !jobPackage ||
+      !subCategory
     ) {
       return message.error("Please fill out all the fields!");
     }
     const data = {
       title,
       jobCategoryId: category,
+      jobSubCategoryId: subCategory,
       jobShiftId: employmentType,
       jobLocation: location,
       experienceLevelId: experience,
@@ -78,7 +82,6 @@ function JobDetails({ setStep, setData }) {
       requirements: skills,
       jobPostingPackage: jobPackage,
     };
-
     setData(data);
     setStep((prev) => prev + 1);
   };
@@ -87,9 +90,14 @@ function JobDetails({ setStep, setData }) {
     try {
       const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
       const data = res.data.data;
+      console.log(data);
       let newData = [];
       for (let i in data) {
-        const obj = { value: data[i].id, label: data[i].title };
+        const obj = {
+          value: data[i].id,
+          label: data[i].title,
+          subCategories: data[i].jobSubCategories,
+        };
         newData.push(obj);
       }
       setCategories(newData);
@@ -134,9 +142,6 @@ function JobDetails({ setStep, setData }) {
     } catch (error) {}
   };
 
-  const setQValue = (e) => {
-    console.log(e, "from quill");
-  };
   const dateFormat = "YYYY-MM-DD";
 
   let today = new Date();
@@ -181,34 +186,71 @@ function JobDetails({ setStep, setData }) {
             />
           </Form.Group>
           <Form.Group
-            className="mb-4 tw-flex tw-flex-col"
+            className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
             controlId="exampleForm.ControlInput1"
           >
-            <Form.Label className="tw-text-gray-600 tw-font-medium">
-              Categories
-            </Form.Label>
-            <Select
-              showSearch
-              className="tw-h-12 tw-border-1 tw-drop-shadow-sm tw-rounded-lg "
-              style={
-                {
-                  // borderColor: "grey",
-                  // paddingTop: 10,
+            <div>
+              <Form.Label className="tw-text-gray-600 tw-font-medium ">
+                Categories
+              </Form.Label>
+              <Select
+                showSearch
+                className="tw-h-12 tw-w-full tw-border-1 tw-drop-shadow-sm tw-rounded-lg "
+                style={
+                  {
+                    // borderColor: "grey",
+                    // paddingTop: 10,
+                  }
                 }
-              }
-              placeholder="Search to Select"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                (option?.label ?? "").includes(input)
-              }
-              filterSort={(optionA, optionB) =>
-                (optionA?.label ?? "")
-                  .toLowerCase()
-                  .localeCompare((optionB?.label ?? "").toLowerCase())
-              }
-              options={categories}
-              onChange={(e, a) => setCategory(a)}
-            />
+                placeholder="Search to Select"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  (option?.label ?? "").includes(input)
+                }
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                options={categories}
+                onChange={(e, a) => {
+                  setCategory(a);
+                  const subCategory = a?.subCategories?.map((item) => {
+                    return { value: item.id, label: item.title };
+                  });
+                  setSubCategories(subCategory);
+                }}
+              />
+            </div>
+            <div>
+              <Form.Label className="tw-text-gray-600 tw-font-medium">
+                Sub Categories
+              </Form.Label>
+              <Select
+                showSearch
+                className="tw-h-12 tw-w-full tw-border-1 tw-drop-shadow-sm tw-rounded-lg "
+                style={
+                  {
+                    // borderColor: "grey",
+                    // paddingTop: 10,
+                  }
+                }
+                placeholder="Search to Select"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  (option?.label ?? "").includes(input)
+                }
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                options={subCategories}
+                onChange={(e, a) => {
+                  setSubCategory(a);
+                }}
+              />
+            </div>
           </Form.Group>
           <Form.Group
             className="mb-4 tw-grid lg:tw-grid-cols-3 tw-gap-4 md:tw-grid-cols-2 sm:tw-grid-cols-1"

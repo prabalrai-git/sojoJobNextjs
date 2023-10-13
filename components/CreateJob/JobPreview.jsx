@@ -32,6 +32,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
       jobLocation: data?.jobLocation,
       jobPostingPackage: data?.jobPostingPackage,
       jobCategoryId: data?.jobCategoryId?.value,
+      jobSubCategoryId: data?.jobSubCategoryId?.value,
       jobShiftId: data?.jobShiftId?.value,
       jobSiteId: data?.jobSiteId?.value,
       educationLevelId: data?.educationLevelId?.value,

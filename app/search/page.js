@@ -15,6 +15,7 @@ const { Search } = Input;
 
 function page({ searchParams }) {
   const [categoriesList, setCategoriesList] = useState();
+  const [subCategoryList, setSubCategoryList] = useState();
   const [educationList, setEductaionList] = useState();
   const [experienceList, setExperienceList] = useState();
 
@@ -26,6 +27,7 @@ function page({ searchParams }) {
   const [category, setCategory] = useState(null);
   const [education, setEducation] = useState(null);
   const [experience, setExperience] = useState(null);
+  const [subCategory, setSubCategory] = useState(null);
 
   useEffect(() => {
     getCategoriesList();
@@ -74,7 +76,11 @@ function page({ searchParams }) {
     try {
       const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
       const newData = res.data.data.map((item) => {
-        return { label: item.title, value: item.id };
+        return {
+          label: item.title,
+          value: item.id,
+          subCategories: item.jobSubCategories,
+        };
       });
       setCategoriesList(newData);
     } catch (error) {
@@ -132,6 +138,9 @@ function page({ searchParams }) {
       if (experience !== null && experience !== undefined) {
         queryParams.push(`experienceLevelId=${experience}`);
       }
+      if (subCategory !== null && subCategory !== undefined) {
+        queryParams.push(`subCategoryId=${subCategory}`);
+      }
 
       if (queryParams.length > 0) {
         apiUrl += `?${queryParams.join("&")}`;
@@ -182,7 +191,38 @@ function page({ searchParams }) {
                 .localeCompare((optionB?.label ?? "").toLowerCase())
             }
             options={categoriesList}
-            onChange={(e, a) => setCategory(e)}
+            onChange={(e, a) => {
+              setCategory(e);
+              const subCategory = a?.subCategories?.map((item) => {
+                return { value: item.id, label: item.title };
+              });
+              setSubCategoryList(subCategory);
+            }}
+          />
+        </div>
+        <div className="tw-mr-4 tw-w-full">
+          <Select
+            showSearch
+            allowClear
+            className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
+            style={
+              {
+                // borderColor: "grey",
+                // paddingTop: 10,
+              }
+            }
+            placeholder="Filter By Sub Category"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").includes(input)
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            options={subCategoryList}
+            onChange={(e, a) => setSubCategory(e)}
           />
         </div>
         <div className="tw-mr-4 tw-w-full">
@@ -210,6 +250,7 @@ function page({ searchParams }) {
             onChange={(e, a) => setEducation(e)}
           />
         </div>
+
         <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch

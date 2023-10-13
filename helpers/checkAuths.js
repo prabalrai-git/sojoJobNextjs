@@ -1,3 +1,4 @@
+"use client";
 let isAuthenticated = false;
 
 export const checkEmployerAuth = () => {

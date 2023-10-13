@@ -50,6 +50,7 @@ module.exports = {
         progressLightBg: "#EAA444",
         monthlyCard: "#F4F7FB",
         dndBtn: "#266BAF",
+
         dndBtnH: "#13538e",
         prevBtn: "#4096ff",
         red: "red",
