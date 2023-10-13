@@ -15,21 +15,19 @@ function ImagePreview({ src }) {
     fetch(src)
       .then((response) => response.blob())
       .then((blob) => {
-        const url = URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "image.png";
-        document.body.appendChild(link);
-        link.click();
-        URL.revokeObjectURL(url);
-        link.remove();
+        if (typeof document !== "undefined") {
+          const url = URL.createObjectURL(new Blob([blob]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "image.png";
+          document.body.appendChild(link);
+          link.click();
+          URL.revokeObjectURL(url);
+          link.remove();
+        }
       });
   };
 
-  useEffect(() => {
-    // This code will only run in the browser
-    // You can move your DOM manipulation code here if needed
-  }, []);
   return (
     <Image
       width={80}
