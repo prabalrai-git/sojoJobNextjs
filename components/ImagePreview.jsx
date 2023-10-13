@@ -1,5 +1,6 @@
+"use client";
 import { Image, Space } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   DownloadOutlined,
   RotateLeftOutlined,
@@ -24,6 +25,11 @@ function ImagePreview({ src }) {
         link.remove();
       });
   };
+
+  useEffect(() => {
+    // This code will only run in the browser
+    // You can move your DOM manipulation code here if needed
+  }, []);
   return (
     <Image
       width={80}
