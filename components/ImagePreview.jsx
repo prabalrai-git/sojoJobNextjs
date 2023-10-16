@@ -16,7 +16,7 @@ function ImagePreview({ src }) {
       .then((response) => response.blob())
       .then((blob) => {
         const url = URL.createObjectURL(new Blob([blob]));
-        if (typeof document !== "undefined") {
+        if (typeof window !== "undefined") {
           const link = document.createElement("a");
           link.href = url;
           link.download = "image.png";

@@ -48,12 +48,12 @@ function RecruiterNavBar() {
         }
       }
       // Bind the event listener
-      if (typeof document !== "undefined") {
+      if (typeof window !== "undefined") {
         document.addEventListener("mousedown", handleClickOutside);
       }
       return () => {
         // Unbind the event listener on clean up
-        if (typeof document !== "undefined") {
+        if (typeof window !== "undefined") {
           document.removeEventListener("mousedown", handleClickOutside);
         }
       };
