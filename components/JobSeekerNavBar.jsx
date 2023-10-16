@@ -47,14 +47,13 @@ function JobSeekerNavBar() {
           setShowDropDown((prev) => !prev);
         }
       }
-      global?.window.document &&
-        document?.addEventListener("mousedown", handleClickOutside);
+
+      document?.addEventListener("mousedown", handleClickOutside);
       // Bind the event listener
       return () => {
         // Unbind the event listener on clean up
 
-        global?.window.document &&
-          document?.removeEventListener("mousedown", handleClickOutside);
+        document?.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
   }
