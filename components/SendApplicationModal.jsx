@@ -353,7 +353,7 @@ function SendApplicationModal({
                 Select File
               </Button>
             </Upload>
-            {loggedInUserData && cvDisplayUrl?.url?.length > 1 && (
+            {loggedInUserData && !cvDisplayUrl[0]?.url && (
               <Link
                 className="tw-text-rose-400 hover:tw-text-red"
                 href={"/job-seeker/profile"}

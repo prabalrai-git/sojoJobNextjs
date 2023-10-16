@@ -61,7 +61,7 @@ function page() {
       setLoading(false);
 
       console.log(error);
-      toast.error("Something went wrong!", {
+      toast.error(error?.response?.data?.msg, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,

@@ -69,9 +69,9 @@ function page() {
       setLoading(true);
       const res = await Axios.post("/jobSeeker/createJobSeekerProfile", data);
       if (res.data.success) {
-        toast.success("Profile created!", {
+        toast.success("Profile created! Please check email to verify account", {
           position: "top-right",
-          autoClose: 500,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -83,7 +83,7 @@ function page() {
         setTimeout(() => {
           setLoading(false);
           router.push("/login/job-seeker");
-        }, 500);
+        }, 2000);
       }
     } catch (error) {
       console.log(error);
