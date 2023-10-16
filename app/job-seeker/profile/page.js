@@ -6,7 +6,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import Dropzone, { useDropzone } from "react-dropzone";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import dayjs from "dayjs";
 import Axios from "@/api/server";
@@ -14,12 +13,6 @@ import { useRouter } from "next/navigation";
 import { UploadOutlined } from "@ant-design/icons";
 
 function page() {
-  const [value, setValue] = useState();
-  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
-    // Disable click and keydown behavior
-    noClick: true,
-    noKeyboard: true,
-  });
   const [data, setData] = useState({
     name: null,
     email: null,
@@ -65,12 +58,11 @@ function page() {
   };
   const getProfileInfo = async () => {
     try {
-      const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("jobSeekerId")
-        }`
-      );
+      if (typeof window !== "undefined") {
+        const res = await Axios.get(
+          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+        );
+      }
       const data = res.data.data;
       setData({
         name: data?.name,
@@ -118,21 +110,22 @@ function page() {
     cvformData.append("cvFile", data.cvfile);
     try {
       setLoading(true);
-      const res = await Axios.patch(
-        `/jobSeeker/updateJobSeekerProfileById/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("jobSeekerId")
-        }`,
-        formData
-      );
-
-      await Axios.post(
-        `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("jobSeekerId")
-        }`,
-        cvformData
-      );
+      if (typeof window !== "undefined") {
+        const res = await Axios.patch(
+          `/jobSeeker/updateJobSeekerProfileById/${sessionStorage.getItem(
+            "jobSeekerId"
+          )}`,
+          formData
+        );
+      }
+      if (typeof window !== "undefined") {
+        await Axios.post(
+          `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${sessionStorage.getItem(
+            "jobSeekerId"
+          )}`,
+          cvformData
+        );
+      }
       if (res.data.success) {
         message.success("Profile Updated Successfully");
         setLoading(false);
