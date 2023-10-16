@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@/styles/navbar.css";
 import Axios from "@/api/server";
+import { useRouter } from "next/navigation";
 
 function JobSeekerNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -33,6 +34,8 @@ function JobSeekerNavBar() {
       console.log(error);
     }
   };
+
+  const router = useRouter();
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
@@ -61,9 +64,10 @@ function JobSeekerNavBar() {
 
   const logout = () => {
     global?.window?.sessionStorage && sessionStorage.clear();
-    if (global.window.location.href) {
-      global.window.location.href = "/";
-    }
+    // if (global.window.location.href) {
+    //   global.window.location.href = "/";
+    // }
+    router.push("/");
   };
 
   return (

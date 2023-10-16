@@ -64,9 +64,10 @@ function RecruiterNavBar() {
 
   const logout = () => {
     global?.window?.sessionStorage && sessionStorage.clear();
-    if (global.window.location.href) {
-      global.window.location.href = "/";
-    }
+    // if (global.window.location.href) {
+    //   global.window.location.href = "/";
+    // }
+    router.push("/");
   };
 
   return (
@@ -89,7 +90,7 @@ function RecruiterNavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {/* <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link> */}
+              <Nav.Link href="#pricing">Pricing</Nav.Link> */}
           </Nav>
           <Nav className=" tw-flex tw-flex-row tw-justify-center tw-items-center">
             <Nav.Link href="/employer/profile">
