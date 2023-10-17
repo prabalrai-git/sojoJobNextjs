@@ -12,6 +12,7 @@ import Axios from "@/api/server";
 import "react-tagsinput/react-tagsinput.css";
 import JobPackage from "../JobPackage";
 import moment from "moment";
+import dynamic from "next/dynamic";
 
 function JobDetails({ setStep, setData }) {
   const [skills, setSkills] = useState([]);
