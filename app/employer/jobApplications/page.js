@@ -21,7 +21,7 @@ function page({ searchParams }) {
 
   useEffect(() => {
     getAllApplicationsForJobId();
-  }, [reload]);
+  }, [reload, searchParams.jobId]);
   const getAllApplicationsForJobId = async () => {
     try {
       const res = await Axios.get(
