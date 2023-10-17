@@ -8,9 +8,9 @@ import Image from "next/image";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import ImagePreview from "@/components/ImagePreview";
 import ApplicantAnswers from "@/components/ApplicantAnswers";
+import { useSearchParams } from "next/navigation";
 
-export const dynamic = "force-dynamic";
-function page({ searchParams }) {
+function page() {
   const [applications, setApplications] = useState();
   const [reload, setReload] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,13 +20,17 @@ function page({ searchParams }) {
     setIsModalOpen(true);
   };
 
+  const searchParams = useSearchParams();
+
+  const jobId = searchParams.get("jobId");
+
   useEffect(() => {
     getAllApplicationsForJobId();
-  }, [reload, searchParams.jobId]);
+  }, [reload, jobId]);
   const getAllApplicationsForJobId = async () => {
     try {
       const res = await Axios.get(
-        `/application/getApplicationsByJobId/${searchParams?.jobId}`
+        `/application/getApplicationsByJobId/${jobId}`
       );
       setApplications(res.data.data);
       // setAnswers(res.data.data);
