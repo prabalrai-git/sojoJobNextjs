@@ -17,6 +17,7 @@ import "react-tagsinput/react-tagsinput.css";
 import JobPackage from "@/components/JobPackage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import useSessionStorage from "@/hooks/useSessionStorage";
 
 function page({ searchParams }) {
   //drop-down states
@@ -147,26 +148,25 @@ function page({ searchParams }) {
   const router = useRouter();
 
   const onSubmit = async () => {
-    if (typeof window !== "undefined") {
-      const formData = {
-        title,
-        jobCategoryId: category,
-        jobShiftId: employmentType,
-        jobLocation: location,
-        experienceLevelId: experience,
-        salary,
-        numberOfVacancies: Number(vacancyNumber),
-        responsibilities: skills,
-        jobSiteId: workType,
-        jobRecruiterId: Number(sessionStorage.getItem("employerId")),
+    const recruiterId = useSessionStorage("employerId");
+    const formData = {
+      title,
+      jobCategoryId: category,
+      jobShiftId: employmentType,
+      jobLocation: location,
+      experienceLevelId: experience,
+      salary,
+      numberOfVacancies: Number(vacancyNumber),
+      responsibilities: skills,
+      jobSiteId: workType,
+      jobRecruiterId: Number(recruiterId),
 
-        startDate,
-        endDate,
-        jobDescription,
-        requirements: skills,
-        jobPostingPackage: jobPackage,
-      };
-    }
+      startDate,
+      endDate,
+      jobDescription,
+      requirements: skills,
+      jobPostingPackage: jobPackage,
+    };
 
     try {
       const res = await Axios.patch(
