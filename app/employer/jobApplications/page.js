@@ -9,6 +9,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import ImagePreview from "@/components/ImagePreview";
 import ApplicantAnswers from "@/components/ApplicantAnswers";
 
+export const dynamic = "force-dynamic";
 function page({ searchParams }) {
   const [applications, setApplications] = useState();
   const [reload, setReload] = useState(false);
