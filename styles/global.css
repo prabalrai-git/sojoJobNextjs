@@ -21,6 +21,14 @@
 .react-tagsinput--focused {
   border-color: #c5dbff !important;
 }
+:where(.css-1vr7spz).ant-input-affix-wrapper > input.ant-input {
+  padding: 0;
+  font-size: inherit;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background-color: #f4f4f4;
+}
 .react-tagsinput {
   background-color: #fff;
   border: 3px solid #ccc;

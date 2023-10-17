@@ -92,7 +92,10 @@ function TrendingTagsComponent() {
       })}
     </span> */}
       <div className="tw-grid tw-grid-cols-12 tw-gap-1">
-        <p className=" xsm:tw-hidden md:tw-block tw-col-span-2 tw-text-gray-400 tw-font-normal ">
+        <p
+          style={{ fontSize: "15px" }}
+          className=" xsm:tw-hidden md:tw-block tw-col-span-2 tw-text-gray-400 tw-font-normal "
+        >
           Trending Tags:
         </p>
         <div className=" xsm:tw-col-span-full md:tw-col-span-10">
