@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import Dropzone, { useDropzone } from "react-dropzone";
 import "react-quill/dist/quill.snow.css";
 import dayjs from "dayjs";
 import Axios from "@/api/server";
@@ -57,87 +56,90 @@ function page() {
     },
   };
   const getProfileInfo = async () => {
-    try {
-      const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
-      );
+    if (typeof window !== "undefined") {
+      try {
+        const res = await Axios.get(
+          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+        );
 
-      const data = res.data.data;
-      setData({
-        name: data?.name,
-        email: data?.email,
-        contactNumber: data?.contactNumber,
-        currentAddress: data?.currentAddress,
-        permanentAddress: data?.permanentAddress,
-        gender: data?.gender,
-        dateOfBirth: data?.dateOfBirth,
-        profilePicture: data?.profilePicture,
-        cvfile: data?.applicantCV?.cvUrl,
-      });
-      setLogoDisplayImage(data.profilePicture);
-      setCVDisplayUrl([
-        {
-          url: data?.applicantCV?.cvUrl,
-          uid: 1,
-          name: data?.applicantCV?.cvUrl,
-        },
-      ]);
-    } catch (error) {
-      console.log(error);
+        const data = res.data.data;
+        setData({
+          name: data?.name,
+          email: data?.email,
+          contactNumber: data?.contactNumber,
+          currentAddress: data?.currentAddress,
+          permanentAddress: data?.permanentAddress,
+          gender: data?.gender,
+          dateOfBirth: data?.dateOfBirth,
+          profilePicture: data?.profilePicture,
+          cvfile: data?.applicantCV?.cvUrl,
+        });
+        setLogoDisplayImage(data.profilePicture);
+        setCVDisplayUrl([
+          {
+            url: data?.applicantCV?.cvUrl,
+            uid: 1,
+            name: data?.applicantCV?.cvUrl,
+          },
+        ]);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const updateProfile = async () => {
     // return console.log(data);
-    const formData = new FormData();
+    if (typeof window !== "undefined") {
+      const formData = new FormData();
 
-    const cvformData = new FormData();
+      const cvformData = new FormData();
 
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("contactNumber", data.contactNumber);
-    formData.append("currentAddress", data.currentAddress);
-    formData.append("permanentAddress", data.permanentAddress);
-    formData.append("gender", data.gender);
-    formData.append(
-      "dateOfBirth",
-      data?.dateOfBirth ? data.dateOfBirth : new Date()
-    );
-    // formData.append("files", data.cvfile);
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("contactNumber", data.contactNumber);
+      formData.append("currentAddress", data.currentAddress);
+      formData.append("permanentAddress", data.permanentAddress);
+      formData.append("gender", data.gender);
+      formData.append(
+        "dateOfBirth",
+        data?.dateOfBirth ? data.dateOfBirth : new Date()
+      );
+      // formData.append("files", data.cvfile);
 
-    formData.append("profilePicture", data.profilePicture);
-    cvformData.append("cvFile", data.cvfile);
-    try {
-      setLoading(true);
-      if (typeof window !== "undefined") {
+      formData.append("profilePicture", data.profilePicture);
+      cvformData.append("cvFile", data.cvfile);
+      try {
+        setLoading(true);
+
         const res = await Axios.patch(
           `/jobSeeker/updateJobSeekerProfileById/${sessionStorage.getItem(
             "jobSeekerId"
           )}`,
           formData
         );
-      }
-      if (typeof window !== "undefined") {
+
         await Axios.post(
           `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${sessionStorage.getItem(
             "jobSeekerId"
           )}`,
           cvformData
         );
-      }
-      if (res.data.success) {
-        message.success("Profile Updated Successfully");
+
+        if (res.data.success) {
+          message.success("Profile Updated Successfully");
+          setLoading(false);
+
+          setTimeout(() => {
+            router.push("/job-seeker/dashboard");
+          }, 1000);
+        }
+      } catch (error) {
+        console.log(error);
         setLoading(false);
 
-        setTimeout(() => {
-          router.push("/job-seeker/dashboard");
-        }, 1000);
+        message.error(error.response.msg);
       }
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-
-      message.error(error.response.msg);
     }
   };
   const propsCV = {

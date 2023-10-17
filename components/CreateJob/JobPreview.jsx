@@ -25,34 +25,61 @@ function JobPreview({ setStep, data, jobQuestions }) {
   const skipped = false;
 
   const onJobPost = async () => {
-    const dataToPost = {
-      title: data?.title,
-      salary: data?.salary,
-      responsibilities: data.requirements,
-      requirements: data?.requirements,
-      jobLocation: data?.jobLocation,
-      jobPostingPackage: data?.jobPostingPackage,
-      jobCategoryId: data?.jobCategoryId?.value,
-      jobSubCategoryId: data?.jobSubCategoryId?.value,
-      jobShiftId: data?.jobShiftId?.value,
-      jobSiteId: data?.jobSiteId?.value,
-      educationLevelId: data?.educationLevelId?.value,
-      experienceLevelId: data?.experienceLevelId?.value,
-      jobRecruiterId:
-        typeof window !== "undefined" &&
-        Number(sessionStorage.getItem("employerId")),
-      startDate: data?.startDate,
-      endDate: data?.endDate,
-      numberOfVacancies: Number(data?.numberOfVacancies),
-      jobDescription: data?.jobDescription,
-    };
+    if (typeof window !== undefined) {
+      const dataToPost = {
+        title: data?.title,
+        salary: data?.salary,
+        responsibilities: data.requirements,
+        requirements: data?.requirements,
+        jobLocation: data?.jobLocation,
+        jobPostingPackage: data?.jobPostingPackage,
+        jobCategoryId: data?.jobCategoryId?.value,
+        jobSubCategoryId: data?.jobSubCategoryId?.value,
+        jobShiftId: data?.jobShiftId?.value,
+        jobSiteId: data?.jobSiteId?.value,
+        educationLevelId: data?.educationLevelId?.value,
+        experienceLevelId: data?.experienceLevelId?.value,
+        jobRecruiterId: Number(sessionStorage.getItem("employerId")),
+        startDate: data?.startDate,
+        endDate: data?.endDate,
+        numberOfVacancies: Number(data?.numberOfVacancies),
+        jobDescription: data?.jobDescription,
+      };
 
-    try {
-      const res = await Axios.post("/job/postJob", dataToPost);
-      if (res.data.success) {
-        toast.success("Posted Successfully!", {
+      try {
+        const res = await Axios.post("/job/postJob", dataToPost);
+        if (res.data.success) {
+          toast.success("Posted Successfully!", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+        const jobId = res.data.data.id;
+        const addedJobIdJQ = jobQuestions.map((e) => {
+          return { ...e, jobId: jobId };
+        });
+
+        try {
+          addedJobIdJQ.map(async (e) => {
+            await Axios.post("job/postJobQuestion", e);
+          });
+          setTimeout(() => {
+            setStep((prev) => prev + 1);
+          }, 1500);
+        } catch (error) {
+          console.log(error);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong!", {
           position: "top-right",
-          autoClose: 1000,
+          autoClose: 4000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -61,33 +88,6 @@ function JobPreview({ setStep, data, jobQuestions }) {
           theme: "dark",
         });
       }
-      const jobId = res.data.data.id;
-      const addedJobIdJQ = jobQuestions.map((e) => {
-        return { ...e, jobId: jobId };
-      });
-
-      try {
-        addedJobIdJQ.map(async (e) => {
-          await Axios.post("job/postJobQuestion", e);
-        });
-        setTimeout(() => {
-          setStep((prev) => prev + 1);
-        }, 1500);
-      } catch (error) {
-        console.log(error);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong!", {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
     }
   };
   const columns = [

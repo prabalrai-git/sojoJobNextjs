@@ -4,10 +4,7 @@ import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import styles from "@/styles/global.css";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@/styles/navbar.css";
@@ -40,26 +37,27 @@ function RecruiterNavBar() {
   const router = useRouter();
 
   function useOutsideAlerter(ref) {
-    useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setShowDropDown((prev) => !prev);
+    if (typeof window !== "undefined") {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            setShowDropDown((prev) => !prev);
+          }
         }
-      }
-      // Bind the event listener
-      if (typeof window !== "undefined") {
+        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
-      }
-      return () => {
-        // Unbind the event listener on clean up
-        if (typeof window !== "undefined") {
+
+        return () => {
+          // Unbind the event listener on clean up
+
           document.removeEventListener("mousedown", handleClickOutside);
-        }
-      };
-    }, [ref]);
+        };
+      }, [ref]);
+    }
   }
 
   const wrapperRef = useRef(null);
@@ -69,7 +67,7 @@ function RecruiterNavBar() {
     if (typeof window !== "undefined") {
       sessionStorage.clear();
 
-      global.window.location.href = "/";
+      window.location.href = "/";
     }
     // router.push("/");
   };

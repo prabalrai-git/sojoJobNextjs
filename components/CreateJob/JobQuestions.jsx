@@ -4,10 +4,7 @@ import { Input, Select } from "antd";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 function JobQuestions({ setStep, setJobQuestions }) {
-  const [value, setValue] = useState("");
   const [question1, setQuestion1] = useState({
     questionNumber: 1,
     questionType: null,

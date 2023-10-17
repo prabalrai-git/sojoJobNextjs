@@ -15,7 +15,6 @@
 # production
 /build
 
-/app/employer
 
 # misc
 .DS_Store
