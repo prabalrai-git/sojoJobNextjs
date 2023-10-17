@@ -19,8 +19,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useSessionStorage from "@/hooks/useSessionStorage";
 import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
 
-function page({ searchParams }) {
+function page() {
   //drop-down states
 
   const [categories, setCategories] = useState();
@@ -52,21 +53,21 @@ function page({ searchParams }) {
     questionType: null,
     questionText: null,
     requiredAnswer: null,
-    jobId: searchParams.id ? searchParams.id : null,
+    jobId: id,
   });
   const [question2, setQuestion2] = useState({
     questionNumber: 2,
     questionType: null,
     questionText: null,
     requiredAnswer: null,
-    jobId: searchParams.id ? searchParams.id : null,
+    jobId: id,
   });
   const [question3, setQuestion3] = useState({
     questionNumber: 3,
     questionType: null,
     questionText: null,
     requiredAnswer: null,
-    jobId: searchParams.id ? searchParams.id : null,
+    jobId: id,
   });
   const [questions, setQuestions] = useState([]);
   const [questionsToUpdate, setQuestionsToUpdate] = useState();
@@ -75,6 +76,9 @@ function page({ searchParams }) {
     () => dynamic(() => import("react-quill"), { ssr: false }),
     []
   );
+  const searchParams = useSearchParams();
+
+  const id = searchParams.get("id");
 
   useEffect(() => {
     setQuestionsToUpdate([question1, question2, question3]);
@@ -98,10 +102,11 @@ function page({ searchParams }) {
   ];
 
   useEffect(() => {
-    if (searchParams.id) {
+    if (id) {
       getJobById();
+      getJobQuestionsByJobId();
     }
-  }, [searchParams?.id]);
+  }, [id]);
 
   useEffect(() => {
     if (data) {
@@ -124,9 +129,7 @@ function page({ searchParams }) {
 
   const getJobById = async () => {
     try {
-      const res = await Axios.get(
-        `/job/getJobById/${searchParams.id ? searchParams.id : null}`
-      );
+      const res = await Axios.get(`/job/getJobById/${id}`);
       setData(res.data.data);
       console.log(res.data.data);
     } catch (error) {
@@ -136,11 +139,7 @@ function page({ searchParams }) {
 
   const getJobQuestionsByJobId = async () => {
     try {
-      const res = await Axios.get(
-        `/job/getAllJobQuestionsByJobId/${
-          searchParams.id ? searchParams.id : null
-        }`
-      );
+      const res = await Axios.get(`/job/getAllJobQuestionsByJobId/${id}`);
       setQuestions(res.data.data);
       setQuestion1(res.data.data[0]);
       setQuestion2(res.data.data[1]);
@@ -155,7 +154,6 @@ function page({ searchParams }) {
     getAllEmploymetType();
     getAllExperienceLevels();
     getAllWorkTypes();
-    getJobQuestionsByJobId();
     setIsMounted(true);
   }, []);
 
@@ -183,10 +181,7 @@ function page({ searchParams }) {
     };
 
     try {
-      const res = await Axios.patch(
-        `/job/updateJobPost/${searchParams?.id}`,
-        formData
-      );
+      const res = await Axios.patch(`/job/updateJobPost/${id}`, formData);
 
       try {
         if (questions) {

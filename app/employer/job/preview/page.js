@@ -12,7 +12,7 @@ function page() {
   const [questions, setQuestions] = useState();
   const [employer, setEmployer] = useState();
 
-  const searchParams = useSearchParams;
+  const searchParams = useSearchParams();
 
   const id = searchParams.get("id");
 
