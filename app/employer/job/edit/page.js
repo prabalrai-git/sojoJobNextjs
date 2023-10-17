@@ -23,6 +23,10 @@ import { useSearchParams } from "next/navigation";
 
 function page() {
   //drop-down states
+  const ReactQuill = useMemo(
+    () => dynamic(() => import("react-quill"), { ssr: false }),
+    []
+  );
 
   const [categories, setCategories] = useState();
   const [employmentTypes, setEmploymentTypes] = useState();
@@ -72,10 +76,6 @@ function page() {
   const [questions, setQuestions] = useState([]);
   const [questionsToUpdate, setQuestionsToUpdate] = useState();
 
-  const ReactQuill = useMemo(
-    () => dynamic(() => import("react-quill"), { ssr: false }),
-    []
-  );
   const searchParams = useSearchParams();
 
   const id = searchParams.get("id");
