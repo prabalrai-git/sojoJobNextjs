@@ -147,26 +147,26 @@ function page({ searchParams }) {
   const router = useRouter();
 
   const onSubmit = async () => {
-    const formData = {
-      title,
-      jobCategoryId: category,
-      jobShiftId: employmentType,
-      jobLocation: location,
-      experienceLevelId: experience,
-      salary,
-      numberOfVacancies: Number(vacancyNumber),
-      responsibilities: skills,
-      jobSiteId: workType,
-      jobRecruiterId:
-        global.window.sessionStorage &&
-        Number(sessionStorage?.getItem("employerId")),
+    if (typeof window !== "undefined") {
+      const formData = {
+        title,
+        jobCategoryId: category,
+        jobShiftId: employmentType,
+        jobLocation: location,
+        experienceLevelId: experience,
+        salary,
+        numberOfVacancies: Number(vacancyNumber),
+        responsibilities: skills,
+        jobSiteId: workType,
+        jobRecruiterId: Number(sessionStorage.getItem("employerId")),
 
-      startDate,
-      endDate,
-      jobDescription,
-      requirements: skills,
-      jobPostingPackage: jobPackage,
-    };
+        startDate,
+        endDate,
+        jobDescription,
+        requirements: skills,
+        jobPostingPackage: jobPackage,
+      };
+    }
 
     try {
       const res = await Axios.patch(

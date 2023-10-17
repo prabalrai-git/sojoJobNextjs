@@ -27,18 +27,17 @@ function page() {
       setLoading(true);
       const res = await Axios.post("/auth/login", data);
       if (typeof window !== "undefined") {
-        global?.window?.sessionStorage && sessionStorage.clear();
+        sessionStorage.clear();
 
         // return console.log(res.data.data, "he ha");
 
-        global?.window?.sessionStorage &&
-          sessionStorage.setItem("id", res.data.data.id);
-        global?.window?.sessionStorage &&
-          sessionStorage.setItem("tokenSojoJob", res.data.data.token);
-        global?.window?.sessionStorage &&
-          sessionStorage.setItem("employerId", res.data.data.employerId);
-        global?.window?.sessionStorage &&
-          sessionStorage.setItem("userType", res.data.data.userType);
+        sessionStorage.setItem("id", res.data.data.id);
+
+        sessionStorage.setItem("tokenSojoJob", res.data.data.token);
+
+        sessionStorage.setItem("employerId", res.data.data.employerId);
+
+        sessionStorage.setItem("userType", res.data.data.userType);
       }
       if (res.data.success) {
         setLoading(false);

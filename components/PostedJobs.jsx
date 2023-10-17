@@ -70,13 +70,14 @@ function PostedJobs({ fromList, jobStatusFilter }) {
 
   const getAllJobs = async () => {
     try {
-      const res = await Axios.get(
-        `/job/getJobsByRecruiterId?recruiterId=${Number(
-          global?.window?.sessionStorage &&
-            sessionStorage?.getItem("employerId")
-        )}`
-      );
-      setJobs(res.data.data);
+      if (typeof window !== "undefined") {
+        const res = await Axios.get(
+          `/job/getJobsByRecruiterId?recruiterId=${Number(
+            sessionStorage.getItem("employerId")
+          )}`
+        );
+        setJobs(res.data.data);
+      }
     } catch (error) {
       console.log(error);
     }

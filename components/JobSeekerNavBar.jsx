@@ -23,13 +23,12 @@ function JobSeekerNavBar() {
   }, []);
   const getProfileInfo = async () => {
     try {
-      const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${
-          global?.window?.sessionStorage &&
-          sessionStorage.getItem("jobSeekerId")
-        }`
-      );
-      setUserData(res.data.data);
+      if (typeof window !== "undefined") {
+        const res = await Axios.get(
+          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+        );
+        setUserData(res.data.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -64,11 +63,12 @@ function JobSeekerNavBar() {
   useOutsideAlerter(wrapperRef);
 
   const logout = () => {
-    global?.window?.sessionStorage && sessionStorage.clear();
-    // if (global.window.location.href) {
-    //   global.window.location.href = "/";
-    // }
-    router.push("/");
+    if (typeof window !== "undefined") {
+      sessionStorage.clear();
+
+      global.window.location.href = "/";
+    }
+    // router.push("/");
   };
 
   return (

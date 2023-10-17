@@ -19,13 +19,12 @@ function page() {
   }, []);
   const getProfileInfo = async () => {
     try {
-      const res = await Axios.get(
-        `/jobSeeker/getJobSeekerById/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("jobSeekerId")
-        }`
-      );
-      setUserData(res.data.data);
+      if (typeof window !== "undefined") {
+        const res = await Axios.get(
+          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+        );
+        setUserData(res.data.data);
+      }
       console.log(res.data.data);
     } catch (error) {
       console.log(error);

@@ -28,12 +28,13 @@ function page({ searchParams }) {
   };
   const getEmployerProfile = async () => {
     try {
-      const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("employerId")
-        }`
-      );
+      if (typeof window !== "undefined") {
+        const res = await Axios.get(
+          `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
+            "employerId"
+          )}`
+        );
+      }
       // console.log(res.data.data, "emp profile");
       setEmployer(res.data.data);
     } catch (error) {}

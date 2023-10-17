@@ -50,13 +50,14 @@ function page() {
     formData.append("companyWebsiteURL", companyWebsiteURL);
     formData.append("name", name);
     try {
-      const res = await Axios.patch(
-        `/jobRecruiter/updateJobRecruiterProfileById/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("employerId")
-        }`,
-        formData
-      );
+      if (typeof window !== "undefined") {
+        const res = await Axios.patch(
+          `/jobRecruiter/updateJobRecruiterProfileById/${sessionStorage?.getItem(
+            "employerId"
+          )}`,
+          formData
+        );
+      }
       if (res.data.success) {
         toast.success("Profile Updated Successfully!", {
           position: "top-right",
@@ -108,14 +109,15 @@ function page() {
 
   const getProfileInformation = async () => {
     try {
-      const res = await Axios.get(
-        `/jobRecruiter/getJobRecruiterById/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("employerId")
-        }`
-      );
+      if (typeof window !== "undefined") {
+        const res = await Axios.get(
+          `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
+            "employerId"
+          )}`
+        );
 
-      setData(res.data.data);
+        setData(res.data.data);
+      }
     } catch (error) {
       console.log(error);
     }

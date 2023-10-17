@@ -3,9 +3,9 @@ let isAuthenticated = false;
 export const checkEmployerAuth = () => {
   if (isAuthenticated === false) {
     const userType =
-      global?.window?.sessionStorage && sessionStorage?.getItem("userType");
+      typeof window !== "undefined" && sessionStorage.getItem("userType");
     const employerId =
-      global?.window?.sessionStorage && sessionStorage?.getItem("employerId");
+      typeof window !== "undefined" && sessionStorage?.getItem("employerId");
     isAuthenticated = userType === "employer";
   }
   return isAuthenticated;
@@ -13,7 +13,7 @@ export const checkEmployerAuth = () => {
 
 export const checkEmployeeAuth = () => {
   const userType =
-    global?.window?.sessionStorage && sessionStorage?.getItem("userType");
+    typeof window !== "undefined" && sessionStorage?.getItem("userType");
 
   if (userType === "job-seeker") {
     return true;

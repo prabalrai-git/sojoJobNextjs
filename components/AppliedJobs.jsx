@@ -95,23 +95,24 @@ function AppliedJobs({ fromList }) {
 
   const getJobsAppliedByApplicant = async () => {
     try {
-      const res = await Axios.get(
-        `/application/getApplicationsBySeekerId/${
-          global?.window?.sessionStorage &&
-          sessionStorage?.getItem("jobSeekerId")
-        }`
-      );
-      const data = res.data.data;
-      const structuredData = data.map((item) => {
-        return {
-          jobTitle: item?.job?.title,
-          employer: item?.jobRecruiter?.companyName,
-          status: item?.status,
-          jobType: item?.job?.jobShift?.title,
-          deadline: item?.job?.endDate,
-        };
-      });
-      setData(structuredData);
+      if (typeof window !== "undefined") {
+        const res = await Axios.get(
+          `/application/getApplicationsBySeekerId/${sessionStorage.getItem(
+            "jobSeekerId"
+          )}`
+        );
+        const data = res.data.data;
+        const structuredData = data.map((item) => {
+          return {
+            jobTitle: item?.job?.title,
+            employer: item?.jobRecruiter?.companyName,
+            status: item?.status,
+            jobType: item?.job?.jobShift?.title,
+            deadline: item?.job?.endDate,
+          };
+        });
+        setData(structuredData);
+      }
     } catch (error) {
       console.log(error);
     }
