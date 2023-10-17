@@ -58,11 +58,10 @@ function page() {
   };
   const getProfileInfo = async () => {
     try {
-      if (typeof window !== "undefined") {
-        const res = await Axios.get(
-          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
-        );
-      }
+      const res = await Axios.get(
+        `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+      );
+
       const data = res.data.data;
       setData({
         name: data?.name,
