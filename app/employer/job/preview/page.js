@@ -5,22 +5,27 @@ import Axios from "@/api/server";
 import Image from "next/image";
 import Link from "next/link";
 import JobPreviewList from "@/components/JobPreviewList";
+import { useSearchParams } from "next/navigation";
 
-function page({ searchParams }) {
+function page() {
   const [data, setData] = useState();
   const [questions, setQuestions] = useState();
   const [employer, setEmployer] = useState();
 
+  const searchParams = useSearchParams;
+
+  const id = searchParams.get("id");
+
   useEffect(() => {
     getJobById();
     getJobQuestions();
-  }, [searchParams.id]);
+  }, [id]);
   useEffect(() => {
     getEmployerProfile();
   }, []);
   const getJobById = async () => {
     try {
-      const res = await Axios.get(`/job/getJobById/${searchParams?.id}`);
+      const res = await Axios.get(`/job/getJobById/${id}`);
       setData(res.data.data);
     } catch (error) {
       console.log(error);
@@ -42,9 +47,7 @@ function page({ searchParams }) {
 
   const getJobQuestions = async () => {
     try {
-      const res = await Axios.get(
-        `/job/getAllJobQuestionsByJobId/${searchParams?.id}`
-      );
+      const res = await Axios.get(`/job/getAllJobQuestionsByJobId/${id}`);
       setQuestions(res.data.data);
       console.log(res.data.data);
     } catch (error) {
@@ -89,7 +92,7 @@ function page({ searchParams }) {
         data={data}
         columns={columns}
         questions={questions}
-        id={searchParams?.id}
+        id={id}
         employer={employer}
       />
     </div>
