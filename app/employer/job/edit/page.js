@@ -18,6 +18,7 @@ import JobPackage from "@/components/JobPackage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useSessionStorage from "@/hooks/useSessionStorage";
+import dynamic from "next/dynamic";
 
 function page({ searchParams }) {
   //drop-down states

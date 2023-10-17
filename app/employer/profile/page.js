@@ -15,6 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import useSessionStorage from "@/hooks/useSessionStorage";
+import dynamic from "next/dynamic";
 
 function page() {
   const [data, setData] = useState();
