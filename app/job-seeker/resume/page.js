@@ -5,9 +5,6 @@ import jsPDF from "jspdf";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { Form } from "react-bootstrap";
-import Dropzone, { useDropzone } from "react-dropzone";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Axios from "@/api/server";
 

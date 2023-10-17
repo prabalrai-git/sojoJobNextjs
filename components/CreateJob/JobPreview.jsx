@@ -25,27 +25,27 @@ function JobPreview({ setStep, data, jobQuestions }) {
   const skipped = false;
 
   const onJobPost = async () => {
-    if (typeof window !== "undefined") {
-      const dataToPost = {
-        title: data?.title,
-        salary: data?.salary,
-        responsibilities: data.requirements,
-        requirements: data?.requirements,
-        jobLocation: data?.jobLocation,
-        jobPostingPackage: data?.jobPostingPackage,
-        jobCategoryId: data?.jobCategoryId?.value,
-        jobSubCategoryId: data?.jobSubCategoryId?.value,
-        jobShiftId: data?.jobShiftId?.value,
-        jobSiteId: data?.jobSiteId?.value,
-        educationLevelId: data?.educationLevelId?.value,
-        experienceLevelId: data?.experienceLevelId?.value,
-        jobRecruiterId: Number(sessionStorage.getItem("employerId")),
-        startDate: data?.startDate,
-        endDate: data?.endDate,
-        numberOfVacancies: Number(data?.numberOfVacancies),
-        jobDescription: data?.jobDescription,
-      };
-    }
+    const dataToPost = {
+      title: data?.title,
+      salary: data?.salary,
+      responsibilities: data.requirements,
+      requirements: data?.requirements,
+      jobLocation: data?.jobLocation,
+      jobPostingPackage: data?.jobPostingPackage,
+      jobCategoryId: data?.jobCategoryId?.value,
+      jobSubCategoryId: data?.jobSubCategoryId?.value,
+      jobShiftId: data?.jobShiftId?.value,
+      jobSiteId: data?.jobSiteId?.value,
+      educationLevelId: data?.educationLevelId?.value,
+      experienceLevelId: data?.experienceLevelId?.value,
+      jobRecruiterId:
+        typeof window !== "undefined" &&
+        Number(sessionStorage.getItem("employerId")),
+      startDate: data?.startDate,
+      endDate: data?.endDate,
+      numberOfVacancies: Number(data?.numberOfVacancies),
+      jobDescription: data?.jobDescription,
+    };
 
     try {
       const res = await Axios.post("/job/postJob", dataToPost);

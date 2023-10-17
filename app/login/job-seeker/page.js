@@ -134,7 +134,7 @@ function page() {
             </Link>
           </div>
           {/* start of form */}
-          <div class="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
+          <div className="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
             <Form
               requiredMark={false}
               onFinish={onFinish}

@@ -4,37 +4,42 @@ import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import styles from "@/styles/global.css";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@/styles/navbar.css";
 import Axios from "@/api/server";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import useSessionStorage from "@/hooks/useSessionStorage";
 
 function JobSeekerNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
   const [userData, setUserData] = useState();
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    getProfileInfo();
+    setIsMounted(true);
   }, []);
+
+  const id = useSessionStorage("jobSeekerId");
+
+  useEffect(() => {
+    if (id) {
+      getProfileInfo();
+    }
+  }, [id]);
+
   const getProfileInfo = async () => {
     try {
-      if (typeof window !== "undefined") {
-        const res = await Axios.get(
-          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
-        );
-        setUserData(res.data.data);
-      }
+      const res = await Axios.get(`/jobSeeker/getJobSeekerById/${id}`);
+      setUserData(res.data.data);
+      console.log(res.data.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const router = useRouter();
+  // const router = useRouter();
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
@@ -66,7 +71,7 @@ function JobSeekerNavBar() {
     if (typeof window !== "undefined") {
       sessionStorage.clear();
 
-      global.window.location.href = "/";
+      window.location.href = "/";
     }
     // router.push("/");
   };

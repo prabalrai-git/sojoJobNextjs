@@ -139,8 +139,11 @@ function AppliedJobs({ fromList }) {
             </h1>
           </div>
           {!fromList && (
-            <Link className="tw-self-center" href={"/employer/job/list"}>
-              <h1 className=" tw-text-primary">SEE ALL</h1>
+            <Link
+              className="tw-self-center tw-no-underline "
+              href={"/employer/job/list"}
+            >
+              <p className=" tw-text-primary">SEE ALL</p>
             </Link>
           )}
         </div>

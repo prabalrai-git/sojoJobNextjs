@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, DatePicker, Input } from "antd";
+import { DatePicker, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -9,12 +9,12 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import dayjs from "dayjs";
 import Axios from "@/api/server";
-import ImgCrop from "antd-img-crop";
 import { UploadOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
+import { Upload } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import useSessionStorage from "@/hooks/useSessionStorage";
 
 function page() {
   const [data, setData] = useState();
@@ -36,6 +36,8 @@ function page() {
 
   const router = useRouter();
 
+  const employerId = useSessionStorage("employerId");
+
   const onSubmit = async () => {
     const formData = new FormData();
 
@@ -50,14 +52,11 @@ function page() {
     formData.append("companyWebsiteURL", companyWebsiteURL);
     formData.append("name", name);
     try {
-      if (typeof window !== "undefined") {
-        const res = await Axios.patch(
-          `/jobRecruiter/updateJobRecruiterProfileById/${sessionStorage?.getItem(
-            "employerId"
-          )}`,
-          formData
-        );
-      }
+      const res = await Axios.patch(
+        `/jobRecruiter/updateJobRecruiterProfileById/${employerId}`,
+        formData
+      );
+
       if (res.data.success) {
         toast.success("Profile Updated Successfully!", {
           position: "top-right",
@@ -104,20 +103,18 @@ function page() {
   }, [data]);
 
   useEffect(() => {
-    getProfileInformation();
-  }, []);
+    if (employerId) {
+      getProfileInformation();
+    }
+  }, [employerId]);
 
   const getProfileInformation = async () => {
     try {
-      if (typeof window !== "undefined") {
-        const res = await Axios.get(
-          `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
-            "employerId"
-          )}`
-        );
+      const res = await Axios.get(
+        `/jobRecruiter/getJobRecruiterById/${employerId}`
+      );
 
-        setData(res.data.data);
-      }
+      setData(res.data.data);
     } catch (error) {
       console.log(error);
     }
