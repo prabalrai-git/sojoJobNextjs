@@ -42,7 +42,7 @@ function page() {
   };
   return (
     <>
-      <div className=" tw-px-20 tw-pb-12 ">
+      <div className="  xsm:tw-px-5 lg:tw-px-16 tw-pb-12 ">
         <div className="tw-pt-10  tw-pb-4">
           <h1 className="tw-text-3xl tw-mb-4 tw-font-semibold">
             Welcome User!

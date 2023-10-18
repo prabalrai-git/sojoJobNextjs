@@ -80,14 +80,14 @@ function JobSeekerNavBar() {
     <Navbar
       collapseOnSelect
       // expand="lg"
-      className="bg-body-tertiary tw-px-20 tw-py-3 "
+      className="bg-body-tertiary lg:tw-px-12 tw-py-3 xsm:tw-px-2 "
     >
       <Container className="tw-max-w-screen-2xl pnavbar">
         <Navbar.Brand href="/">
           <Image
-            className="tw-object-contain tw-cursor-pointer "
+            className="tw-object-contain tw-cursor-pointer  "
             src={"/logo.png"}
-            width={230}
+            width={200}
             height={230}
             alt="logo.png"
           />
@@ -100,11 +100,14 @@ function JobSeekerNavBar() {
           </Nav>
           <Nav>
             <Nav.Link className="tw-self-center" href="/about">
-              <h2 className="tw-font-medium tw-text-lg tw-text-black hover:tw-underline">
+              <h2 className="tw-font-medium tw-text-lg tw-text-black hover:tw-underline xsm:tw-hidden 800:tw-block">
                 About Us
               </h2>
             </Nav.Link>
-            <Nav.Link href="#deets">
+            <Nav.Link
+              onClick={() => setShowDropDown((prev) => !prev)}
+              href="#deets"
+            >
               <Image
                 src={
                   userData?.profilePicture
@@ -123,8 +126,8 @@ function JobSeekerNavBar() {
               onClick={() => setShowDropDown((prev) => !prev)}
               href="#memes"
             >
-              <div className="tw-flex tw-flex-row ">
-                <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4 tw-capitalize">
+              <div className="800:tw-flex  tw-flex-row xsm:tw-hidden ">
+                <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4 tw-capitalize ">
                   {userData?.name}
                 </h2>
                 <Image
@@ -142,10 +145,10 @@ function JobSeekerNavBar() {
       {showDropDown && (
         <div
           ref={wrapperRef}
-          className=" tw-drop-shadow-md tw-absolute tw-right-36 tw-top-24 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-6 tw-pr-52 tw-py-6"
+          className=" tw-drop-shadow-md tw-absolute xsm:tw-right-5 md:tw-right-16  tw-top-24 tw-bg-white xsm:tw-w-11/12 md:tw-w-5/12 lg:tw-w-4/12 xl:tw-w-3/12 tw-z-10 tw-rounded-lg tw-pl-6 tw-pr-12 tw-py-6"
         >
           <ul onClick={() => setShowDropDown((prev) => !prev)}>
-            <Link href={"/job-seeker/dashboard"}>
+            <Link className="tw-no-underline" href={"/job-seeker/dashboard"}>
               <li className="tw-flex tw-flex-row tw-mb-3">
                 <Image
                   src={"/home.png"}
@@ -159,7 +162,7 @@ function JobSeekerNavBar() {
                 </p>
               </li>
             </Link>
-            <Link href={"/job-seeker/profile"}>
+            <Link className="tw-no-underline" href={"/job-seeker/profile"}>
               <li className="tw-flex tw-flex-row tw-mb-3">
                 <Image
                   src={"/userg.png"}

@@ -162,7 +162,7 @@ function page() {
     },
   };
   return (
-    <div className="tw-pt-10 tw-mx-20 tw-pb-10">
+    <div className="tw-pt-10  xsm:tw-mx-5 lg:tw-mx-16 tw-pb-10">
       <div className="tw-flex tw-flex-row tw-mb-10">
         <Link href={"/job-seeker/dashboard"}>
           <Image
@@ -177,7 +177,7 @@ function page() {
           Profile Setup
         </h1>
       </div>
-      <div className="tw-bg-white tw-rounded-lg tw-w-full tw-mt-10 tw-px-10 tw-py-6 ">
+      <div className="tw-bg-white tw-rounded-lg tw-w-full tw-mt-10 800:tw-px-10 xsm:tw-px-4 tw-py-6 ">
         <div className="tw-flex tw-flex-row tw-justify-between">
           <div className="tw-flex tw-flex-row">
             <Image
@@ -195,7 +195,7 @@ function page() {
         <div className="tw-mt-10">
           <Form>
             <Form.Group
-              className="mb-4 tw-grid tw-grid-cols-5 tw-gap-4"
+              className="mb-4 xsm:tw-grid-cols-1 tw-grid 800:tw-grid-cols-5 tw-gap-4"
               controlId="exampleForm.ControlInput1"
             >
               <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 ">
@@ -274,8 +274,8 @@ function page() {
                 </div>
               </div>
 
-              <div className="tw-flex tw-flex-row tw-mt-10 tw-justify-between">
-                <div className="tw-flex tw-flex-row">
+              <div className="tw-flex tw-flex-row tw-mt-10 tw-justify-between ">
+                <div className="tw-flex tw-flex-row  ">
                   <Image
                     src={"/borderBlack.png"}
                     width={10}
@@ -290,7 +290,7 @@ function page() {
               </div>
             </Form.Group>
             <Form.Group
-              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
+              className="mb-4 tw-grid 800:tw-grid-cols-2 xsm:tw-grid-cols-1 tw-gap-4"
               controlId="exampleForm.ControlInput1"
             >
               <div className="tw-flex tw-flex-col">
@@ -323,7 +323,7 @@ function page() {
               </div>
             </Form.Group>
             <Form.Group
-              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
+              className="mb-4 tw-grid 800:tw-grid-cols-2 xsm:tw-grid-cols-1 tw-gap-4"
               controlId="exampleForm.ControlInput1"
             >
               <div>
@@ -356,7 +356,7 @@ function page() {
               </div>
             </Form.Group>
             <Form.Group
-              className="mb-4 tw-grid tw-grid-cols-2 tw-gap-4"
+              className="mb-4 tw-grid 800:tw-grid-cols-2 xsm:tw-grid-cols-1 tw-gap-4"
               controlId="exampleForm.ControlInput1"
             >
               <div>

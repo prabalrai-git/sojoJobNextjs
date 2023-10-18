@@ -83,7 +83,7 @@ function RecruiterNavBar() {
           <Image
             className="tw-object-contain tw-cursor-pointer tw-w-52 "
             src={"/logo.png"}
-            width={230}
+            width={200}
             height={230}
             alt="logo.png"
           />

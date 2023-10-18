@@ -138,14 +138,14 @@ function AppliedJobs({ fromList }) {
               Jobs You Applied
             </h1>
           </div>
-          {!fromList && (
+          {/* {!fromList && (
             <Link
               className="tw-self-center tw-no-underline "
               href={"/employer/job/list"}
             >
               <p className=" tw-text-primary">SEE ALL</p>
             </Link>
-          )}
+          )} */}
         </div>
         {/* <Image
         src={"/files.png"}
