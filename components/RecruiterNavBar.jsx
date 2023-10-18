@@ -142,36 +142,38 @@ function RecruiterNavBar() {
       {showDropDown && (
         <div
           ref={wrapperRef}
-          className=" tw-drop-shadow-md tw-absolute md:tw-right-10 tw-top-20 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-6 tw-pr-52 tw-py-6 xsm:tw-right-0 xsm:tw-w-full md:tw-w-4/12 lg:tw-w-3/12"
+          className=" tw-drop-shadow-md tw-absolute md:tw-right-10 tw-top-20 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-3 tw-pr-20 tw-py-4 xsm:tw-right-0 xsm:tw-w-full md:tw-w-4/12 lg:tw-w-3/12"
         >
           <ul onClick={() => setShowDropDown((prev) => !prev)}>
-            <Link href={"/employer/dashboard"}>
-              <li className="tw-flex tw-flex-row tw-mb-3">
-                <Image
-                  src={"/home.png"}
-                  width={16}
-                  height={16}
-                  alt="home"
-                  className="tw-object-contain tw-mr-4"
-                />
-                <p className="tw-text-base tw-font-medium tw-text-gray-600">
-                  Dashboard
-                </p>
-              </li>
+            <Link
+              className="tw-no-underline tw-flex tw-flex-row"
+              href={"/employer/dashboard"}
+            >
+              <Image
+                src={"/home.png"}
+                width={20}
+                height={20}
+                alt="home"
+                className="tw-object-contain tw-mr-4"
+              />
+              <p className="tw-text-base tw-font-medium tw-text-gray-600">
+                Dashboard
+              </p>
             </Link>
-            <Link href={"/employer/job/list"}>
-              <li className="tw-flex tw-flex-row tw-mb-3">
-                <Image
-                  src={"/reportg.png"}
-                  width={16}
-                  height={16}
-                  alt="home"
-                  className="tw-object-contain tw-mr-4"
-                />
-                <p className="tw-text-base tw-font-medium tw-text-gray-600">
-                  Job Applications
-                </p>
-              </li>
+            <Link
+              className="tw-no-underline tw-flex tw-flex-row  "
+              href={"/employer/job/list"}
+            >
+              <Image
+                src={"/reportg.png"}
+                width={20}
+                height={20}
+                alt="home"
+                className="tw-object-contain tw-mr-4"
+              />
+              <p className="tw-text-base tw-font-medium tw-text-gray-600">
+                Job Applications
+              </p>
             </Link>
 
             <li
@@ -180,8 +182,8 @@ function RecruiterNavBar() {
             >
               <Image
                 src={"/logout.png"}
-                width={16}
-                height={16}
+                width={20}
+                height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
               />

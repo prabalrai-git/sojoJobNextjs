@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Axios from "@/api/server";
@@ -12,38 +12,28 @@ import { Input, Form, Button } from "antd";
 function page() {
   const router = useRouter();
 
-  const [email, setEmail] = useState();
+  const [loading, setLoading] = useState(false);
 
   const [mPin, setMPin] = useState();
-  const [loading, setLoading] = useState(false);
+
+  const searchParams = useSearchParams();
 
   const onFinish = async () => {
     const data = {
-      email,
+      userId: searchParams.get("userId"),
+      token: searchParams.get("token"),
       mPin,
     };
-
+    // return console.log(data);
     try {
       setLoading(true);
-      const res = await Axios.post("/auth/login", data);
-      if (typeof window !== "undefined") {
-        sessionStorage.clear();
+      const res = await Axios.post("/auth/resetPassword", data);
 
-        // return console.log(res.data.data, "he ha");
-
-        sessionStorage.setItem("id", res.data.data.id);
-
-        sessionStorage.setItem("tokenSojoJob", res.data.data.token);
-
-        sessionStorage.setItem("employerId", res.data.data.employerId);
-
-        sessionStorage.setItem("userType", res.data.data.userType);
-      }
       if (res.data.success) {
         setLoading(false);
-        toast.success("Login Successful!", {
+        toast.success("M-pin changed successfuly!", {
           position: "top-right",
-          autoClose: 500,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -53,8 +43,12 @@ function page() {
         });
 
         setTimeout(() => {
-          router.push("/employer/dashboard");
-        }, 500);
+          router.push(
+            searchParams.get("userType") === "employer"
+              ? "/login/employer"
+              : "/login/job-seeker"
+          );
+        }, 1500);
       }
     } catch (error) {
       setLoading(false);
@@ -78,61 +72,28 @@ function page() {
       <ToastContainer />
 
       <div
-        style={{ height: "120vh" }}
+        style={{ height: "100vh" }}
         className="tw-ml-20 xsm:tw-ml-0 md:tw-ml-5 lg:tw-ml-20 tw-grid tw-grid-cols-2 xsm:tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 "
       >
         <div className="tw-px-5 ">
-          <div className="tw-flex tw-flex-row tw-justify-between tw-mt-20  xsm:tw-mr-0 xl:tw-mr-16  ">
+          <div className="tw-flex tw-flex-row tw-justify-between tw-mt-20  xsm:tw-mr-0 xl:tw-mr-16 tw-items-center  ">
             <Link href={"/"} className="tw-no-underline tw-text-black">
-              <div className="tw-flex tw-flex-row tw-self-center">
-                <div className="mt-1">
-                  <Image
-                    src={"/arrow.png"}
-                    width={20}
-                    height={20}
-                    //   style={{ height: "20px" }}
-                    alt="back"
-                    className="tw-object-contain tw-mr-3 "
-                  />
-                </div>
-
-                <p className=""> Go back to Homepage</p>
-              </div>
-            </Link>
-            <Link className="tw-no-underline" href={"/register/employer"}>
-              <p className="tw-text-primary tw-font-base xsm:tw-hidden sm:tw-block hover:tw-text-buttonHover">
-                New to SojoJob ? Sign up here
-              </p>
-            </Link>
-          </div>
-          <h1 className="tw-my-10 tw-mt-20 tw-text-3xl">Sign in to Sojojob</h1>
-          <p className="tw-mb-5 tw-font-medium tw-text-gray-800">You are a</p>
-          <div className="tw-grid xsm:tw-grid-cols-2 tw-gap-10 xsm:tw-pr-0 xl:tw-grid-cols-3">
-            <Link href={"/login/job-seeker"} className="tw-no-underline">
-              <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-border-2 tw-border-chooseBg">
+              <div className="tw-flex tw-flex-row tw-items-center tw-justify-center">
                 <Image
-                  src={"/user.png"}
-                  width={50}
-                  height={50}
-                  alt="person.png"
-                  className="tw-object-contain tw-mt-5"
+                  src={"/arrow.png"}
+                  width={30}
+                  height={30}
+                  //   style={{ height: "20px" }}
+                  alt="back"
+                  className="tw-object-contain tw-mr-5 tw-self-center  "
                 />
-                <p className="tw-font-medium tw-mt-2 tw-text-black tw-no-underline">
-                  Job Seeker
-                </p>
+                <div className="tw-flex tw-justify-center tw-items-center  ">
+                  <p className="tw-text-xl tw-mt-3 ">Cancel</p>
+                </div>
               </div>
             </Link>
-            <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-5 tw-rounded-lg  tw-bg-chooseBg tw-border-2 tw-border-primary">
-              <Image
-                src={"/businessman.png"}
-                width={50}
-                height={50}
-                alt="person.png"
-                className="tw-object-contain tw-mt-5"
-              />
-              <p className="tw-font-medium tw-mt-2">Job Provider</p>
-            </div>
           </div>
+
           {/* start of form */}
           <div className="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
             <Form
@@ -142,28 +103,9 @@ function page() {
               layout="vertical"
             >
               <Form.Item
-                name="emailAddress"
-                label=" Email address"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your email!",
-                  },
-                ]}
-              >
-                <Input
-                  type="email"
-                  className="tw-h-12 tw-drop-shadow-sm"
-                  id="emailAddress"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Form.Item>
-
-              <Form.Item
                 name="mPin"
-                label="M-pin"
+                label="New M-pin"
+                hasFeedback
                 rules={[
                   {
                     required: true,
@@ -174,18 +116,40 @@ function page() {
                 <Input.Password
                   type="password"
                   id="mPin"
-                  className="tw-h-12 tw-drop-shadow-sm"
+                  className=" tw-h-12  tw-drop-shadow-sm "
                   aria-describedby="passwordHelpBlock"
-                  placeholder="Enter your m-pin"
                   value={mPin}
                   onChange={(e) => setMPin(e.target.value)}
                 ></Input.Password>
               </Form.Item>
-              <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-0 ">
-                <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-base tw-cursor-pointer hover:tw-text-buttonHover">
-                  Forgot Password?
-                </p>
-              </div>
+
+              <Form.Item
+                label="Confirm New M-pin"
+                name="comfirmM-pin"
+                dependencies={["mPin"]}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: "Please confirm your M-pin!",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("mPin") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The new M-pin that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password className="tw-h-12 " />
+              </Form.Item>
+
               <Form.Item>
                 <Button
                   disabled={loading}
@@ -193,17 +157,12 @@ function page() {
                   htmlType="submit"
                   className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-mt-5 tw-text-white tw-py-3 tw-text-lg tw-font-medium tw-px-20 tw-h-12 tw-flex tw-justify-center tw-items-center"
                 >
-                  Sign In
+                  Continue
                 </Button>
               </Form.Item>
             </Form>
           </div>
           {/* end of form */}
-          <Link className="tw-no-underline" href={"/register/employer"}>
-            <p className="tw-mt-5 tw-text-primary tw-font-base tw-cursor-pointer hover:tw-text-buttonHover">
-              Don't have an account?
-            </p>
-          </Link>
         </div>
         {/*  */}
         <div className="tw-relative xsm:tw-hidden md:tw-block ">
@@ -217,7 +176,7 @@ function page() {
             width={600}
             height={300}
             alt="auth.png"
-            style={{ height: "100%" }}
+            style={{ height: "100vh" }}
             className="tw-w-full tw-object-cover"
           />
 
@@ -242,9 +201,9 @@ function page() {
               right: 0,
               marginLeft: "auto",
               marginRight: "auto",
-              bottom: "23%",
+              bottom: "20%",
             }}
-            className="object-contain tw-absolute tw-text-center text-white tw-text-3xl tw-font-semibold  "
+            className="object-contain tw-absolute tw-text-center text-white tw-text-3xl tw-font-semibold "
           >
             100+ Successful Stories <br /> Create from Sojojob
           </h2>

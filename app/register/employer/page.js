@@ -305,7 +305,7 @@ function page() {
             height={300}
             alt="auth.png"
             style={{ height: "100%" }}
-            className="tw-w-full tw-object-fill"
+            className="tw-w-full tw-object-cover"
           />
 
           <Image
@@ -331,7 +331,7 @@ function page() {
               marginRight: "auto",
               bottom: "47%",
             }}
-            className="object-contain tw-absolute tw-text-center text-white "
+            className="object-contain tw-absolute tw-text-center text-white tw-text-3xl tw-font-semibold  "
           >
             100+ Successful Stories <br /> Create from Sojojob
           </h2>

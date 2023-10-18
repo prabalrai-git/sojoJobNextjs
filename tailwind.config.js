@@ -42,7 +42,7 @@ module.exports = {
         esewaTheme: "#61BB47",
         aboutGrey: "#EAEAEA",
         buttonHover: "#159149",
-        overlayLogin: "rgba(39, 174, 97,0.88)",
+        overlayLogin: "rgba(39, 174, 97,0.72)",
         iconAccent: "#32B368",
         chooseBg: "#D3EFDF",
         employerBg: "#EAEAEA",
