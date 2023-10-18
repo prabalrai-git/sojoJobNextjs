@@ -8,14 +8,19 @@ import RelatedJobs from "@/components/RelatedJobs";
 import OtherJobs from "@/components/OtherJobs";
 import SendApplicationModal from "@/components/SendApplicationModal";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { useSearchParams } from "next/navigation";
 
-function page({ searchParams }) {
+function page() {
   const [jobDetails, setJobsDetails] = useState();
   const [open, setOpen] = useState(false);
   const [jobQuestions, setJobQuestions] = useState(null);
   const showModal = () => {
     setOpen(true);
   };
+
+  const searchParams = useSearchParams();
+
+  const id = searchParams.get("id");
 
   const jobDescription = (
     <div
@@ -33,10 +38,10 @@ function page({ searchParams }) {
   );
   useEffect(() => {
     getJobDetails();
-  }, [searchParams.id]);
+  }, [id]);
   const getJobDetails = async () => {
     try {
-      const res = await Axios.get(`/job/getJobById/${searchParams.id}`);
+      const res = await Axios.get(`/job/getJobById/${id}`);
       setJobsDetails(res.data.data);
       setJobQuestions(res.data.data?.jobQuestions);
     } catch (error) {
