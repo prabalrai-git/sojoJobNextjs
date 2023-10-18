@@ -142,7 +142,7 @@ function RecruiterNavBar() {
       {showDropDown && (
         <div
           ref={wrapperRef}
-          className=" tw-drop-shadow-md tw-absolute md:tw-right-10 tw-top-20 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-3 tw-pr-20 tw-py-4 xsm:tw-right-0 xsm:tw-w-full md:tw-w-4/12 lg:tw-w-3/12"
+          className=" tw-drop-shadow-md tw-absolute md:tw-right-10 tw-top-20 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-6 tw-pr-20 tw-py-4 xsm:tw-right-0 xsm:tw-w-full md:tw-w-4/12 lg:tw-w-3/12"
         >
           <ul onClick={() => setShowDropDown((prev) => !prev)}>
             <Link
