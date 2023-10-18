@@ -53,6 +53,7 @@ function SendApplicationModal({
       }, 2000);
     }
   }, [cvEmpty]);
+  const [form] = Form.useForm();
 
   const getLoggedInJobSeekerData = async () => {
     try {
@@ -264,8 +265,6 @@ function SendApplicationModal({
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-
-  const [form] = Form.useForm();
 
   return (
     <Modal
