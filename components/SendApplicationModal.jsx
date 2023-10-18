@@ -352,14 +352,15 @@ function SendApplicationModal({
                 Select File
               </Button>
             </Upload>
-            {loggedInUserData && !cvDisplayUrl[0]?.url && (
-              <Link
-                className="tw-text-rose-400 hover:tw-text-red"
-                href={"/job-seeker/profile"}
-              >
-                Please upload the CV to complete your profile!
-              </Link>
-            )}
+            {loggedInUserData &&
+              (!cvDisplayUrl || !cvDisplayUrl[0] || !cvDisplayUrl[0]?.url) && (
+                <Link
+                  className="tw-text-rose-400 hover:tw-text-red"
+                  href={"/job-seeker/profile"}
+                >
+                  Please upload the CV to complete your profile!
+                </Link>
+              )}
             {cvEmpty && (
               <p className="tw-text-red tw-mt-3">Please upload the CV!</p>
             )}
