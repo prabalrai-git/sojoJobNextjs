@@ -187,7 +187,7 @@ function JobSeekerNavBar() {
                 </p>
               </li>
             </Link> */}
-            <Link href={"/job-seeker/settings"}>
+            {/* <Link href={"/job-seeker/settings"}>
               <li className="tw-flex tw-flex-row tw-mb-3">
                 <Image
                   src={"/settings.png"}
@@ -200,7 +200,7 @@ function JobSeekerNavBar() {
                   Settings
                 </p>
               </li>
-            </Link>
+            </Link> */}
 
             <li className="tw-flex tw-flex-row tw-mb-3">
               <Image
