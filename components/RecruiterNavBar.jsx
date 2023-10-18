@@ -146,7 +146,7 @@ function RecruiterNavBar() {
         >
           <ul onClick={() => setShowDropDown((prev) => !prev)}>
             <Link
-              className="tw-no-underline tw-flex tw-flex-row"
+              className="tw-no-underline tw-flex tw-flex-row tw-my-3"
               href={"/employer/dashboard"}
             >
               <Image
@@ -161,7 +161,7 @@ function RecruiterNavBar() {
               </p>
             </Link>
             <Link
-              className="tw-no-underline tw-flex tw-flex-row  "
+              className="tw-no-underline tw-flex tw-flex-row tw-my-3  "
               href={"/employer/job/list"}
             >
               <Image
@@ -178,7 +178,7 @@ function RecruiterNavBar() {
 
             <li
               onClick={() => logout()}
-              className="tw-flex tw-flex-row tw-mb-3 tw-cursor-pointer"
+              className="tw-flex tw-flex-row tw-my-3 tw-cursor-pointer"
             >
               <Image
                 src={"/logout.png"}
