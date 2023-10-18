@@ -88,7 +88,7 @@ function page() {
                   className="tw-object-contain tw-mr-5 tw-self-center  "
                 />
                 <div className="tw-flex tw-justify-center tw-items-center  ">
-                  <p className="tw-text-xl tw-mt-3 ">Cancel</p>
+                  <p className="tw-text-xl ">Cancel</p>
                 </div>
               </div>
             </Link>
