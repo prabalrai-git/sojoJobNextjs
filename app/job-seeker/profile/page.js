@@ -162,7 +162,7 @@ function page() {
     },
   };
   return (
-    <div className="tw-pt-10 tw-mx-40 tw-pb-10">
+    <div className="tw-pt-10 tw-mx-20 tw-pb-10">
       <div className="tw-flex tw-flex-row tw-mb-10">
         <Link href={"/job-seeker/dashboard"}>
           <Image
