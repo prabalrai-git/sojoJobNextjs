@@ -155,7 +155,7 @@ export default function Home() {
           One
         </h1>
         <content className="tw-flex tw-flex-col tw-items-center sm:tw-w-full ">
-          <div className="tw-flex tw-mt-14 tw-mb-7 tw-relative lg:tw-w-6/12 tw-w-full  ">
+          <div className="tw-flex xsm:tw-flex-col sm:tw-flex-row tw-mt-14 tw-mb-7 tw-relative lg:tw-w-6/12 tw-w-full tw-gap-4  ">
             <Input
               placeholder="Search Jobs"
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -172,9 +172,11 @@ export default function Home() {
                 pathname: "/search",
                 query: { term: searchTerm }, // the data
               }}
-              className="tw-bg-primary tw-py-2 tw-px-5 tw-ml-4 tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline "
+              className="tw-bg-primary tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline "
             >
-              <button>Search</button>
+              <button className="tw-bg-primary tw-py-2 tw-px-5 tw-mx-auto tw-rounded-lg tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline tw-text-center ">
+                Search
+              </button>
             </Link>
           </div>
 
