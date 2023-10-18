@@ -181,9 +181,12 @@ function page() {
                   onChange={(e) => setMPin(e.target.value)}
                 ></Input.Password>
               </Form.Item>
-              <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-0 ">
+              <div
+                onClick={() => router.push("/forgotPassword")}
+                className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-0 "
+              >
                 <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-base tw-cursor-pointer hover:tw-text-buttonHover">
-                  Forgot Password?
+                  Forgot M-Pin?
                 </p>
               </div>
               <Form.Item>

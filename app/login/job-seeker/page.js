@@ -183,7 +183,7 @@ function page() {
               </Form.Item>
               <div className="tw-flex tw-justify-end xsm:tw-mr-0 xl:tw-mr-0 ">
                 <p className="tw-text-primary tw-align-bottom tw-mt-3 tw-font-base tw-cursor-pointer hover:tw-text-buttonHover">
-                  Forgot Password?
+                  Forgot M-Pin?
                 </p>
               </div>
               <Form.Item>
