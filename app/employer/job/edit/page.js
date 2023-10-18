@@ -27,6 +27,9 @@ function page() {
     () => dynamic(() => import("react-quill"), { ssr: false }),
     []
   );
+  const searchParams = useSearchParams();
+
+  const id = searchParams.get("id");
 
   const [categories, setCategories] = useState();
   const [employmentTypes, setEmploymentTypes] = useState();
@@ -75,10 +78,6 @@ function page() {
   });
   const [questions, setQuestions] = useState([]);
   const [questionsToUpdate, setQuestionsToUpdate] = useState();
-
-  const searchParams = useSearchParams();
-
-  const id = searchParams.get("id");
 
   useEffect(() => {
     setQuestionsToUpdate([question1, question2, question3]);
