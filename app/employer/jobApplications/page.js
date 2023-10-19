@@ -193,18 +193,18 @@ function page() {
   ];
 
   return (
-    <div className="tw-pt-10 tw-px-20 tw-pb-12">
+    <div className="tw-pt-10 xsm:tw-mx-6 800:tw-mx-16 tw-pb-12">
       <div className="tw-flex tw-flex-row tw-mb-10">
         <Link href={"/employer/dashboard"}>
           <Image
             src={"/arrow-left.png"}
-            width={40}
-            height={40}
+            width={35}
+            height={35}
             alt="back"
-            className="tw-mr-5 tw-object-contain"
+            className=" xsm:tw-mr-7 tw-object-contain"
           />
         </Link>
-        <h1 className="tw-text-black tw-font-semibold tw-text-3xl tw-self-center ">
+        <h1 className="tw-text-black tw-font-semibold 800:tw-text-3xl xsm:tw-text-base tw-self-center ">
           Applicants for SJ00{applications && applications[0]?.job?.id}{" "}
           {applications && applications[0]?.job?.title}
         </h1>
