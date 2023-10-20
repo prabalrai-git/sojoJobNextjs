@@ -1,6 +1,6 @@
 "use client";
 import { Image, Space } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   DownloadOutlined,
   RotateLeftOutlined,

@@ -10,7 +10,7 @@ function MonthlyInfoCard({ title, data }) {
         </div>
         <div className="tw-col-span-6  ">
           <div className="tw-grid tw-grid-cols-1 tw-gap-3">
-            <h2 className="tw-text-gray-500 tw-text-lg">{title}</h2>
+            <h2 className="tw-text-gray-500 tw-text-base">{title}</h2>
             <h1 className="tw-text-6xl tw-text-black">{data}</h1>
             {/* <p className="tw-text-gray-400">{data}%</p> */}
           </div>

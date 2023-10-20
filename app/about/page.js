@@ -1,6 +1,5 @@
 "use client";
 
-import OurPartnersCarousel from "@/components/OurPartnersCarousel";
 import ReviewCard from "@/components/ReviewCard";
 import Image from "next/image";
 import React from "react";

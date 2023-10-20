@@ -7,7 +7,6 @@ import Axios from "@/api/server";
 import RelatedJobs from "@/components/RelatedJobs";
 import OtherJobs from "@/components/OtherJobs";
 import SendApplicationModal from "@/components/SendApplicationModal";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import { useSearchParams } from "next/navigation";
 
 function page() {

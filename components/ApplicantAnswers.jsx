@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Modal, Space, Table, Tag } from "antd";
+import React from "react";
+import { Modal, Table } from "antd";
 const ApplicantAnswers = ({
   isModalOpen,
   setIsModalOpen,

@@ -89,8 +89,8 @@ function page() {
           }
         />
       )}
-      <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-9  ">
-        <div className="tw-bg-white tw-rounded-lg tw-col-span-6 xl:tw-mr-4 xsm:tw-mr-0  ">
+      <div className="tw-mt-10 tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-8 xl:tw-grid-cols-9 tw-gap-4  ">
+        <div className="tw-bg-white tw-rounded-lg xl:tw-col-span-6 xl:tw-mr-4 xsm:tw-mr-0 lg:tw-col-span-5 md:tw-col-span-1  ">
           <div className="tw-px-10 tw-py-6">
             <div className="tw-flex tw-flex-row">
               <Image
@@ -122,9 +122,9 @@ function page() {
         </div>
         <div
           // style={{ height: "295px" }}
-          className="tw-bg-white tw-rounded-lg tw-col-span-3 tw-grid tw-w-full lg:tw-mt-10 xl:tw-mt-0 xsm:tw-mt-10 "
+          className="tw-bg-white tw-rounded-lg tw-grid tw-w-full xl:tw-mt-0 lg:tw-col-span-3 xl:tw-col-span-3 md:tw-col-span-1   "
         >
-          <div className="tw-px-10 tw-py-6 ">
+          <div className="tw-px-10 tw-py-6 tw-pb-12 ">
             <div className="tw-flex tw-flex-row">
               <Image
                 src={"/borderBlack.png"}
@@ -143,7 +143,7 @@ function page() {
                   size="100"
                   src={sojoRep?.profileImage}
                   round={true}
-                  className=" tw-border-gray-200 tw-mr-5 "
+                  className=" tw-border-gray-200 tw-mr-5 tw-mb-5 "
                   style={{ borderWidth: 0.5 }}
                 />
               </div>
@@ -151,8 +151,10 @@ function page() {
                 <h2 className="tw-font-semibold tw-text-lg">
                   Sojo Representative
                 </h2>
-                <h2 className="tw-text-lg">{sojoRep?.email}</h2>
-                <p className="tw-text-lg">{sojoRep?.phone}</p>
+                <h2 className="tw-text-sm tw-text-gray-500">
+                  {sojoRep?.email}
+                </h2>
+                <p className="tw-text-sm tw-text-gray-500">{sojoRep?.phone}</p>
               </div>
             </div>
           </div>

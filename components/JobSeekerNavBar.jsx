@@ -15,11 +15,6 @@ import useSessionStorage from "@/hooks/useSessionStorage";
 function JobSeekerNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
   const [userData, setUserData] = useState();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const id = useSessionStorage("jobSeekerId");
 

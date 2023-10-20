@@ -35,7 +35,7 @@ function JobCard({ job, whiteBg }) {
               width={16}
               height={16}
               alt="job-shift"
-              className="tw-mr-2   tw-object-contain"
+              className="tw-mr-2 tw-object-contain"
             />
             <p className="tw-text-primary tw-capitalize tw-text-sm ">
               {job?.jobShift?.title}
@@ -47,7 +47,7 @@ function JobCard({ job, whiteBg }) {
               width={16}
               height={16}
               alt="job-site"
-              className="tw-mr-2  tw-object-contain"
+              className="tw-mr-2 tw-object-contain"
             />
             <p className="tw-text-primary tw-text-sm ">{job?.jobSite?.title}</p>
           </div>

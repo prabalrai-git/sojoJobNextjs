@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
-import { Popconfirm, Space, Table, Tag } from "antd";
+import { Popconfirm, Table } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
