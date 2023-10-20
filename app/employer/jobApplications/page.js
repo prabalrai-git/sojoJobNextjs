@@ -5,10 +5,11 @@ import Axios from "@/api/server";
 import { Popconfirm, Table, Tag, message } from "antd";
 import Link from "next/link";
 import Image from "next/image";
-import { Tooltip as ReactTooltip } from "react-tooltip";
 import ImagePreview from "@/components/ImagePreview";
 import ApplicantAnswers from "@/components/ApplicantAnswers";
 import { useSearchParams } from "next/navigation";
+import "@/styles/global.css";
+import { QuestionCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
 
 function page() {
   const [applications, setApplications] = useState();
@@ -113,7 +114,7 @@ function page() {
       title: "View CV",
       dataIndex: "viewCV",
       key: "viewCV",
-      width: "148px",
+      width: "200px",
       render: (e, a) => {
         return <ImagePreview src={a.cvfile} />;
       },
@@ -154,7 +155,7 @@ function page() {
       render: (e, a) => {
         return (
           a.status.toLowerCase() === "pending" && (
-            <div className="tw-flex tw-flex-row tw-gap-4">
+            <div className="tw-flex tw-flex-row tw-gap-4 tw-mx-auto">
               <div className="tw-self-end tw-cursor-pointer">
                 <Popconfirm
                   title="Applicant Fit"
@@ -162,9 +163,10 @@ function page() {
                   okText="Yes"
                   cancelText="No"
                   onConfirm={() => onFit(e.id)}
+                  icon={<CheckCircleOutlined style={{ color: "green" }} />}
                 >
-                  <div className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-md tw-py-2 tw-px-5 tw-flex tw-flex-row tw-cursor">
-                    <p className="tw-text-white tw-font-medium tw-text-xs">
+                  <div className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-md  tw-flex tw-flex-row tw-cursor tw-w-24 tw-h-7">
+                    <p className="tw-text-white tw-font-medium tw-text-xs tw-mx-auto tw-my-auto">
                       Applicant Fit
                     </p>
                   </div>
@@ -177,9 +179,10 @@ function page() {
                   okText="Yes"
                   cancelText="No"
                   onConfirm={() => onUnFit(e.id)}
+                  icon={<QuestionCircleOutlined style={{ color: "red" }} />}
                 >
-                  <div className="tw-bg-lightRed hover:tw-bg-rose-200 tw-rounded-md tw-py-2 tw-px-5 tw-flex tw-flex-row tw-cursor">
-                    <p className="tw-text-red tw-font-medium tw-text-xs">
+                  <div className="tw-bg-lightRed hover:tw-bg-rose-200 tw-rounded-md  tw-flex tw-flex-row tw-cursor tw-w-28 tw-h-7">
+                    <p className="tw-text-red tw-font-medium tw-text-xs tw-mx-auto tw-my-auto">
                       Applicant Unfit
                     </p>
                   </div>

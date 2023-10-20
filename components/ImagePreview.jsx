@@ -30,8 +30,8 @@ function ImagePreview({ src }) {
 
   return (
     <Image
-      width={80}
-      height={50}
+      width={130}
+      height={130}
       className="tw-object-contain"
       src={src}
       preview={{

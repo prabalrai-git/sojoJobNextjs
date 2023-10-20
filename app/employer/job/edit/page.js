@@ -158,8 +158,8 @@ function page() {
 
   const router = useRouter();
 
+  const recruiterId = useSessionStorage("employerId");
   const onSubmit = async () => {
-    const recruiterId = useSessionStorage("employerId");
     const formData = {
       title,
       jobCategoryId: category,

@@ -30,7 +30,7 @@ function page({ searchParams }) {
           </h1>
         </div>
         <div>
-          <button className="tw-bg-primary hover:tw-bg-buttonHover tw-mr-5 tw-text-sm tw-text-white tw-rounded-lg tw-px-6 tw-py-2">
+          <button className="tw-bg-primary hover:tw-bg-buttonHover tw-mr-5 tw-text-sm tw-text-white tw-rounded-lg tw-px-6 tw-py-2 tw-w-52">
             Applicant Fit
           </button>
           <button className="tw-bg-lightRed tw-drop-shadow-sm hover:tw-drop-shadow tw-mr-5 tw-text-red tw-rounded-lg tw-px-6 tw-py-2 tw-text-sm">
