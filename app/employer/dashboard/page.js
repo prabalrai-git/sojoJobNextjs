@@ -61,7 +61,7 @@ function page() {
           </p>
         </div>
         <Link
-          className="md:tw-w-3/12 lg:tw-w-44 tw-mt-5"
+          className="md:tw-w-3/12 lg:tw-w-44 tw-mt-5 tw-no-underline"
           href={"/employer/job/create"}
         >
           <button className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg xsm:tw-w-full tw-py-4  tw-text-white tw-flex tw-flex-row tw-items-center tw-justify-center md:tw-w-full ">
@@ -73,7 +73,7 @@ function page() {
               className="tw-self-center tw-mr-3"
             />
 
-            <p className="tw-self-center tw-text-base tw-font-medium">
+            <p className="tw-self-center tw-text-base tw-my-auto tw-font-medium">
               Post a Job
             </p>
           </button>
@@ -121,7 +121,7 @@ function page() {
           </div>
         </div>
         <div
-          style={{ height: "295px" }}
+          // style={{ height: "295px" }}
           className="tw-bg-white tw-rounded-lg tw-col-span-3 tw-grid tw-w-full lg:tw-mt-10 xl:tw-mt-0 xsm:tw-mt-10 "
         >
           <div className="tw-px-10 tw-py-6 ">

@@ -2,10 +2,10 @@
 
 import { Popconfirm, Table } from "antd";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import "@/styles/global.css";
 
 function AppliedJobs({ fromList }) {
   const [data, setData] = useState();

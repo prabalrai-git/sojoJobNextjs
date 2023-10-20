@@ -28,7 +28,7 @@ function ReviewCard({ item }) {
       <div className="tw-bg-white tw-pt-10 tw-px-5 tw-rounded-b-xl">
         <div>
           <h6 className="tw-font-lg tw-font-medium tw-my-3">"{item.title}"</h6>
-          <p>{item?.desc}</p>
+          <p className="tw-text-justify">{item?.desc}</p>
           <h6 className="tw-font-lg tw-font-medium tw-my-3">- {item.person}</h6>
           <p>{item?.desg}</p>
         </div>

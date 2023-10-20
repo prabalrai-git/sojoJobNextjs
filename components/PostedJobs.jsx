@@ -8,6 +8,7 @@ import { Popconfirm, Space, Table, Tag } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import "@/styles/global.css";
 
 function PostedJobs({ fromList, jobStatusFilter }) {
   const [jobs, setJobs] = useState([]);
@@ -168,6 +169,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
         if (a.jobApplications.length > 0) {
           return (
             <Link
+              className="tw-no-underline"
               href={{
                 pathname: "/employer/jobApplications",
                 query: { jobId: a.id }, // the data
@@ -274,8 +276,11 @@ function PostedJobs({ fromList, jobStatusFilter }) {
             </h1>
           </div>
           {!fromList && (
-            <Link className="tw-self-center" href={"/employer/job/list"}>
-              <h1 className=" tw-text-primary">SEE ALL</h1>
+            <Link
+              className="tw-self-center tw-no-underline"
+              href={"/employer/job/list"}
+            >
+              <p className=" tw-text-primary">SEE ALL</p>
             </Link>
           )}
         </div>

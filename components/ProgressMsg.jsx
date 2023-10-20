@@ -10,10 +10,10 @@ function ProgressMsg({ completionPercentage, fromJobSeeker }) {
   return (
     <div
       style={{ backgroundColor: fromJobSeeker ? "#266baf" : "#E58C17" }}
-      className="tw-w-full tw-rounded-lg tw-py-5 tw-px-4 tw-mt-10 tw-flex tw-flex-row tw-justify-between"
+      className="tw-w-full tw-rounded-lg tw-py-5 md:tw-px-4 xsm:tw-px-1 tw-mt-10 tw-flex md:tw-flex-col tw-justify-between lg:tw-flex-row xsm:tw-flex-col"
     >
       <div className="tw-flex tw-flex-row">
-        <div className="tw-h-20 tw-w-20">
+        <div className="tw-h-auto xsm:tw-hidden lg:tw-block md:tw-w-20">
           {fromJobSeeker ? (
             <Image
               src={"/BlueA.png"}
@@ -53,19 +53,19 @@ function ProgressMsg({ completionPercentage, fromJobSeeker }) {
             />
           )}
         </div>
-        <div className="tw-self-center tw-ml-10">
-          <h2 className="tw-text-white tw-font-semibold tw-mb-0 tw-text-lg">
+        <div className="tw-self-center md:tw-ml-10 xsm:tw-ml-1 ">
+          <h2 className="tw-text-white tw-font-semibold tw-mb-0 tw-text-lg xsm:tw-text-center lg:tw-text-left ">
             Your details are missing!
           </h2>
-          <h3 className="tw-text-white tw-font-base tw-mb-2 tw-text-lg">
+          <p className="tw-text-white tw-font-base tw-mb-2 tw-text-md xsm:tw-text-center lg:tw-text-left tw-w-full">
             {fromJobSeeker
               ? "Just a few more steps and your SojoJob profile is complete! Setup now to enjoy unlimited benefits."
               : "Post a free job to complete your profile"}
-          </h3>
+          </p>
         </div>
       </div>
       <Link
-        className=" tw-self-center"
+        className=" tw-self-center tw-no-underline"
         href={fromJobSeeker ? "/job-seeker/profile" : "/employer/job/create"}
       >
         <button
@@ -73,7 +73,7 @@ function ProgressMsg({ completionPercentage, fromJobSeeker }) {
             backgroundColor: fromJobSeeker ? "white" : "#EAA444",
             color: fromJobSeeker ? "#0069d3" : "white",
           }}
-          className=" tw-rounded-lg tw-h-12 tw-self-center tw-px-4 tw-py-3  "
+          className=" tw-rounded-lg tw-w-44  tw-self-center tw-px-4 tw-py-3  "
         >
           {fromJobSeeker ? "Setup Now" : "Post a Job"}
         </button>

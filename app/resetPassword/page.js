@@ -77,25 +77,30 @@ function page() {
       >
         <div className="tw-px-5 ">
           <div className="tw-flex tw-flex-row tw-justify-between tw-mt-20  xsm:tw-mr-0 xl:tw-mr-16 tw-items-center  ">
-            <Link href={"/"} className="tw-no-underline tw-text-black">
-              <div className="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                <Image
-                  src={"/arrow.png"}
-                  width={30}
-                  height={30}
-                  //   style={{ height: "20px" }}
-                  alt="back"
-                  className="tw-object-contain tw-mr-5 tw-self-center  "
-                />
-                <div className="tw-flex tw-justify-center tw-items-center  ">
-                  <p className="tw-text-xl ">Cancel</p>
-                </div>
+            <div
+              onClick={() => history.back()}
+              className="tw-cursor-pointer  tw-flex tw-flex-row tw-items-center tw-justify-center"
+            >
+              <Image
+                src={"/arrow.png"}
+                width={30}
+                height={30}
+                //   style={{ height: "20px" }}
+                alt="back"
+                className="tw-object-contain tw-mr-5 tw-self-center  "
+              />
+              <div className="tw-flex tw-justify-center tw-items-center  ">
+                <p className="tw-text-xl ">Cancel</p>
               </div>
-            </Link>
+            </div>
           </div>
 
           {/* start of form */}
           <div className="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">
+            <p className="tw-font-medium tw-text-2xl">Change M-Pin</p>
+            <p className="tw-text-gray-500 tw-mb-10">
+              Enter a new M-Pin below to change your M-Pin.
+            </p>
             <Form
               requiredMark={false}
               onFinish={onFinish}

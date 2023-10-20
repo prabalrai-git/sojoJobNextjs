@@ -35,7 +35,7 @@ function page() {
         setLoading(false);
         openNotificationWithIcon("info");
         setTimeout(() => {
-          router.push("/");
+          history.back();
         }, 4000);
       }
     } catch (error) {
@@ -66,26 +66,31 @@ function page() {
       >
         <div className="tw-px-5 ">
           <div className="tw-flex tw-flex-row tw-justify-between tw-mt-20  xsm:tw-mr-0 xl:tw-mr-16 tw-items-center  ">
-            <Link href={"/"} className="tw-no-underline tw-text-black">
-              <div className="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                <Image
-                  src={"/arrow.png"}
-                  width={30}
-                  height={30}
-                  //   style={{ height: "20px" }}
-                  alt="back"
-                  className="tw-object-contain tw-mr-5 tw-self-center  "
-                />
-                <div className="tw-flex tw-justify-center tw-items-center  ">
-                  <p className="tw-text-xl  ">Cancel</p>
-                </div>
+            <div
+              onClick={() => history.back()}
+              className="tw-flex tw-flex-row tw-items-center tw-justify-center tw-cursor-pointer"
+            >
+              <Image
+                src={"/arrow.png"}
+                width={30}
+                height={30}
+                //   style={{ height: "20px" }}
+                alt="back"
+                className="tw-object-contain tw-mr-5 tw-self-center  "
+              />
+              <div className="tw-flex tw-justify-center tw-items-center  ">
+                <p className="tw-text-xl  ">Cancel</p>
               </div>
-            </Link>
+            </div>
           </div>
 
           {/* start of form */}
 
-          <p className="tw-mt-16 tw-text-gray-500">
+          <p className="tw-mt-14 tw-text-2xl tw-font-medium tw-mb-3">
+            Forgot M-Pin?
+          </p>
+
+          <p className=" tw-text-gray-500">
             Please, enter your email and we will send your M-Pin reset link.
           </p>
           <div className="mb-3 xsm:tw-mr-0 xl:tw-mr-16  tw-mt-10">

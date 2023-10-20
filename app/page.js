@@ -6,7 +6,6 @@ import JobCard from "@/components/JobCard";
 import EmployersCard from "@/components/EmployersCard";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import NavBar from "@/components/NavBar";
 import Carousel from "react-multi-carousel";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -15,9 +14,7 @@ import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import "@/styles/individualStyles.css";
-import RecruiterNavBar from "@/components/RecruiterNavBar";
 import TrendingTagsComponent from "@/components/TrendingTagsComponent";
-import JobSeekerNavBar from "@/components/JobSeekerNavBar";
 import { NavBarByUser } from "@/components/NavBarType";
 export default function Home() {
   const [eliteJobs, setEliteJobs] = useState(null);
@@ -150,7 +147,7 @@ export default function Home() {
           paddingBottom: 100,
         }}
       >
-        <h1 className="tw-text-center tw-mt-12 tw-text-5xl lg:tw-text-4xl md:tw-text-4xl sm:tw-text-4xl xl:tw-text-5xl xsm:tw-text-4xl tw-font-medium">
+        <h1 className="tw-text-center tw-mt-12 tw-text-5xl lg:tw-text-4xl md:tw-text-4xl sm:tw-text-3xl xsm:tw-text-2xl xl:tw-text-5xl tw-font-medium">
           Hire an Expert or Be <span className="tw-text-primary">Hired</span> as
           One
         </h1>
@@ -172,9 +169,9 @@ export default function Home() {
                 pathname: "/search",
                 query: { term: searchTerm }, // the data
               }}
-              className="tw-bg-primary tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline "
+              className="tw-bg-primary tw-rounded-lg tw-text-white tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline tw-items-center"
             >
-              <button className="tw-bg-primary tw-py-2 tw-px-5 tw-mx-auto tw-rounded-lg tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline tw-text-center ">
+              <button className="tw-bg-primary tw-px-5 tw-mx-auto tw-rounded-lg tw-font-medium hover:tw-bg-buttonHover tw-flex tw-no-underline tw-text-center tw-py-2 ">
                 Search
               </button>
             </Link>
