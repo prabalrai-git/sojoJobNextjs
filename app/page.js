@@ -147,7 +147,7 @@ export default function Home() {
           paddingBottom: 100,
         }}
       >
-        <h1 className="tw-text-center tw-mt-12 tw-text-5xl lg:tw-text-4xl md:tw-text-4xl sm:tw-text-3xl xsm:tw-text-2xl xl:tw-text-5xl tw-font-medium">
+        <h1 className="tw-text-center tw-mt-12 tw-text-5xl lg:tw-text-4xl md:tw-text-4xl sm:tw-text-3xl xsm:tw-text-2xl xl:tw-text-5xl tw-font-medium ">
           Hire an Expert or Be <span className="tw-text-primary">Hired</span> as
           One
         </h1>

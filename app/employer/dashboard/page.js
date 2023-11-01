@@ -73,7 +73,7 @@ function page() {
               className="tw-self-center tw-mr-3"
             />
 
-            <p className="tw-self-center tw-text-base tw-my-auto tw-font-medium">
+            <p className="tw-self-center tw-text-base tw-my-auto tw-font-medium tw-font-serif">
               Post a Job
             </p>
           </button>
