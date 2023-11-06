@@ -11,7 +11,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
   const [skillsArray, setSkillsArray] = useState();
 
   useEffect(() => {
-    const skillsA = data?.skills.split("&");
+    const skillsA = data?.skills?.split("&");
     setSkillsArray(skillsA);
   }, [data]);
   const jobDescription = (

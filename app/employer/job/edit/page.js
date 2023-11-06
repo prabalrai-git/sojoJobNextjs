@@ -601,7 +601,10 @@ function page() {
                     Skills Required (Make sure to press enter after writing a
                     skill set.)
                   </Form.Label>
-                  <TagsInput value={skills} onChange={(e) => setSkills(e)} />
+                  <TagsInput
+                    value={skills.length > 0 && skills}
+                    onChange={(e) => setSkills(e)}
+                  />
                 </Form.Group>
                 <Form.Group
                   className="mb-4"
