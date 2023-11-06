@@ -28,7 +28,6 @@ function JobSeekerNavBar() {
     try {
       const res = await Axios.get(`/jobSeeker/getJobSeekerById/${id}`);
       setUserData(res.data.data);
-      console.log(res.data.data);
     } catch (error) {
       console.log(error);
     }

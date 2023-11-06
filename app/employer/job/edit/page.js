@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import useSessionStorage from "@/hooks/useSessionStorage";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
+import TagsInput from "react-tagsinput";
 
 function page() {
   //drop-down states
@@ -120,8 +121,8 @@ function page() {
       setStartDate(data?.startDate);
       setEndDate(data?.endDate);
       setJobDescription(data?.jobDescription);
-
-      setSkills(data?.requirements);
+      const skillsArray = data?.skills.split("&");
+      setSkills(skillsArray);
       setJobPackage(data?.jobPostingPackage);
     }
   }, [data]);
@@ -160,6 +161,7 @@ function page() {
 
   const recruiterId = useSessionStorage("employerId");
   const onSubmit = async () => {
+    const skillsString = skills.join("&");
     const formData = {
       title,
       jobCategoryId: category,
@@ -168,15 +170,16 @@ function page() {
       experienceLevelId: experience,
       salary,
       numberOfVacancies: Number(vacancyNumber),
-      responsibilities: skills,
+      // responsibilities: skills,
       jobSiteId: workType,
       jobRecruiterId: Number(recruiterId),
 
       startDate,
       endDate,
       jobDescription,
-      requirements: skills,
+      // requirements: skills,
       jobPostingPackage: jobPackage,
+      skills: skillsString,
     };
 
     try {
@@ -184,7 +187,7 @@ function page() {
 
       try {
         if (questions) {
-          questionsToUpdate.map(async (e) => {
+          questionsToUpdate?.map(async (e) => {
             await Axios.patch("job/updateJobQuestionById", e);
           });
         }
@@ -576,7 +579,7 @@ function page() {
                     />
                   </div>
                 </Form.Group>
-                <Form.Group
+                {/* <Form.Group
                   className="mb-4 tw-mb-10"
                   controlId="exampleForm.ControlInput1"
                 >
@@ -590,6 +593,16 @@ function page() {
                     onChange={(e) => setSkills(e)}
                     size
                   />
+                </Form.Group> */}
+                <Form.Group
+                  className="mb-4  "
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label className="tw-text-gray-600 tw-font-medium">
+                    Skills Required (Make sure to press enter after writing a
+                    skill set.)
+                  </Form.Label>
+                  <TagsInput value={skills} onChange={(e) => setSkills(e)} />
                 </Form.Group>
                 <Form.Group
                   className="mb-4"
@@ -605,13 +618,6 @@ function page() {
                     onChange={(e) => setJobDescription(e)}
                   />
                 </Form.Group>
-                {/* <Form.Group className="mb-4  " controlId="exampleForm.ControlInput1">
-            <Form.Label className="tw-text-gray-600 tw-font-medium">
-              Skills Required (Make sure to press enter after writing a skill
-              set.)
-            </Form.Label>
-            <TagsInput value={skills} onChange={(e) => setSkills(e)} />
-          </Form.Group> */}
               </Form>
               <div>
                 <p className="tw-text-gray-600 tw-font-medium">Package</p>

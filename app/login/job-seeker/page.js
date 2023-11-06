@@ -19,6 +19,7 @@ function page() {
     const data = {
       email,
       mPin,
+      userType: "job-seeker",
     };
 
     try {

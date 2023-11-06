@@ -66,7 +66,6 @@ function page({ searchParams }) {
         `/public/getJobBySearchTerm/${searchParams.term}`
       );
       setSearchedJobs(res.data.data);
-      console.log(res.data.data, "search term jobs");
     } catch (error) {
       console.log(error);
     }
@@ -118,7 +117,6 @@ function page({ searchParams }) {
     try {
       const res = await Axios.get(`/public/getJobBySearchTerm/${value}`);
       setSearchedJobs(res.data.data);
-      console.log(res.data.data, "search term jobs");
     } catch (error) {
       console.log(error);
     }

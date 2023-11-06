@@ -8,11 +8,14 @@ import RelatedJobs from "@/components/RelatedJobs";
 import OtherJobs from "@/components/OtherJobs";
 import SendApplicationModal from "@/components/SendApplicationModal";
 import { useSearchParams } from "next/navigation";
+import styles from "@/styles/list.module.css";
+import { Tag } from "antd";
 
 function page() {
   const [jobDetails, setJobsDetails] = useState();
   const [open, setOpen] = useState(false);
   const [jobQuestions, setJobQuestions] = useState(null);
+  const [skillsArray, setSkillsArray] = useState();
   const showModal = () => {
     setOpen(true);
   };
@@ -23,6 +26,7 @@ function page() {
 
   const jobDescription = (
     <div
+      className={styles.hero}
       dangerouslySetInnerHTML={{
         __html: jobDetails?.jobDescription,
       }}
@@ -30,17 +34,22 @@ function page() {
   );
   const requirements = (
     <div
+      className={styles.hero}
       dangerouslySetInnerHTML={{
         __html: jobDetails?.requirements,
       }}
     />
   );
+
   useEffect(() => {
     getJobDetails();
   }, [id]);
   const getJobDetails = async () => {
     try {
       const res = await Axios.get(`/job/getJobById/${id}`);
+
+      const skillsA = res.data.data.skills.split("&");
+      setSkillsArray(skillsA);
       setJobsDetails(res.data.data);
       setJobQuestions(res.data.data?.jobQuestions);
     } catch (error) {
@@ -152,17 +161,27 @@ function page() {
             </p>
           </div>
         </div>
+        <div className="tw-my-10 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
+          <p className="tw-text-xl tw-font-medium">Skills Required:</p>
+          {skillsArray?.map((item) => {
+            return (
+              <Tag className="tw-px-4 tw-py-1 tw-capitalize" color="blue">
+                {item}
+              </Tag>
+            );
+          })}
+        </div>
         {/*  */}
         <div className="tw-mt-10">
-          <h4 className="tw-font-bold tw-text-2xl">Job Description</h4>
-          <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
+          <h1 className="tw-font-semibold tw-text-3xl  ">Job Description</h1>
+          {/* <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Responsibilities
-          </h3>
+          </h3> */}
           <div>{jobDescription}</div>
-          <h3 className="tw-mt-10 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
+          {/* <h3 className="tw-mt-10 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Requirements
           </h3>
-          <div>{requirements}</div>
+          <div className="tw-list-disc">{requirements}</div> */}
         </div>
         {/*  */}
 

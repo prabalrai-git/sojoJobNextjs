@@ -1,13 +1,22 @@
-import { Table } from "antd";
+"use client";
+import { Table, Tag } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styles from "@/styles/list.module.css";
 
 function JobPreviewList({ data, columns, questions, id, employer }) {
+  const [skillsArray, setSkillsArray] = useState();
+
+  useEffect(() => {
+    const skillsA = data?.skills.split("&");
+    setSkillsArray(skillsA);
+  }, [data]);
   const jobDescription = (
     <div
+      className={styles.hero}
       dangerouslySetInnerHTML={{
         __html: data?.jobDescription,
       }}
@@ -15,6 +24,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
   );
   const requirements = (
     <div
+      className={styles.hero}
       dangerouslySetInnerHTML={{
         __html: data?.requirements,
       }}
@@ -119,18 +129,23 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
           </div>
         </div>
         {/*  */}
+        <div className="tw-my-10 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
+          <p className="tw-text-xl tw-font-medium">Skills Required:</p>
+          {skillsArray?.map((item) => {
+            return (
+              <Tag className="tw-px-4 tw-py-1 tw-capitalize" color="blue">
+                {item}
+              </Tag>
+            );
+          })}
+        </div>
         <div className="tw-mb-10">
           <h2 className="tw-text-black tw-font-bold tw-mb-4">
             Job Description
           </h2>
-          <p
-            style={{ lineHeight: 1.5 }}
-            className="tw-text-gray-400 tw-text-justify"
-          >
-            {jobDescription}
-          </p>
+          <div className="tw-ml-5">{jobDescription}</div>
         </div>
-        <div className="tw-mb-10">
+        {/* <div className="tw-mb-10">
           <h2 className="tw-text-black tw-font-bold tw-mb-4">Requirements</h2>
           <p
             style={{ lineHeight: 1.5 }}
@@ -149,7 +164,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
           >
             {requirements}
           </p>
-        </div>
+        </div> */}
         {questions?.length > 0 && (
           <>
             <p className=" tw-mb-5 tw-font-bold">Questions</p>

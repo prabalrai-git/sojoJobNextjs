@@ -21,6 +21,7 @@ function page() {
     const data = {
       email,
       mPin,
+      userType: "employer",
     };
 
     try {

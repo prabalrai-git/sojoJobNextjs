@@ -12,6 +12,7 @@ import "react-tagsinput/react-tagsinput.css";
 import JobPackage from "../JobPackage";
 import moment from "moment";
 import dynamic from "next/dynamic";
+import TagsInput from "react-tagsinput";
 
 function JobDetails({ setStep, setData }) {
   const [skills, setSkills] = useState([]);
@@ -71,6 +72,8 @@ function JobDetails({ setStep, setData }) {
     ) {
       return message.error("Please fill out all the fields!");
     }
+    const skillsString = skills.join("&");
+
     const data = {
       title,
       jobCategoryId: category,
@@ -84,7 +87,7 @@ function JobDetails({ setStep, setData }) {
       startDate,
       endDate,
       jobDescription,
-      requirements: skills,
+      skills: skillsString,
       jobPostingPackage: jobPackage,
     };
     setData(data);
@@ -95,7 +98,6 @@ function JobDetails({ setStep, setData }) {
     try {
       const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
       const data = res.data.data;
-      console.log(data);
       let newData = [];
       for (let i in data) {
         const obj = {
@@ -455,7 +457,7 @@ function JobDetails({ setStep, setData }) {
               />
             </div>
           </Form.Group>
-          <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+          {/* <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
             <Form.Label className="tw-text-gray-600 tw-font-medium">
               Skills Required
             </Form.Label>
@@ -465,25 +467,28 @@ function JobDetails({ setStep, setData }) {
               value={skills}
               onChange={(e) => setSkills(e)}
             />
+          </Form.Group> */}
+          <Form.Group
+            className="tw-my-8 "
+            controlId="exampleForm.ControlInput1"
+          >
+            <Form.Label className="tw-text-gray-600 tw-font-medium">
+              Skills Required (Make sure to press enter after writing a skill
+              set.)
+            </Form.Label>
+            <TagsInput value={skills} onChange={(e) => setSkills(e)} />
           </Form.Group>
           <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
             <Form.Label className="tw-text-gray-600 tw-font-medium">
               Job Description
             </Form.Label>
             <ReactQuill
-              className=" tw-mb-5 "
+              className=" tw-mb-5  "
               theme="snow"
               value={jobDescription}
               onChange={(e) => setJobDescription(e)}
             />
           </Form.Group>
-          {/* <Form.Group className="mb-4  " controlId="exampleForm.ControlInput1">
-            <Form.Label className="tw-text-gray-600 tw-font-medium">
-              Skills Required (Make sure to press enter after writing a skill
-              set.)
-            </Form.Label>
-            <TagsInput value={skills} onChange={(e) => setSkills(e)} />
-          </Form.Group> */}
         </Form>
         <div>
           <p className="tw-text-gray-600 tw-font-medium">Package</p>

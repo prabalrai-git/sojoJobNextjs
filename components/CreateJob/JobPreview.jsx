@@ -29,8 +29,6 @@ function JobPreview({ setStep, data, jobQuestions }) {
       const dataToPost = {
         title: data?.title,
         salary: data?.salary,
-        responsibilities: data.requirements,
-        requirements: data?.requirements,
         jobLocation: data?.jobLocation,
         jobPostingPackage: data?.jobPostingPackage,
         jobCategoryId: data?.jobCategoryId?.value,
@@ -44,6 +42,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
         endDate: data?.endDate,
         numberOfVacancies: Number(data?.numberOfVacancies),
         jobDescription: data?.jobDescription,
+        skills: data?.skills,
       };
 
       try {

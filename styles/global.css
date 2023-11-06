@@ -21,6 +21,7 @@
 .react-tagsinput--focused {
   border-color: #c5dbff !important;
 }
+
 :where(.css-1vr7spz).ant-input-affix-wrapper > input.ant-input {
   padding: 0;
   font-size: inherit;
@@ -39,10 +40,10 @@
   padding-bottom: 5px !important;
 }
 .react-tagsinput-tag {
-  background-color: #4096ff !important;
+  background-color: rgba(221, 255, 221, 0.5) !important;
   border-radius: 2px;
   border: 1px solid #89dc05 !important;
-  color: white !important;
+  color: green !important;
   display: inline-block;
   font-family: sans-serif;
 

@@ -6,3 +6,4 @@ export const job = {
   jobShifts: "Full-time",
   companyLogo: "/companyLogo.png",
 };
+

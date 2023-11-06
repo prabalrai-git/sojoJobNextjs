@@ -49,7 +49,6 @@ function page() {
     try {
       const res = await Axios.get(`/job/getAllJobQuestionsByJobId/${id}`);
       setQuestions(res.data.data);
-      console.log(res.data.data);
     } catch (error) {
       console.log(error);
     }
