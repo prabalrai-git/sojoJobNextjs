@@ -602,7 +602,7 @@ function page() {
                     skill set.)
                   </Form.Label>
                   <TagsInput
-                    value={skills.length > 0 && skills}
+                    value={skills || []}
                     onChange={(e) => setSkills(e)}
                   />
                 </Form.Group>
