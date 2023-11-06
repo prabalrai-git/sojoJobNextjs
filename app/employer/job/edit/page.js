@@ -121,7 +121,7 @@ function page() {
       setStartDate(data?.startDate);
       setEndDate(data?.endDate);
       setJobDescription(data?.jobDescription);
-      const skillsArray = data?.skills.split("&");
+      const skillsArray = data?.skills?.split("&");
       setSkills(skillsArray);
       setJobPackage(data?.jobPostingPackage);
     }

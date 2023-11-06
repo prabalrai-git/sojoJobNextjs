@@ -48,7 +48,7 @@ function page() {
     try {
       const res = await Axios.get(`/job/getJobById/${id}`);
 
-      const skillsA = res.data.data.skills.split("&");
+      const skillsA = res?.data?.data?.skills?.split("&");
       setSkillsArray(skillsA);
       setJobsDetails(res.data.data);
       setJobQuestions(res.data.data?.jobQuestions);
