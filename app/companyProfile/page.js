@@ -110,7 +110,7 @@ function page({ searchParams }) {
             </p>
           </div>
         </div>
-        <p className="tw-mt-10 tw-leading-loose tw-text-gray-300 tw-text-justify">
+        <p className="tw-mt-10 tw-leading-loose tw-text-gray-600 tw-text-justify">
           {companyInfo}
         </p>
       </div>
