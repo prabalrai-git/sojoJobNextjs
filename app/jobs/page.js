@@ -173,7 +173,7 @@ function page() {
         </div>
         {/*  */}
         <div className="tw-mt-10">
-          <h1 className="tw-font-semibold tw-text-3xl  ">Job Description</h1>
+          <h1 className="tw-font-semibold tw-text-xl  ">Job Description</h1>
           {/* <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Responsibilities
           </h3> */}
