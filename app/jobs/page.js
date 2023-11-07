@@ -168,7 +168,7 @@ function page() {
           {/* <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Responsibilities
           </h3> */}
-          <div className="tw-my-10 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
+          <div className="tw-mt-5 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
             <p className="tw-text-base tw-font-medium tw-mr-3">
               Skills Required:
             </p>
