@@ -107,7 +107,7 @@ function page() {
           </div>
         </div>
         {/*  */}
-        <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap ">
+        <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap tw-gap-2 ">
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
             <Image
               src={"/clock.png"}
@@ -160,6 +160,19 @@ function page() {
               {jobDetails?.jobSite?.title}
             </p>
           </div>
+          <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+            <Image
+              src={"/location.png"}
+              width={20}
+              height={20}
+              alt="timing"
+              className="tw-object-contain tw-mr-3 tw-self-center"
+            />
+
+            <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
+              {jobDetails?.jobLocation}
+            </p>
+          </div>
         </div>
         {/*  */}{" "}
         <div className="tw-my-8 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
@@ -174,7 +187,7 @@ function page() {
             );
           })}
         </div>
-        <div className="tw-mt-10">
+        <div className="tw-mt-10 xsm:tw-w-full lg:tw-w-8/12 tw-text-justify">
           <h1 className="tw-font-semibold tw-text-lg  ">Job Description</h1>
           {/* <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Responsibilities
