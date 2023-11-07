@@ -1,14 +1,17 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
-import { Table } from "antd";
+import { Table, Tag } from "antd";
+import styles from "@/styles/list.module.css";
 
 function JobPreview({ setStep, data, jobQuestions }) {
+  const [skillsArray, setSkillsArray] = useState([]);
   const jobDescription = (
     <div
+      className={styles.hero}
       dangerouslySetInnerHTML={{
         __html: data.jobDescription,
       }}
@@ -23,6 +26,11 @@ function JobPreview({ setStep, data, jobQuestions }) {
   );
 
   const skipped = false;
+
+  useEffect(() => {
+    const arr = data?.skills?.split("&");
+    setSkillsArray(arr);
+  }, [data]);
 
   const onJobPost = async () => {
     if (typeof window !== undefined) {
@@ -203,19 +211,44 @@ function JobPreview({ setStep, data, jobQuestions }) {
             </p>
           </div>
         </div>
+        <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
+          <Image
+            src={"/location.png"}
+            width={20}
+            height={20}
+            alt="timing"
+            className="tw-object-contain tw-mr-3 tw-self-center"
+          />
+
+          <p className="tw-self-center tw-capitalize tw-text-gray-600 tw-text-medium">
+            {data?.jobLocation}
+          </p>
+        </div>
         {/*  */}
+        <div className="tw-my-8 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
+          <p className="tw-text-base tw-font-medium tw-mr-3">
+            Skills Required:
+          </p>
+          {skillsArray?.map((item) => {
+            return (
+              <Tag className="tw-px-4 tw-py-0 tw-capitalize" color="blue">
+                {item}
+              </Tag>
+            );
+          })}
+        </div>
         <div className="tw-mb-10">
           <h2 className="tw-text-black tw-font-medium tw-mb-4">
             Job Description
           </h2>
           <p
             style={{ lineHeight: 1.5 }}
-            className="tw-text-gray-400 tw-text-justify "
+            className="tw-text-gray-600 tw-text-justify "
           >
             {jobDescription}
           </p>
         </div>
-        <div className="tw-mb-10">
+        {/* <div className="tw-mb-10">
           <h2 className="tw-text-black tw-font-medium tw-mb-4">Requirements</h2>
           <p
             style={{ lineHeight: 1.5 }}
@@ -234,7 +267,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
           >
             {requirements}
           </p>
-        </div>
+        </div> */}
         {!skipped > 0 && (
           <>
             <p className=" tw-mb-5 tw-font-bold">Questions</p>
