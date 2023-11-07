@@ -161,25 +161,25 @@ function page() {
             </p>
           </div>
         </div>
-
-        {/*  */}
+        {/*  */}{" "}
+        <div className="tw-my-8 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
+          <p className="tw-text-base tw-font-medium tw-mr-3">
+            Skills Required:
+          </p>
+          {skillsArray?.map((item) => {
+            return (
+              <Tag className="tw-px-4 tw-py-0 tw-capitalize" color="blue">
+                {item}
+              </Tag>
+            );
+          })}
+        </div>
         <div className="tw-mt-10">
           <h1 className="tw-font-semibold tw-text-lg  ">Job Description</h1>
           {/* <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Responsibilities
           </h3> */}
-          <div className="tw-mt-5 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
-            <p className="tw-text-base tw-font-medium tw-mr-3">
-              Skills Required:
-            </p>
-            {skillsArray?.map((item) => {
-              return (
-                <Tag className="tw-px-4 tw-py-0 tw-capitalize" color="blue">
-                  {item}
-                </Tag>
-              );
-            })}
-          </div>
+
           <div>{jobDescription}</div>
           {/* <h3 className="tw-mt-10 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Requirements
@@ -187,7 +187,6 @@ function page() {
           <div className="tw-list-disc">{requirements}</div> */}
         </div>
         {/*  */}
-
         <RelatedJobs
           jobCategory={jobDetails?.jobCategory}
           exludeJobId={jobDetails?.id}
