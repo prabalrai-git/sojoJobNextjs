@@ -381,7 +381,7 @@ function page({ searchParams }) {
             </div>
             {/*  */}
             <div className="tw-mt-10">
-              <h4 className="tw-font-semibold tw-text-2xl">Job Description</h4>
+              <h4 className="tw-font-semibold tw-text-xl">Job Description</h4>
               <h3 className="tw-mt-7 tw-underline tw-font-semibold tw-text-xl tw-mb-5">
                 Responsibilities
               </h3>

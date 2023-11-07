@@ -162,7 +162,7 @@ function page() {
           </div>
         </div>
         <div className="tw-my-10 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
-          <p className="tw-text-xl tw-font-medium">Skills Required:</p>
+          <p className="tw-text-lg tw-font-medium">Skills Required:</p>
           {skillsArray?.map((item) => {
             return (
               <Tag className="tw-px-4 tw-py-1 tw-capitalize" color="blue">
@@ -173,7 +173,7 @@ function page() {
         </div>
         {/*  */}
         <div className="tw-mt-10">
-          <h1 className="tw-font-semibold tw-text-xl  ">Job Description</h1>
+          <h1 className="tw-font-semibold tw-text-lg  ">Job Description</h1>
           {/* <h3 className="tw-mt-7 tw-underline tw-font-bold tw-text-3xl tw-mb-4">
             Responsibilities
           </h3> */}
