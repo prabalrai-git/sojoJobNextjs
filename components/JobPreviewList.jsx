@@ -140,7 +140,7 @@ function JobPreviewList({ data, columns, questions, id, employer }) {
           })}
         </div>
         <div className="tw-mb-10">
-          <h2 className="tw-text-black tw-font-bold tw-mb-4 tw-text-xl">
+          <h2 className="tw-text-black tw-font-bold tw-mb-4">
             Job Description
           </h2>
           <div className="tw-ml-5">{jobDescription}</div>
