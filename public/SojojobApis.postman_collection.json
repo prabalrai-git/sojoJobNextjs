@@ -1,0 +1,1648 @@
+{
+	"info": {
+		"_postman_id": "1d84349a-199c-4f3a-a6f9-789de3b1dedc",
+		"name": "SojojobApis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21437592"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Get Elite Jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/public/getEliteJobs",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"public",
+								"getEliteJobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Standard Jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/public/getStandardJobs",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"public",
+								"getStandardJobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job By Filters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/public/getJobByFilters",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"public",
+								"getJobByFilters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jobs Other Than CategoryId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/public/getJobsOtherThanCategoryId/2",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"public",
+								"getJobsOtherThanCategoryId",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job By Search Term",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://sojo-job-backend.vercel.app/api/v1/public/getJobBySearchTerm/react",
+							"protocol": "https",
+							"host": [
+								"sojo-job-backend",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"public",
+								"getJobBySearchTerm",
+								"react"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Similar Jobs By Category Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/public/getSimilarJobsByCategoryId/2",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"public",
+								"getSimilarJobsByCategoryId",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "Post a Job",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"dummy\",\n    \"salary\":\"dummy\",\n    \"jobLocation\":\"dummy\",\n    \"jobPostingPackage\":\"Elite\",\n    \"jobCategoryId\":2,\n    \"jobShiftId\":2,\n    \"jobSiteId\":2,\n    \"jobSubCategoryId\":8,\n    \"educationLevelId\":1,\n    \"experienceLevelId\":1,\n    \"jobRecruiterId\":4,\n    \"startDate\":\"2021-01-01\",\n    \"endDate\":\"2025-01-01\",\n    \"numberOfVacancies\":5,\n    \"jobDescription\":\"hello wrold\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/job/postJob",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"postJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/job/getJobById/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"getJobById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jobs By Recruiter Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/job/getJobsByRecruiterId?recruiterId=3",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"getJobsByRecruiterId"
+							],
+							"query": [
+								{
+									"key": "recruiterId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Filtered Job By RecruiterId And JobStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/job/getFilteredJobsByJobStatus?recruiterId=3&jobStatus=active",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"getFilteredJobsByJobStatus"
+							],
+							"query": [
+								{
+									"key": "recruiterId",
+									"value": "3"
+								},
+								{
+									"key": "jobStatus",
+									"value": "active"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job Post By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"dummy\",\n    \"salary\":\"dummy\",\n    \"jobLocation\":\"dummy\",\n    \"jobPostingPackage\":\"Elite\",\n    \"jobCategoryId\":2,\n    \"jobShiftId\":2,\n    \"jobSiteId\":2,\n    \"jobSubCategoryId\":8,\n    \"educationLevelId\":1,\n    \"experienceLevelId\":1,\n    \"jobRecruiterId\":4,\n    \"startDate\":\"2021-01-01\",\n    \"endDate\":\"2025-01-01\",\n    \"numberOfVacancies\":5,\n    \"jobDescription\":\"hello wrold\"\n    ,\"skills\":\"hello&world\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/job/updateJobPost/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"updateJobPost",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/job/deleteJobById/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"deleteJobById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Job Question",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"questionNumber\":1,\n    \"questionType\":\"Yes/No\",\n    \"questionText\":\"Text\",\n    \"requiredAnswer\":\"Yes\",\n    \"jobId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/job/postJobQuestion",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"postJobQuestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Job Questions By JobId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/job/getAllJobQuestionsByJobId/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"getAllJobQuestionsByJobId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job Questions By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n            \"id\": 68,\n            \"questionNumber\": \"1\",\n            \"questionType\": \"Yes/No\",\n            \"questionText\": \"Text test\",\n            \"requiredAnswer\": \"Yes\",\n            \"createdAt\": \"2023-11-08T11:09:51.000Z\",\n            \"updatedAt\": \"2023-11-08T11:09:51.000Z\",\n            \"jobId\": 1\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/job/updateJobQuestionById",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"updateJobQuestionById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pos Job Answers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answer\":\"yes&yes\",\n    \"jobQuestionId\":18,\n    \"jobApplicationId\":35\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/job/postJobAnswers",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"postJobAnswers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job Answers By ApplicationId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/job/getAllJobAnswersByApplicationId/36",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"job",
+								"getAllJobAnswersByApplicationId",
+								"36"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"prabalrai17@gmail.com\",\n    \"mPin\":\"1234\",\n    \"userType\":\"job-seeker\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/auth/login",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/auth/verifyAccount/sfsdfsdfsdfsdfsdfsdfsdfsdfsdf",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"auth",
+								"verifyAccount",
+								"sfsdfsdfsdfsdfsdfsdfsdfsdfsdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"demo@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/auth/requestPasswordReset",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"auth",
+								"requestPasswordReset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\":1,\n    \"token\":\"jfksdjfskldfjsdklf\",\n    \"mPin\":\"2323\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/auth/resetPassword",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"auth",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application",
+			"item": [
+				{
+					"name": "Create New Application",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "jobSeekerEmail",
+									"value": "demo@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "jobSeekerName",
+									"value": "demo",
+									"type": "text"
+								},
+								{
+									"key": "jobId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "jobSeekerId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "jobRecruiterId",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "cvfile",
+									"type": "file",
+									"src": "/Users/mac/Downloads/image (5).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/application/createNewApplication",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"application",
+								"createNewApplication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application By JobId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/application/getApplicationsByJobId/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"application",
+								"getApplicationsByJobId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application By RecruiterId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/application/getApplicationsByRecruiterId/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"application",
+								"getApplicationsByRecruiterId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Applications By SeekerId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/application/getApplicationsBySeekerId/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"application",
+								"getApplicationsBySeekerId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job Application By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\":\"rejected\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/application/updateJobApplicationById/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"application",
+								"updateJobApplicationById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job Recruiter",
+			"item": [
+				{
+					"name": "Get Job Recruiter By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/jobRecruiter/getJobRecruiterById/2",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobRecruiter",
+								"getJobRecruiterById",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Job Recuiter Profile/Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyName\":\"Demo Company\",\n    \"companyEmail\":\"demo@gmail.com\",\n    \"companyPhone\":1234,\n    \"mPin\":\"1234\",\n    \"name\":\"Demo User\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/jobRecruiter/createJobRecruiterProfile",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobRecruiter",
+								"createJobRecruiterProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job Recuiter Profile By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "companyName",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "companyEmail",
+									"value": "hello@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "companyPhone",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "companySize",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "companyFoundedDate",
+									"value": "2023-01-01",
+									"type": "text"
+								},
+								{
+									"key": "companyHeadquarters",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "companyWebsiteURL",
+									"value": "www.google.com",
+									"type": "text"
+								},
+								{
+									"key": "companyInfo",
+									"value": "helloa lfjsdklfjlksdjfklsd",
+									"type": "text"
+								},
+								{
+									"key": "companyLogoImage",
+									"type": "file",
+									"src": "/Users/mac/Desktop/sojoProjects/sojoJobMERN/sojo-job-client/public/leapfroglogo.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/jobRecruiter/updateJobRecruiterProfileById/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobRecruiter",
+								"updateJobRecruiterProfileById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Monthly Overview Data By Recruiter Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/jobRecruiter/getMonthlyOverviewDataByRecruiterId/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobRecruiter",
+								"getMonthlyOverviewDataByRecruiterId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job Seeker",
+			"item": [
+				{
+					"name": "Create Job Seeker Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"job-seeker 1\",\n    \"contactNumber\":10101,\n    \"email\":\"jobSeeker1@gmail.com\",\n    \"jobStatus\":\"worked\",\n    \"mPin\":\"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/jobSeeker/createJobSeekerProfile",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobSeeker",
+								"createJobSeekerProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job Seeker Profile By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "job-seeker1",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jobSeeker1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "currentAddress",
+									"value": "Demo",
+									"type": "text"
+								},
+								{
+									"key": "permanentAddress",
+									"value": "Demo",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2022-01-01",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/Users/mac/Desktop/sojoProjects/sojoJobMERN/sojo-job-client/public/companyBackground.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/jobSeeker/updateJobSeekerProfileById/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobSeeker",
+								"updateJobSeekerProfileById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post or Update JobSeeker CV by Job Seeker Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cvFile",
+									"type": "file",
+									"src": "/Users/mac/Desktop/sojoProjects/sojoJobMERN/sojo-job-client/public/resume.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{PROD_URL}}/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobSeeker",
+								"postOrUpdateJobSeekerCVByJobSeekerId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job Seeker By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/jobSeeker/getJobSeekerById/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobSeeker",
+								"getJobSeekerById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile Completion By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROD_URL}}/jobSeeker/getProfileCompletionPercentage/1",
+							"host": [
+								"{{PROD_URL}}"
+							],
+							"path": [
+								"jobSeeker",
+								"getProfileCompletionPercentage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Job Sub Categories",
+					"item": [
+						{
+							"name": "Get All Sub Categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobSubCategories/getAllSubCategories",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobSubCategories",
+										"getAllSubCategories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Job Sub Category By Category Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Dummy sub-cat\",\n    \"jobCategoryId\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobSubCategories/addJobSubCategoryByCategoryId",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobSubCategories",
+										"addJobSubCategoryByCategoryId"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Sub Category By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobSubCategories/deleteJobSubCategoryById/1",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobSubCategories",
+										"deleteJobSubCategoryById",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Job Categories",
+					"item": [
+						{
+							"name": "Get All Job Categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobCategories/getAllJobCategories",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobCategories",
+										"getAllJobCategories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Job Category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Dummy\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobCategories/addJobCategory",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobCategories",
+										"addJobCategory"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Job Category By Id",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"New Category rectified\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobCategories/updateJobCategoryById/26",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobCategories",
+										"updateJobCategoryById",
+										"26"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Job Category By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobCategories/deleteJobCategoryById/26",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobCategories",
+										"deleteJobCategoryById",
+										"26"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Education Levels",
+					"item": [
+						{
+							"name": "Get All Education Levels",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/educationLevels/getAllEducationLevels",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"educationLevels",
+										"getAllEducationLevels"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Education Level",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"new level\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/educationLevels/addEducationLevel",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"educationLevels",
+										"addEducationLevel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Education Level By Id",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/educationLevels/updateEducationLevelById/10",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"educationLevels",
+										"updateEducationLevelById",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Education By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/educationLevels/deleteEducationLevelById/10",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"educationLevels",
+										"deleteEducationLevelById",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Experience Levels",
+					"item": [
+						{
+							"name": "Get All Experience Level",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/experienceLevels/getAllExperienceLevels",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"experienceLevels",
+										"getAllExperienceLevels"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Experience Level",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"new level\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/experienceLevels/addExperienceLevel",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"experienceLevels",
+										"addExperienceLevel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Experience By Id",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/experienceLevels/updateExperienceLevelById/10",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"experienceLevels",
+										"updateExperienceLevelById",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Experience By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/experienceLevels/deleteExperienceLevelById/10",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"experienceLevels",
+										"deleteExperienceLevelById",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Job Sites",
+					"item": [
+						{
+							"name": "Get All Job Sites",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobSites/getAllJobSites",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobSites",
+										"getAllJobSites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Job Site",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"new-site\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobSites/addJobSite",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobSites",
+										"addJobSite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Job Site",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"hello\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobSites/updateJobSiteById/4",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobSites",
+										"updateJobSiteById",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Job Shifts",
+					"item": [
+						{
+							"name": "Get All Shifts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobShift/getAllShifts",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobShift",
+										"getAllShifts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Job shift",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"hello-shift\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobShift/addJobShift",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobShift",
+										"addJobShift"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Job Shift",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobShift/updateJobShiftById/3",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobShift",
+										"updateJobShiftById",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Sojo Contact Person",
+					"item": [
+						{
+							"name": "Get Sojo Contact Person",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/sojoJobContactPerson/getSojoJobContactPersonDetails",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"sojoJobContactPerson",
+										"getSojoJobContactPersonDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post Sojo Contact Person",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Demo",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "demo@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123",
+											"type": "text"
+										},
+										{
+											"key": "profileImage",
+											"type": "file",
+											"src": "/Users/mac/Desktop/sojoProjects/sojoJobMERN/sojo-job-client/public/dearhold.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/sojoJobContactPerson/postSojoJobContactPersonDetails",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"sojoJobContactPerson",
+										"postSojoJobContactPersonDetails"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Companies",
+					"item": [
+						{
+							"name": "Get All Companies",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/companies/getAllCompanies",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"companies",
+										"getAllCompanies"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Job Posting",
+					"item": [
+						{
+							"name": "Get All Jobs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobPostings/getAllJobs",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobPostings",
+										"getAllJobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Status By Job Id",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROD_URL}}/admin/jobPostings/changeStatusByJobId/2?status=Active",
+									"host": [
+										"{{PROD_URL}}"
+									],
+									"path": [
+										"admin",
+										"jobPostings",
+										"changeStatusByJobId",
+										"2"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "Active"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
