@@ -64,11 +64,12 @@ function page() {
       console.log(error);
     }
   };
-  console.log(total);
   return (
     <main className="lg:tw-mx-20 md:tw-mx-5 xsm:tw-mx-5">
       <div>
-        <h3 className="tw-capitalize tw-my-10 tw-mt-20">All {jobType} Jobs</h3>
+        <h3 className="tw-capitalize tw-my-10 tw-mt-20 tw-text-2xl tw-font-semibold">
+          All {jobType} Jobs
+        </h3>
       </div>
       {/* <div className="tw-flex tw-flex-col tw-gap-5">
         {data?.map((item) => {
