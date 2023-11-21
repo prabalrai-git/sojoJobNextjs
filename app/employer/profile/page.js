@@ -65,7 +65,7 @@ function page() {
       if (res.data.success) {
         toast.success("Profile Updated Successfully!", {
           position: "top-right",
-          autoClose: 500,
+          autoClose: 800,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -75,7 +75,7 @@ function page() {
         });
         setTimeout(() => {
           router.push("/employer/dashboard");
-        }, 500);
+        }, 1000);
       }
     } catch (error) {
       console.log(error);

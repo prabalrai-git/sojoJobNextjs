@@ -30,7 +30,7 @@ export default function Home() {
 
   const getEliteJobs = async (req, res) => {
     try {
-      const res = await Axios.get("/public/getEliteJobs");
+      const res = await Axios.get("/public/getEliteJobs?limit=16");
       setEliteJobs(res.data.data);
     } catch (error) {
       console.log(error);
@@ -39,7 +39,7 @@ export default function Home() {
 
   const getStandardJobs = async (req, res) => {
     try {
-      const res = await Axios.get("/public/getStandardJobs");
+      const res = await Axios.get("/public/getStandardJobs?limit=16");
       setStandardJobs(res.data.data);
     } catch (error) {
       console.log(error);
@@ -181,17 +181,25 @@ export default function Home() {
         </content>
 
         <div className="tw-mt-20 ">
-          <div className="tw-flex tw-flex-row tw-items-stretch">
-            <Image
-              className="tw-self-center"
-              src={"/fire.png"}
-              height={30}
-              width={30}
-              alt="fire.png"
-            />
-            <h2 className="tw-self-center tw-m-0 tw-ml-3 tw-font-medium tw-text-lg">
-              Elite Jobs
-            </h2>
+          <div className="tw-flex tw-flex-row tw-justify-between">
+            <div className="tw-flex tw-flex-row tw-items-stretch">
+              <Image
+                className="tw-self-center"
+                src={"/fire.png"}
+                height={30}
+                width={30}
+                alt="fire.png"
+              />
+              <h2 className="tw-self-center tw-m-0 tw-ml-3 tw-font-medium tw-text-lg">
+                Elite Jobs
+              </h2>
+            </div>
+            <Link
+              className="tw-font-semibold tw-text-primary tw-no-underline"
+              href={{ pathname: "/jobs/list", query: { type: "elite" } }}
+            >
+              <p>SEE ALL</p>
+            </Link>{" "}
           </div>
           <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 950:twpgrid-cols-3 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
             {eliteJobs?.map((item) => {
@@ -255,17 +263,25 @@ export default function Home() {
         {/* end of employers carousel */}
         {/* start of standard jobs */}
         <div className="tw-mt-20">
-          <div className="tw-flex tw-flex-row ">
-            <Image
-              src={"/report.png"}
-              width={25}
-              height={25}
-              alt="recruiters"
-              className="tw-object-contain tw-mr-3 tw-self-center"
-            />
-            <p className="tw-font-semibold tw-m-0 tw-text-black tw-text-lg tw-self-center">
-              Standard Jobs
-            </p>
+          <div className="tw-flex tw-flex-row tw-justify-between">
+            <div className="tw-flex tw-flex-row ">
+              <Image
+                src={"/report.png"}
+                width={25}
+                height={25}
+                alt="recruiters"
+                className="tw-object-contain tw-mr-3 tw-self-center"
+              />
+              <p className="tw-font-semibold tw-m-0 tw-text-black tw-text-lg tw-self-center">
+                Standard Jobs
+              </p>
+            </div>
+            <Link
+              className="tw-font-semibold tw-text-primary tw-no-underline"
+              href={{ pathname: "/jobs/list", query: { type: "standard" } }}
+            >
+              <p>SEE ALL</p>
+            </Link>
           </div>
           <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 950:twpgrid-cols-3 sm:tw-grid-cols-2 xsm:tw-grid-cols-1 800:tw-grid-cols-2 ">
             {standardJobs?.map((item) => {

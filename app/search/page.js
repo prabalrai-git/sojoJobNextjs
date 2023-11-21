@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
-import { Button, Input, Select } from "antd";
+import { Button, Input, Select, Tag } from "antd";
 import Axios from "@/api/server";
 import "@/styles/individualStyles.css";
 
@@ -28,6 +28,7 @@ function page({ searchParams }) {
   const [education, setEducation] = useState(null);
   const [experience, setExperience] = useState(null);
   const [subCategory, setSubCategory] = useState(null);
+  const [skillsArray, setSkillsArray] = useState();
 
   useEffect(() => {
     getCategoriesList();
@@ -300,7 +301,13 @@ function page({ searchParams }) {
           >
             {searchedJobs?.map((item) => {
               return (
-                <div onClick={() => setToDisplayJob(item)}>
+                <div
+                  onClick={() => {
+                    setToDisplayJob(item);
+                    const skillsA = item.skills?.split("&");
+                    setSkillsArray(skillsA);
+                  }}
+                >
                   <JobCard key={item} job={item} />
                 </div>
               );
@@ -380,16 +387,28 @@ function page({ searchParams }) {
               </div>
             </div>
             {/*  */}
+            <div className="tw-my-8 tw-flex tw-flex-row tw-gap-1 tw-items-center tw-flex-wrap">
+              <p className="tw-text-base tw-font-medium tw-mr-3">
+                Skills Required:
+              </p>
+              {skillsArray?.map((item) => {
+                return (
+                  <Tag className="tw-px-4 tw-py-0 tw-capitalize" color="blue">
+                    {item}
+                  </Tag>
+                );
+              })}
+            </div>
             <div className="tw-mt-10">
               <h4 className="tw-font-semibold tw-text-xl">Job Description</h4>
               <h3 className="tw-mt-7 tw-underline tw-font-semibold tw-text-xl tw-mb-5">
                 Responsibilities
               </h3>
               <div>{jobDescription}</div>
-              <h3 className="tw-mt-10 tw-underline tw-font-semibold tw-text-xl tw-mb-5">
+              {/* <h3 className="tw-mt-10 tw-underline tw-font-semibold tw-text-xl tw-mb-5">
                 Requirements
               </h3>
-              <div>{requirements}</div>
+              <div>{requirements}</div> */}
             </div>
           </div>
         )}
