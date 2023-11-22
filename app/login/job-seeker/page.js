@@ -8,12 +8,16 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
+import { getUserDetails } from "@/features/userData/userDataSlice";
+import { useDispatch } from "react-redux";
 
 function page() {
   const router = useRouter();
   const [email, setEmail] = useState();
   const [mPin, setMPin] = useState();
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const onFinish = async () => {
     const data = {
@@ -38,6 +42,7 @@ function page() {
         sessionStorage.setItem("jobSeekerId", res.data.data.jobSeekerId);
 
         sessionStorage.setItem("userType", res.data.data.userType);
+        dispatch(getUserDetails("job-seeker"));
       }
       if (res.data.success) {
         toast.success("Login Successful!", {

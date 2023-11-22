@@ -10,29 +10,12 @@ import Link from "next/link";
 import "@/styles/navbar.css";
 import { useRouter } from "next/navigation";
 import Axios from "@/api/server";
+import { useSelector } from "react-redux";
 
 function RecruiterNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [data, setData] = useState();
-  useEffect(() => {
-    getProfileInformation();
-  }, []);
 
-  const getProfileInformation = async () => {
-    try {
-      if (typeof window !== "undefined") {
-        const res = await Axios.get(
-          `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
-            "employerId"
-          )}`
-        );
-
-        setData(res.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { userDetails } = useSelector((state) => state.userData);
 
   const router = useRouter();
 
@@ -109,7 +92,9 @@ function RecruiterNavBar() {
             >
               <Image
                 src={
-                  data?.companyLogoImage ? data.companyLogoImage : "/avatar.png"
+                  userDetails?.companyLogoImage
+                    ? userDetails.companyLogoImage
+                    : "/avatar.png"
                 }
                 width={40}
                 height={40}
@@ -125,7 +110,7 @@ function RecruiterNavBar() {
             >
               <div className="tw-flex tw-flex-row ">
                 <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4">
-                  {data?.companyName}
+                  {userDetails?.companyName}
                 </h2>
                 <Image
                   src={"/down.png"}

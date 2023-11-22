@@ -11,27 +11,28 @@ import "@/styles/navbar.css";
 import Axios from "@/api/server";
 // import { useRouter } from "next/navigation";
 import useSessionStorage from "@/hooks/useSessionStorage";
+import { useSelector } from "react-redux";
 
 function JobSeekerNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [userData, setUserData] = useState();
 
-  const id = useSessionStorage("jobSeekerId");
+  // const id = useSessionStorage("jobSeekerId");
+  const { userDetails } = useSelector((state) => state.userData);
 
-  useEffect(() => {
-    if (id) {
-      getProfileInfo();
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   if (id) {
+  //     getProfileInfo();
+  //   }
+  // }, [id]);
 
-  const getProfileInfo = async () => {
-    try {
-      const res = await Axios.get(`/jobSeeker/getJobSeekerById/${id}`);
-      setUserData(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getProfileInfo = async () => {
+  //   try {
+  //     const res = await Axios.get(`/jobSeeker/getJobSeekerById/${id}`);
+  //     setUserData(res.data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // const router = useRouter();
 
@@ -104,8 +105,8 @@ function JobSeekerNavBar() {
             >
               <Image
                 src={
-                  userData?.profilePicture
-                    ? userData.profilePicture
+                  userDetails?.profilePicture
+                    ? userDetails.profilePicture
                     : "/avatar.png"
                 }
                 width={45}
@@ -122,7 +123,7 @@ function JobSeekerNavBar() {
             >
               <div className="800:tw-flex  tw-flex-row xsm:tw-hidden ">
                 <h2 className="tw-text-primary tw-text-lg tw-font-medium tw-mr-4 tw-capitalize ">
-                  {userData?.name}
+                  {userDetails?.name}
                 </h2>
                 <Image
                   src={"/down.png"}

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
 import Image from "next/image";
 import ProgressMsg from "@/components/ProgressMsg";
+import { useSelector } from "react-redux";
 
 function page() {
   const [standardJobs, setStandardJobs] = useState(null);
@@ -16,6 +17,8 @@ function page() {
     getStandardJobs();
     getProfileCompletionPercentage();
   }, []);
+
+  const { userDetails } = useSelector((state) => state.userData);
 
   const getStandardJobs = async (req, res) => {
     try {
@@ -45,7 +48,7 @@ function page() {
       <div className="  xsm:tw-px-5 lg:tw-px-16 tw-pb-12 ">
         <div className="tw-pt-10  tw-pb-4">
           <h1 className="tw-text-3xl tw-mb-4 tw-font-semibold">
-            Welcome User!
+            Welcome! {userDetails.name}
           </h1>
           <h2 className="tw-text-lg">
             This is your personalized space where we help you find an ideal

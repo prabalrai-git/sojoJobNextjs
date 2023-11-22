@@ -1,20 +1,16 @@
-"use client";
-const { default: JobSeekerNavBar } = require("./JobSeekerNavBar");
-const { default: NavBar } = require("./NavBar");
-const { default: RecruiterNavBar } = require("./RecruiterNavBar");
+import JobSeekerNavBar from "./JobSeekerNavBar";
+import NavBar from "./NavBar";
+import RecruiterNavBar from "./RecruiterNavBar";
 
 export const NavBarByUser = () => {
-  if (
-    typeof window !== "undefined" &&
-    sessionStorage.getItem("userType") === "employer"
-  ) {
-    return <RecruiterNavBar />;
-  } else if (
-    typeof window !== "undefined" &&
-    sessionStorage.getItem("userType") === "job-seeker"
-  ) {
-    return <JobSeekerNavBar />;
-  } else {
-    return <NavBar />;
+  if (typeof window !== "undefined") {
+    const userType = sessionStorage.getItem("userType");
+    if (userType === "employer") {
+      return <RecruiterNavBar />;
+    } else if (userType === "job-seeker") {
+      return <JobSeekerNavBar />;
+    }
   }
+
+  return <NavBar />;
 };

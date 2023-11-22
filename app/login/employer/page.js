@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
 import { Input, Form, Button } from "antd";
+import { useDispatch } from "react-redux";
+import { getUserDetails } from "@/features/userData/userDataSlice";
 
 function page() {
   const router = useRouter();
@@ -16,6 +18,8 @@ function page() {
 
   const [mPin, setMPin] = useState();
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const onFinish = async () => {
     const data = {
@@ -39,6 +43,7 @@ function page() {
         sessionStorage.setItem("employerId", res.data.data.employerId);
 
         sessionStorage.setItem("userType", res.data.data.userType);
+        dispatch(getUserDetails("employer"));
       }
       if (res.data.success) {
         setLoading(false);

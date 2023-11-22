@@ -23,6 +23,14 @@ export default function Home() {
 
   const router = useRouter();
 
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   setUserType(sessionStorage.getItem("userType"));
+  //   if (userType) {
+  //     dispatch(getUserDetails("userType"));
+  //   }
+  // }, [userType]);
+
   useEffect(() => {
     getEliteJobs();
     getStandardJobs();
