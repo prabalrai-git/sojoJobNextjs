@@ -77,7 +77,7 @@ function page() {
           width={115}
           height={115}
           alt="companyLogo"
-          className="tw-rounded-full tw-absolute tw-top-24 tw-left-40"
+          className="tw-rounded-full tw-absolute tw-object-fill tw-top-24 tw-left-40 tw-bg-white tw-h-28 tw-w-28"
         />
       </div>
       <div className="tw-mx-28 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-28 tw-mt-32">

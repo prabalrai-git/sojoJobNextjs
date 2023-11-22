@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "@/api/server";
 import Link from "next/link";
 import JobCard from "@/components/JobCard";
-import BackgroundImage from "@/public/companyBackground.png";
+import BackgroundImage from "@/public/singlebg.png";
 
 function page({ searchParams }) {
   const [company, setCompany] = useState();
@@ -46,7 +46,7 @@ function page({ searchParams }) {
       }}
     />
   );
-
+  console.log(company);
   return (
     <div className="tw-mx-28 xsm:tw-mx-5 sm:tw-mx-10 md:tw-mx-28 tw-mt-10">
       <div
@@ -56,22 +56,26 @@ function page({ searchParams }) {
           backgroundPosition: "center center", // Center the image
           backgroundRepeat: "no-repeat",
         }}
-        className="tw-h-72 tw-w-full tw-rounded tw-relative tw-object-contain"
+        className="tw-h-60 tw-w-full tw-rounded tw-relative tw-object-contain"
       >
-        <div className="tw-bg-white tw-h-32 tw-w-32 tw-rounded-full tw-absolute -tw-bottom-16 tw-left-7 tw-flex tw-justify-center tw-align-middle">
-          {company?.companyLogoImage && (
-            <Image
-              src={company.companyLogoImage}
-              width={120}
-              height={120}
-              alt="companyLogo"
-              className="tw-object-contain"
-            />
-          )}
+        <div className="tw-bg-white tw-h-24 tw-w-24 tw-rounded-full tw-absolute -tw-bottom-10 tw-left-7 tw-flex tw-justify-center tw-align-middle">
+          <Image
+            src={
+              company?.companyLogoImage
+                ? company.companyLogoImage
+                : "/companyLogo.png"
+            }
+            width={120}
+            height={120}
+            alt="companyLogo"
+            className="tw-rounded-full tw-object-fill tw-w-24 tw-h-24"
+          />
         </div>
       </div>
-      <div className="tw-mt-20 tw-mx-4">
-        <p className="tw-font-semibold tw-text-2xl">{company?.companyName}</p>
+      <div className="tw-mt-32 tw-mx-4 ">
+        <p className="tw-font-semibold tw-text-2xl tw-mb-5">
+          {company?.companyName}
+        </p>
         <div className="tw-grid xsm:tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-5 xl:tw-grid-cols-6 tw-mt-5">
           <div className="tw-flex tw-flex-row tw-justify-start tw-items-center tw-mb-7">
             <Image

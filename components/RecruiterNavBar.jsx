@@ -114,7 +114,7 @@ function RecruiterNavBar() {
                 width={40}
                 height={40}
                 alt="user"
-                className=" tw-ml-8 tw-w-10"
+                className=" tw-rounded-full tw-ml-8 tw-object-fill tw-w-12 tw-h-12"
               />
             </Nav.Link>
             <Nav.Link

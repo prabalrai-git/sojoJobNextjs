@@ -111,7 +111,7 @@ function JobSeekerNavBar() {
                 width={45}
                 height={45}
                 alt="user"
-                className=" tw-ml-8 tw-rounded-full tw-object-contain"
+                className=" tw-ml-8 tw-rounded-full tw-object-fill tw-w-12 tw-h-12"
               />
             </Nav.Link>
             <Nav.Link
@@ -163,7 +163,7 @@ function JobSeekerNavBar() {
                   width={16}
                   height={16}
                   alt="home"
-                  className="tw-object-contain tw-mr-4"
+                  className="tw-object-contain tw-mr-4 "
                 />
                 <p className="tw-text-lg tw-font-medium tw-text-gray-600">
                   My Profile
@@ -205,7 +205,7 @@ function JobSeekerNavBar() {
                 width={16}
                 height={16}
                 alt="home"
-                className="tw-object-contain tw-mr-4"
+                className="tw-object-contain tw-mr-4 "
               />
               <p
                 onClick={() => logout()}

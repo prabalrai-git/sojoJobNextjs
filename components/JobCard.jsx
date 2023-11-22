@@ -9,7 +9,7 @@ function JobCard({ job, whiteBg }) {
     >
       <div>
         <Image
-          className="tw-rounded-full tw-mr-5 tw-object-contain tw-h-10 tw-w-10 lg:tw-w-10 lg:tw-h-10"
+          className="tw-rounded-full tw-mr-5   tw-w-10 lg:tw-w-10 lg:tw-h-10 tw-object-fill tw-h-10 tw-bg-gray-100"
           src={
             job?.jobRecruiter?.companyLogoImage
               ? job.jobRecruiter.companyLogoImage

@@ -64,6 +64,7 @@ function page() {
       console.log(error);
     }
   };
+
   return (
     <main className="lg:tw-mx-20 md:tw-mx-5 xsm:tw-mx-5">
       <div>
