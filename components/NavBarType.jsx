@@ -1,3 +1,4 @@
+"use client";
 import JobSeekerNavBar from "./JobSeekerNavBar";
 import NavBar from "./NavBar";
 import RecruiterNavBar from "./RecruiterNavBar";
@@ -10,7 +11,6 @@ export const NavBarByUser = () => {
     } else if (userType === "job-seeker") {
       return <JobSeekerNavBar />;
     }
+    return <NavBar />;
   }
-
-  return <NavBar />;
 };
