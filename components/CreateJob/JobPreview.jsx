@@ -120,6 +120,8 @@ function JobPreview({ setStep, data, jobQuestions }) {
     },
   ];
 
+  console.log(jobQuestions,jobQuestions.length,'this job Question')
+
   return (
     <>
       <ToastContainer />
@@ -272,7 +274,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
             {requirements}
           </p>
         </div> */}
-        {jobQuestions.length > 0 &&  (
+        {jobQuestions[0].questionText !== null &&  (
           <>
             <p className=" tw-mb-5 tw-font-bold">Questions</p>
             <Table
