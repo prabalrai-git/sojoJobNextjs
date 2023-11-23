@@ -42,7 +42,6 @@ const userDataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUserDetails.fulfilled, (state, action) => {
-        console.log(action, "hihihihihihi extra");
         state.userDetails = action.payload;
       })
       .addCase(getUserDetails.rejected, (state, action) => {
