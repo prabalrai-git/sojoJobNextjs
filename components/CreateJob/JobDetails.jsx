@@ -497,7 +497,7 @@ function JobDetails({ setStep, setData }) {
             />
           </Form.Group>
         </Form>
-        <div className="tw-mt-20">
+        <div className="tw-mt-16">
           <p className="tw-text-gray-600 tw-font-medium">Package</p>
 
           <div className="tw-grid lg:tw-grid-cols-8 md:tw-grid-cols-4 sm:tw-grid-cols-2 tw-gap-4">
