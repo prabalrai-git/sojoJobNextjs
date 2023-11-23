@@ -214,7 +214,7 @@ function JobDetails({ setStep, setData }) {
                 placeholder="Search to Select"
                 optionFilterProp="children"
                 filterOption={(input, option) =>
-                  (option?.label ?? "").toLowerCase().includes(input)
+                  (option?.label ?? "").toLowerCase().includes(input.toLocaleLowerCase())
                 }
                 filterSort={(optionA, optionB) =>
                   (optionA?.label ?? "")
