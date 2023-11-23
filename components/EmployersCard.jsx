@@ -6,7 +6,7 @@ import React from "react";
 function EmployersCard({ item }) {
   const visit = () => {
     // Use window.open to open a new tab with the specified URL
-    window.open("https://www.khalti.com", "_blank");
+    window.open(item.url, "_blank");
   };
 
   return (
