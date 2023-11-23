@@ -75,7 +75,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
         const res = await Axios.get(
           `/job/getJobsByRecruiterId?recruiterId=${Number(
             sessionStorage.getItem("employerId")
-          )}`
+          )}&limit=10000`
         );
         setJobs(res.data.data);
       }
