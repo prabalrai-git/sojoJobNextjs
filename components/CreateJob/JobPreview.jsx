@@ -272,7 +272,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
             {requirements}
           </p>
         </div> */}
-        {!skipped > 0 && jobQuestions.length >0 &&  (
+        {jobQuestions.length > 0 &&  (
           <>
             <p className=" tw-mb-5 tw-font-bold">Questions</p>
             <Table
