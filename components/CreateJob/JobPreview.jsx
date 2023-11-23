@@ -6,6 +6,7 @@ import Axios from "@/api/server";
 import "react-toastify/dist/ReactToastify.css";
 import { Table, Tag } from "antd";
 import styles from "@/styles/list.module.css";
+import { useSelector } from "react-redux";
 
 function JobPreview({ setStep, data, jobQuestions }) {
   const [skillsArray, setSkillsArray] = useState([]);
@@ -31,6 +32,8 @@ function JobPreview({ setStep, data, jobQuestions }) {
     const arr = data?.skills?.split("&");
     setSkillsArray(arr);
   }, [data]);
+
+  const { userDetails } = useSelector((state) => state.userData);
 
   const onJobPost = async () => {
     if (typeof window !== undefined) {
@@ -155,7 +158,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
         </div>
         {/*  */}
         <h2 className="tw-text-black tw-text-lg tw-mt-7 tw-mb-8 tw-font-light">
-          Leapfrog Technology
+         {userDetails?.companyName}
         </h2>
         {/*  */}
         <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap tw-mb-10 ">
@@ -269,7 +272,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
             {requirements}
           </p>
         </div> */}
-        {!skipped > 0 && (
+        {!skipped > 0 && jobQuestions &&  (
           <>
             <p className=" tw-mb-5 tw-font-bold">Questions</p>
             <Table
