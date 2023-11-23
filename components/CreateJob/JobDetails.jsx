@@ -490,7 +490,7 @@ function JobDetails({ setStep, setData }) {
               Job Description
             </Form.Label>
             <ReactQuill
-              className=" tw-mb-5 tw-h-72 "
+              className=" tw-mb-5 tw-h-96 "
               theme="snow"
               value={jobDescription}
               onChange={(e) => setJobDescription(e)}
