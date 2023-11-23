@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Axios from "@/api/server";
 import Link from "next/link";
 import JobCard from "@/components/JobCard";
-import { Pagination, Tag } from "antd";
+import { Input, Pagination, Select, Tag } from "antd";
 import Image from "next/image";
 
 function page() {
@@ -13,6 +13,67 @@ function page() {
   const [total, setTotal] = useState();
   const [skillsArray, setSkillsArray] = useState();
   const [toDisplayJob, setToDisplayJob] = useState();
+  const [categoriesList, setCategoriesList] = useState();
+  const [subCategoryList, setSubCategoryList] = useState();
+  const [educationList, setEductaionList] = useState();
+  const [experienceList, setExperienceList] = useState();
+
+  const [category, setCategory] = useState(null);
+  const [education, setEducation] = useState(null);
+  const [experience, setExperience] = useState(null);
+  const [subCategory, setSubCategory] = useState(null);
+
+  const { Search } = Input;
+
+
+  useEffect(() => {
+    getCategoriesList();
+    getEducationList();
+    getExperienceList();
+  }, []);
+
+  const getCategoriesList = async () => {
+    try {
+      const res = await Axios.get("/admin/jobCategories/getAllJobCategories");
+      const newData = res.data.data.map((item) => {
+        return {
+          label: item.title,
+          value: item.id,
+          subCategories: item.jobSubCategories,
+        };
+      });
+      setCategoriesList(newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getEducationList = async () => {
+    try {
+      const res = await Axios.get(
+        "/admin/educationLevels/getAllEducationLevels"
+      );
+      const newData = res.data.data.map((item) => {
+        return { label: item.title, value: item.id };
+      });
+      setEductaionList(newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getExperienceList = async () => {
+    try {
+      const res = await Axios.get(
+        "/admin/experienceLevels/getAllExperienceLevels"
+      );
+      const newData = res.data.data.map((item) => {
+        return { label: item.title, value: item.id };
+      });
+      setExperienceList(newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const jobDescription = (
     <div
@@ -67,6 +128,137 @@ function page() {
 
   return (
     <main className="lg:tw-mx-20 md:tw-mx-5 xsm:tw-mx-5">
+          <div className="tw-flex tw-flex-row xsm:tw-flex-col  sm:tw-flex-col  md:tw-flex-row tw-justify-between">
+        {/* <h2 className="tw-font-medium tw-text-3xl tw-capitalize">Search {jobType} Jobs</h2>
+        <div className="tw-flex tw-justify-center   xsm:tw-w-full sm:tw-w-full md:tw-w-4/12 tw-relative 950:tw-w-5/12 800:tw-w-5/12 lg:tw-w-3/12  ">
+          <Search
+            placeholder="Search for jobs.."
+            className="tw-bg-grey tw-h-24"
+            allowClear
+            onSearch={()=>console.log('yo')}
+            size="large"
+          />
+        </div> */}
+      </div>
+      {/*  */}
+      <h5 className="tw-font-medium tw-text-lg">Filters:</h5>
+      <div className="tw-grid tw-grid-cols-4 tw-gap-4 xsm:tw-grid-cols-1  tw-mt-4 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-3 xl:tw-grid-cols-4">
+        <div className="tw-mr-4 tw-w-full">
+          <Select
+            showSearch
+            allowClear
+            className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
+            style={
+              {
+                // borderColor: "grey",
+                // paddingTop: 10,
+              }
+            }
+            placeholder="Filter By Category"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").includes(input)
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            options={categoriesList}
+            onChange={(e, a) => {
+              setCategory(e);
+              const subCategory = a?.subCategories?.map((item) => {
+                return { value: item.id, label: item.title };
+              });
+              setSubCategoryList(subCategory);
+            }}
+          />
+        </div>
+        <div className="tw-mr-4 tw-w-full">
+          <Select
+            showSearch
+            allowClear
+            className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
+            style={
+              {
+                // borderColor: "grey",
+                // paddingTop: 10,
+              }
+            }
+            placeholder="Filter By Sub Category"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").includes(input)
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            options={subCategoryList}
+            onChange={(e, a) => setSubCategory(e)}
+          />
+        </div>
+        <div className="tw-mr-4 tw-w-full">
+          <Select
+            showSearch
+            allowClear
+            className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
+            style={
+              {
+                // borderColor: "grey",
+                // paddingTop: 10,
+              }
+            }
+            placeholder="Filter By Education Level"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").includes(input)
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            options={educationList}
+            onChange={(e, a) => setEducation(e)}
+          />
+        </div>
+
+        <div className="tw-mr-4 tw-w-full">
+          <Select
+            showSearch
+            allowClear
+            className="tw-h-12 tw-border-2 tw-rounded-lg tw-w-full "
+            style={
+              {
+                // borderColor: "grey",
+                // paddingTop: 10,
+              }
+            }
+            placeholder="Filter By Experience Level"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").includes(input)
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            options={experienceList}
+            onChange={(e, a) => setExperience(e)}
+          />
+        </div>
+        <div className="tw-mr-4 tw-w-full">
+          <button
+            className="tw-bg-primary hover:tw-bg-buttonHover tw-rounded-lg tw-text-white tw-h-12 tw-text-sm tw-font-semibold tw-w-4/12"
+            onClick={() => onFilter()}
+          >
+            Filter
+          </button>{" "}
+        </div>
+      </div>
       <div>
         <h3 className="tw-capitalize tw-my-10 tw-mt-20 tw-text-2xl tw-font-semibold">
           All {jobType} Jobs

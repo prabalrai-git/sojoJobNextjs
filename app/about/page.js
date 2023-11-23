@@ -18,7 +18,7 @@ function page() {
     { id: 7, src: "/images/clients/7.png" },
     { id: 9, src: "/images/clients/9.png" },
     { id: 8, src: "/images/clients/8.png" },
-    { id: 10, src: "/cotiviti.png" },
+    // { id: 10, src: "/cotiviti.png" },
   ];
 
   const review = [
