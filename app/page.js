@@ -92,33 +92,23 @@ export default function Home() {
   };
 
   const employers = [
-    {
-      id: 1,
-      title: "Leapfrog",
-      address: "Charkhal",
-      themeColor: "#27AF61",
-      logo: "/leapfroglogo.png",
-    },
-    // {
-    //   id: 2,
-    //   title: "Deerhold Ltd",
-    //   address: "Kupondole",
-    //   themeColor: "#e96b30",
-    //   logo: "/dearhold.png",
-    // },
-    {
-      id: 3,
-      title: "COTIVITI",
-      address: "Bhaktapur",
-      themeColor: "#30006e",
-      logo: "/cotiviti.png",
-    },
+   
+  
     {
       id: 4,
       title: "UXcam",
       address: "Lalitpur",
       themeColor: "#5e97ff",
       logo: "/ux.png",
+      url:"https://uxcam.com/"
+    },
+    {
+      id: 6,
+      title: "KFC",
+      address: "Kathmandu",
+      themeColor: "#a91933",
+      logo: "/kfc.png",
+      url:"https://kfc.com.np/"
     },
     {
       id: 5,
@@ -126,21 +116,66 @@ export default function Home() {
       address: "Baneshwor",
       themeColor: "#5c2d91",
       logo: "/khalti.png",
+      url:"https://khalti.com/"
+    },
+ 
+    {
+      id: 7,
+      title: "F1soft",
+      address: "Lalitpur",
+      themeColor: "#A62529",
+      logo: "/f1soft.png",
+      url:"https://www.f1soft.com/"
     },
     {
-      id: 6,
-      title: "KFC",
-      address: "DurbarMarg",
-      themeColor: "#a91933",
-      logo: "/kfc.png",
+      id: 8,
+      title: "Eight Square",
+      address: "Kathmandu",
+      themeColor: "#2792D3",
+      logo: "/eightsquare.jpeg",
+      url:"https://8squarei.com/"
     },
-    // {
-    //   id: 7,
-    //   title: "KFC",
-    //   address: "DurbarMarg",
-    //   themeColor: "#a91933",
-    //   logo: "/kfc.png",
-    // },
+    {
+      id: 1,
+      title: "Leapfrog",
+      address: "Charkhal",
+      themeColor: "#27AF61",
+      logo: "/leapfroglogo.png",
+      url:"https://www.lftechnology.com/"
+    },
+    {
+      id: 9,
+      title: "UBA Solutions",
+      address: "Imadol",
+      themeColor: "#019DE2",
+      logo: "/uba.jpeg",
+      url:"https://uba-solutions.com/"
+    },
+    {
+      id: 10,
+      title: "The British College",
+      address: "Kathmandu",
+      themeColor: "#2B348E",
+      logo: "/britishcollege.png",
+      url:"https://www.thebritishcollege.edu.np/"
+    },
+    {
+      id: 12,
+      title: "IME Group",
+      address: "Kathmandu",
+      themeColor: "#EA2127",
+      logo: "/imegroup.png",
+      url:"https://imegroup.com.np/"
+    },
+    {
+      id: 11,
+      title: "Verisk",
+      address: "Lalitpur",
+      themeColor: "#095696",
+      logo: "/verisk.png",
+      url:"https://www.verisknepal.com.np/"
+    },
+   
   ];
 
   const searchJobs = () => {
