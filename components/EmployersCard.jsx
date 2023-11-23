@@ -37,7 +37,7 @@ function EmployersCard({ item }) {
               width={90}
               height={90}
               alt="company"
-              className="tw-object-contain  "
+              className="tw-object-contain tw-rounded-full  "
             />
           </div>
         </div>

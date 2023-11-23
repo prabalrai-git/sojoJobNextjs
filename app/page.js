@@ -99,13 +99,13 @@ export default function Home() {
       themeColor: "#27AF61",
       logo: "/leapfroglogo.png",
     },
-    {
-      id: 2,
-      title: "Deerhold Ltd",
-      address: "Kupondole",
-      themeColor: "#e96b30",
-      logo: "/dearhold.png",
-    },
+    // {
+    //   id: 2,
+    //   title: "Deerhold Ltd",
+    //   address: "Kupondole",
+    //   themeColor: "#e96b30",
+    //   logo: "/dearhold.png",
+    // },
     {
       id: 3,
       title: "COTIVITI",
@@ -127,6 +127,20 @@ export default function Home() {
       themeColor: "#5c2d91",
       logo: "/khalti.png",
     },
+    {
+      id: 6,
+      title: "KFC",
+      address: "DurbarMarg",
+      themeColor: "#a91933",
+      logo: "/kfc.png",
+    },
+    // {
+    //   id: 7,
+    //   title: "KFC",
+    //   address: "DurbarMarg",
+    //   themeColor: "#a91933",
+    //   logo: "/kfc.png",
+    // },
   ];
 
   const searchJobs = () => {

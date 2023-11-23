@@ -36,6 +36,7 @@ function JobDetails({ setStep, setData }) {
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
   const [subCategory, setSubCategory] = useState();
+  const [jobSubCategory, setJobSubCategory] = useState()
   const [employmentType, setEmploymentType] = useState();
   const [location, setLocation] = useState();
   const [experience, setExperience] = useState();
@@ -68,7 +69,7 @@ function JobDetails({ setStep, setData }) {
       !jobDescription ||
       !skills ||
       !jobPackage ||
-      !subCategory
+      !jobSubCategory
     ) {
       return message.error("Please fill out all the fields!");
     }
@@ -78,6 +79,7 @@ function JobDetails({ setStep, setData }) {
       title,
       jobCategoryId: category,
       jobSubCategoryId: subCategory,
+      jobSubCategoryTxt:jobSubCategory,
       jobShiftId: employmentType,
       jobLocation: location,
       experienceLevelId: experience,
@@ -233,7 +235,12 @@ function JobDetails({ setStep, setData }) {
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Sub Categories
               </Form.Label>
-              <Select
+              <Input
+              className="tw-border-1 tw-drop-shadow-sm tw-border-gray-300 tw-h-12"
+              onChange={(e) => setJobSubCategory(e.target.value)}
+              placeholder="Enter the sub-category here..."
+            />
+              {/* <Select
                 showSearch
                 className="tw-h-12 tw-w-full tw-border-1 tw-drop-shadow-sm tw-rounded-lg "
                 style={
@@ -256,7 +263,7 @@ function JobDetails({ setStep, setData }) {
                 onChange={(e, a) => {
                   setSubCategory(a);
                 }}
-              />
+              /> */}
             </div>
           </Form.Group>
           <Form.Group
