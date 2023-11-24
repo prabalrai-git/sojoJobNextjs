@@ -96,17 +96,17 @@ function page() {
       key: "status",
       filters: [
         { text: "Pending", value: "pending" },
-        { text: "Accepted", value: "accepted" },
-        { text: "Rejected", value: "rejected" },
+        { text: "Fit", value: "accepted" },
+        { text: "Unfit", value: "rejected" },
       ],
       onFilter: (value, record) => record.status === value,
       render: (text) => {
         if (text.toLowerCase() == "pending") {
           return <p className="tw-text-progressBg tw-capitalize">{text}</p>;
         } else if (text.toLowerCase() == "accepted") {
-          return <p className="tw-text-primary tw-capitalize">{text}</p>;
+          return <p className="tw-text-primary tw-capitalize">Fit</p>;
         } else if (text.toLowerCase() == "rejected") {
-          return <p className="tw-text-red tw-capitalize">{text}</p>;
+          return <p className="tw-text-red tw-capitalize">UnFit</p>;
         }
       },
     },
@@ -198,15 +198,15 @@ function page() {
   return (
     <div className="tw-pt-10 xsm:tw-mx-6 800:tw-mx-16 tw-pb-12">
       <div className="tw-flex tw-flex-row tw-mb-10">
-        <Link href={"/employer/dashboard"}>
-          <Image
-            src={"/arrow-left.png"}
-            width={35}
-            height={35}
-            alt="back"
-            className=" xsm:tw-mr-7 tw-object-contain"
-          />
-        </Link>
+        <Image
+          onClick={() => history.back()}
+          src={"/arrow-left.png"}
+          width={35}
+          height={35}
+          alt="back"
+          className=" xsm:tw-mr-7 tw-object-contain tw-cursor-pointer"
+        />
+
         <h1 className="tw-text-black tw-font-semibold 800:tw-text-3xl xsm:tw-text-base tw-self-center ">
           Applicants for SJ00{applications && applications[0]?.job?.id}{" "}
           {applications && applications[0]?.job?.title}

@@ -28,36 +28,54 @@ function RelatedJobs({ jobCategory, exludeJobId }) {
   };
 
   return (
-    <div className="tw-mt-32">
-      <div className="tw-flex tw-flex-row tw-items-stretch">
-        <Image
-          className="tw-self-center"
-          src={"/briefcase.png"}
-          height={30}
-          width={30}
-          alt="fire.png"
-        />
-        <h2 className="tw-self-center tw-ml-3 tw-font-medium tw-text-lg tw-capitalize">
-          Related <span className="tw-text-blue-500">{jobCategory?.title}</span>{" "}
-          Jobs at sojojob
-        </h2>
+    realatedJobs?.length > 0 && (
+      <div className="tw-mt-12">
+        <div className="tw-flex tw-flex-row tw-justify-between">
+          <div className="tw-flex tw-flex-row tw-items-stretch">
+            <Image
+              className="tw-self-center"
+              src={"/briefcase.png"}
+              height={30}
+              width={30}
+              alt="fire.png"
+            />
+            <h2 className="tw-self-center tw-ml-3 tw-font-medium tw-text-lg tw-capitalize">
+              Related{" "}
+              <span className="tw-text-blue-500">{jobCategory?.title}</span>{" "}
+              Jobs at sojojob
+            </h2>
+          </div>
+          <Link
+            className="tw-font-semibold tw-text-primary tw-no-underline"
+            href={{
+              pathname: "/jobs/list",
+              query: {
+                type: "similarCategory",
+                id: jobCategory?.id,
+                category: jobCategory?.title,
+              },
+            }}
+          >
+            <p>SEE ALL</p>
+          </Link>
+        </div>
+        <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2">
+          {realatedJobs?.map((item) => {
+            return (
+              <Link
+                href={{
+                  pathname: "/jobs",
+                  query: { id: item.id }, // the data
+                }}
+                className="tw-text-black tw-no-underline"
+              >
+                <JobCard key={item} job={item} />
+              </Link>
+            );
+          })}
+        </div>
       </div>
-      <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-mt-10 md:tw-grid-cols-1 lg:tw-grid-cols-3 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 800:tw-grid-cols-2">
-        {realatedJobs?.map((item) => {
-          return (
-            <Link
-              href={{
-                pathname: "/jobs",
-                query: { id: item.id }, // the data
-              }}
-              className="tw-text-black tw-no-underline"
-            >
-              <JobCard key={item} job={item} />
-            </Link>
-          );
-        })}
-      </div>
-    </div>
+    )
   );
 }
 

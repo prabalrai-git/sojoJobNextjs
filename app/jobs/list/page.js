@@ -6,6 +6,7 @@ import Link from "next/link";
 import JobCard from "@/components/JobCard";
 import { Input, Pagination, Select, Tag } from "antd";
 import Image from "next/image";
+import SendApplicationModal from "@/components/SendApplicationModal";
 
 function page() {
   const [data, setData] = useState([]);
@@ -17,14 +18,19 @@ function page() {
   const [subCategoryList, setSubCategoryList] = useState();
   const [educationList, setEductaionList] = useState();
   const [experienceList, setExperienceList] = useState();
+  const [open, setOpen] = useState(false);
 
   const [category, setCategory] = useState(null);
   const [education, setEducation] = useState(null);
   const [experience, setExperience] = useState(null);
   const [subCategory, setSubCategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState();
 
   const { Search } = Input;
 
+  const showModal = () => {
+    setOpen(true);
+  };
 
   useEffect(() => {
     getCategoriesList();
@@ -74,7 +80,6 @@ function page() {
     }
   };
 
-
   const jobDescription = (
     <div
       dangerouslySetInnerHTML={{
@@ -93,6 +98,9 @@ function page() {
   const searchParams = useSearchParams();
 
   const jobType = searchParams.get("type");
+
+  const id = searchParams.get("id");
+  const categoryName = searchParams.get("category");
 
   useEffect(() => {
     getJobs();
@@ -121,6 +129,61 @@ function page() {
 
         return;
       }
+      if (jobType.toLocaleLowerCase() === "similarcategory") {
+        const res = await Axios.get(`/public/getSimilarJobsByCategoryId/${id}`);
+        setData(res.data.data);
+        setToDisplayJob(res.data.data[0]);
+
+        setTotal(Number(res.data.pagination.totalPages) * limit);
+        return;
+      }
+      if (jobType.toLocaleLowerCase() === "other") {
+        const res = await Axios.get(`/public/getJobsOtherThanCategoryId/${id}`);
+        setData(res.data.data);
+        setToDisplayJob(res.data.data[0]);
+
+        setTotal(Number(res.data.pagination.totalPages) * limit);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const onFilter = async () => {
+    try {
+      let apiUrl = "/public/getJobByFilters";
+      let queryParams = [];
+
+      if (category !== null && category !== undefined) {
+        queryParams.push(`categoryId=${category}`);
+      }
+      if (education !== null && education !== undefined) {
+        queryParams.push(`educationLevelId=${education}`);
+      }
+      if (experience !== null && experience !== undefined) {
+        queryParams.push(`experienceLevelId=${experience}`);
+      }
+      if (subCategory !== null && subCategory !== undefined) {
+        queryParams.push(`subCategoryId=${subCategory}`);
+      }
+
+      if (queryParams.length > 0) {
+        apiUrl += `?${queryParams.join("&")}`;
+      }
+      const res = await Axios.get(apiUrl);
+      setData(res.data.data);
+      setToDisplayJob(res.data.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onSearch = async (value, _e, info) => {
+    try {
+      const res = await Axios.get(`/public/getJobBySearchTerm/${value}`);
+      setData(res.data.data);
+      setSearchTerm(value);
+      setToDisplayJob(res.data.data[0]);
     } catch (error) {
       console.log(error);
     }
@@ -128,17 +191,21 @@ function page() {
 
   return (
     <main className="lg:tw-mx-20 md:tw-mx-5 xsm:tw-mx-5">
-          <div className="tw-flex tw-flex-row xsm:tw-flex-col  sm:tw-flex-col  md:tw-flex-row tw-justify-between">
-        {/* <h2 className="tw-font-medium tw-text-3xl tw-capitalize">Search {jobType} Jobs</h2>
+      <div className="tw-flex tw-flex-row xsm:tw-flex-col  sm:tw-flex-col  md:tw-flex-row tw-justify-between tw-mt-10">
+        <h2 className="tw-font-medium tw-text-3xl tw-capitalize">
+          Search {categoryName ? categoryName : jobType} Jobs
+        </h2>
         <div className="tw-flex tw-justify-center   xsm:tw-w-full sm:tw-w-full md:tw-w-4/12 tw-relative 950:tw-w-5/12 800:tw-w-5/12 lg:tw-w-3/12  ">
           <Search
             placeholder="Search for jobs.."
             className="tw-bg-grey tw-h-24"
             allowClear
-            onSearch={()=>console.log('yo')}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
+            onSearch={onSearch}
             size="large"
           />
-        </div> */}
+        </div>
       </div>
       {/*  */}
       <h5 className="tw-font-medium tw-text-lg">Filters:</h5>
@@ -157,7 +224,7 @@ function page() {
             placeholder="Filter By Category"
             optionFilterProp="children"
             filterOption={(input, option) =>
-              (option?.label ?? "").includes(input)
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
             filterSort={(optionA, optionB) =>
               (optionA?.label ?? "")
@@ -174,7 +241,7 @@ function page() {
             }}
           />
         </div>
-        <div className="tw-mr-4 tw-w-full">
+        {/* <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch
             allowClear
@@ -198,8 +265,8 @@ function page() {
             options={subCategoryList}
             onChange={(e, a) => setSubCategory(e)}
           />
-        </div>
-        <div className="tw-mr-4 tw-w-full">
+        </div> */}
+        {/* <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch
             allowClear
@@ -223,7 +290,7 @@ function page() {
             options={educationList}
             onChange={(e, a) => setEducation(e)}
           />
-        </div>
+        </div> */}
 
         <div className="tw-mr-4 tw-w-full">
           <Select
@@ -260,8 +327,8 @@ function page() {
         </div>
       </div>
       <div>
-        <h3 className="tw-capitalize tw-my-10 tw-mt-20 tw-text-2xl tw-font-semibold">
-          All {jobType} Jobs
+        <h3 className="tw-capitalize tw-my-10 tw-mt-10 tw-text-2xl tw-font-semibold">
+          All {categoryName ? categoryName : jobType} Jobs
         </h3>
       </div>
       {/* <div className="tw-flex tw-flex-col tw-gap-5">
@@ -322,12 +389,22 @@ function page() {
                 <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize tw-mb-2">
                   {toDisplayJob && toDisplayJob?.title}
                 </h3>
-                <p className="tw-capitalize">
-                  {toDisplayJob && toDisplayJob?.jobRecruiter?.companyName}
-                </p>
+                <Link
+                  href={{
+                    pathname: "/companyProfile",
+                    query: { id: toDisplayJob?.jobRecruiter?.id }, // the data
+                  }}
+                >
+                  <p className="tw-capitalize">
+                    {toDisplayJob && toDisplayJob?.jobRecruiter?.companyName}
+                  </p>
+                </Link>
               </div>
               <div>
-                <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">
+                <button
+                  onClick={() => showModal()}
+                  className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4"
+                >
                   Apply now!
                 </button>
               </div>
@@ -414,6 +491,13 @@ function page() {
           </div>
         )}
       </div>
+      <SendApplicationModal
+        open={open}
+        setOpen={setOpen}
+        jobRecruiterId={toDisplayJob?.jobRecruiterId}
+        jobId={toDisplayJob?.id}
+        jobQuestions={toDisplayJob?.jobQuestions}
+      />
     </main>
   );
 }

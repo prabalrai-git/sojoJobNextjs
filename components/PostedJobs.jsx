@@ -176,7 +176,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
               }}
             >
               <p className="tw-text-primary tw-capitalize tw-font-semibold hover:tw-text-buttonHover tw-cursor-pointer">
-                View Applicants
+                {a.jobApplications.length} Applicants
               </p>
             </Link>
           );
@@ -290,6 +290,9 @@ function PostedJobs({ fromList, jobStatusFilter }) {
             columns={columns}
             dataSource={filteredJobs ? filteredJobs : jobs}
             scroll={{ x: 900 }}
+            pagination={{
+              pageSize: 10,
+            }}
           />
         ) : (
           <Image

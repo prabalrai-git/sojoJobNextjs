@@ -265,6 +265,8 @@ function SendApplicationModal({
     console.log("Failed:", errorInfo);
   };
 
+  // console.log(jobQuestions, "hi");
+
   return (
     <Modal
       open={open}
@@ -364,11 +366,12 @@ function SendApplicationModal({
               <p className="tw-text-red tw-mt-3">Please upload the CV!</p>
             )}
           </Form.Item>
-          {jobQuestions && (
+          {jobQuestions?.length > 0 && (
             <>
               {/* <p className="tw-font-medium tw-text-lg tw-mb-5">
              he following questions as well
             </p> */}
+
               <Divider orientation="left" orientationMargin="0">
                 Please answer the questions below
               </Divider>

@@ -197,7 +197,7 @@ function page() {
 
               <Form.Item
                 name="name"
-                label="Name"
+                label="Contact Person Name"
                 rules={[
                   {
                     required: true,

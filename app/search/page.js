@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import { Button, Input, Select, Tag } from "antd";
 import Axios from "@/api/server";
 import "@/styles/individualStyles.css";
+import SendApplicationModal from "@/components/SendApplicationModal";
 
 const { Search } = Input;
 // import "@/styles/global.css";
@@ -21,6 +22,7 @@ function page({ searchParams }) {
 
   const [searchedJobs, setSearchedJobs] = useState();
   const [toDisplayJob, setToDisplayJob] = useState();
+  const [open, setOpen] = useState(false);
 
   // form states
 
@@ -29,7 +31,7 @@ function page({ searchParams }) {
   const [experience, setExperience] = useState(null);
   const [subCategory, setSubCategory] = useState(null);
   const [skillsArray, setSkillsArray] = useState();
-  const [searchTerm, setSearchTerm ] = useState();
+  const [searchTerm, setSearchTerm] = useState();
 
   useEffect(() => {
     getCategoriesList();
@@ -38,7 +40,7 @@ function page({ searchParams }) {
   }, []);
 
   useEffect(() => {
-    setSearchTerm(searchParams.term)
+    setSearchTerm(searchParams.term);
     getJobs();
   }, [searchParams.term]);
 
@@ -47,6 +49,10 @@ function page({ searchParams }) {
       setToDisplayJob(searchedJobs[0]);
     }
   }, [searchedJobs]);
+
+  const showModal = () => {
+    setOpen(true);
+  };
 
   const jobDescription = (
     <div
@@ -120,7 +126,7 @@ function page({ searchParams }) {
     try {
       const res = await Axios.get(`/public/getJobBySearchTerm/${value}`);
       setSearchedJobs(res.data.data);
-      setSearchTerm(value)
+      setSearchTerm(value);
     } catch (error) {
       console.log(error);
     }
@@ -154,18 +160,18 @@ function page({ searchParams }) {
     }
   };
 
-  console.log(toDisplayJob,'hi')
-
   return (
     <div className="tw-mx-28 xsm:tw-mx-5 sm:tw-mx-10 md:tw-mx-28 tw-mt-10">
       <div className="tw-flex tw-flex-row xsm:tw-flex-col  sm:tw-flex-col  md:tw-flex-row tw-justify-between">
-        <h2 className="tw-font-medium tw-text-3xl">Search results for {searchTerm?`'${searchTerm}'`:null}</h2>
+        <h2 className="tw-font-medium tw-text-3xl">
+          Search results for {searchTerm ? `'${searchTerm}'` : null}
+        </h2>
         <div className="tw-flex tw-justify-center   xsm:tw-w-full sm:tw-w-full md:tw-w-4/12 tw-relative 950:tw-w-5/12 800:tw-w-5/12 lg:tw-w-3/12  ">
           <Search
             placeholder="Search for jobs.."
             className="tw-bg-grey tw-h-24"
             allowClear
-            onChange={e=>setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value)}
             value={searchTerm}
             onSearch={onSearch}
             size="large"
@@ -298,7 +304,6 @@ function page({ searchParams }) {
           // style={{ marginTop: -109 }}
           className="xsm:tw-order-2 sm:tw-order-2 md:tw-order-2 lg:tw-order-1 lg:-tw-mt-28 md:tw-mt-0  "
         >
-
           <h4 className="tw-mt-10 tw-mb-10 tw-capitalize tw-text-xl tw-font-medium">
             {searchedJobs?.length} jobs listed currently
           </h4>
@@ -330,19 +335,21 @@ function page({ searchParams }) {
                   {toDisplayJob && toDisplayJob?.title}
                 </h3>
                 <Link
-              href={{
-                pathname: "/companyProfile",
-                query: { id: toDisplayJob?.jobRecruiter?.id }, // the data
-              }}
-            >
-
-                <p className="tw-capitalize">
-                  {toDisplayJob && toDisplayJob?.jobRecruiter?.companyName}
-                </p>
-            </Link>
+                  href={{
+                    pathname: "/companyProfile",
+                    query: { id: toDisplayJob?.jobRecruiter?.id }, // the data
+                  }}
+                >
+                  <p className="tw-capitalize">
+                    {toDisplayJob && toDisplayJob?.jobRecruiter?.companyName}
+                  </p>
+                </Link>
               </div>
               <div>
-                <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">
+                <button
+                  onClick={() => showModal()}
+                  className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4"
+                >
                   Apply now!
                 </button>
               </div>
@@ -429,6 +436,13 @@ function page({ searchParams }) {
           </div>
         )}
       </div>
+      <SendApplicationModal
+        open={open}
+        setOpen={setOpen}
+        jobRecruiterId={toDisplayJob?.jobRecruiterId}
+        jobId={toDisplayJob?.id}
+        jobQuestions={toDisplayJob?.jobQuestions}
+      />
     </div>
   );
 }
