@@ -130,6 +130,21 @@ function RecruiterNavBar() {
           className=" tw-drop-shadow-md tw-absolute md:tw-right-10 tw-top-20 tw-bg-white tw-z-10 tw-rounded-lg tw-pl-6 tw-pr-20 tw-py-4 xsm:tw-right-0 xsm:tw-w-full md:tw-w-4/12 lg:tw-w-3/12"
         >
           <ul onClick={() => setShowDropDown((prev) => !prev)}>
+          <Link
+              className="tw-no-underline tw-flex tw-flex-row tw-my-3  "
+              href={"/dashboard/jobs"}
+            >
+              <Image
+                src={"/briefcase.png"}
+                width={20}
+                height={20}
+                alt="home"
+                className="tw-object-contain tw-mr-4"
+              />
+              <p className="tw-text-base tw-font-medium tw-text-gray-600">
+                Public Jobs
+              </p>
+            </Link>
             <Link
               className="tw-no-underline tw-flex tw-flex-row tw-my-3"
               href={"/employer/dashboard"}
@@ -160,6 +175,7 @@ function RecruiterNavBar() {
                 Job Applications
               </p>
             </Link>
+         
 
             <li
               onClick={() => logout()}
