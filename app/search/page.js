@@ -29,6 +29,7 @@ function page({ searchParams }) {
   const [experience, setExperience] = useState(null);
   const [subCategory, setSubCategory] = useState(null);
   const [skillsArray, setSkillsArray] = useState();
+  const [searchTerm, setSearchTerm ] = useState();
 
   useEffect(() => {
     getCategoriesList();
@@ -37,6 +38,7 @@ function page({ searchParams }) {
   }, []);
 
   useEffect(() => {
+    setSearchTerm(searchParams.term)
     getJobs();
   }, [searchParams.term]);
 
@@ -118,6 +120,7 @@ function page({ searchParams }) {
     try {
       const res = await Axios.get(`/public/getJobBySearchTerm/${value}`);
       setSearchedJobs(res.data.data);
+      setSearchTerm(value)
     } catch (error) {
       console.log(error);
     }
@@ -151,15 +154,19 @@ function page({ searchParams }) {
     }
   };
 
+  console.log(toDisplayJob,'hi')
+
   return (
     <div className="tw-mx-28 xsm:tw-mx-5 sm:tw-mx-10 md:tw-mx-28 tw-mt-10">
       <div className="tw-flex tw-flex-row xsm:tw-flex-col  sm:tw-flex-col  md:tw-flex-row tw-justify-between">
-        <h2 className="tw-font-medium tw-text-3xl">Search Jobs</h2>
-        <div className="tw-flex tw-justify-center tw-mb-10  xsm:tw-w-full sm:tw-w-full md:tw-w-4/12 tw-relative 950:tw-w-5/12 800:tw-w-5/12 lg:tw-w-3/12  ">
+        <h2 className="tw-font-medium tw-text-3xl">Search results for {searchTerm?`'${searchTerm}'`:null}</h2>
+        <div className="tw-flex tw-justify-center   xsm:tw-w-full sm:tw-w-full md:tw-w-4/12 tw-relative 950:tw-w-5/12 800:tw-w-5/12 lg:tw-w-3/12  ">
           <Search
             placeholder="Search for jobs.."
             className="tw-bg-grey tw-h-24"
             allowClear
+            onChange={e=>setSearchTerm(e.target.value)}
+            value={searchTerm}
             onSearch={onSearch}
             size="large"
           />
@@ -182,7 +189,7 @@ function page({ searchParams }) {
             placeholder="Filter By Category"
             optionFilterProp="children"
             filterOption={(input, option) =>
-              (option?.label ?? "").includes(input)
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
             filterSort={(optionA, optionB) =>
               (optionA?.label ?? "")
@@ -199,7 +206,7 @@ function page({ searchParams }) {
             }}
           />
         </div>
-        <div className="tw-mr-4 tw-w-full">
+        {/* <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch
             allowClear
@@ -223,8 +230,8 @@ function page({ searchParams }) {
             options={subCategoryList}
             onChange={(e, a) => setSubCategory(e)}
           />
-        </div>
-        <div className="tw-mr-4 tw-w-full">
+        </div> */}
+        {/* <div className="tw-mr-4 tw-w-full">
           <Select
             showSearch
             allowClear
@@ -248,7 +255,7 @@ function page({ searchParams }) {
             options={educationList}
             onChange={(e, a) => setEducation(e)}
           />
-        </div>
+        </div> */}
 
         <div className="tw-mr-4 tw-w-full">
           <Select
@@ -291,6 +298,7 @@ function page({ searchParams }) {
           // style={{ marginTop: -109 }}
           className="xsm:tw-order-2 sm:tw-order-2 md:tw-order-2 lg:tw-order-1 lg:-tw-mt-28 md:tw-mt-0  "
         >
+
           <h4 className="tw-mt-10 tw-mb-10 tw-capitalize tw-text-xl tw-font-medium">
             {searchedJobs?.length} jobs listed currently
           </h4>
@@ -321,9 +329,17 @@ function page({ searchParams }) {
                 <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize tw-mb-2">
                   {toDisplayJob && toDisplayJob?.title}
                 </h3>
+                <Link
+              href={{
+                pathname: "/companyProfile",
+                query: { id: toDisplayJob?.jobRecruiter?.id }, // the data
+              }}
+            >
+
                 <p className="tw-capitalize">
                   {toDisplayJob && toDisplayJob?.jobRecruiter?.companyName}
                 </p>
+            </Link>
               </div>
               <div>
                 <button className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4">

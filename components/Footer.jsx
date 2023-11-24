@@ -24,8 +24,8 @@ function Footer() {
               Login to SojoJob Account
             </p>
           </Link>
-          <Link href={"/about"} className="tw-text-white tw-no-underline">
-            <p className=" tw-cursor-pointer hover:tw-text-primary">About Us</p>
+          <Link href={"/home"} className="tw-text-white tw-no-underline">
+            <p className=" tw-cursor-pointer hover:tw-text-primary">Home</p>
           </Link>
         </div>
       </div>
@@ -48,8 +48,8 @@ function Footer() {
               Login to SojoJob Account
             </p>
           </Link>
-          <Link href={"/about"} className="tw-text-white tw-no-underline">
-            <p className=" tw-cursor-pointer hover:tw-text-primary">About Us</p>
+          <Link href={"/home"} className="tw-text-white tw-no-underline">
+            <p className=" tw-cursor-pointer hover:tw-text-primary">Home</p>
           </Link>{" "}
         </div>
       </div>

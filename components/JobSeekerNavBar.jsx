@@ -94,9 +94,9 @@ function JobSeekerNavBar() {
             <Nav.Link href="#pricing">Pricing</Nav.Link> */}
           </Nav>
           <Nav>
-            <Nav.Link className="tw-self-center" href="/about">
+            <Nav.Link className="tw-self-center" href="/home">
               <h2 className="tw-font-medium tw-text-lg tw-text-black hover:tw-underline xsm:tw-hidden 800:tw-block">
-                About Us
+                Home
               </h2>
             </Nav.Link>
             <Nav.Link
