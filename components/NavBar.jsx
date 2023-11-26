@@ -5,8 +5,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "@/styles/navbar.css";
+import { useState } from "react";
 
 function NavBar() {
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
   return (
     <Navbar
       collapseOnSelect
@@ -20,6 +22,8 @@ function NavBar() {
             src={"/logo.png"}
             width={230}
             height={230}
+            onLoad={() => setIsLogoLoaded(true)}
+            style={{ display: isLogoLoaded ? "block" : "none" }}
             alt="logo.png"
           />
         </Navbar.Brand>
