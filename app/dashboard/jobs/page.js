@@ -13,7 +13,7 @@ import Axios from "@/api/server";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import "@/styles/individualStyles.css";
+import "@/styles/searchStylesDashboard.css";
 import TrendingTagsComponent from "@/components/TrendingTagsComponent";
 import { NavBarByUser } from "@/components/NavBarType";
 export default function Home() {
