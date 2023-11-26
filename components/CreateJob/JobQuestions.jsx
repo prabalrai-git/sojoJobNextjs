@@ -7,19 +7,19 @@ import { Form } from "react-bootstrap";
 function JobQuestions({ setStep, setJobQuestions }) {
   const [question1, setQuestion1] = useState({
     questionNumber: 1,
-    questionType: null,
+    questionType: "Number",
     questionText: null,
     requiredAnswer: null,
   });
   const [question2, setQuestion2] = useState({
     questionNumber: 2,
-    questionType: null,
+    questionType: "Number",
     questionText: null,
     requiredAnswer: null,
   });
   const [question3, setQuestion3] = useState({
     questionNumber: 3,
-    questionType: null,
+    questionType: "Number",
     questionText: null,
     requiredAnswer: null,
   });
@@ -122,30 +122,44 @@ function JobQuestions({ setStep, setJobQuestions }) {
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Ideal Answer 1
               </Form.Label>
-              <Select
-                onChange={(e, a) =>
-                  setQuestion1((prev) => ({ ...prev, requiredAnswer: e }))
-                }
-                showSearch
-                className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
-                style={
-                  {
-                    // borderColor: "grey",
-                    // paddingTop: 10,
+              {question1?.questionType == "Yes/No" ? (
+                <Select
+                  onChange={(e, a) =>
+                    setQuestion1((prev) => ({ ...prev, requiredAnswer: e }))
                   }
-                }
-                placeholder="Search to Select"
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  (option?.label ?? "").includes(input)
-                }
-                filterSort={(optionA, optionB) =>
-                  (optionA?.label ?? "")
-                    .toLowerCase()
-                    .localeCompare((optionB?.label ?? "").toLowerCase())
-                }
-                options={question1?.questionType == "Yes/No" ? yesno : range}
-              />
+                  showSearch
+                  className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                  style={
+                    {
+                      // borderColor: "grey",
+                      // paddingTop: 10,
+                    }
+                  }
+                  placeholder="Search to Select"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    (option?.label ?? "").includes(input)
+                  }
+                  filterSort={(optionA, optionB) =>
+                    (optionA?.label ?? "")
+                      .toLowerCase()
+                      .localeCompare((optionB?.label ?? "").toLowerCase())
+                  }
+                  options={yesno}
+                />
+              ) : (
+                <Input
+                  className="tw-border-2 tw-border-gray-300 tw-h-12"
+                  onChange={(e) =>
+                    setQuestion1((prev) => ({
+                      ...prev,
+                      requiredAnswer: e.target.value,
+                    }))
+                  }
+                  type="number"
+                  placeholder="Enter answer here"
+                />
+              )}
             </div>
           </Form.Group>
           <Form.Group
@@ -200,30 +214,44 @@ function JobQuestions({ setStep, setJobQuestions }) {
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Ideal Answer 2
               </Form.Label>
-              <Select
-                onChange={(e, a) =>
-                  setQuestion2((prev) => ({ ...prev, requiredAnswer: e }))
-                }
-                showSearch
-                className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
-                style={
-                  {
-                    // borderColor: "grey",
-                    // paddingTop: 10,
+              {question2?.questionType == "Yes/No" ? (
+                <Select
+                  onChange={(e, a) =>
+                    setQuestion2((prev) => ({ ...prev, requiredAnswer: e }))
                   }
-                }
-                placeholder="Search to Select"
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  (option?.label ?? "").includes(input)
-                }
-                filterSort={(optionA, optionB) =>
-                  (optionA?.label ?? "")
-                    .toLowerCase()
-                    .localeCompare((optionB?.label ?? "").toLowerCase())
-                }
-                options={question2?.questionType == "Yes/No" ? yesno : range}
-              />
+                  showSearch
+                  className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                  style={
+                    {
+                      // borderColor: "grey",
+                      // paddingTop: 10,
+                    }
+                  }
+                  placeholder="Search to Select"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    (option?.label ?? "").includes(input)
+                  }
+                  filterSort={(optionA, optionB) =>
+                    (optionA?.label ?? "")
+                      .toLowerCase()
+                      .localeCompare((optionB?.label ?? "").toLowerCase())
+                  }
+                  options={yesno}
+                />
+              ) : (
+                <Input
+                  className="tw-border-2 tw-border-gray-300 tw-h-12"
+                  onChange={(e) =>
+                    setQuestion2((prev) => ({
+                      ...prev,
+                      requiredAnswer: e.target.value,
+                    }))
+                  }
+                  type="number"
+                  placeholder="Enter answer here"
+                />
+              )}
             </div>
           </Form.Group>
           <Form.Group
@@ -278,30 +306,44 @@ function JobQuestions({ setStep, setJobQuestions }) {
               <Form.Label className="tw-text-gray-600 tw-font-medium">
                 Ideal Answer 3
               </Form.Label>
-              <Select
-                onChange={(e, a) =>
-                  setQuestion3((prev) => ({ ...prev, requiredAnswer: e }))
-                }
-                showSearch
-                className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
-                style={
-                  {
-                    // borderColor: "grey",
-                    // paddingTop: 10,
+              {question3?.questionType == "Yes/No" ? (
+                <Select
+                  onChange={(e, a) =>
+                    setQuestion3((prev) => ({ ...prev, requiredAnswer: e }))
                   }
-                }
-                placeholder="Search to Select"
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  (option?.label ?? "").includes(input)
-                }
-                filterSort={(optionA, optionB) =>
-                  (optionA?.label ?? "")
-                    .toLowerCase()
-                    .localeCompare((optionB?.label ?? "").toLowerCase())
-                }
-                options={question3?.questionType == "Yes/No" ? yesno : range}
-              />
+                  showSearch
+                  className="tw-h-12 tw-border-2  tw-rounded-lg tw-w-full"
+                  style={
+                    {
+                      // borderColor: "grey",
+                      // paddingTop: 10,
+                    }
+                  }
+                  placeholder="Search to Select"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    (option?.label ?? "").includes(input)
+                  }
+                  filterSort={(optionA, optionB) =>
+                    (optionA?.label ?? "")
+                      .toLowerCase()
+                      .localeCompare((optionB?.label ?? "").toLowerCase())
+                  }
+                  options={yesno}
+                />
+              ) : (
+                <Input
+                  className="tw-border-2 tw-border-gray-300 tw-h-12"
+                  onChange={(e) =>
+                    setQuestion3((prev) => ({
+                      ...prev,
+                      requiredAnswer: e.target.value,
+                    }))
+                  }
+                  type="number"
+                  placeholder="Enter answer here"
+                />
+              )}
             </div>
           </Form.Group>
         </Form>

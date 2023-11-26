@@ -48,7 +48,7 @@ function page() {
           setPhone("");
           setDisabled(false);
 
-          message.success("Email Sent! We will contact you shortly.");
+          message.success("Email Received! We will contact you shortly.");
         },
         (error) => {
           console.log(error.text);
