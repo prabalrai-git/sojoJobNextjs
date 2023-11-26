@@ -291,7 +291,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
             dataSource={filteredJobs ? filteredJobs : jobs}
             scroll={{ x: 900 }}
             pagination={{
-              pageSize: 10,
+              showSizeChanger: true,
             }}
           />
         ) : (

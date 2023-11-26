@@ -160,6 +160,9 @@ function AppliedJobs({ fromList }) {
             columns={columns}
             dataSource={data}
             scroll={{ x: 900 }}
+            pagination={{
+              showSizeChanger: true,
+            }}
           />
         ) : (
           <Image
