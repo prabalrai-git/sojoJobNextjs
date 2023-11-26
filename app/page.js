@@ -95,7 +95,7 @@ function page() {
                   src={item.src}
                   width={150}
                   height={100}
-                  className="tw-object-contain xsm:tw-w-16 md:tw-w-36 "
+                  className="tw-object-fill xsm:tw-w-16 md:tw-w-36 "
                   alt={item.id}
                 />
               );

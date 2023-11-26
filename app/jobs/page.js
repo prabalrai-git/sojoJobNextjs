@@ -77,11 +77,11 @@ function page() {
           width={115}
           height={115}
           alt="companyLogo"
-          className="tw-rounded-full tw-absolute tw-object-fill tw-top-24 tw-left-40 tw-bg-white tw-h-28 tw-w-28"
+          className="tw-rounded-full tw-absolute tw-object-fill tw-top-24 tw-bg-white tw-h-28 md:tw-left-40 xsm:tw-left-1/3  "
         />
       </div>
       <div className="tw-mx-28 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-28 tw-mt-32">
-        <div className="tw-flex tw-flex-row tw-justify-between">
+        <div className="tw-flex tw-flex-row tw-justify-between xsm:tw-flex-col tw-gap-5 sm:tw-flex-row">
           <div>
             <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize tw-mb-3 tw-font-semibold ">
               {jobDetails?.title}
@@ -100,14 +100,14 @@ function page() {
           <div>
             <button
               onClick={() => showModal()}
-              className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4"
+              className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg sm:tw-px-7 xsm:tw-px-6 xsm:tw-py-2 sm:tw-py-4"
             >
               Apply now!
             </button>
           </div>
         </div>
         {/*  */}
-        <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap tw-gap-2 ">
+        <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap tw-gap-5 ">
           <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
             <Image
               src={"/clock.png"}

@@ -384,7 +384,7 @@ function page() {
         </div>
         {data?.length > 0 && (
           <div className=" xsm:tw-order-1 sm:tw-order-1 md:tw-order-1 lg:tw-order-2 tw-col-span-2 tw-border-2  tw-border-cardBorder tw-rounded-lg tw-p-10 tw-py-16 xsm:tw-p-3 sm:tw-p-5 md:tw-p-10 lg:-tw-mt-1">
-            <div className="tw-flex tw-flex-row tw-justify-between">
+            <div className="tw-flex tw-flex-row tw-justify-between xsm:tw-flex-col tw-gap-5 sm:tw-flex-row">
               <div>
                 <h3 className="xsm:tw-text-lg sm:tw-text-xl md:tw-text-3xl tw-capitalize tw-mb-2">
                   {toDisplayJob && toDisplayJob?.title}
@@ -403,14 +403,14 @@ function page() {
               <div>
                 <button
                   onClick={() => showModal()}
-                  className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg tw-px-7 tw-py-4"
+                  className="tw-bg-primary hover:tw-bg-buttonHover   tw-text-white tw-rounded-lg sm:tw-px-7 xsm:tw-px-6 xsm:tw-py-2 sm:tw-py-4"
                 >
                   Apply now!
                 </button>
               </div>
             </div>
             {/*  */}
-            <div className="tw-flex tw-flex-row tw-mt-6 tw-flex-wrap">
+            <div className="tw-flex tw-flex-row tw-mt-6 tw-flex-wrap tw-gap-5">
               <div className="tw-flex tw-flex-row tw-mr-7 tw-items-center">
                 <Image
                   src={"/clock.png"}

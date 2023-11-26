@@ -46,7 +46,6 @@ function page({ searchParams }) {
       }}
     />
   );
-  console.log(company);
   return (
     <div className="tw-mx-28 xsm:tw-mx-5 sm:tw-mx-10 md:tw-mx-28 tw-mt-10">
       <div
@@ -58,7 +57,7 @@ function page({ searchParams }) {
         }}
         className="tw-h-60 tw-w-full tw-rounded tw-relative tw-object-contain"
       >
-        <div className="tw-bg-white tw-h-24 tw-w-24 tw-rounded-full tw-absolute -tw-bottom-10 tw-left-7 tw-flex tw-justify-center tw-align-middle">
+        <div className="tw-bg-white tw-h-24 tw-w-24 tw-rounded-full tw-absolute -tw-bottom-10 md:tw-left-14 tw-flex xsm:tw-left-1/3  tw-justify-center tw-align-middle">
           <Image
             src={
               company?.companyLogoImage
