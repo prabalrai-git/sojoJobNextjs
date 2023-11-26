@@ -79,7 +79,7 @@ function JobSeekerNavBar() {
     >
       <Container className="tw-max-w-screen-2xl pnavbar">
         <Navbar.Brand href="/">
-          <Image
+          <img
             className="tw-object-contain tw-cursor-pointer  "
             src={"/logo.png"}
             width={200}
