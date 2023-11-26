@@ -185,7 +185,7 @@ function page({ searchParams }) {
         <div className="tw-flex tw-justify-center   xsm:tw-w-full sm:tw-w-full md:tw-w-4/12 tw-relative 950:tw-w-5/12 800:tw-w-5/12 lg:tw-w-3/12  ">
           <Search
             placeholder="Search for jobs.."
-            className="tw-bg-grey tw-h-24"
+            className="tw-bg-white tw-h-24"
             allowClear
             onChange={(e) => setSearchTerm(e.target.value)}
             value={searchTerm}
