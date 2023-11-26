@@ -87,6 +87,7 @@ function RecruiterNavBar() {
                 width={30}
                 height={30}
                 alt="settings"
+                loading="lazy"
               />
             </Nav.Link>
             <Nav.Link
@@ -122,6 +123,7 @@ function RecruiterNavBar() {
                   height={15}
                   alt="arrow-down"
                   className="tw-object-contain"
+                  loading="lazy"
                 />
               </div>
             </Nav.Link>
@@ -144,6 +146,7 @@ function RecruiterNavBar() {
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
+                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Public Jobs
@@ -159,6 +162,7 @@ function RecruiterNavBar() {
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
+                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Dashboard
@@ -174,6 +178,7 @@ function RecruiterNavBar() {
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
+                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Job Applications
@@ -190,6 +195,7 @@ function RecruiterNavBar() {
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
+                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Logout
