@@ -19,14 +19,6 @@ function page() {
 
   const formRef = useRef(null);
 
-  console.log(
-    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-    process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-
-    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-    "hi what is up"
-  );
-
   const sendEmail = async (e) => {
     e.preventDefault();
     setDisabled(true);
