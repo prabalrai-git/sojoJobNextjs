@@ -60,6 +60,10 @@
   box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
 }
 
+:where(.css-1vr7spz).ant-input-affix-wrapper > input.ant-input {
+  background-color: white !important;
+}
+
 p {
   margin-bottom: 0rem;
 }
