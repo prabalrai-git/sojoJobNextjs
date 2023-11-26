@@ -11,11 +11,11 @@ function NavBar() {
     <Navbar
       collapseOnSelect
       expand="sm"
-      className="tw-flex tw-flex-row tw-bg-white tw-justify-between tw-pt-5 tw-sticky tw-top-0 tw-z-50 tw-pb-5"
+      className="tw-flex tw-flex-row tw-bg-white tw-justify-between tw-pt-5 tw-sticky tw-top-0 tw-z-50 tw-pb-5 tw-h-24"
     >
       <Container className="tw-max-w-screen-2xl pnavbar">
         <Navbar.Brand href="/">
-          <Image
+          <img
             className="tw-object-contain tw-cursor-pointer "
             src={"/logo.png"}
             width={230}
@@ -46,7 +46,10 @@ function NavBar() {
               Dank memes
             </Nav.Link> */}
             <ul className="tw-flex tw-flex-row tw-text-lg tw-font-medium tw-items-center xsm:tw-text-sm md:tw-text-lg ">
-              <Link className=" tw-no-underline tw-text-black" href="/dashboard/jobs ">
+              <Link
+                className=" tw-no-underline tw-text-black"
+                href="/dashboard/jobs "
+              >
                 <li className="tw-mx-4 md:tw-mx-7 tw-cursor-pointer hover:tw-underline  ">
                   Jobs
                 </li>
