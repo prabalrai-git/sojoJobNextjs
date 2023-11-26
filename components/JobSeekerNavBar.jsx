@@ -86,6 +86,8 @@ function JobSeekerNavBar() {
             width={200}
             height={230}
             alt="logo.png"
+            onLoad={() => setIsLogoLoaded(true)}
+            style={{ display: isLogoLoaded ? "block" : "none" }}
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
