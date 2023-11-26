@@ -41,8 +41,24 @@ function page({ searchParams }) {
 
   useEffect(() => {
     setSearchTerm(searchParams.term);
+
     getJobs();
+    if (searchParams.categoryId) {
+      setSearchTerm(searchParams.categoryTitle);
+      filterByCategoryOnly();
+    }
   }, [searchParams.term]);
+
+  const filterByCategoryOnly = async () => {
+    try {
+      const res = await Axios.get(
+        `/public/getJobByFilters?categoryId=${searchParams.categoryId}`
+      );
+      setSearchedJobs(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (searchedJobs) {

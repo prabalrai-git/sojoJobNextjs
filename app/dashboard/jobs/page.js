@@ -92,15 +92,13 @@ export default function Home() {
   };
 
   const employers = [
-   
-  
     {
       id: 4,
       title: "UXcam",
       address: "Lalitpur",
       themeColor: "#5e97ff",
       logo: "/ux.png",
-      url:"https://uxcam.com/"
+      url: "https://uxcam.com/",
     },
     {
       id: 6,
@@ -108,7 +106,7 @@ export default function Home() {
       address: "Kathmandu",
       themeColor: "#a91933",
       logo: "/kfc.png",
-      url:"https://kfc.com.np/"
+      url: "https://kfc.com.np/",
     },
     {
       id: 5,
@@ -116,16 +114,16 @@ export default function Home() {
       address: "Baneshwor",
       themeColor: "#5c2d91",
       logo: "/khalti.png",
-      url:"https://khalti.com/"
+      url: "https://khalti.com/",
     },
- 
+
     {
       id: 7,
       title: "F1soft",
       address: "Lalitpur",
       themeColor: "#A62529",
       logo: "/f1soft.png",
-      url:"https://www.f1soft.com/"
+      url: "https://www.f1soft.com/",
     },
     {
       id: 8,
@@ -133,7 +131,7 @@ export default function Home() {
       address: "Kathmandu",
       themeColor: "#2792D3",
       logo: "/eightsquare.jpeg",
-      url:"https://8squarei.com/"
+      url: "https://8squarei.com/",
     },
     {
       id: 1,
@@ -141,7 +139,7 @@ export default function Home() {
       address: "Charkhal",
       themeColor: "#27AF61",
       logo: "/leapfroglogo.png",
-      url:"https://www.lftechnology.com/"
+      url: "https://www.lftechnology.com/",
     },
     {
       id: 9,
@@ -149,7 +147,7 @@ export default function Home() {
       address: "Imadol",
       themeColor: "#019DE2",
       logo: "/uba.jpeg",
-      url:"https://uba-solutions.com/"
+      url: "https://uba-solutions.com/",
     },
     {
       id: 10,
@@ -157,7 +155,7 @@ export default function Home() {
       address: "Kathmandu",
       themeColor: "#2B348E",
       logo: "/britishcollege.png",
-      url:"https://www.thebritishcollege.edu.np/"
+      url: "https://www.thebritishcollege.edu.np/",
     },
     {
       id: 12,
@@ -165,7 +163,7 @@ export default function Home() {
       address: "Kathmandu",
       themeColor: "#EA2127",
       logo: "/imegroup.png",
-      url:"https://imegroup.com.np/"
+      url: "https://imegroup.com.np/",
     },
     {
       id: 11,
@@ -173,9 +171,8 @@ export default function Home() {
       address: "Lalitpur",
       themeColor: "#095696",
       logo: "/verisk.png",
-      url:"https://www.verisknepal.com.np/"
+      url: "https://www.verisknepal.com.np/",
     },
-   
   ];
 
   const searchJobs = () => {
