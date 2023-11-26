@@ -4,55 +4,59 @@ import Footer from "@/components/Footer";
 import { NavBarByUser } from "@/components/NavBarType";
 import ReviewCard from "@/components/ReviewCard";
 import Image from "next/image";
-import React from "react";
+import React, { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import emailjs from "@emailjs/browser";
+import { review, someOfOurClients } from "@/staticData";
+import { message } from "antd";
 
 function page() {
-  const sendEmail = async () => {};
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [disabled, setDisabled] = useState(false);
 
-  const data = [
-    { id: 1, src: "/lepfrognew.png" },
-    { id: 2, src: "/images/clients/2.png" },
-    { id: 3, src: "/logo-n.png" },
-    { id: 4, src: "/images/clients/4.png" },
-    { id: 6, src: "/images/clients/6.png" },
-    { id: 7, src: "/imegroup.png" },
-    { id: 8, src: "/uxcam.png" },
-    { id: 9, src: "/images/clients/9.png" },
-    { id: 10, src: "/kfclogo.png" },
-    // { id: 10, src: "/cotiviti.png" },
-  ];
+  const formRef = useRef(null);
 
-  const review = [
-    {
-      id: 1,
-      src: "/images/c1.png",
-      logo: "/images/cl1.png",
-      title: "Speed and Accuracy",
-      person: "Ms.Sephika Shakya",
-      desc: "The most important that we liked about sojojob is its speed and accuracy, you can try it yourself.",
-      desg: "HR Assistant, Info Developers",
-    },
-    {
-      id: 2,
-      src: "/images/c2.png",
-      logo: "/images/cl2.png",
-      title: "Prompt Response",
-      person: "Ms.Smriti",
-      desc: "Sojojob's prompt response and follow up excites us the most and which has also helped us in hiring candidate faster",
-      desg: "Senior HR, Foodmandu",
-    },
-    {
-      id: 3,
-      src: "/images/c3.png",
-      logo: "/images/cl3.png",
-      title: "Easy to work with ",
-      person: "Ms. Sushma Dhakal",
-      desc: "Overall process and team are both easy to work with",
-      desg: "HR Officer, Bottle Tech",
-    },
-  ];
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    setDisabled(true);
+    if (!name || !email || !phone) {
+      setDisabled(false);
+      return message.info("Please enter value in all the fields.");
+    }
+
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      to_name: "Sojo Job",
+      message: `Please, call be back. \n Name: ${name} \n Email:${email} \n Phone:+977 ${phone}`,
+    };
+
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          setName("");
+          setEmail("");
+          setPhone("");
+          setDisabled(false);
+
+          message.success("Email Sent! We will contact you shortly.");
+        },
+        (error) => {
+          console.log(error.text);
+          setDisabled(false);
+          message.error(error.text);
+        }
+      );
+  };
 
   return (
     <>
@@ -88,7 +92,7 @@ function page() {
             Some of our clients
           </h1>
           <div className="tw-flex tw-flex-row  tw-flex-wrap tw-items-center tw-justify-center  tw-mx-40 tw-mt-5 xsm:tw-mx-5 md:tw-mx-40 tw-mb-10 tw-gap-7">
-            {data.map((item) => {
+            {someOfOurClients.map((item) => {
               return (
                 <Image
                   key={item.id}
@@ -139,36 +143,43 @@ function page() {
               for employers and job seekers alike.
             </p>
           </div>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form ref={formRef}>
+            <Form.Group className="mb-3" controlId="formBasicEmail1">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 size="lg"
+                type="text"
                 className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black "
-                type="email"
                 placeholder="Enter Name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="formBasicEmail2">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black"
                 size="lg"
                 type="email"
                 placeholder="Enter email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="formBasicEmail3">
               <Form.Label>Phone number</Form.Label>
               <Form.Control
                 className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black"
                 size="lg"
-                type="email"
+                type="number"
                 placeholder="Enter phone"
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
               />
             </Form.Group>
 
             <Button
+              disabled={disabled}
               onClick={sendEmail}
               type="submit"
               className="tw-bg-primary hover:tw-bg-buttonHover tw-border-transparent px-4 py-2"
