@@ -14,11 +14,11 @@ function page() {
   const data = [
     { id: 1, src: "/lepfrognew.png" },
     { id: 2, src: "/images/clients/2.png" },
-    { id: 3, src: "/images/clients/3.png" },
+    { id: 3, src: "/logo-n.png" },
     { id: 4, src: "/images/clients/4.png" },
     { id: 6, src: "/images/clients/6.png" },
-    { id: 7, src: "/images/clients/7.png" },
-    { id: 8, src: "/images/clients/8.png" },
+    { id: 7, src: "/imegroup.png" },
+    { id: 8, src: "/uxcam.png" },
     { id: 9, src: "/images/clients/9.png" },
     { id: 10, src: "/kfclogo.png" },
     // { id: 10, src: "/cotiviti.png" },
@@ -87,7 +87,7 @@ function page() {
           <h1 className=" tw-text-center tw-font-medium xsm:tw-text-2xl sm:tw-text-3xl md:tw-text-4xl">
             Some of our clients
           </h1>
-          <div className="tw-flex tw-flex-row  tw-flex-wrap tw-items-center tw-justify-center  tw-mx-40 tw-mt-5 xsm:tw-mx-5 md:tw-mx-40 tw-mb-10 tw-gap-5">
+          <div className="tw-flex tw-flex-row  tw-flex-wrap tw-items-center tw-justify-center  tw-mx-40 tw-mt-5 xsm:tw-mx-5 md:tw-mx-40 tw-mb-10 tw-gap-7">
             {data.map((item) => {
               return (
                 <Image
