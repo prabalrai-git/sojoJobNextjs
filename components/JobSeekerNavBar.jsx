@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 
 function JobSeekerNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
 
   // const id = useSessionStorage("jobSeekerId");
   const { userDetails } = useSelector((state) => state.userData);
@@ -151,6 +152,8 @@ function JobSeekerNavBar() {
                   height={16}
                   alt="home"
                   className="tw-object-contain tw-mr-4"
+                  onLoad={() => setIsLogoLoaded(true)}
+                  style={{ display: isLogoLoaded ? "block" : "none" }}
                 />
                 <p className="tw-text-lg tw-font-medium tw-text-gray-600">
                   Dashboard

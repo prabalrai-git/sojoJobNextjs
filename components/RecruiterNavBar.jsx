@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 function RecruiterNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
 
   const { userDetails } = useSelector((state) => state.userData);
 
@@ -69,6 +70,8 @@ function RecruiterNavBar() {
             width={200}
             height={230}
             alt="logo.png"
+            onLoad={() => setIsLogoLoaded(true)}
+            style={{ display: isLogoLoaded ? "block" : "none" }}
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
