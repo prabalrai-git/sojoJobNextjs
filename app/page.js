@@ -128,7 +128,7 @@ function page() {
             })}
           </div>
         </div>
-        <div
+        {/* <div
           className="tw-bg-aboutGrey"
           style={{
             backgroundImage: "url('/mini.jpg')",
@@ -159,7 +159,7 @@ function page() {
               return <ReviewCard item={item} />;
             })}
           </div>
-        </div>
+        </div> */}
         <div className="tw-mx-32 xsm:tw-mx-5 sm:tw-mx-16 md:tw-mx-32 tw-grid tw-grid-cols-2 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 md:tw-grid-cols-1 950:tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-2 tw-gap-10 tw-pt-20 ">
           <div className="">
             <h1 className="xsm:tw-text-2xl sm:tw-text-3xl md:tw-text-4xl tw-font-medium tw-mb-5">
