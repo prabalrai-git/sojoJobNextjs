@@ -8,7 +8,7 @@ import React, { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
-import { review, someOfOurClients } from "@/staticData";
+import { review, review2, someOfOurClients } from "@/staticData";
 import { message } from "antd";
 
 function page() {
@@ -124,6 +124,38 @@ function page() {
           </div>
           <div className="tw-mt-5 tw-grid tw-grid-cols-3 tw-gap-5 tw-pb-20 xsm:tw-grid-cols-1 xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20 sm:tw-grid-cols-2 md:tw-grid-cols-3">
             {review?.map((item) => {
+              return <ReviewCard item={item} />;
+            })}
+          </div>
+        </div>
+        <div
+          className="tw-bg-aboutGrey"
+          style={{
+            backgroundImage: "url('/mini.jpg')",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <div className="tw-mx-20 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-32">
+            <h1 className="xsm:tw-text-2xl sm:tw-text-3xl md:tw-text-4xl tw-text-center tw-font-medium tw-pt-14 tw-text-white">
+              Our Training Courses
+            </h1>
+            <p className="tw-py-10 tw-text-justify tw-text-white">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </p>
+          </div>
+          <div className="tw-mt-5 tw-grid tw-grid-cols-3 tw-gap-5 tw-pb-20 xsm:tw-grid-cols-1 xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20 sm:tw-grid-cols-2 md:tw-grid-cols-3">
+            {review2?.map((item) => {
               return <ReviewCard item={item} />;
             })}
           </div>

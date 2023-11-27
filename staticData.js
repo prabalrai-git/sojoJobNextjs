@@ -40,3 +40,32 @@ export const review = [
     desg: "HR Officer, Bottle Tech",
   },
 ];
+export const review2 = [
+  {
+    id: 1,
+    src: "/react-training.jpeg",
+    logo: "/companyLogo.png",
+    title: "React Certification",
+    // person: "Ms.Sephika Shakya",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+    // desg: "HR Assistant, Info Developers",
+  },
+  {
+    id: 2,
+    src: "/react-training.jpeg",
+    logo: "/companyLogo.png",
+    title: "React Certification",
+    // person: "Ms.Smriti",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+    // desg: "Senior HR, Foodmandu",
+  },
+  {
+    id: 3,
+    src: "/react-training.jpeg",
+    logo: "/companyLogo.png",
+    title: "React Certification",
+    // person: "Ms. Sushma Dhakal",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+    // desg: "HR Officer, Bottle Tech",
+  },
+];

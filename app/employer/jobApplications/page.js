@@ -9,7 +9,14 @@ import ImagePreview from "@/components/ImagePreview";
 import ApplicantAnswers from "@/components/ApplicantAnswers";
 import { useSearchParams } from "next/navigation";
 import "@/styles/global.css";
-import { QuestionCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import {
+  QuestionCircleOutlined,
+  CheckCircleOutlined,
+  LikeOutlined,
+  DislikeOutlined,
+  HourglassOutlined,
+} from "@ant-design/icons";
+import { Card, Col, Row, Statistic } from "antd";
 
 function page() {
   const [applications, setApplications] = useState();
@@ -20,6 +27,9 @@ function page() {
   const showModal = () => {
     setIsModalOpen(true);
   };
+  const [fitApplicantNumber, setFitApplicantNumber] = useState(0);
+  const [unfitApplicantNumber, setUnFitApplicantNumber] = useState(0);
+  const [pendingApplicantNumber, setPendingApplicantNumber] = useState(0);
 
   const searchParams = useSearchParams();
 
@@ -33,7 +43,27 @@ function page() {
       const res = await Axios.get(
         `/application/getApplicationsByJobId/${jobId}`
       );
-      setApplications(res.data.data);
+      const value = res.data.data;
+      setApplications(value);
+
+      let fitApplicant = 0;
+      let unfitApplicant = 0;
+      let pendingApplicant = 0;
+
+      value.map((item) => {
+        if (item.status === "accepted") {
+          return fitApplicant++;
+        } else if (item.status === "rejected") {
+          return unfitApplicant++;
+        } else {
+          return pendingApplicant++;
+        }
+      });
+
+      setFitApplicantNumber(fitApplicant);
+      setUnFitApplicantNumber(unfitApplicant);
+      setPendingApplicantNumber(pendingApplicant);
+
       // setAnswers(res.data.data);
     } catch (error) {}
   };
@@ -106,7 +136,7 @@ function page() {
         } else if (text.toLowerCase() == "accepted") {
           return <p className="tw-text-primary tw-capitalize">Fit</p>;
         } else if (text.toLowerCase() == "rejected") {
-          return <p className="tw-text-red tw-capitalize">UnFit</p>;
+          return <p className="tw-text-red tw-capitalize">Unfit</p>;
         }
       },
     },
@@ -197,7 +227,7 @@ function page() {
 
   return (
     <div className="tw-pt-10 xsm:tw-mx-6 800:tw-mx-16 tw-pb-12">
-      <div className="tw-flex tw-flex-row tw-mb-10">
+      <div className="tw-flex tw-flex-row tw-mb-10 ">
         <Image
           onClick={() => history.back()}
           src={"/arrow-left.png"}
@@ -212,10 +242,57 @@ function page() {
           {applications && applications[0]?.job?.title}
         </h1>
       </div>
+      <Row gutter={[24, 24]}>
+        <Col xs={24} xl={8} md={8}>
+          <Card bordered={false}>
+            <Statistic
+              title="Fit applicant count"
+              value={fitApplicantNumber}
+              precision={0}
+              valueStyle={{
+                color: "#3f8600",
+              }}
+              prefix={<LikeOutlined />}
+              suffix={fitApplicantNumber === 1 ? "applicant" : "applicants"}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} xl={8} md={8}>
+          <Card bordered={false}>
+            <Statistic
+              title="Unfit applicant count"
+              value={unfitApplicantNumber}
+              precision={0}
+              valueStyle={{
+                color: "#cf1322",
+              }}
+              prefix={<DislikeOutlined />}
+              suffix={unfitApplicantNumber === 1 ? "applicant" : "applicants"}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} xl={8} md={8}>
+          <Card bordered={false}>
+            <Statistic
+              title="Pending applicant count"
+              value={pendingApplicantNumber}
+              precision={0}
+              valueStyle={{
+                color: "#E58C17",
+              }}
+              prefix={<HourglassOutlined />}
+              suffix={pendingApplicantNumber === 1 ? "applicant" : "applicants"}
+            />
+          </Card>
+        </Col>
+      </Row>
       <Table
         className="tw-mt-10"
         columns={columns}
         dataSource={applications}
+        pagination={{
+          showSizeChanger: true,
+        }}
         scroll={{ x: 900 }}
       />
       <ApplicantAnswers

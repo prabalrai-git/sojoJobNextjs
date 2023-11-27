@@ -64,6 +64,14 @@ p {
   margin-bottom: 0rem;
 }
 
+:where(.css-zcfrx9).ant-card .ant-card-body {
+  padding: 12px;
+  border-radius: 0 0 8px 8px;
+}
+:where(.css-dev-only-do-not-override-1vr7spz).ant-card .ant-card-body {
+  padding: 8px;
+  border-radius: 0 0 8px 8px;
+}
 /* * {
   font-family: "Times New Roman", Times, serif;
 } */
