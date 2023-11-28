@@ -17,7 +17,7 @@ import "react-tagsinput/react-tagsinput.css";
 import JobPackage from "@/components/JobPackage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import useSessionStorage from "@/hooks/useSessionStorage";
+import uselocalStorage from "@/hooks/uselocalStorage";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import TagsInput from "react-tagsinput";
@@ -158,7 +158,7 @@ function page() {
 
   const router = useRouter();
 
-  const recruiterId = useSessionStorage("employerId");
+  const recruiterId = uselocalStorage("employerId");
   const onSubmit = async () => {
     const skillsString = skills.join("&");
     const formData = {

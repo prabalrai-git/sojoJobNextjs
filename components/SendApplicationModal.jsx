@@ -27,7 +27,7 @@ function SendApplicationModal({
   const [fullname, setFullName] = useState();
   const [file, setFile] = useState();
   const [jobSeekerId, setJobSeekerId] = useState(
-    typeof window !== "undefined" && sessionStorage.getItem("jobSeekerId")
+    typeof window !== "undefined" && localStorage.getItem("jobSeekerId")
   );
   const [loggedInUserData, setLoggedInUserData] = useState();
   const [cvDisplayUrl, setCVDisplayUrl] = useState([]);

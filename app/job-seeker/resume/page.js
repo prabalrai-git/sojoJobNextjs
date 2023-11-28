@@ -18,7 +18,7 @@ function page() {
     try {
       if (typeof window !== "undefined") {
         const res = await Axios.get(
-          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+          `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
         );
         setUserData(res.data.data);
       }

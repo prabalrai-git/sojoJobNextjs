@@ -14,7 +14,7 @@ import { Upload } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
-import useSessionStorage from "@/hooks/useSessionStorage";
+import uselocalStorage from "@/hooks/uselocalStorage";
 import dynamic from "next/dynamic";
 
 function page() {
@@ -41,7 +41,7 @@ function page() {
 
   const router = useRouter();
 
-  const employerId = useSessionStorage("employerId");
+  const employerId = uselocalStorage("employerId");
 
   const onSubmit = async () => {
     const formData = new FormData();

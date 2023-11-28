@@ -32,17 +32,17 @@ function page() {
       setLoading(true);
       const res = await Axios.post("/auth/login", data);
       if (typeof window !== "undefined") {
-        sessionStorage.clear();
+        localStorage.clear();
 
         // return console.log(res.data.data, "he ha");
 
-        sessionStorage.setItem("id", res.data.data.id);
+        localStorage.setItem("id", res.data.data.id);
 
-        sessionStorage.setItem("tokenSojoJob", res.data.data.token);
+        localStorage.setItem("tokenSojoJob", res.data.data.token);
 
-        sessionStorage.setItem("employerId", res.data.data.employerId);
+        localStorage.setItem("employerId", res.data.data.employerId);
 
-        sessionStorage.setItem("userType", res.data.data.userType);
+        localStorage.setItem("userType", res.data.data.userType);
         dispatch(getUserDetails("employer"));
       }
       if (res.data.success) {

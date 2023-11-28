@@ -97,7 +97,7 @@ function AppliedJobs({ fromList }) {
     try {
       if (typeof window !== "undefined") {
         const res = await Axios.get(
-          `/application/getApplicationsBySeekerId/${sessionStorage.getItem(
+          `/application/getApplicationsBySeekerId/${localStorage.getItem(
             "jobSeekerId"
           )}`
         );

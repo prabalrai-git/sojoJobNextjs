@@ -74,7 +74,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
       if (typeof window !== "undefined") {
         const res = await Axios.get(
           `/job/getJobsByRecruiterId?recruiterId=${Number(
-            sessionStorage.getItem("employerId")
+            localStorage.getItem("employerId")
           )}&limit=10000`
         );
         setJobs(res.data.data);
@@ -183,7 +183,6 @@ function PostedJobs({ fromList, jobStatusFilter }) {
         } else {
           return (
             <p className="tw-text-black tw-capitalize tw-font-base">
-              {" "}
               No Applicants
             </p>
           );

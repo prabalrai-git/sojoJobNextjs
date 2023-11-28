@@ -25,7 +25,7 @@ export default function Home() {
 
   // const dispatch = useDispatch();
   // useEffect(() => {
-  //   setUserType(sessionStorage.getItem("userType"));
+  //   setUserType(localStorage.getItem("userType"));
   //   if (userType) {
   //     dispatch(getUserDetails("userType"));
   //   }
@@ -180,9 +180,9 @@ export default function Home() {
   };
 
   // const NavBarByUser = () => {
-  //   if (sessionStorage.getItem("userType") === "employer") {
+  //   if (localStorage.getItem("userType") === "employer") {
   //     return <RecruiterNavBar />;
-  //   } else if (sessionStorage.getItem("userType") === "job-seeker") {
+  //   } else if (localStorage.getItem("userType") === "job-seeker") {
   //     return <JobSeekerNavBar />;
   //   } else {
   //     return <NavBar />;

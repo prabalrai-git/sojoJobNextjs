@@ -49,7 +49,7 @@ function RecruiterNavBar() {
 
   const logout = () => {
     if (typeof window !== "undefined") {
-      sessionStorage.clear();
+      localStorage.clear();
 
       window.location.href = "/";
     }

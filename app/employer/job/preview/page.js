@@ -35,7 +35,7 @@ function page() {
     try {
       if (typeof window !== "undefined") {
         const res = await Axios.get(
-          `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
+          `/jobRecruiter/getJobRecruiterById/${localStorage.getItem(
             "employerId"
           )}`
         );

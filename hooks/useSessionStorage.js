@@ -1,14 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const useSessionStorage = (name) => {
+const uselocalStorage = (name) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    setValue(sessionStorage.getItem(name));
+    setValue(localStorage.getItem(name));
   }, []);
 
   return value;
 };
 
-export default useSessionStorage;
+export default uselocalStorage;

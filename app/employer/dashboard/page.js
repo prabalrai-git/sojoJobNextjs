@@ -24,7 +24,7 @@ function page() {
   const getOverViewData = useCallback(async () => {
     try {
       if (typeof window !== "undefined") {
-        const id = sessionStorage.getItem("employerId");
+        const id = localStorage.getItem("employerId");
         const res = await Axios.get(
           `/jobRecruiter/getMonthlyOverviewDataByRecruiterId/${id}`
         );

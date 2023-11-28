@@ -33,7 +33,7 @@ function page() {
     try {
       if (typeof window !== "undefined") {
         const res = await Axios.get(
-          `/jobSeeker/getProfileCompletionPercentage/${sessionStorage.getItem(
+          `/jobSeeker/getProfileCompletionPercentage/${localStorage.getItem(
             "jobSeekerId"
           )}`
         );

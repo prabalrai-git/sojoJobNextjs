@@ -10,14 +10,14 @@ import Link from "next/link";
 import "@/styles/navbar.css";
 import Axios from "@/api/server";
 // import { useRouter } from "next/navigation";
-import useSessionStorage from "@/hooks/useSessionStorage";
+import uselocalStorage from "@/hooks/uselocalStorage";
 import { useSelector } from "react-redux";
 
 function JobSeekerNavBar() {
   const [showDropDown, setShowDropDown] = useState(false);
   const [isLogoLoaded, setIsLogoLoaded] = useState(false);
 
-  // const id = useSessionStorage("jobSeekerId");
+  // const id = uselocalStorage("jobSeekerId");
   const { userDetails } = useSelector((state) => state.userData);
 
   // useEffect(() => {
@@ -65,7 +65,7 @@ function JobSeekerNavBar() {
 
   const logout = () => {
     if (typeof window !== "undefined") {
-      sessionStorage.clear();
+      localStorage.clear();
 
       window.location.href = "/";
     }

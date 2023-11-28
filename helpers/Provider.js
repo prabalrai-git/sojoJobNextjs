@@ -8,7 +8,7 @@ export function Providers({ children }) {
   const [userType, setUserType] = useState();
 
   useEffect(() => {
-    setUserType(sessionStorage.getItem("userType"));
+    setUserType(localStorage.getItem("userType"));
     if (userType) {
       store.dispatch(getUserDetails(userType));
     }

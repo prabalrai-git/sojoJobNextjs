@@ -17,7 +17,7 @@ export const getUserDetails = createAsyncThunk(
       //   const resp = await Axios.get(url);
       if (name.toLowerCase() === "employer") {
         const res = await Axios.get(
-          `/jobRecruiter/getJobRecruiterById/${sessionStorage.getItem(
+          `/jobRecruiter/getJobRecruiterById/${localStorage.getItem(
             "employerId"
           )}`
         );
@@ -25,7 +25,7 @@ export const getUserDetails = createAsyncThunk(
       }
       if (name.toLowerCase() === "job-seeker") {
         const res = await Axios.get(
-          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+          `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
         );
         return res.data.data;
       }

@@ -41,7 +41,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
         title: data?.title,
         salary: data?.salary,
         jobLocation: data?.jobLocation,
-        jobSubCategoryTxt:data?.jobSubCategoryTxt,
+        jobSubCategoryTxt: data?.jobSubCategoryTxt,
         jobPostingPackage: data?.jobPostingPackage,
         jobCategoryId: data?.jobCategoryId?.value,
         jobSubCategoryId: data?.jobSubCategoryId?.value,
@@ -49,7 +49,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
         jobSiteId: data?.jobSiteId?.value,
         educationLevelId: data?.educationLevelId?.value,
         experienceLevelId: data?.experienceLevelId?.value,
-        jobRecruiterId: Number(sessionStorage.getItem("employerId")),
+        jobRecruiterId: Number(localStorage.getItem("employerId")),
         startDate: data?.startDate,
         endDate: data?.endDate,
         numberOfVacancies: Number(data?.numberOfVacancies),
@@ -120,7 +120,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
     },
   ];
 
-  console.log(jobQuestions,jobQuestions.length,'this job Question')
+  console.log(jobQuestions, jobQuestions.length, "this job Question");
 
   return (
     <>
@@ -160,7 +160,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
         </div>
         {/*  */}
         <h2 className="tw-text-black tw-text-lg tw-mt-7 tw-mb-8 tw-font-light">
-         {userDetails?.companyName}
+          {userDetails?.companyName}
         </h2>
         {/*  */}
         <div className="tw-flex tw-flex-row tw-mt-4 tw-flex-wrap tw-mb-10 ">
@@ -274,7 +274,7 @@ function JobPreview({ setStep, data, jobQuestions }) {
             {requirements}
           </p>
         </div> */}
-        {jobQuestions[0].questionText !== null &&  (
+        {jobQuestions[0].questionText !== null && (
           <>
             <p className=" tw-mb-5 tw-font-bold">Questions</p>
             <Table

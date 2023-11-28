@@ -5,7 +5,7 @@ import RecruiterNavBar from "./RecruiterNavBar";
 
 export const NavBarByUser = () => {
   if (typeof window !== "undefined") {
-    const userType = sessionStorage.getItem("userType");
+    const userType = localStorage.getItem("userType");
     if (userType === "employer") {
       return <RecruiterNavBar />;
     } else if (userType === "job-seeker") {

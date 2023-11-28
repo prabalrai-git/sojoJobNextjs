@@ -59,7 +59,7 @@ function page() {
     if (typeof window !== "undefined") {
       try {
         const res = await Axios.get(
-          `/jobSeeker/getJobSeekerById/${sessionStorage.getItem("jobSeekerId")}`
+          `/jobSeeker/getJobSeekerById/${localStorage.getItem("jobSeekerId")}`
         );
 
         const data = res.data.data;
@@ -113,14 +113,14 @@ function page() {
         setLoading(true);
 
         const res = await Axios.patch(
-          `/jobSeeker/updateJobSeekerProfileById/${sessionStorage.getItem(
+          `/jobSeeker/updateJobSeekerProfileById/${localStorage.getItem(
             "jobSeekerId"
           )}`,
           formData
         );
 
         await Axios.post(
-          `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${sessionStorage.getItem(
+          `/jobSeeker/postOrUpdateJobSeekerCVByJobSeekerId/${localStorage.getItem(
             "jobSeekerId"
           )}`,
           cvformData
