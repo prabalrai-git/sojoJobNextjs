@@ -71,7 +71,7 @@ function page({ searchParams }) {
           />
         </div>
       </div>
-      <div className="tw-mt-32 tw-mx-4 ">
+      <div className="tw-mt-20 tw-mx-4 ">
         <p className="tw-font-semibold tw-text-2xl tw-mb-5">
           {company?.companyName}
         </p>
@@ -108,12 +108,16 @@ function page({ searchParams }) {
               alt="employees"
               className="tw-object-contain  tw-mr-3 tw-self-center"
             />
-            <p className=" tw-text-gray-500 tw-self-center tw-my-auto">
+            <a
+              target="_blank"
+              href={"https://" + company?.companyWebsiteURL}
+              className=" tw-text-blue-500 tw-no-underline tw-self-center tw-my-auto hover:tw-text-blue-700"
+            >
               {company?.companyWebsiteURL}
-            </p>
+            </a>
           </div>
         </div>
-        <p className="tw-mt-10 tw-leading-loose tw-text-gray-600 tw-text-justify">
+        <p className="tw-mt-0 tw-leading-loose tw-text-gray-600 tw-text-justify">
           {companyInfo}
         </p>
       </div>
