@@ -79,12 +79,13 @@ function page() {
         </div>
         <div className="tw-mb-10">
           <Image
-            src="/images/home-banner.png"
+            src="/hero.jpeg"
             width={300}
-            height={200}
+            height={300}
             quality={100}
+            layout="responsive"
             alt="home-banner"
-            className="tw-w-full tw-object-contain tw-h-30 xsm:tw-h-full"
+            className="tw-w-full tw-object-contain tw-h-full xsm:tw-h-5/6"
           />
         </div>
         <div>
