@@ -51,7 +51,7 @@ export const trainings = [
   {
     id: 2,
     src: "/fe.jpeg",
-    title: "Transform into a Frontend Pro in Just 1.1 Months ",
+    title: "Transform into a Frontend Pro in Just 1.2 Months ",
     desc: "Earn Your Developer Certification, Gain Access to Our Exclusive Network, and Enjoy 100% Job Assistance with Expert Guidance !",
   },
   {

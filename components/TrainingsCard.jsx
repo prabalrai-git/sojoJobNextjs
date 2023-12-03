@@ -32,7 +32,7 @@ function TrainingsCard({ item }) {
                 width={20}
                 height={20}
               />
-              <p>9702615753</p>
+              <p>+977 9702615753</p>
             </a>
             <a
               className="tw-flex tw-flex-row tw-mt-2"
