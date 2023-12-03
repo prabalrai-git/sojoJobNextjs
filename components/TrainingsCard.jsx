@@ -44,7 +44,7 @@ function TrainingsCard({ item }) {
                 width={20}
                 height={20}
               />
-              <p>hell@sojojob.com</p>
+              <p>hello@sojojob.com</p>
             </a>
           </div>
         </div>
