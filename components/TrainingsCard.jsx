@@ -23,7 +23,7 @@ function TrainingsCard({ item }) {
           <div>
             <p className="tw-mt-5 tw-font-bold">Contact us:</p>
             <a
-              href="tel:+9779818158171"
+              href="tel:+9779702615753"
               className="tw-flex tw-flex-row tw-mt-2 tw-no-underline "
             >
               <Image
