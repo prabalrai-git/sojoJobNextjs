@@ -135,7 +135,7 @@ function page() {
         <div className="tw-bg-aboutGrey">
           <div className="tw-mx-20 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-32">
             <h1 className="xsm:tw-text-2xl sm:tw-text-3xl md:tw-text-4xl tw-text-center tw-font-medium tw-pt-14">
-              Our Services
+              Our Courses
             </h1>
             <p className="tw-py-10 tw-text-justify">
               We're not just a job site – we're here for you! Whether it's on
