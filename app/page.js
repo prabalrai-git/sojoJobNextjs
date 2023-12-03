@@ -8,8 +8,9 @@ import React, { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
-import { review, review2, someOfOurClients } from "@/staticData";
+import { review, review2, someOfOurClients, trainings } from "@/staticData";
 import { message } from "antd";
+import TrainingsCard from "@/components/TrainingsCard";
 
 function page() {
   const [name, setName] = useState();
@@ -65,10 +66,12 @@ function page() {
         <div className="tw-grid tw-grid-cols-2 tw-mx-23 tw-py-20 tw-gap-10 sm:tw-gap-2 xsm:tw-gap-2 md:tw-grid-cols-2 lg:tw-grid-cols-2  sm:tw-py-5 xsm:tw-py-5 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 xsm:tw-mx-3 tw-text-justify sm:tw-mx-10 md:tw-mx-20 tw-my-14 ">
           <h1
             style={{ lineHeight: "70px" }}
-            className="tw-font-medium md:tw-text-4xl tw-text-center sm:tw-text-3xl xsm:tw-text-2xl tw-mb-7 "
+            className="tw-font-medium md:tw-text-3xl tw-text-center sm:tw-text-3xl xsm:tw-text-2xl tw-mb-7 "
           >
-            We help employers and employees find their
-            <span className="tw-text-primary"> ideal</span> match
+            <span className="tw-text-primary">Connecting</span> employers,
+            employees, and <span className="tw-text-primary">training</span>
+            <br />
+            them for success.
           </h1>
           <p className="tw-mx-20 md:tw-mx-5 lg:tw-mx-16 xl:tw-mx-16 sm:tw-mx-0 xsm:tw-mx-0 tw-text-lg">
             For the past few years, we have been successful in helping both
@@ -107,7 +110,7 @@ function page() {
             })}
           </div>
         </div>
-        <div className="tw-bg-aboutGrey">
+        {/* <div className="tw-bg-aboutGrey">
           <div className="tw-mx-20 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-32">
             <h1 className="xsm:tw-text-2xl sm:tw-text-3xl md:tw-text-4xl tw-text-center tw-font-medium tw-pt-14">
               What our clients say
@@ -125,7 +128,26 @@ function page() {
           </div>
           <div className="tw-mt-5 tw-grid tw-grid-cols-3 tw-gap-5 tw-pb-20 xsm:tw-grid-cols-1 xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20 sm:tw-grid-cols-2 md:tw-grid-cols-3">
             {review?.map((item) => {
-              return <ReviewCard item={item} />;
+              return <TrainingsCard item={item} />;
+            })}
+          </div>
+        </div> */}
+        <div className="tw-bg-aboutGrey">
+          <div className="tw-mx-20 xsm:tw-mx-4 sm:tw-mx-10 md:tw-mx-32">
+            <h1 className="xsm:tw-text-2xl sm:tw-text-3xl md:tw-text-4xl tw-text-center tw-font-medium tw-pt-14">
+              Our Services
+            </h1>
+            <p className="tw-py-10 tw-text-justify">
+              We're not just a job site – we're here for you! Whether it's on
+              the web, your phone, or social media, we use fancy tech to help
+              all kinds of companies find the right people. Our main goal is to
+              make sure employers and job seekers are happy. We don't just find
+              jobs – we also offer awesome training to help you succeed
+            </p>
+          </div>
+          <div className="tw-mt-5 tw-grid tw-grid-cols-3 tw-gap-10 tw-pb-20 xsm:tw-grid-cols-1 xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20 sm:tw-grid-cols-2 md:tw-grid-cols-3">
+            {trainings?.map((item) => {
+              return <TrainingsCard item={item} />;
             })}
           </div>
         </div>
@@ -167,13 +189,13 @@ function page() {
               Connect with us
             </h1>
             <p className=" tw-pr-10 tw-leading-relaxed tw-font-normal tw-text-lg tw-text-justify">
-              Sojojob is a platform that enables employers to easily and quickly
-              post their job requirements, shortlist the best candidates, and
-              hire them with a few clicks. Job seekers can also benefit from
-              this platform, as they can register, search, apply, and get jobs
-              for free in just a few clicks. With technology-guided tools and a
-              simplified shortlisting process, Sojojob is the perfect solution
-              for employers and job seekers alike.
+              Explore job opportunities effortlessly with Sojojob ! Employers,
+              streamline your hiring process by posting jobs and selecting top
+              candidates with just a few clicks. Job seekers, register, search,
+              and apply for free, and don't miss our professional training
+              services to boost your skills. To get started, please provide your
+              name, email, and contact number in the form . We'll give you a
+              call back to guide you through the next steps.
             </p>
           </div>
           <Form ref={formRef}>

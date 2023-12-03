@@ -40,6 +40,29 @@ export const review = [
     desg: "HR Officer, Bottle Tech",
   },
 ];
+
+export const trainings = [
+  {
+    id: 1,
+    src: "/yt.jpeg",
+    title: "Go from Zero to YouTuber in Just 2 Weeks",
+    desc: "Unlock Your YouTube Success: Transform into a Thriving YouTuber in Just 2 Weeks",
+  },
+  {
+    id: 2,
+    src: "/fe.jpeg",
+    title: "Transform into a Frontend Pro in Just 1.1 Months ",
+    desc: "Earn Your Developer Certification, Gain Access to Our Exclusive Network, and Enjoy 100% Job Assistance with Expert Guidance !",
+  },
+  {
+    id: 3,
+    src: "/mern.jpeg",
+
+    title:
+      "Learn Everything About Websites: Become a Full Stack Pro in Just 2 Months !",
+    desc: "Coming soon, call us know when and book your seats",
+  },
+];
 export const review2 = [
   {
     id: 1,
