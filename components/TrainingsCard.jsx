@@ -16,7 +16,7 @@ function TrainingsCard({ item }) {
           className="tw-w-full tw-object-contain "
         />
       </div>
-      <div className="tw-bg-white  tw-px-5 tw-rounded-b-xl tw-h-52 xl:tw-h-60 lg:tw-h-80 md:tw-h-48 sm:tw-h-52">
+      <div className="tw-bg-white  tw-px-5 tw-rounded-b-xl xsm:tw-h-64 450:tw-h-52 800:tw-h-52 xl:tw-h-60 lg:tw-h-80 md:tw-h-48 sm:tw-h-52">
         <div>
           <h6 className="tw-text-xl tw-font-medium tw-my-3 ">{item.title}</h6>
           <p className="tw-text-justify tw-text-base ">{item?.desc}</p>
