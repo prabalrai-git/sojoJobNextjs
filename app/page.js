@@ -11,10 +11,12 @@ import emailjs from "@emailjs/browser";
 import { review, review2, someOfOurClients, trainings } from "@/staticData";
 import { message } from "antd";
 import TrainingsCard from "@/components/TrainingsCard";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function page() {
   const [name, setName] = useState();
-  const [email, setEmail] = useState();
+  const [reason, setReason] = useState();
   const [phone, setPhone] = useState();
   const [disabled, setDisabled] = useState(false);
 
@@ -22,17 +24,18 @@ function page() {
 
   const sendEmail = async (e) => {
     e.preventDefault();
+
     setDisabled(true);
-    if (!name || !email || !phone) {
+    if (!name || !reason || !phone) {
       setDisabled(false);
       return message.info("Please enter value in all the fields.");
     }
 
     const templateParams = {
       from_name: name,
-      from_email: email,
+      from_email: "hello@sojojob.com",
       to_name: "Sojo Job",
-      message: `Please, call be back. \n Name: ${name} \n Email:${email} \n Phone:+977 ${phone}`,
+      message: `Please, call be back. \n Name: ${name} \n Reason:${reason} \n Phone:+977 ${phone}`,
     };
 
     emailjs
@@ -45,7 +48,7 @@ function page() {
       .then(
         (result) => {
           setName("");
-          setEmail("");
+          setReason("");
           setPhone("");
           setDisabled(false);
 
@@ -57,6 +60,43 @@ function page() {
           message.error(error.text);
         }
       );
+  };
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 3,
+      slidesToSlide: 2,
+    },
+    bigDesktop: {
+      breakpoint: { max: 3000, min: 2000 },
+      items: 3,
+      slidesToSlide: 2,
+    },
+    desktop: {
+      breakpoint: { max: 2000, min: 1324 },
+      items: 3,
+      slidesToSlide: 2,
+    },
+    smallDesktop: {
+      breakpoint: { max: 1324, min: 1024 },
+      items: 3,
+      slidesToSlide: 2,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 864 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    smallTablet: {
+      breakpoint: { max: 864, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
   };
 
   return (
@@ -145,11 +185,39 @@ function page() {
               jobs – we also offer awesome training to help you succeed
             </p>
           </div>
-          <div className="tw-mt-5 tw-grid tw-grid-cols-3 tw-gap-10 tw-pb-20 xsm:tw-grid-cols-1 xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20 sm:tw-grid-cols-2 md:tw-grid-cols-3">
+          {/* <div className="tw-mt-5 tw-grid tw-grid-cols-3 tw-gap-10 tw-pb-20 xsm:tw-grid-cols-1 xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20 sm:tw-grid-cols-2 md:tw-grid-cols-3">
             {trainings?.map((item) => {
               return <TrainingsCard item={item} />;
             })}
-          </div>
+          </div> */}
+          <div className="tw-mt-5 tw-pb-20  xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20">
+            <Carousel
+              renderButtonGroupOutside={false}
+              autoPlay={true}
+              swipeable={true}
+              draggable={true}
+              showDots={false}
+              arrows
+              infinite={true}
+              // partialVisible={false}
+              // removeArrowOnDeviceType={[
+              //   "tablet",
+              //   "mobile",
+              //   "desktop",
+              //   "smallDesktop",
+              //   "bigDesktop",
+              //   "smallTablet",
+              // ]}
+              responsive={responsive}
+            >
+              {trainings?.map((item) => {
+                return <TrainingsCard item={item} />;
+              })}
+            </Carousel>
+            {/* {trainings?.map((item) => {
+              return <TrainingsCard item={item} />;
+            })} */}
+          </div>{" "}
         </div>
         {/* <div
           className="tw-bg-aboutGrey"
@@ -211,15 +279,32 @@ function page() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail2">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
+              <Form.Label>What can we help you with today?</Form.Label>
+              {/* <Form.Control
                 className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black"
                 size="lg"
                 type="email"
                 placeholder="Enter email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
+                
+              /> */}
+              <Form.Select
+                value={reason}
+                className="tw-text-base tw-font-medium tw-h-12 shadow-sm shadow-black"
+                onChange={(e) => setReason(e.target.value)}
+                aria-label="Default select example"
+              >
+                <option>Options</option>
+                <option value="I am looking for job.">
+                  I am looking for job.
+                </option>
+                <option value="I am looking to post jobs.">
+                  I am looking to post jobs.
+                </option>
+                <option value="I am looking for training courses.">
+                  I am looking for training courses.
+                </option>
+                <option value="Others">Others</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail3">
               <Form.Label>Phone number</Form.Label>

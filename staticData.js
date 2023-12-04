@@ -60,7 +60,7 @@ export const trainings = [
 
     title:
       "Learn Everything About Websites: Become a Full Stack Pro in Just 2 Months !",
-    desc: "Coming soon, call us know when and book your seats",
+    desc: "Coming soon, call us to know when and book your seats",
   },
 ];
 export const review2 = [
