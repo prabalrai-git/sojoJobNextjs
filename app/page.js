@@ -26,9 +26,34 @@ function page() {
     e.preventDefault();
 
     setDisabled(true);
+
     if (!name || !reason || !phone) {
       setDisabled(false);
-      return message.info("Please enter value in all the fields.");
+      const missingFields = [];
+
+      if (!name) {
+        missingFields.push("name");
+      }
+
+      if (!reason) {
+        missingFields.push("reason");
+      }
+
+      if (!phone) {
+        missingFields.push("phone number");
+      }
+      let missingFieldsMessage;
+
+      if (missingFields.length === 1) {
+        missingFieldsMessage = `Please enter the ${missingFields[0]}.`;
+      } else if (missingFields.length > 1) {
+        const lastField = missingFields.pop();
+        missingFieldsMessage = `Please enter ${missingFields.join(
+          ", "
+        )} and ${lastField}.`;
+      }
+
+      return message.info(missingFieldsMessage);
     }
 
     const templateParams = {
@@ -190,7 +215,7 @@ function page() {
               return <TrainingsCard item={item} />;
             })}
           </div> */}
-          <div className="tw-mt-5 tw-pb-20  xsm:tw-mx-5 sm:tw-mx-5  lg:tw-mx-20">
+          <div className="tw-mt-5 tw-pb-20  xsm:tw-mx-0 sm:tw-mx-5  lg:tw-mx-20">
             <Carousel
               renderButtonGroupOutside={false}
               autoPlay={true}
