@@ -20,6 +20,7 @@ export default function Home() {
   const [eliteJobs, setEliteJobs] = useState(null);
   const [standardJobs, setStandardJobs] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [topCompanies, setTopCompanies] = useState();
 
   const router = useRouter();
 
@@ -34,6 +35,7 @@ export default function Home() {
   useEffect(() => {
     getEliteJobs();
     getStandardJobs();
+    getAllTopCompanies();
   }, []);
 
   const getEliteJobs = async (req, res) => {
@@ -52,6 +54,14 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getAllTopCompanies = async (req, res) => {
+    try {
+      const res = await Axios.get("/admin/companies/getAllTopCompanies");
+      console.log(res.data.data);
+      setTopCompanies(res.data.data);
+    } catch (error) {}
   };
 
   const responsive = {
@@ -90,90 +100,6 @@ export default function Home() {
       items: 1,
     },
   };
-
-  const employers = [
-    {
-      id: 4,
-      title: "UXcam",
-      address: "Lalitpur",
-      themeColor: "#5e97ff",
-      logo: "/ux.png",
-      url: "https://uxcam.com/",
-    },
-    {
-      id: 6,
-      title: "KFC",
-      address: "Kathmandu",
-      themeColor: "#a91933",
-      logo: "/kfc.png",
-      url: "https://kfc.com.np/",
-    },
-    {
-      id: 5,
-      title: "Khalti",
-      address: "Baneshwor",
-      themeColor: "#5c2d91",
-      logo: "/khalti.png",
-      url: "https://khalti.com/",
-    },
-
-    {
-      id: 7,
-      title: "F1soft",
-      address: "Lalitpur",
-      themeColor: "#A62529",
-      logo: "/f1soft.png",
-      url: "https://www.f1soft.com/",
-    },
-    {
-      id: 8,
-      title: "Eight Square",
-      address: "Kathmandu",
-      themeColor: "#2792D3",
-      logo: "/eightsquare.jpeg",
-      url: "https://8squarei.com/",
-    },
-    {
-      id: 1,
-      title: "Leapfrog",
-      address: "Charkhal",
-      themeColor: "#27AF61",
-      logo: "/leapfroglogo.png",
-      url: "https://www.lftechnology.com/",
-    },
-    {
-      id: 9,
-      title: "UBA Solutions",
-      address: "Imadol",
-      themeColor: "#019DE2",
-      logo: "/uba.jpeg",
-      url: "https://uba-solutions.com/",
-    },
-    {
-      id: 10,
-      title: "The British College",
-      address: "Kathmandu",
-      themeColor: "#2B348E",
-      logo: "/britishcollege.png",
-      url: "https://www.thebritishcollege.edu.np/",
-    },
-    {
-      id: 12,
-      title: "IME Group",
-      address: "Kathmandu",
-      themeColor: "#EA2127",
-      logo: "/imegroup.png",
-      url: "https://imegroup.com.np/",
-    },
-    {
-      id: 11,
-      title: "Verisk",
-      address: "Lalitpur",
-      themeColor: "#095696",
-      logo: "/verisk.png",
-      url: "https://www.verisknepal.com.np/",
-    },
-  ];
 
   const searchJobs = () => {
     router.push(`/search?term=${searchTerm}`);
@@ -289,27 +215,29 @@ export default function Home() {
             {/* {data1.map((item) => {
               return <EmployersCard />;
             })} */}
-            <Carousel
-              autoPlay={true}
-              swipeable={true}
-              draggable={true}
-              showDots={false}
-              infinite={true}
-              partialVisible={false}
-              removeArrowOnDeviceType={[
-                "tablet",
-                "mobile",
-                "desktop",
-                "smallDesktop",
-                "bigDesktop",
-                "smallTablet",
-              ]}
-              responsive={responsive}
-            >
-              {employers.map((item) => {
-                return <EmployersCard key={item.id} item={item} />;
-              })}
-            </Carousel>
+            {topCompanies && (
+              <Carousel
+                autoPlay={true}
+                swipeable={true}
+                draggable={true}
+                showDots={false}
+                infinite={true}
+                partialVisible={false}
+                // removeArrowOnDeviceType={[
+                //   "tablet",
+                //   "mobile",
+                //   "desktop",
+                //   "smallDesktop",
+                //   "bigDesktop",
+                //   "smallTablet",
+                // ]}
+                responsive={responsive}
+              >
+                {topCompanies?.map((item) => {
+                  return <EmployersCard key={item.id} item={item} />;
+                })}
+              </Carousel>
+            )}
           </div>
           {/*  */}
           {/*  */}

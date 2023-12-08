@@ -6,16 +6,16 @@ import React from "react";
 function EmployersCard({ item }) {
   const visit = () => {
     // Use window.open to open a new tab with the specified URL
-    window.open(item.url, "_blank");
+    window.open(item.website, "_blank");
   };
 
   return (
-    <Tooltip title={`Visit ${item.title}`}>
+    <Tooltip title={`Visit ${item.name}`}>
       <div onClick={() => visit()} className="tw-mx-3 tw-cursor-pointer ">
         <div
           style={{
-            backgroundColor: item.themeColor,
-            borderColor: item.themeColor,
+            backgroundColor: item.brandColor,
+            borderColor: item.brandColor,
           }}
           className="  tw-border-2 tw-rounded-t-lg tw-h-28 tw-relative "
         >
@@ -44,10 +44,10 @@ function EmployersCard({ item }) {
         <div className="tw-border-cardBorder tw-border-2 tw-h-36 tw-rounded-b-lg tw-items-center tw-flex tw-justify-center">
           <div className="tw-mt-6">
             <p className="tw-font-medium tw-text-lg tw-text-center">
-              {item.title}
+              {item.name}
             </p>
             <p className="tw-mt-1 tw-text-primary tw-text-center tw-font-light">
-              {item.address}
+              {item.location}
             </p>
           </div>
         </div>

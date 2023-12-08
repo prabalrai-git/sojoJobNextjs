@@ -89,7 +89,7 @@ function page() {
   };
 
   const updateProfile = async () => {
-    // return console.log(data);
+    // return console.log(data.cvfile);
     if (typeof window !== "undefined") {
       const formData = new FormData();
 
