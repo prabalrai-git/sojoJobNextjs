@@ -10,6 +10,8 @@ import dayjs from "dayjs";
 import Axios from "@/api/server";
 import { useRouter } from "next/navigation";
 import { UploadOutlined } from "@ant-design/icons";
+import ImgCrop from "antd-img-crop";
+import "@/styles/individualStyles.css";
 
 function page() {
   const [data, setData] = useState({
@@ -199,34 +201,48 @@ function page() {
               controlId="exampleForm.ControlInput1"
             >
               <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 ">
-                <Dragger {...props} className="tw-w-full tw-h-full tw-relative">
-                  {logoDisplayImage ? (
-                    <>
-                      <img
-                        src={logoDisplayImage}
-                        className="tw-absolute tw-top-0 tw-bottom-0 tw-left-0 tw-right-0 tw-max-h-full tw-w-full tw-object-cover"
-                        alt="img"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <p className="ant-upload-drag-icon">
-                        <UploadOutlined />
-                      </p>
-                      <p className="ant-upload-text">
-                        Drag and Drop to Upload Profile Image
-                      </p>
-                      <p>Or</p>
-                      <button
-                        className="tw-text-white tw-bg-dndBtn tw-px-5 tw-py-3 tw-rounded-lg hover:tw-bg-dndBtnH tw-mt-5"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        Browse File
-                      </button>
-                    </>
-                  )}
-                </Dragger>
-                {/* </ImgCrop> */}
+                <ImgCrop
+                  rotationSlider
+                  aspectSlider
+                  quality={1}
+                  aspect={3 / 3}
+                  minZoom={0}
+                  cropShape=""
+                >
+                  <Dragger
+                    {...props}
+                    className="tw-w-full tw-h-full tw-relative"
+                  >
+                    {logoDisplayImage ? (
+                      <>
+                        <div className="tw-h-full tw-rounded-lg hover:tw-bg-blackt tw-cursor-pointer tw-z-40 tw-w-full tw-absolute tw-top-0 tw-text-transparent hover:tw-text-white tw-flex tw-justify-center tw-items-center ">
+                          <h6 className="">Change Image</h6>
+                        </div>
+                        <img
+                          src={logoDisplayImage}
+                          className="tw-absolute tw-top-0 tw-bottom-0 tw-left-0 tw-right-0 tw-max-h-full tw-w-full tw-object-fill tw-rounded-lg "
+                          alt="img"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <p className="ant-upload-drag-icon">
+                          <UploadOutlined />
+                        </p>
+                        <p className="ant-upload-text">
+                          Drag and Drop to Upload Profile Image
+                        </p>
+                        <p>Or</p>
+                        <button
+                          className="tw-text-white tw-bg-dndBtn tw-px-5 tw-py-3 tw-rounded-lg hover:tw-bg-dndBtnH tw-mt-5"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Browse File
+                        </button>
+                      </>
+                    )}
+                  </Dragger>
+                </ImgCrop>
               </div>
               <div className="tw-col-span-3 tw-grid tw-gap-8">
                 <div>

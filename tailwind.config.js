@@ -56,6 +56,8 @@ module.exports = {
         red: "red",
         searchGrey: "#F4F4F4",
         lightRed: "#ffe4e4",
+        dnd: "#e9f0f7",
+        blackt: "rgba(0, 0, 0,0.5)",
       },
     },
   },

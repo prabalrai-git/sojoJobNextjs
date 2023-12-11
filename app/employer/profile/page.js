@@ -16,6 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import uselocalStorage from "@/hooks/uselocalStorage";
 import dynamic from "next/dynamic";
+import ImgCrop from "antd-img-crop";
+import "@/styles/individualStyles.css";
 
 function page() {
   const [data, setData] = useState();
@@ -128,7 +130,7 @@ function page() {
   const props = {
     name: "file",
     multiple: false,
-    // action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
     onChange(info) {
       const { status } = info.file;
 
@@ -190,41 +192,111 @@ function page() {
                 controlId="exampleForm.ControlInput1"
               >
                 <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 tw-relative">
-                  <Dragger
-                    {...props}
-                    className="tw-w-full tw-h-full tw-relative"
+                  <ImgCrop
+                    rotationSlider
+                    aspectSlider
+                    quality={1}
+                    aspect={3 / 3}
+                    minZoom={0}
+                    cropShape=""
                   >
-                    {logoDisplayImage ? (
-                      <>
-                        <img
-                          src={logoDisplayImage}
-                          className="tw-absolute tw-top-0 tw-bottom-0 tw-left-0 tw-right-0 tw-max-h-full tw-w-full tw-object-cover"
-                          alt="img"
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <p className="ant-upload-drag-icon">
-                          <UploadOutlined />
-                        </p>
-                        <p className="ant-upload-text">
-                          Drag and Drop to Upload Company Logo
-                        </p>
-                        <p>Or</p>
-                        <button
-                          className="tw-text-white tw-bg-dndBtn tw-px-5 tw-py-3 tw-rounded-lg hover:tw-bg-dndBtnH tw-mt-5"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Browse File
-                        </button>
-                      </>
-                    )}
-                  </Dragger>
-                  {/* </ImgCrop> */}
+                    <Dragger
+                      {...props}
+                      className="tw-w-full tw-h-full tw-relative "
+                    >
+                      {logoDisplayImage ? (
+                        <>
+                          <div className="tw-h-full tw-rounded-lg hover:tw-bg-blackt tw-cursor-pointer tw-z-40 tw-w-full tw-absolute tw-top-0 tw-text-transparent hover:tw-text-white tw-flex tw-justify-center tw-items-center ">
+                            <h6 className="">Change Image</h6>
+                          </div>
+                          <img
+                            src={logoDisplayImage}
+                            className="tw-absolute tw-top-0 tw-bottom-0 tw-left-0 tw-right-0 tw-max-h-full tw-w-full tw-object-fill tw-rounded-lg "
+                            alt="img"
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <p className="ant-upload-drag-icon">
+                            <UploadOutlined />
+                          </p>
+                          <p className="ant-upload-text">
+                            Drag and Drop to Upload Company Logo
+                          </p>
+                          <p>Or</p>
+                          <button
+                            className="tw-text-white tw-bg-dndBtn tw-px-5 tw-py-3 tw-rounded-lg hover:tw-bg-dndBtnH tw-mt-5"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            Browse File
+                          </button>
+                        </>
+                      )}
+                    </Dragger>
+                  </ImgCrop>
                 </div>
+                {/* <div className="tw-bg-blue-100 tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-col-span-2 tw-relative tw-w-full">
+                  <ImgCrop
+                    rotationSlider
+                    aspectSlider
+                    quality={1}
+                    aspect={3 / 3}
+                    minZoom={0}
+                    cropShape=""
+                  >
+                    <Upload
+                      action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                      listType="picture-card"
+                      fileList={companyLogoImage}
+                      onRemove={() => setCompanyLogoImage()}
+                      onChange={onChange}
+                      onPreview={onPreview}
+                      className=" "
+                    >
+                      {(companyLogoImage?.length < 1 && (
+                        <div className="tw-flex tw-justify-center tw-flex-col">
+                          <Image
+                            src="/upload.png"
+                            width={70}
+                            height={70}
+                            alt="home-banner"
+                            className=" tw-object-contain tw-self-center"
+                          />
+                          <h6 className="tw-mt-5">
+                            Drag and Dop file <br />
+                            <br />
+                            or
+                          </h6>
+                          <div className="tw-bg-dndBtn tw-cursor-pointer tw-text-white tw-rounded-lg tw-px-14 tw-py-3">
+                            Browse Files
+                          </div>
+                        </div>
+                      )) ||
+                        (!companyLogoImage && (
+                          <div className="tw-flex tw-justify-center tw-flex-col">
+                            <Image
+                              src="/upload.png"
+                              width={70}
+                              height={70}
+                              alt="home-banner"
+                              className=" tw-object-contain tw-self-center"
+                            />
+                            <h6 className="tw-mt-5">
+                              Drag and Dop file <br />
+                              <br />
+                              or
+                            </h6>
+                            <div className="tw-bg-dndBtn tw-cursor-pointer tw-text-white tw-rounded-lg tw-px-14 tw-py-3">
+                              Browse Files
+                            </div>
+                          </div>
+                        ))}
+                    </Upload>
+                  </ImgCrop>
+                </div> */}
                 <div className="tw-col-span-3 tw-grid tw-gap-8">
                   <div>
-                    <Form.Label className="tw-text-gray-600 tw-font-medium">
+                    <Form.Label className="tw-text-gray-600 tw-font-medium tw-mt-5">
                       Company Name
                     </Form.Label>
                     <Input
