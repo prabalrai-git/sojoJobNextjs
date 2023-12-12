@@ -47,7 +47,7 @@ function page({ searchParams }) {
       setSearchTerm(searchParams.categoryTitle);
       filterByCategoryOnly();
     }
-  }, [searchParams.term]);
+  }, [searchParams.term, searchParams.categoryId]);
 
   const filterByCategoryOnly = async () => {
     try {
