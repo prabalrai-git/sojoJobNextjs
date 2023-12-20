@@ -84,6 +84,7 @@ function PostedJobs({ fromList, jobStatusFilter }) {
     }
   };
 
+
   const columns = [
     {
       title: "Job Post ID",
@@ -102,6 +103,13 @@ function PostedJobs({ fromList, jobStatusFilter }) {
       key: "startDate",
       render: (text) => text.split("T")[0],
       sorter: (a, b) => new Date(a.startDate) - new Date(b.startDate),
+    },
+    {
+      title: "Job Expiry Date",
+      dataIndex: "endDate",
+      key: "endDate",
+      render: (text) => text.split("T")[0],
+      sorter: (a, b) => new Date(a.endDate) - new Date(b.endDate),
     },
     {
       title: "Status",
@@ -143,12 +151,31 @@ function PostedJobs({ fromList, jobStatusFilter }) {
       key: "jobApplications",
       render: (text, a) => {
         if (a.jobStatus === "Expired") {
-          return (
-            <p className="tw-text-black tw-capitalize tw-font-semibold">
-              {" "}
-              Job Post closed
-            </p>
-          );
+
+          if (a.jobApplications.length > 0){
+
+            return (
+              <Link
+              className="tw-no-underline"
+              href={{
+                pathname: "/employer/jobApplications",
+                query: { jobId: a.id }, // the data
+              }}
+            >
+              <p className="tw-text-primary tw-capitalize tw-font-semibold hover:tw-text-buttonHover tw-cursor-pointer">
+                <span className="tw-text-black">  Job Post closed / </span>{a.jobApplications.length} Applicants
+              </p>
+            </Link>
+            );
+          }
+          else{
+            return (
+              <p className="tw-text-black tw-capitalize tw-font-semibold">
+                
+                Job Post closed / <span className="tw-text-red">No Applicants</span>
+              </p>
+            );
+          }
         }
         if (a.jobStatus === "Pending") {
           return (
