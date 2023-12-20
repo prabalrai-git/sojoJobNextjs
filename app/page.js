@@ -19,6 +19,8 @@ function page() {
   const [reason, setReason] = useState();
   const [phone, setPhone] = useState();
   const [disabled, setDisabled] = useState(false);
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
+
 
   const formRef = useRef(null);
 
@@ -146,15 +148,21 @@ function page() {
           </p>
         </div>
         <div className="tw-mb-10">
-          <Image
-            src="/hero.jpeg"
+          {/* <Image
             width={300}
             height={300}
             quality={100}
             priority
             layout="responsive"
-            alt="home-banner"
+          /> */}
+              <img
             className="tw-w-full tw-object-contain tw-h-full xsm:tw-h-5/6"
+            src="/hero.jpeg"
+            width={230}
+            height={230}
+            onLoad={() => setIsLogoLoaded(true)}
+            style={{ display: isLogoLoaded ? "block" : "none" }}
+            alt="home-banner"
           />
         </div>
         <div>
