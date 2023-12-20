@@ -85,6 +85,8 @@ function RecruiterNavBar() {
               <Image
                 src={"/settings.png"}
                 width={30}
+                priority
+
                 height={30}
                 alt="settings"
                 loading="lazy"
@@ -101,6 +103,8 @@ function RecruiterNavBar() {
                     : "/avatar.png"
                 }
                 width={40}
+                priority
+
                 height={40}
                 alt="user"
                 className=" tw-rounded-full tw-ml-8 tw-object-fill tw-w-12 tw-h-12"
@@ -120,6 +124,8 @@ function RecruiterNavBar() {
                 <Image
                   src={"/down.png"}
                   width={15}
+                  priority
+
                   height={15}
                   alt="arrow-down"
                   className="tw-object-contain"
@@ -143,6 +149,8 @@ function RecruiterNavBar() {
               <Image
                 src={"/briefcase.png"}
                 width={20}
+                priority
+
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
@@ -160,6 +168,8 @@ function RecruiterNavBar() {
                 src={"/home.png"}
                 width={20}
                 height={20}
+                priority
+
                 alt="home"
                 className="tw-object-contain tw-mr-4"
                 loading="lazy"
@@ -175,6 +185,8 @@ function RecruiterNavBar() {
               <Image
                 src={"/reportg.png"}
                 width={20}
+                priority
+
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
@@ -193,6 +205,8 @@ function RecruiterNavBar() {
                 src={"/logout.png"}
                 width={20}
                 height={20}
+                priority
+
                 alt="home"
                 className="tw-object-contain tw-mr-4"
                 loading="lazy"

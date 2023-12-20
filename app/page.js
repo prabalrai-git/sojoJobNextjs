@@ -39,7 +39,7 @@ function page() {
         missingFields.push("reason");
       }
 
-      if (!phone) {
+      if (!phone) { 
         missingFields.push("phone number");
       }
       let missingFieldsMessage;
@@ -126,7 +126,7 @@ function page() {
 
   return (
     <>
-      {NavBarByUser()}
+     <NavBarByUser/>
       <div className="tw-mb-20">
         <div className="tw-grid tw-grid-cols-2 tw-mx-23 tw-py-20 tw-gap-10 sm:tw-gap-2 xsm:tw-gap-2 md:tw-grid-cols-2 lg:tw-grid-cols-2  sm:tw-py-5 xsm:tw-py-5 sm:tw-grid-cols-1 xsm:tw-grid-cols-1 xsm:tw-mx-3 tw-text-justify sm:tw-mx-10 md:tw-mx-20 tw-my-14 ">
           <h1
@@ -152,6 +152,7 @@ function page() {
             height={300}
             quality={100}
             layout="responsive"
+            priority
             alt="home-banner"
             className="tw-w-full tw-object-contain tw-h-full xsm:tw-h-5/6"
           />
