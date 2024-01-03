@@ -114,6 +114,7 @@ function JobSeekerNavBar() {
                 }
                 width={45}
                 height={45}
+                priority
                 alt="user"
                 className=" tw-ml-8 tw-rounded-full tw-object-fill tw-w-12 tw-h-12"
               />
@@ -132,6 +133,8 @@ function JobSeekerNavBar() {
                   src={"/down.png"}
                   width={15}
                   height={15}
+                  priority
+
                   alt="arrow-down"
                   className="tw-object-contain"
                 />
@@ -152,6 +155,8 @@ function JobSeekerNavBar() {
                   src={"/home.png"}
                   width={16}
                   height={16}
+                  priority
+
                   alt="home"
                   className="tw-object-contain tw-mr-4"
                   onLoad={() => setIsLogoLoaded(true)}
@@ -169,6 +174,8 @@ function JobSeekerNavBar() {
                   width={16}
                   height={16}
                   alt="home"
+                  priority
+
                   className="tw-object-contain tw-mr-4 "
                 />
                 <p className="tw-text-lg tw-font-medium tw-text-gray-600">
@@ -211,6 +218,8 @@ function JobSeekerNavBar() {
                 width={16}
                 height={16}
                 alt="home"
+                priority
+
                 className="tw-object-contain tw-mr-4 "
               />
               <p
