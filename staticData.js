@@ -47,20 +47,38 @@ export const trainings = [
     src: "/yt.jpeg",
     title: "Go from Zero to YouTuber in Just 2 Weeks",
     desc: "Unlock Your YouTube Success: Transform into a Thriving YouTuber in Just 2 Weeks",
+    mode: "Physical classes",
   },
   {
     id: 2,
     src: "/fe.jpeg",
     title: "Transform into a Frontend Pro in Just 1.2 Months ",
     desc: "Earn Your Developer Certification, Gain Access to Our Exclusive Network, and Enjoy 100% Job Assistance with Expert Guidance !",
+    mode: "Physical classes",
+  },
+
+  // {
+  //   id: 3,
+  //   src: "/mern.jpeg",
+
+  //   title:
+  //     "Learn Everything About Websites: Become a Full Stack Pro in Just 2 Months !",
+  //   desc: "Coming soon, call us to know when and book your seats",
+  // },
+  {
+    id: 5,
+    src: "/youtubeO.jpeg",
+    title: "Transition from Beginner to YouTuber in a Swift 2 Weeks",
+    desc: "Unlock YouTube Success: Transform into a Thriving YouTuber in Only 2 Weeks (Recordings of all classes will also be provided)",
+    mode: "Online classes",
   },
   {
-    id: 3,
-    src: "/mern.jpeg",
-
+    id: 4,
+    src: "/frontO.jpeg",
     title:
-      "Learn Everything About Websites: Become a Full Stack Pro in Just 2 Months !",
-    desc: "Coming soon, call us to know when and book your seats",
+      "Enhance Your Skills and Emerge as a Frontend Pro in Just 1.2 Months",
+    desc: "Obtain Your Developer Certification, Access Our Exclusive Network, and Receive 100% Job Assistance with Expert Guidance! (Recordings of all classes will also be provided)",
+    mode: "Online classes",
   },
 ];
 export const review2 = [

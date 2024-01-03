@@ -1,4 +1,4 @@
-import { Image, Space } from "antd";
+import { Image, Space, Tag } from "antd";
 import React from "react";
 
 function TrainingsCard({ item }) {
@@ -32,8 +32,16 @@ function TrainingsCard({ item }) {
       </div>
       <div className="tw-bg-white  tw-px-5 tw-rounded-b-xl xsm:tw-h-64 450:tw-h-52 800:tw-h-52 xl:tw-h-56 lg:tw-h-72 md:tw-h-48 sm:tw-h-52 tw-relative">
         <div>
-          <h6 className="tw-text-lg tw-font-medium tw-my-3 ">{item.title}</h6>
-          <p className="tw-text-justify tw-text-base tw-absolute tw-top-20 lg:tw-top-24 xsm:tw-top-24 sm:tw-top-16 450:tw-top-16 tw-right-4 tw-left-4 ">
+          <h6 className="tw-text-lg tw-font-medium tw-my-3 ">
+            {item.title}{" "}
+            <Tag
+              className="tw-self-center"
+              color={item.mode === "Online classes" ? "#2db7f5" : "#87d068"}
+            >
+              {item.mode}
+            </Tag>
+          </h6>
+          <p className="tw-text-justify tw-text-sm tw-absolute tw-top-20 lg:tw-top-24 xsm:tw-top-24 sm:tw-top-16 450:tw-top-16 tw-right-4 tw-left-4 ">
             {item?.desc}
           </p>
           <div className="tw-absolute -tw-bottom-10">
