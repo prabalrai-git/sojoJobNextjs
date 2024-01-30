@@ -86,10 +86,8 @@ function RecruiterNavBar() {
                 src={"/settings.png"}
                 width={30}
                 priority
-
                 height={30}
                 alt="settings"
-                loading="lazy"
               />
             </Nav.Link>
             <Nav.Link
@@ -104,11 +102,9 @@ function RecruiterNavBar() {
                 }
                 width={40}
                 priority
-
                 height={40}
                 alt="user"
                 className=" tw-rounded-full tw-ml-8 tw-object-fill tw-w-12 tw-h-12"
-                loading="lazy"
               />
             </Nav.Link>
             <Nav.Link
@@ -125,11 +121,9 @@ function RecruiterNavBar() {
                   src={"/down.png"}
                   width={15}
                   priority
-
                   height={15}
                   alt="arrow-down"
                   className="tw-object-contain"
-                  loading="lazy"
                 />
               </div>
             </Nav.Link>
@@ -150,11 +144,9 @@ function RecruiterNavBar() {
                 src={"/briefcase.png"}
                 width={20}
                 priority
-
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
-                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Public Jobs
@@ -172,7 +164,6 @@ function RecruiterNavBar() {
 
                 alt="home"
                 className="tw-object-contain tw-mr-4"
-                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Dashboard
@@ -186,11 +177,9 @@ function RecruiterNavBar() {
                 src={"/reportg.png"}
                 width={20}
                 priority
-
                 height={20}
                 alt="home"
                 className="tw-object-contain tw-mr-4"
-                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Job Applications
@@ -209,7 +198,6 @@ function RecruiterNavBar() {
 
                 alt="home"
                 className="tw-object-contain tw-mr-4"
-                loading="lazy"
               />
               <p className="tw-text-base tw-font-medium tw-text-gray-600">
                 Logout
