@@ -74,7 +74,7 @@ export const trainings = [
   },
   {
     id: 4,
-    src: "/frontO.jpeg",
+    src: "/front0.jpg",
     title:
       "Enhance Your Skills and Emerge as a Frontend Pro in Just 1.2 Months",
     desc: "Obtain Your Developer Certification, Access Our Exclusive Network, and Receive 100% Job Assistance with Expert Guidance! (Recordings of all classes will also be provided)",
